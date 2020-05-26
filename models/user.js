@@ -21,7 +21,7 @@ const userSchema = new Schema({
     heroes: {
         type: [{
             type: Schema.Types.ObjectId,
-            ref: Champion
+            ref: "Champion"
         }]
     },
     rank: {
