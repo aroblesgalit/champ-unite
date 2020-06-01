@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Header() {
     return (
         <header>
-            <nav className="uk-navbar-container uk-margin" uk-navbar="true">
+            <nav className="uk-navbar-container" uk-navbar="true">
                 <div className="uk-navbar-left">
                     <Link className="uk-navbar-item uk-logo" to="/">ChampUnite</Link>
                     <ul className="uk-navbar-nav">
