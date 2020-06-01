@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
-header {
+footer {
     background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
+}
+
+.social-links {
+    width: 60px;
+}
+
+.social-links span:hover {
+    color: rgb(25, 22, 84);
 }

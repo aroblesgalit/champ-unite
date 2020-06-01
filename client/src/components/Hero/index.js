@@ -10,7 +10,7 @@ function Hero() {
                 <p uk-parallax="opacity: 0,1; y: 100,0; scale: 0.5,1; viewport: 0.5;">
                     Create your champion(s) now and battle against other users on a one-to-one match.
                 </p>
-                <button className="uk-button uk-button-primary" uk-parallax="opacity: 0,1; y: -200,0; scale: 0.5,1; viewport: 0.5;">Sign up</button>
+                <button className="uk-button primary-btn" uk-parallax="opacity: 0,1; y: -200,0; scale: 0.5,1; viewport: 0.5;">Sign up</button>
             </div>
         </div>
     );
