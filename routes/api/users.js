@@ -8,17 +8,20 @@ router.post("/login", passport.authenticate("local"), function(req, res) {
 });
 
 router.post("/signup", function (req, res) {
+    console.log("Post signup ran...");
     db.User.create({
-        username: req.body.username,
         email: req.body.email,
+        username: req.body.username,
         password: req.body.password
     })
         .then(function (dbUser) {
-            res.redirect(307, "/api/users/login");
+            // res.redirect(307, "/api/users/login");
+            console.log(dbUser);
         })
         .catch(function (err) {
+            console.log(err);
             res.status(401).json(err);
-        })
+        });
 });
 
 router.get("/user_data", function (req, res) {

@@ -13,12 +13,14 @@ const userSchema = new Schema({
     email: {
         type: String,
         required: true,
+        trim: true,
         unique: true,
         match: [/.+@.+\..+/, "Please enter a valid e-mail address"]
     },
     password: {
         type: String,
         required: true,
+        trim: true,
         validate: [({ length }) => length >= 6, "Password should be longer."]
     },
     heroes: {
