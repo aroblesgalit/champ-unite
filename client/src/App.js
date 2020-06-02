@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
           </Route>
         </Switch>
         <Footer />

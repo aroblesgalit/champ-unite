@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-.home-container, .login-container {
+.home-container, .login-container, .signup-container {
     min-height: calc(100vh - 230px);
 }
 
@@ -14,4 +14,8 @@
 
 .login-overlay {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+.signup-container {
+    background-image: url("https://images.unsplash.com/photo-1569701813229-33284b643e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80");
 }
