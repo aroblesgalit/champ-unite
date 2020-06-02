@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import API from "../../utils/API";
 
 function SignupForm() {
+
+    const usernameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+
+    const handleSignup = () => {
+
+    }
+
     return (
         <form className="signup-form uk-flex uk-flex-column uk-flex-middle uk-height-1-1">
             <h2>Signup</h2>
@@ -25,7 +35,7 @@ function SignupForm() {
                 </div>
             </div>
             <div className="uk-margin-small">
-                <button className="uk-button primary-btn">Sign up</button>
+                <button className="uk-button primary-btn" onClick={handleSignup}>Sign up</button>
             </div>
             <p className="signup-login-text">
                 Already have an account? <Link to="/login"><span>Log in here now.</span></Link>

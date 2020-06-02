@@ -3,7 +3,8 @@ const passport = require("../../config/passport");
 const router = require("express").Router();
 
 router.post("/login", passport.authenticate("local"), function(req, res) {
-    res.redirect("/users/" + req.user.username)
+    res.json(req.user);
+    res.redirect("/users/" + req.user.username);
 });
 
 router.post("/signup", function (req, res) {
