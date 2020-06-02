@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.css";
-import Chart from "chart.js";
 
 function ChampionCard(props) {
 
@@ -8,40 +7,16 @@ function ChampionCard(props) {
         return a * 1.8;
     }
 
-    // const ctx = document.getElementById("stats-chart");
-
-    // const statsChart = new Chart(ctx, {
-    //     type: "bar",
-    //     data: {
-    //         labels: ["STR", "PWR", "CBT", "INT", "SPD", "DUR"],
-    //         datasets: [{
-    //             label: "Stats Value",
-    //             data: [
-    //                 props.str, props.pwr, props.cbt, props.int, props.spd, props.dur
-    //             ],
-    //             backgroundColor: [
-    //                 "rgba(255, 99, 132, 0.2)",
-    //                 "rgba(54, 162, 235, 0.2)",
-    //                 "rgba(255, 206, 86, 0.2)",
-    //                 "rgba(75, 192, 192, 0.2)",
-    //                 "rgba(153, 102, 255, 0.2)",
-    //                 "rgba(255, 159, 64, 0.2)"
-    //             ]
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     beginAtZero: true
-    //                 }
-    //             }]
-    //         }
-    //     }
-    // });
-
     return (
-        <div className="champion-card uk-card">
+        <div className="champion-card uk-card uk-position-relatve">
+            {
+                props.type === "search" ? (
+                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus"></button>
+                ) : ""
+            }
+            <div className="champion-name-container uk-position-absolute uk-text-center">
+                <span className="champion-name">{props.name}</span>
+            </div>
             <div className="champion-img-container uk-card-media-top uk-margin-top">
                 <img src={props.imageUrl} alt={props.name} />
             </div>

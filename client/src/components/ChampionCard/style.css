@@ -7,6 +7,33 @@
 .champion-card {
     width: 260px;
     border: 1px solid #c0c0c0;
+    margin-right: 20px;
+}
+
+.champion-name-container {
+    background-color: #fff;
+    border: 1px solid #c0c0c0;
+    padding: 4px 10px;
+    width: 90%;
+    top: 10px;
+    left: 5%;
+}
+
+.champion-name {
+    font-size: 20px;
+}
+
+.add-btn {
+    z-index: 2;
+    background-color: rgb(67, 198, 172);
+    color: #f2f2f2;
+    top: 5px;
+    right: 5px;
+}
+
+.add-btn:hover {
+    background-color: rgb(25, 22, 84);
+    color: #f2f2f2;
 }
 
 .champion-img-container {

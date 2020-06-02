@@ -40,6 +40,7 @@ function ChampionsSearch() {
                 {
                     champions.map(champion => {
                         return <ChampionCard
+                            key={champion.imageUrl}
                             name={champion.name}
                             imageUrl={champion.imageUrl}
                             int={champion.int}
@@ -48,6 +49,7 @@ function ChampionsSearch() {
                             dur={champion.dur}
                             pwr={champion.pwr}
                             cbt={champion.cbt}
+                            type="search"
                         />
                     })
                 }
