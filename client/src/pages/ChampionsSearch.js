@@ -16,7 +16,7 @@ function ChampionsSearch() {
         },
         {
             name: "Batman".toUpperCase(),
-            imageUrl: "https://www.toynews-online.biz/wp-content/uploads/Batman.jpg",
+            imageUrl: "https://i.pinimg.com/originals/a8/45/8a/a8458a20f9de50dfa48ffd12fd9c7e55.jpg",
             int: 90,
             str: 80,
             spd: 87,
@@ -49,6 +49,8 @@ function ChampionsSearch() {
                             dur={champion.dur}
                             pwr={champion.pwr}
                             cbt={champion.cbt}
+                            atk={((champion.str + champion.pwr + champion.cbt) / 30).toFixed()}
+                            def={((champion.int + champion.spd + champion.dur) / 30).toFixed()}
                             type="search"
                         />
                     })
