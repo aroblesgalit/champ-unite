@@ -27,13 +27,9 @@ function SignupForm() {
             })
                 .then(function (res) {
                     window.location.replace("/");
-                    console.log(res);
-                    console.log("User signed up successfully!");
                 })
                 .catch(function (err) {
                     console.log(err);
-                    console.log("Email:", emailRef.current.value, "- Username:", usernameRef.current.value, "- Password:", passwordRef.current.value)
-                    console.log("Failed signup.");
                     setSignupFailed(true);
                 });
         } else {

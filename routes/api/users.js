@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("local"), function(req, res) {
     res.json(req.user);
-    res.redirect("/users/" + req.user.username);
+    // res.redirect("/users/" + req.user.username);
 });
 
 router.post("/signup", function (req, res) {
@@ -31,6 +31,10 @@ router.get("/user_data", function (req, res) {
         res.json({
             id: req.user._id,
             username: req.user.username
+            // heroes
+            // wins
+            // losses
+            // rank
         })
     }
 });

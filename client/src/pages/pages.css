@@ -4,7 +4,10 @@
     box-sizing: border-box;
 }
 
-.home-container, .login-container, .signup-container {
+.home-container,
+.login-container, 
+.signup-container, 
+.user-profile-container {
     min-height: calc(100vh - 230px);
 }
 
