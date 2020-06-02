@@ -23,20 +23,23 @@ const userSchema = new Schema({
         trim: true,
         validate: [({ length }) => length >= 6, "Password should be longer."]
     },
-    heroes: {
+    champions: {
         type: [{
             type: Schema.Types.ObjectId,
             ref: "Champion"
         }]
     },
     rank: {
-        type: Number
+        type: Number,
+        default: 0
     },
     wins: {
-        type: Number
+        type: Number,
+        default: 0
     },
     losses: {
-        type: Number
+        type: Number,
+        default: 0
     }
 });
 

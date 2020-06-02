@@ -1,0 +1,38 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.profile-header {
+    background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
+    padding: 20px 100px 40px 100px;
+}
+
+.profile-img-container {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 100px;
+}
+
+.profile-header h2 {
+    font-size: 40px;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.user-stats:not(:last-child) {
+    margin-right: 30px;
+}
+
+.stat-val {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.stat-label {
+    font-size: 14px;
+    line-height: 1;
+}

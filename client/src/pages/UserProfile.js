@@ -1,9 +1,10 @@
 import React from "react";
+import ProfileHeader from "../components/ProfileHeader";
 
 function UserProfile() {
     return (
         <div className="user-profile-container">
-            <h1>User Profile</h1>
+            <ProfileHeader />
         </div>
     );
 }
