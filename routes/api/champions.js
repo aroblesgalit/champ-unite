@@ -3,7 +3,7 @@ const championsController = require("../../controllers/championsController");
 
 // Matches with "/api/champions"
 router.route("/")
-    .get(championsController.getByUserId)
+    .get(championsController.getAll)
     .post(championsController.create);
 
 // Matches with "/api/champions/:id"

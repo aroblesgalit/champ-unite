@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import ChampionCard from "../components/ChampionCard";
+// import API from "../utils/API";
+import axios from "axios";
 
 function ChampionsSearch() {
 
@@ -26,13 +28,40 @@ function ChampionsSearch() {
         }
     ]
 
+    const searchRef = useRef();
+
+    function handleSearch(e) {
+        e.preventDefault();
+
+        // API.searchHeroes(searchRef.current.value)
+        //     .then(res => {
+        //         console.log("Search successful!");
+        //         console.log(res);
+        //     })
+        //     .catch(err => {
+        //         console.log("Search failed");
+        //         console.log(err);
+        //     })
+        const query = searchRef.current.value;
+        const accessToken = "2839209799538545";
+        axios.get("https://cors-anywhere.herokuapp.com/https://superheroapi.com/api/" + accessToken + "/search/" + query)
+            .then(res => {
+                console.log("Search successful!");
+                console.log(res.data.results);
+            })
+            .catch(err => {
+                console.log("Search failed");
+                console.log(err);
+            })
+    }
+
     return (
         <section className="uk-section champions-search-container">
             <div className="uk-flex uk-flex-middle">
                 <h2>Search Champions</h2>
                 <form className="uk-search uk-search-default uk-width-1-4@l uk-width-1-3@m uk-width-1-2@s uk-width-1-1">
-                    <button className="uk-search-icon-flip" uk-search-icon="true"></button>
-                    <input className="uk-search-input" type="search" placeholder="Search for a champion" />
+                    <button className="uk-search-icon-flip" uk-search-icon="true" onClick={handleSearch}></button>
+                    <input className="uk-search-input" type="search" placeholder="Search for a champion" ref={searchRef} />
                 </form>
             </div>
 

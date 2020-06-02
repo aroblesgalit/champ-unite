@@ -2,6 +2,12 @@ const db = require("../models");
 
 // Define methods for the champions
 module.exports = {
+    getAll: function(req, res) {
+        db.Champion
+            .find({})
+            .then(dbModels => res.json(dbModels))
+            .catch(err => res.status(422).json(err));
+    },
     getById: function(req, res) {
         db.Champion
             .findById(req.params.id)
