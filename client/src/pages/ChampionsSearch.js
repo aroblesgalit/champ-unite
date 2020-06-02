@@ -2,6 +2,30 @@ import React from "react";
 import ChampionCard from "../components/ChampionCard";
 
 function ChampionsSearch() {
+
+    const champions = [
+        {
+            name: "Superman".toUpperCase(),
+            imageUrl: "https://vignette.wikia.nocookie.net/marvel_dc/images/a/a5/Superman_Vol_5_1_Textless.jpg",
+            int: 90,
+            str: 80,
+            spd: 87,
+            dur: 60,
+            pwr: 90,
+            cbt: 85
+        },
+        {
+            name: "Batman".toUpperCase(),
+            imageUrl: "https://www.toynews-online.biz/wp-content/uploads/Batman.jpg",
+            int: 90,
+            str: 80,
+            spd: 87,
+            dur: 60,
+            pwr: 90,
+            cbt: 85
+        },
+    ]
+
     return (
         <section className="uk-section champions-search-container">
             <div className="uk-flex uk-flex-middle">
@@ -13,6 +37,21 @@ function ChampionsSearch() {
             </div>
 
             <div className="champions-search-results">
+                {
+                    champions.map(champion => {
+                        return <ChampionCard
+                            name={champion.name}
+                            imageUrl={champion.imageUrl}
+                            int={champion.int}
+                            str={champion.str}
+                            spd={champion.spd}
+                            dur={champion.dur}
+                            pwr={champion.pwr}
+                            cbt={champion.cbt}
+                        />
+                    })
+                }
+
                 <ChampionCard />
             </div>
         </section>
