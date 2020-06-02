@@ -7,7 +7,8 @@
 .home-container,
 .login-container, 
 .signup-container, 
-.user-profile-container {
+.user-profile-container,
+.champions-search-container {
     min-height: calc(100vh - 230px);
 }
 
@@ -17,6 +18,15 @@
 
 .login-overlay {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+.champions-search-container {
+    margin: 0 100px;
+}
+
+.champions-search-container h2 {
+    margin: 0;
+    margin-right: 20px;
 }
 
 

@@ -3,3 +3,5 @@ const heroesAPIController = require("../../controllers/heroesAPIController");
 
 router.route("/:query")
     .get(heroesAPIController.searchHeroes)
+
+module.exports = router;

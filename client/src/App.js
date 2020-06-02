@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
+import ChampionsSearch from "./pages/ChampionsSearch";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/profile">
             <UserProfile />
+          </Route>
+          <Route path="/champions">
+            <ChampionsSearch />
           </Route>
         </Switch>
         <Footer />
