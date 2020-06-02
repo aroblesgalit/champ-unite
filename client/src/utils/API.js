@@ -9,5 +9,8 @@ export default {
     },
     getUserData: function () {
         return axios.get("/api/users/user_data");
+    },
+    searchHeroes: function (query) {
+        return axios.get("/api/heroes/" + query);
     }
 };
