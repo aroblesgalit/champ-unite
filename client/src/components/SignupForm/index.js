@@ -26,7 +26,7 @@ function SignupForm() {
                 password: password
             })
                 .then(function (res) {
-                    window.location.replace("/");
+                    window.location.replace("/profile");
                 })
                 .catch(function (err) {
                     console.log(err);

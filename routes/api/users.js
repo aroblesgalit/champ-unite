@@ -30,11 +30,13 @@ router.get("/user_data", function (req, res) {
     } else {
         res.json({
             id: req.user._id,
-            username: req.user.username
-            // heroes
-            // wins
-            // losses
-            // rank
+            username: req.user.username,
+            champions: req.user.champions,
+            wins: req.user.wins,
+            losses: req.user.losses,
+            rank: req.user.rank
+            // total battles > wins + losses
+            // percent for ranking > wins/(wins+losses)
         })
     }
 });
