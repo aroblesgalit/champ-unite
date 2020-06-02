@@ -7,21 +7,42 @@ passport.use(new LocalStrategy(
     function (username, password, done) {
         db.User.findOne({
             username: username
-        }, function (err, user) {
-            if (err) {
-                return done(err);
-            }
+        }).then(user => {
+            // If there's no user with the given username
             if (!user) {
                 return done(null, false, {
                     message: "Incorrect username."
                 });
+            } else {
+                // Check if the password matches the one stored
+                user.validPassword(password)
+                    .then(valid => {
+                        // If it's valid,then log them in
+                        if (valid) {
+                            return done(null, user)
+                            // If the password is invalid, then return incorrect message
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password."
+                            })
+                        }
+                    })
             }
-            if (!user.validPassword(password)) {
-                return done(null, false, {
-                    message: "Incorrect password."
-                });
-            }
-            return done(null, user);
         });
     }
 ));
+
+// In order to help keep authentication state across HTTP requests,
+// Sequelize needs to serialize and deserialize the user
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    db.User.findById(id, function (err, user) {
+        done(err, user);
+    });
+});
+
+// Export our configured passport
+module.exports = passport;
