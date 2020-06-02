@@ -87,10 +87,25 @@ function ChampionsSearch() {
             //         query: query
             //     })
             // })
+            const newResults = [...searchResults];
 
             for (let i = 0; i < searchResults.data.results; i++) {
                 const champion = searchResults.data.results[i];
                 console.log("Adding champions...");
+                newResults.push({
+                    name: champion.name,
+                    race: champion.appearance.race,
+                    image: champion.image.url,
+                    strength: champion.powerstats.strength,
+                    power: champion.powerstats.power,
+                    combat: champion.powerstats.combat,
+                    intelligence: champion.powerstats.intelligence,
+                    speed: champion.powerstats.speed,
+                    durability: champion.powerstats.durability,
+                    attack: ((champion.powerstats.strength + champion.powerstats.power + champion.powerstats.combat) / 30).toFixed(),
+                    defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
+                    query: query
+                })
                 await API.addChampion({
                     name: champion.name,
                     race: champion.appearance.race,
@@ -107,7 +122,7 @@ function ChampionsSearch() {
                 })
             }
             // Set search results to results
-            setSearchResults(searchResults.data.results);
+            setSearchResults(newResults);
         }
     }
 
@@ -122,23 +137,23 @@ function ChampionsSearch() {
             </div>
 
             <div className="champions-search-results uk-flex">
-                {
-                    champions.map(champion => {
+                { searchResults.length > 0 ?
+                    searchResults.map(champion => {
                         return <ChampionCard
-                            key={champion.imageUrl}
+                            key={champion._id || champion.image}
                             name={champion.name}
-                            imageUrl={champion.imageUrl}
-                            int={champion.int}
-                            str={champion.str}
-                            spd={champion.spd}
-                            dur={champion.dur}
-                            pwr={champion.pwr}
-                            cbt={champion.cbt}
-                            atk={((champion.str + champion.pwr + champion.cbt) / 30).toFixed()}
-                            def={((champion.int + champion.spd + champion.dur) / 30).toFixed()}
+                            image={champion.image}
+                            strength={champion.strength}
+                            power={champion.power}
+                            combat={champion.combat}
+                            intelligence={champion.intelligence}
+                            speed={champion.speed}
+                            durability={champion.durability}
+                            attack={champion.attack}
+                            defense={champion.defense}
                             type="search"
                         />
-                    })
+                    }) : ""
                 }
             </div>
         </section>
