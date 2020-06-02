@@ -8,6 +8,14 @@ module.exports = {
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
     },
+    getByQuery: function(req, res) {
+        db.Champion
+            .find({
+                query: req.params.query
+            })
+            .then(dbModels => res.json(dbModels))
+            .catch(err => res.status(422).json(err));
+    },
     getById: function(req, res) {
         db.Champion
             .findById(req.params.id)

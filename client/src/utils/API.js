@@ -10,7 +10,13 @@ export default {
     getUserData: function () {
         return axios.get("/api/users/user_data");
     },
-    searchHeroes: function (query) {
-        return axios.get("/api/heroes/" + query);
+    // searchHeroes: function (query) {
+    //     return axios.get("/api/heroes/" + query);
+    // }
+    addChampion: function (data) {
+        return axios.post("/api/champions", data);
+    },
+    getAllChampions: function () {
+        return axios.get("/api/champions")
     }
 };
