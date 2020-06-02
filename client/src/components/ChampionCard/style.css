@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.champion-card {
+    width: 260px;
+    border: 1px solid #c0c0c0;
+}
+
+.champion-img-container {
+    height: 200px;
+    overflow: hidden;
+}
+
+.uk-card-body {
+    padding: 10px;
+}
+
+.stats-header {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.stats-label {
+    font-size: 12px;
+}
+
+.stats-val {
+    font-size: 12px;
+}

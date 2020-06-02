@@ -1,4 +1,5 @@
 import React from "react";
+import ChampionCard from "../components/ChampionCard";
 
 function ChampionsSearch() {
     return (
@@ -10,10 +11,10 @@ function ChampionsSearch() {
                     <input className="uk-search-input" type="search" placeholder="Search for a champion" />
                 </form>
             </div>
-            {
-                // Container for results
-                // Component for result card 
-            }
+
+            <div className="champions-search-results">
+                <ChampionCard />
+            </div>
         </section>
     );
 }
