@@ -26,10 +26,12 @@
 
 .stats-label {
     font-size: 12px;
+    width: 30px;
 }
 
 .stats-val {
     font-size: 12px;
+    min-width: 20px;
 }
 
 .stats-bar {
@@ -37,4 +39,9 @@
     min-width: 1px;
     background-color: #444;
     margin: 0 4px;
+}
+
+.stats-bar-container {
+    /* width: 200px; */
+    /* background-color: red; */
 }

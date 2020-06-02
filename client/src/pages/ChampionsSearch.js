@@ -8,11 +8,11 @@ function ChampionsSearch() {
             name: "Superman".toUpperCase(),
             imageUrl: "https://vignette.wikia.nocookie.net/marvel_dc/images/a/a5/Superman_Vol_5_1_Textless.jpg",
             int: 90,
-            str: 80,
-            spd: 87,
-            dur: 60,
-            pwr: 90,
-            cbt: 85
+            str: 100,
+            spd: 100,
+            dur: 90,
+            pwr: 100,
+            cbt: 90
         },
         {
             name: "Batman".toUpperCase(),

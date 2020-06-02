@@ -4,6 +4,10 @@ import Chart from "chart.js";
 
 function ChampionCard(props) {
 
+    function calcBarWidth(a) {
+        return a * 1.8;
+    }
+
     // const ctx = document.getElementById("stats-chart");
 
     // const statsChart = new Chart(ctx, {
@@ -44,22 +48,22 @@ function ChampionCard(props) {
             <div className="uk-card-body">
                 <p className="stats-header">STATS</p>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">STR</span><div className="stats-bar" style={{width:props.str + "%"}}></div><span className="stats-val">{props.str}</span>
+                    <span className="stats-label">STR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.str) + "px"}}></div><span className="stats-val">{props.str}</span></div>
                 </div>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">PWR</span><div className="stats-bar" style={{width:props.pwr + "%"}}></div><span className="stats-val">{props.pwr}</span>
+                    <span className="stats-label">PWR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.pwr) + "px"}}></div><span className="stats-val">{props.pwr}</span></div>
                 </div>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">CBT</span><div className="stats-bar" style={{width:props.cbt + "%"}}></div><span className="stats-val">{props.cbt}</span>
+                    <span className="stats-label">CBT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.cbt) + "px"}}></div><span className="stats-val">{props.cbt}</span></div>
                 </div>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">INT</span><div className="stats-bar" style={{width:props.int + "%"}}></div><span className="stats-val">{props.int}</span>
+                    <span className="stats-label">INT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.int) + "px"}}></div><span className="stats-val">{props.int}</span></div>
                 </div>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">SPD</span><div className="stats-bar" style={{width:props.spd + "%"}}></div><span className="stats-val">{props.spd}</span>
+                    <span className="stats-label">SPD</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.spd) + "px"}}></div><span className="stats-val">{props.spd}</span></div>
                 </div>
                 <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">DUR</span><div className="stats-bar" style={{width:props.dur + "%"}}></div><span className="stats-val">{props.dur}</span>
+                    <span className="stats-label">DUR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{width:calcBarWidth(props.dur) + "px"}}></div><span className="stats-val">{props.dur}</span></div>
                 </div>
             </div>
         </div>
