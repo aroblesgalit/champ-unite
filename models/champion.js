@@ -11,8 +11,10 @@ const championSchema = new Schema({
         required: true
     },
     race: {
-        type: String,
-        required: true
+        type: String
+    },
+    image: {
+        type: String
     },
     strength: {
         type: Number,
@@ -61,6 +63,9 @@ const championSchema = new Schema({
         required: true,
         min: 1,
         max: 100
+    },
+    query: {
+        type: String
     }
 });
 

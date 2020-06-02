@@ -18,5 +18,22 @@ export default {
     },
     getAllChampions: function () {
         return axios.get("/api/champions")
-    }
+    },
+    getChampionsByQuery: function (query) {
+        return axios.get("/api/champions/query/" + query)
+    },
+    searchHeroes: function (query) {
+        const accessToken = "2839209799538545";
+
+        let queryUrl = `https://cors-anywhere.herokuapp.com/https://superheroapi.com/api/${accessToken}/search/${query}`;
+        return new Promise((resolve, reject) => {
+            axios
+                .get(queryUrl)
+                .then(res => {
+                    const heroes = res;
+                    resolve(heroes);
+                })
+                .catch(err => reject(err));
+        })
+    },
 };

@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ChampionCard from "../components/ChampionCard";
-// import API from "../utils/API";
-import axios from "axios";
+import API from "../utils/API";
 
 function ChampionsSearch() {
 
@@ -28,9 +27,26 @@ function ChampionsSearch() {
         }
     ]
 
+    // const [championsDB, setChampionsDB] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
+
+    // useEffect(() => {
+    //     loadChampionsDB();
+    // }, []);
+
+    // function loadChampionsDB() {
+    //     API.getAllChampions()
+    //         .then(res => {
+    //             setChampionsDB(res.data);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }
+
     const searchRef = useRef();
 
-    function handleSearch(e) {
+    async function handleSearch(e) {
         e.preventDefault();
 
         // API.searchHeroes(searchRef.current.value)
@@ -42,17 +58,57 @@ function ChampionsSearch() {
         //         console.log("Search failed");
         //         console.log(err);
         //     })
-        const query = searchRef.current.value;
-        const accessToken = "2839209799538545";
-        axios.get("https://cors-anywhere.herokuapp.com/https://superheroapi.com/api/" + accessToken + "/search/" + query)
-            .then(res => {
-                console.log("Search successful!");
-                console.log(res.data.results);
-            })
-            .catch(err => {
-                console.log("Search failed");
-                console.log(err);
-            })
+
+        const query = searchRef.current.value.toLowerCase();
+
+        const dbChampions = await API.getChampionsByQuery(query)
+        if (dbChampions.data.length) {
+            setSearchResults(dbChampions.data);
+            console.log("Grabbing from database...", dbChampions.data);
+        } else {
+            console.log("No results form database. Running api call now...")
+            // Run third party api
+            const searchResults = await API.searchHeroes(query);
+            console.log(searchResults.data.results);
+            
+            // await searchResults.data.results.map(champion => {
+            //     API.addChampion({
+            //         name: champion.name,
+            //         race: champion.appearance.race,
+            //         image: champion.image.url,
+            //         strength: champion.powerstats.strength,
+            //         power: champion.powerstats.power,
+            //         combat: champion.powerstats.combat,
+            //         intelligence: champion.powerstats.intelligence,
+            //         speed: champion.powerstats.speed,
+            //         durability: champion.powerstats.durability,
+            //         attack: ((champion.powerstats.strength + champion.powerstats.power + champion.powerstats.combat) / 30).toFixed(),
+            //         defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
+            //         query: query
+            //     })
+            // })
+
+            for (let i = 0; i < searchResults.data.results; i++) {
+                const champion = searchResults.data.results[i];
+                console.log("Adding champions...");
+                await API.addChampion({
+                    name: champion.name,
+                    race: champion.appearance.race,
+                    image: champion.image.url,
+                    strength: champion.powerstats.strength,
+                    power: champion.powerstats.power,
+                    combat: champion.powerstats.combat,
+                    intelligence: champion.powerstats.intelligence,
+                    speed: champion.powerstats.speed,
+                    durability: champion.powerstats.durability,
+                    attack: ((champion.powerstats.strength + champion.powerstats.power + champion.powerstats.combat) / 30).toFixed(),
+                    defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
+                    query: query
+                })
+            }
+            // Set search results to results
+            setSearchResults(searchResults.data.results);
+        }
     }
 
     return (

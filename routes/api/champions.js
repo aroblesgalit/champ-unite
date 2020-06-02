@@ -10,4 +10,7 @@ router.route("/")
 router.route("/:id")
     .get(championsController.getById)
 
+router.route("/query/:query")
+    .get(championsController.getByQuery)
+
 module.exports = router;
