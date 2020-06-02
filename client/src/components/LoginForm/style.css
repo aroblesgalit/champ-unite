@@ -1,0 +1,19 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.login-form {
+    padding: 20px;
+    background-color: #fff;
+    margin: 40px 0;
+}
+
+.signup-login-text {
+    font-size: 14px;
+}
+
+.signup-login-text span {
+    color: rgb(67, 198, 172);
+}
