@@ -1,31 +1,31 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import ChampionCard from "../components/ChampionCard";
 import API from "../utils/API";
 
 function ChampionsSearch() {
 
-    const champions = [
-        {
-            name: "Superman".toUpperCase(),
-            imageUrl: "https://vignette.wikia.nocookie.net/marvel_dc/images/a/a5/Superman_Vol_5_1_Textless.jpg",
-            int: 90,
-            str: 100,
-            spd: 100,
-            dur: 90,
-            pwr: 100,
-            cbt: 90
-        },
-        {
-            name: "Batman".toUpperCase(),
-            imageUrl: "https://i.pinimg.com/originals/a8/45/8a/a8458a20f9de50dfa48ffd12fd9c7e55.jpg",
-            int: 90,
-            str: 80,
-            spd: 87,
-            dur: 60,
-            pwr: 90,
-            cbt: 85
-        }
-    ]
+    // const champions = [
+    //     {
+    //         name: "Superman".toUpperCase(),
+    //         imageUrl: "https://vignette.wikia.nocookie.net/marvel_dc/images/a/a5/Superman_Vol_5_1_Textless.jpg",
+    //         int: 90,
+    //         str: 100,
+    //         spd: 100,
+    //         dur: 90,
+    //         pwr: 100,
+    //         cbt: 90
+    //     },
+    //     {
+    //         name: "Batman".toUpperCase(),
+    //         imageUrl: "https://i.pinimg.com/originals/a8/45/8a/a8458a20f9de50dfa48ffd12fd9c7e55.jpg",
+    //         int: 90,
+    //         str: 80,
+    //         spd: 87,
+    //         dur: 60,
+    //         pwr: 90,
+    //         cbt: 85
+    //     }
+    // ]
 
     // const [championsDB, setChampionsDB] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
@@ -68,8 +68,8 @@ function ChampionsSearch() {
         } else {
             console.log("No results form database. Running api call now...")
             // Run third party api
-            const searchResults = await API.searchHeroes(query);
-            console.log(searchResults.data.results);
+            const heroesResults = await API.searchHeroes(query);
+            console.log(heroesResults.data.results);
             
             // await searchResults.data.results.map(champion => {
             //     API.addChampion({
@@ -87,11 +87,12 @@ function ChampionsSearch() {
             //         query: query
             //     })
             // })
-            const newResults = [...searchResults];
+            const newResults = [];
 
-            for (let i = 0; i < searchResults.data.results; i++) {
-                const champion = searchResults.data.results[i];
+            for (let i = 0; i < heroesResults.data.results.length; i++) {
+                const champion = heroesResults.data.results[i];
                 console.log("Adding champions...");
+                console.log(champion);
                 newResults.push({
                     name: champion.name,
                     race: champion.appearance.race,
@@ -120,6 +121,8 @@ function ChampionsSearch() {
                     defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
                     query: query
                 })
+                    .then(dbModel => console.log(dbModel))
+                    .catch(err => console.log(err));
             }
             // Set search results to results
             setSearchResults(newResults);
