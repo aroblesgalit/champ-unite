@@ -23,7 +23,7 @@ function ChampionsSearch() {
             dur: 60,
             pwr: 90,
             cbt: 85
-        },
+        }
     ]
 
     return (
@@ -36,7 +36,7 @@ function ChampionsSearch() {
                 </form>
             </div>
 
-            <div className="champions-search-results">
+            <div className="champions-search-results uk-flex">
                 {
                     champions.map(champion => {
                         return <ChampionCard
@@ -51,8 +51,6 @@ function ChampionsSearch() {
                         />
                     })
                 }
-
-                <ChampionCard />
             </div>
         </section>
     );
