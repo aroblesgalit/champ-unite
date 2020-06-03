@@ -23,6 +23,11 @@ function ChampionsSearch() {
 
     const searchRef = useRef();
 
+    // Function to generate a random value from 1 - 100
+    function generateStat() {
+        return Math.floor((Math.random() * 100) + 1);
+    }
+
     // Handle search event
     async function handleSearch(e) {
         e.preventDefault();
@@ -52,16 +57,23 @@ function ChampionsSearch() {
                 const champion = heroesResults.data.results[i];
                 console.log("Adding champions...");
                 console.log(champion);
+
                 // Store relevant data
                 const name = champion.name;
                 const race = champion.appearance.race;
                 const image = champion.image.url;
-                const strength = champion.powerstats.strength;
-                const power = champion.powerstats.power;
-                const combat = champion.powerstats.combat;
-                const intelligence = champion.powerstats.intelligence;
-                const speed = champion.powerstats.speed;
-                const durability = champion.powerstats.durability;
+                let strength;
+                let power;
+                let combat;
+                let intelligence;
+                let speed;
+                let durability;
+                champion.powerstats.strength === "null" ? strength = generateStat() : strength = champion.powerstats.strength;
+                champion.powerstats.power === "null" ? power = generateStat() : power = champion.powerstats.power;
+                champion.powerstats.combat === "null" ? combat = generateStat() : combat = champion.powerstats.combat;
+                champion.powerstats.intelligence === "null" ? intelligence = generateStat() : intelligence = champion.powerstats.intelligence;
+                champion.powerstats.speed === "null" ? speed = generateStat() : speed = champion.powerstats.speed;
+                champion.powerstats.durability === "null" ? durability = generateStat() : durability = champion.powerstats.durability;
                 // Calculate attack and defense
                 const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
                 const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
