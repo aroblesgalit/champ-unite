@@ -10,7 +10,7 @@ function ChampionCard(props) {
     return (
         <div className="champion-card uk-card uk-position-relatve">
             {
-                props.type === "search" ? (
+                props.type === "search" && props.userLoggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus"></button>
                 ) : ""
             }
