@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import "./style.css";
-import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 
 function ProfileHeader() {
 
-    const { username, rank, wins, losses, champions } = useContext(UserContext);
+    const { username, rank, wins, losses } = useContext(UserContext);
 
     // const [userData, setUserData] = useState({});
 

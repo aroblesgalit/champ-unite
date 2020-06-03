@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
     getAll: function (req, res) {
         db.Champion
-            .find({})
+            .find({user: null})
             .sort({name: 1})
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
@@ -26,7 +26,7 @@ module.exports = {
     getByUserId: function (req, res) {
         db.Champion
             .find({
-                user: req._id
+                user: req.params.id
             })
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));

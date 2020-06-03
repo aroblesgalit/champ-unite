@@ -13,4 +13,7 @@ router.route("/:id")
 router.route("/query/:query")
     .get(championsController.getByQuery)
 
+router.route("/user/:id")
+    .get(championsController.getByUserId)
+
 module.exports = router;

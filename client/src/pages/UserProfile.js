@@ -1,30 +1,57 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
-import UserContext from "../utils/UserContext";
+// import UserContext from "../utils/UserContext";
 import ChampionCard from "../components/ChampionCard";
 import API from "../utils/API";
 
 function UserProfile() {
 
-    const { champions } = useContext(UserContext);
+    // const { id } = useContext(UserContext);
 
     const [championList, setChampionList] = useState([]);
 
     useEffect(() => {
-        loadChampionList();
+        // async function init() {
+        //     console.log("useEffect() running... init() running... Printing out championList...", championList);
+        //     await loadChampionList();
+        // }
+        
+        // init();
+        // async function init() {
+        //     await loadChampionList();
+        // }
+        // init();
+        API.getUserData()
+            .then(async(user) => {
+                console.log(user.data);
+                const champions = await API.getChampionsByUserId(user.data.id);
+                console.log(champions.data);
+                setChampionList(champions.data);
+            })
+
     }, []);
 
-    async function loadChampionList () {
-        if (champions && champions.length > 0) {
-            const newData = [];
-            for (let i = 0; i < champions.length; i++) {
-               const championData = await API.getChampionById(champions[i]);
-               newData.push(championData);
-            }
-            setChampionList(newData);
-        }
-    }
+    // async function loadChampionList() {
+    //     const champions = await API.getChampionsByUserId(id)
+    //     console.log("loadChampionList() running...", champions)
+    // }
+
+    // async function loadChampionList () {
+    //     console.log("loadChampionList() running...")
+    //     if (champions && champions.length > 0) {
+    //         console.log("loadChampionList() running...if conditional running...")
+    //         const newData = [];
+    //         for (let i = 0; i < champions.length; i++) {
+    //            const championData = await API.getChampionById(champions[i]);
+    //            console.log(championData);
+    //            newData.push(championData);
+    //         }
+    //         setChampionList(newData);
+    //     } else {
+    //         console.log("champions is null");
+    //     }
+    // }
 
     // Go thru champions array and find each champion by id and create a new array with all data
 
@@ -42,10 +69,10 @@ function UserProfile() {
                 </div>
                 <div className="champions-list-container uk-flex uk-flex-wrap">
                     {
-                        champions && champions.length > 0 ? (
+                        championList && championList.length > 0 ? (
                             championList.map(champion => {
                                 return <ChampionCard
-                                    key={champion._id}
+                                    key={champion._id || champion.image}
                                     name={champion.name}
                                     image={champion.image}
                                     strength={champion.strength}
