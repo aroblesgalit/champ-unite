@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import UserContext from "../../utils/UserContext";
+import API from "../../utils/API";
 
 function Header() {
+
+    const { loggedIn } = useContext(UserContext);
+
+    function handleLogout() {
+        API.logoutUser()
+            .then(() => {
+                console.log("User logged out.");
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
     return (
         <header>
             <nav className="uk-navbar-container uk-navbar-transparent uk-light" uk-navbar="true">
@@ -15,11 +30,24 @@ function Header() {
                     </ul>
                 </div>
                 <div className="uk-navbar-right">
-                    <ul className="uk-navbar-nav">
-                        <li>
-                            <Link to="/login">Login</Link>
-                        </li>
-                    </ul>
+                    {
+                        loggedIn ? (
+                            <ul className="uk-navbar-nav">
+                                <li>
+                                    <Link to="/profile">Profile</Link>
+                                </li>
+                                <li>
+                                    <Link to="/login" onClick={handleLogout} >Logout</Link>
+                                </li>
+                            </ul>
+                        ) : (
+                                <ul className="uk-navbar-nav">
+                                    <li>
+                                        <Link to="/login">Login</Link>
+                                    </li>
+                                </ul>
+                            )
+                    }
                 </div>
             </nav>
         </header>
