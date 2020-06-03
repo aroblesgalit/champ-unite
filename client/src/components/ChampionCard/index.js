@@ -1,20 +1,39 @@
 import React, { useContext } from "react";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
+import API from "../../utils/API"; 
 
 function ChampionCard(props) {
 
-    const { loggedIn } = useContext(UserContext);
+    const { loggedIn, id } = useContext(UserContext);
 
     function calcBarWidth(a) {
         return a * 1.8;
+    }
+
+    function handleAdd() {
+        API.addChampion({
+            user: id,
+            name: props.name,
+            image: props.image,
+            strength: props.strength,
+            power: props.power,
+            combat: props.combat,
+            intelligence: props.intelligence,
+            speed: props.speed,
+            durability: props.durability,
+            attack: props.attack,
+            defense: props.defense
+        })
+            .then(dbModel => console.log("Added champion to your list: ", dbModel))
+            .catch(err => console.log("Add failed: ", err))
     }
 
     return (
         <div className="champion-card uk-card uk-position-relatve">
             {
                 props.type === "search" && loggedIn ? (
-                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus"></button>
+                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
                 ) : ""
             }
             <div className="champion-name-container uk-position-absolute uk-text-center">

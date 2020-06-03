@@ -21,10 +21,11 @@ function App() {
   async function getUserData() {
     console.log("getUserData() ran...")
     const { data } = await API.getUserData();
-    // console.log("Running getUserData() from App.js...", data);
+    console.log("Running getUserData() from App.js...", data);
     if (data) {
       setUser({
         loggedIn: true,
+        id: data.id,
         username: data.username,
         rank: data.rank,
         wins: data.wins,
@@ -34,6 +35,7 @@ function App() {
     } else {
       setUser({
         loggedIn: false,
+        id: "",
         username: "",
         rank: 0,
         wins: 0,
