@@ -13,6 +13,9 @@ export default {
     getUserData: function () {
         return axios.get("/api/users/user_data");
     },
+    updateUserChampions: function (id, champion) {
+        return axios.put("/api/users/" + id + "/" + champion);
+    },
     // searchHeroes: function (query) {
     //     return axios.get("/api/heroes/" + query);
     // }

@@ -48,4 +48,13 @@ router.get("/user_data", function (req, res) {
     }
 });
 
+router.put("/:id/:champion", function (req, res) {
+    db.User
+        .findByIdAndUpdate(req.params.id, {
+            $push: { champions: req.params.champion }
+        })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+})
+
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
-import API from "../../utils/API"; 
+import API from "../../utils/API";
 
 function ChampionCard(props) {
 
@@ -11,22 +11,29 @@ function ChampionCard(props) {
         return a * 1.8;
     }
 
-    function handleAdd() {
-        API.addChampion({
-            user: id,
-            name: props.name,
-            image: props.image,
-            strength: props.strength,
-            power: props.power,
-            combat: props.combat,
-            intelligence: props.intelligence,
-            speed: props.speed,
-            durability: props.durability,
-            attack: props.attack,
-            defense: props.defense
-        })
-            .then(dbModel => console.log("Added champion to your list: ", dbModel))
-            .catch(err => console.log("Add failed: ", err))
+    async function handleAdd() {
+        try {
+            const newUserChampion = await API.addChampion({
+                user: id,
+                name: props.name,
+                image: props.image,
+                strength: props.strength,
+                power: props.power,
+                combat: props.combat,
+                intelligence: props.intelligence,
+                speed: props.speed,
+                durability: props.durability,
+                attack: props.attack,
+                defense: props.defense
+            })
+
+            console.log("Added champion to your list: ", newUserChampion);
+            // Update user's champions array
+            await API.updateUserChampions(id, newUserChampion.data._id);
+
+        } catch (err) {
+            console.log("Add failed: ", err)
+        }
     }
 
     return (
