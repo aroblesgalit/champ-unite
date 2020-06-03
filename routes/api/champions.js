@@ -9,6 +9,7 @@ router.route("/")
 // Matches with "/api/champions/:id"
 router.route("/:id")
     .get(championsController.getById)
+    .delete(championsController.remove);
 
 router.route("/query/:query")
     .get(championsController.getByQuery)

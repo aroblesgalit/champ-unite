@@ -5,7 +5,7 @@ import API from "../../utils/API";
 
 function ChampionCard(props) {
 
-    const { loggedIn, id } = useContext(UserContext);
+    const { loggedIn, id, champions } = useContext(UserContext);
 
     function calcBarWidth(a) {
         return a * 1.8;
@@ -36,11 +36,26 @@ function ChampionCard(props) {
         }
     }
 
+    function handleDelete() {
+        API.removeChampion(props.id)
+            .then(res => {
+                console.log(res);
+                window.location.reload(false);
+            })
+            .catch(err => console.log(err));
+        // Remove from champions list in User model
+    }
+
     return (
         <div className="champion-card uk-card uk-position-relatve">
             {
                 props.type === "search" && loggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
+                ) : ""
+            }
+            {
+                props.type === "user" && loggedIn ? (
+                    <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={handleDelete}></button>
                 ) : ""
             }
             <div className="champion-name-container uk-position-absolute uk-text-center">

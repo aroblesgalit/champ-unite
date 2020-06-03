@@ -7,21 +7,9 @@ import API from "../utils/API";
 
 function UserProfile() {
 
-    // const { id } = useContext(UserContext);
-
     const [championList, setChampionList] = useState([]);
 
     useEffect(() => {
-        // async function init() {
-        //     console.log("useEffect() running... init() running... Printing out championList...", championList);
-        //     await loadChampionList();
-        // }
-        
-        // init();
-        // async function init() {
-        //     await loadChampionList();
-        // }
-        // init();
         API.getUserData()
             .then(async(user) => {
                 console.log(user.data);
@@ -31,11 +19,6 @@ function UserProfile() {
             })
 
     }, []);
-
-    // async function loadChampionList() {
-    //     const champions = await API.getChampionsByUserId(id)
-    //     console.log("loadChampionList() running...", champions)
-    // }
 
     // async function loadChampionList () {
     //     console.log("loadChampionList() running...")
@@ -73,6 +56,7 @@ function UserProfile() {
                             championList.map(champion => {
                                 return <ChampionCard
                                     key={champion._id || champion.image}
+                                    id={champion._id}
                                     name={champion.name}
                                     image={champion.image}
                                     strength={champion.strength}

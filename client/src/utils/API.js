@@ -34,6 +34,9 @@ export default {
     getChampionsByUserId: function(id) {
         return axios.get("/api/champions/user/" + id)
     },
+    removeChampion: function(id) {
+        return axios.delete("/api/champions/" + id);
+    },
     // searchHeroes: function (query) {
     //     return axios.get("/api/heroes/" + query);
     // }

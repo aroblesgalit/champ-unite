@@ -40,6 +40,19 @@
     color: #f2f2f2;
 }
 
+.delete-btn {
+    z-index: 4;
+    background-color: rgb(198, 67, 67);
+    color: #f2f2f2;
+    top: 5px;
+    right: 5px;
+}
+
+.delete-btn:hover {
+    background-color: rgb(226, 122, 62);
+    color: #f2f2f2;
+}
+
 .battle-stats-container {
     right: 0;
     top: 50px;
