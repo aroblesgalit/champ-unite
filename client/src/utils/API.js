@@ -28,6 +28,9 @@ export default {
     getChampionsByQuery: function (query) {
         return axios.get("/api/champions/query/" + query)
     },
+    getChampionById: function(id) {
+        return axios.get("/api/champions/" + id)
+    },
     // searchHeroes: function (query) {
     //     return axios.get("/api/heroes/" + query);
     // }
