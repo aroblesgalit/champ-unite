@@ -10,6 +10,7 @@
 
 .hero-text, .hero-text>h1 {
     color: #f2f2f2;
+    z-index: 2;
 }
 
 .hero-overlay {
