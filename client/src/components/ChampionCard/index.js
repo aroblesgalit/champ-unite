@@ -44,6 +44,9 @@ function ChampionCard(props) {
             })
             .catch(err => console.log(err));
         // Remove from champions list in User model
+        API.removeChampionFromUser(id, props.id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
     }
 
     return (

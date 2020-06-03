@@ -16,6 +16,10 @@ export default {
     updateUserChampions: function (id, champion) {
         return axios.put("/api/users/" + id + "/" + champion);
     },
+    // Update user's champions by removing an id from the array
+    removeChampionFromUser: function(user, champion) {
+        return axios.put("/api/users/champions/" + user + "/" + champion)
+    },
     // searchHeroes: function (query) {
     //     return axios.get("/api/heroes/" + query);
     // }

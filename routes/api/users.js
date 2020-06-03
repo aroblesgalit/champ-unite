@@ -57,4 +57,14 @@ router.put("/:id/:champion", function (req, res) {
             .catch(err => res.status(422).json(err));
 })
 
+// Remove a champion from the champions array
+router.put("/champions/:user/:champion", function(req, res ) {
+    db.User
+        .update({ _id: req.params.user }, {
+            $pull: { champions:  req.params.champion }
+        }, { safe: true, multi: true })
+            .then(res => res.json(res))
+            .catch(err => res.status(422).json(err));
+})
+
 module.exports = router;

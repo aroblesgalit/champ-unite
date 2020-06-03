@@ -26,7 +26,8 @@ app.use(routes);
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/champUnite", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 // Start the API server
