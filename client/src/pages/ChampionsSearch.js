@@ -6,6 +6,7 @@ function ChampionsSearch() {
 
     const [championsDB, setChampionsDB] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
+    const [noResults, setNoResults] = useState(false);
 
     useEffect(() => {
         loadChampionsDB();
@@ -45,6 +46,10 @@ function ChampionsSearch() {
             // Otherwise, run the third party api
             const heroesResults = await API.searchHeroes(query);
             console.log(heroesResults.data.results);
+
+            if (!heroesResults.data.results) {
+                setNoResults(true);
+            }
             // Declare a new array for results
             const newResults = [];
             // Declare a function to calculate attack and defense
