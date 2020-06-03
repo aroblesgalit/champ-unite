@@ -22,6 +22,9 @@ export default {
     getChampionsByQuery: function (query) {
         return axios.get("/api/champions/query/" + query)
     },
+    // searchHeroes: function (query) {
+    //     return axios.get("/api/heroes/" + query);
+    // }
     searchHeroes: function (query) {
         const accessToken = "2839209799538545";
 
@@ -35,5 +38,5 @@ export default {
                 })
                 .catch(err => reject(err));
         })
-    },
+    }
 };

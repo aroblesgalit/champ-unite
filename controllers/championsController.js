@@ -5,6 +5,7 @@ module.exports = {
     getAll: function (req, res) {
         db.Champion
             .find({})
+            .sort({name: 1})
             .then(dbModels => res.json(dbModels))
             .catch(err => res.status(422).json(err));
     },
