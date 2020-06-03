@@ -89,36 +89,52 @@ function ChampionsSearch() {
             // })
             const newResults = [];
 
+            function calcBattleStat(a, b, c) {
+                return ((a + b + c) / 30).toFixed();
+            }
+
             for (let i = 0; i < heroesResults.data.results.length; i++) {
                 const champion = heroesResults.data.results[i];
                 console.log("Adding champions...");
                 console.log(champion);
+                const name = champion.name;
+                const race = champion.appearance.race;
+                const image = champion.image.url;
+                const strength = champion.powerstats.strength;
+                const power = champion.powerstats.power;
+                const combat = champion.powerstats.combat;
+                const intelligence = champion.powerstats.intelligence;
+                const speed = champion.powerstats.speed;
+                const durability = champion.powerstats.durability;
+                const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
+                const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
+
                 newResults.push({
-                    name: champion.name,
-                    race: champion.appearance.race,
-                    image: champion.image.url,
-                    strength: champion.powerstats.strength,
-                    power: champion.powerstats.power,
-                    combat: champion.powerstats.combat,
-                    intelligence: champion.powerstats.intelligence,
-                    speed: champion.powerstats.speed,
-                    durability: champion.powerstats.durability,
-                    attack: ((champion.powerstats.strength + champion.powerstats.power + champion.powerstats.combat) / 30).toFixed(),
-                    defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
+                    name: name,
+                    race: race,
+                    image: image,
+                    strength: strength,
+                    power: power,
+                    combat: combat,
+                    intelligence: intelligence,
+                    speed: speed,
+                    durability: durability,
+                    attack: attack,
+                    defense: defense,
                     query: query
                 })
-                await API.addChampion({
-                    name: champion.name,
-                    race: champion.appearance.race,
-                    image: champion.image.url,
-                    strength: champion.powerstats.strength,
-                    power: champion.powerstats.power,
-                    combat: champion.powerstats.combat,
-                    intelligence: champion.powerstats.intelligence,
-                    speed: champion.powerstats.speed,
-                    durability: champion.powerstats.durability,
-                    attack: ((champion.powerstats.strength + champion.powerstats.power + champion.powerstats.combat) / 30).toFixed(),
-                    defense: ((champion.powerstats.intelligence + champion.powerstats.speed + champion.powerstats.durability) / 30).toFixed(),
+                API.addChampion({
+                    name: name,
+                    race: race,
+                    image: image,
+                    strength: strength,
+                    power: power,
+                    combat: combat,
+                    intelligence: intelligence,
+                    speed: speed,
+                    durability: durability,
+                    attack: attack,
+                    defense: defense,
                     query: query
                 })
                     .then(dbModel => console.log(dbModel))
@@ -126,6 +142,7 @@ function ChampionsSearch() {
             }
             // Set search results to results
             setSearchResults(newResults);
+            console.log("New Results: ", newResults);
         }
     }
 
