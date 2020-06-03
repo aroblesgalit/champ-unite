@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./style.css";
+import UserContext from "../../utils/UserContext";
 
 function ChampionCard(props) {
+
+    const { loggedIn } = useContext(UserContext);
 
     function calcBarWidth(a) {
         return a * 1.8;
@@ -10,7 +13,7 @@ function ChampionCard(props) {
     return (
         <div className="champion-card uk-card uk-position-relatve">
             {
-                props.type === "search" && props.userLoggedIn ? (
+                props.type === "search" && loggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus"></button>
                 ) : ""
             }

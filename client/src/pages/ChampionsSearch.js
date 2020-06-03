@@ -7,22 +7,10 @@ function ChampionsSearch() {
     const [championsDB, setChampionsDB] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [noResults, setNoResults] = useState(false);
-    const [userLoggedIn, setUserLoggedIn] = useState(false);
-
+    
     useEffect(() => {
         loadChampionsDB();
-        getUserData();
     }, []);
-
-    async function getUserData() {
-        console.log("getUserData() ran...")
-        const { data } = await API.getUserData();
-        if (data) {
-            setUserLoggedIn(true);
-        } else {
-            setUserLoggedIn(false);
-        }
-    }
 
     function loadChampionsDB() {
         API.getAllChampions()
@@ -159,7 +147,6 @@ function ChampionsSearch() {
                             attack={champion.attack}
                             defense={champion.defense}
                             type="search"
-                            userLoggedIn={userLoggedIn}
                         />
                     }) : championsDB.map(champion => {
                         return <ChampionCard
@@ -175,7 +162,6 @@ function ChampionsSearch() {
                             attack={champion.attack}
                             defense={champion.defense}
                             type="search"
-                            userLoggedIn={userLoggedIn}
                         />
                     })
                 }
