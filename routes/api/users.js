@@ -24,6 +24,13 @@ router.post("/signup", function (req, res) {
         });
 });
 
+router.get("/logout", function (req, res) {
+    req.logout();
+    req.session.destroy(function (err) {
+        res.json({})
+    });
+});
+
 router.get("/user_data", function (req, res) {
     if (!req.user) {
         res.status(401).json({});
