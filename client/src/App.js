@@ -10,6 +10,7 @@ import ChampionsSearch from "./pages/ChampionsSearch";
 import UsersSearch from "./pages/UsersSearch";
 import UserContext from './utils/UserContext';
 import API from "./utils/API";
+import OtherUserProfile from './pages/OtherUserProfile';
 
 function App() {
 
@@ -69,6 +70,9 @@ function App() {
             </Route>
             <Route path="/users">
               <UsersSearch />
+            </Route>
+            <Route path="/profile/:username">
+              <OtherUserProfile />
             </Route>
           </Switch>
           <Footer />
