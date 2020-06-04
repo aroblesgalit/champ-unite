@@ -13,6 +13,7 @@ export default {
     getUserData: function () {
         return axios.get("/api/users/user_data");
     },
+    // Add to user's champions
     updateUserChampions: function (id, champion) {
         return axios.put("/api/users/" + id + "/" + champion);
     },

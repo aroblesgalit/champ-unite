@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
@@ -6,6 +6,8 @@ import API from "../../utils/API";
 function ChampionCard(props) {
 
     const { loggedIn, id, champions } = useContext(UserContext);
+
+    const [maxReached, setMaxReached] = useState(false);
 
     function calcBarWidth(a) {
         return a * 1.8;
@@ -27,15 +29,18 @@ function ChampionCard(props) {
                     durability: props.durability,
                     attack: props.attack,
                     defense: props.defense
-                })   
-                // console.log("Added champion to your list: ", newUserChampion);
+                })
                 // Update user's champions array
                 await API.updateUserChampions(id, newUserChampion.data._id);
                 window.location.reload(false);
             } else {
-                // console.log("Running else champions.length >= 3...", champions.length);
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
-            }           
+                setMaxReached(true);
+                // After 3 seconds, setMaxReached backto false to close the alert
+                setTimeout(function(){ 
+                    setMaxReached(false); 
+                }, 4000);
+            }
         } catch (err) {
             console.log("Add failed: ", err)
         }
@@ -56,6 +61,14 @@ function ChampionCard(props) {
 
     return (
         <div className="champion-card uk-card uk-position-relatve">
+            {
+                maxReached ? (
+                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom" uk-alert="true">
+                        <button className="uk-alert-close" uk-close="true"></button>
+                        <p>You've reached the max number of champions on your list! Please make room if you'd like to add another.</p>
+                    </div>
+                ) : ""
+            }
             {
                 props.type === "search" && loggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
