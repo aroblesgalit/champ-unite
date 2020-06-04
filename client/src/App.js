@@ -75,7 +75,7 @@ function App() {
             <Route path="/profile/:username">
               <OtherUserProfile />
             </Route>
-            <Route path="/battle">
+            <Route path="/battle/:userid/vs/:otheruserid">
               <Battle />
             </Route>
           </Switch>

@@ -50,13 +50,29 @@ function UserCard(props) {
                     </div>
                 </div>
             </div>
-            <div className={ user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center" } >
+            <div className={user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
                     user.isLoggedIn && props.champions.length > 0 && user.champions.length > 0 ? (
-                        <Link to="/battle" className="uk-button secondary-btn">Battle</Link>
+                        <button uk-toggle="target: #modal-overflow" className="uk-button secondary-btn">Battle</button>
                     ) : ""
                 }
+            </div>
+
+            <div id="modal-overflow" uk-modal="true">
+                <div className="uk-modal-dialog">
+                    <button className="uk-modal-close-default" type="button" uk-close="true"></button>
+                    <div className="uk-modal-header">
+                        <h2 className="uk-modal-title">My Champions</h2>
+                    </div>
+                    <div className="uk-modal-body" uk-overflow-auto="true">
+                        <p>Select one of your champions to go into battle.</p>
+                    </div>
+                    <div className="uk-modal-footer uk-text-right">
+                        <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
+                        <Link to={`/battle/${user.champions ? user.champions[0] : `n/a`}/vs/${props.champions ? props.champions[0] : `n/a`}`} className="uk-button secondary-btn" type="button">Battle</Link>
+                    </div>
+                </div>
             </div>
         </div>
     );
