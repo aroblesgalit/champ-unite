@@ -22,7 +22,8 @@ function OtherUserProfile() {
                     username: userDB.data[0].username,
                     rank: userDB.data[0].rank,
                     wins: userDB.data[0].wins,
-                    losses: userDB.data[0].losses
+                    losses: userDB.data[0].losses,
+                    champions: userDB.data[0].champions
                 });
             })
             .catch(err => console.log(err));
@@ -35,6 +36,8 @@ function OtherUserProfile() {
                 rank={otherUser.rank}
                 wins={otherUser.wins}
                 losses={otherUser.losses}
+                champions={otherUser.champions}
+                type="otherUser"
             />
 
             <div className="user-champions-container">
