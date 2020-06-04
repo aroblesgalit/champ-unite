@@ -35,6 +35,7 @@ function UsersSearch() {
                             rank={user.rank}
                             wins={user.wins}
                             losses={user.losses}
+                            champions={user.champions}
                         />
                     })
                 }

@@ -51,7 +51,7 @@ function UserCard(props) {
             <div className={ user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center" } >
                 <Link to="#" className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn ? (
+                    user.isLoggedIn && props.champions.length > 0 ? (
                         <Link to="#" className="uk-button secondary-btn">Battle</Link>
                     ) : ""
                 }
