@@ -58,5 +58,9 @@ export default {
                 })
                 .catch(err => reject(err));
         })
+    },
+    // Get all users
+    getAllUsers: function() {
+        return axios.get("/api/users");
     }
 };
