@@ -13,24 +13,29 @@ function ChampionCard(props) {
 
     async function handleAdd() {
         try {
-            const newUserChampion = await API.addChampion({
-                user: id,
-                name: props.name,
-                image: props.image,
-                strength: props.strength,
-                power: props.power,
-                combat: props.combat,
-                intelligence: props.intelligence,
-                speed: props.speed,
-                durability: props.durability,
-                attack: props.attack,
-                defense: props.defense
-            })
-
-            console.log("Added champion to your list: ", newUserChampion);
-            // Update user's champions array
-            await API.updateUserChampions(id, newUserChampion.data._id);
-
+            if (champions.length < 3) {
+                // console.log("Running conditional champions.length < 3...", champions.length);
+                const newUserChampion = await API.addChampion({
+                    user: id,
+                    name: props.name,
+                    image: props.image,
+                    strength: props.strength,
+                    power: props.power,
+                    combat: props.combat,
+                    intelligence: props.intelligence,
+                    speed: props.speed,
+                    durability: props.durability,
+                    attack: props.attack,
+                    defense: props.defense
+                })   
+                // console.log("Added champion to your list: ", newUserChampion);
+                // Update user's champions array
+                await API.updateUserChampions(id, newUserChampion.data._id);
+                window.location.reload(false);
+            } else {
+                // console.log("Running else champions.length >= 3...", champions.length);
+                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
+            }           
         } catch (err) {
             console.log("Add failed: ", err)
         }

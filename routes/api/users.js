@@ -48,6 +48,7 @@ router.get("/user_data", function (req, res) {
     }
 });
 
+// Add a champion to the champions array
 router.put("/:id/:champion", function (req, res) {
     db.User
         .findByIdAndUpdate(req.params.id, {
@@ -60,7 +61,7 @@ router.put("/:id/:champion", function (req, res) {
 // Remove a champion from the champions array
 router.put("/champions/:user/:champion", function(req, res ) {
     db.User
-        .update({ _id: req.params.user }, {
+        .updateOne({ _id: req.params.user }, {
             $pull: { champions:  req.params.champion }
         }, { safe: true, multi: true })
             .then(res => res.json(res))
