@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
+import API from "../utils/API";
 
 function UsersSearch() {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        API.getAllUsers()
+            .then(usersDB => {
+                // console.log(usersDB.data);
+                setUsers(usersDB.data);
+            })
+            .catch(err => console.log(err));
+    }, []);
+
+
     return (
         <section className="uk-section users-search-container">
             <div className="uk-flex uk-flex-middle">
@@ -13,7 +27,17 @@ function UsersSearch() {
             </div>
 
             <div className="users-search-results uk-flex uk-flex-wrap">
-                <UserCard />
+                { 
+                    users.map(user => {
+                        return <UserCard 
+                            key={user._id}
+                            username={user.username}
+                            rank={user.rank}
+                            wins={user.wins}
+                            losses={user.losses}
+                        />
+                    })
+                }
             </div>
         </section>
     );
