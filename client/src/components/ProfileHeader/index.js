@@ -1,25 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./style.css";
-import API from "../../utils/API";
 
-function ProfileHeader() {
-
-    const [user, setUser] = useState({});
-
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    username: user.data.username,
-                    rank: user.data.rank,
-                    wins: user.data.wins,
-                    losses: user.data.losses
-                })
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, []);
+function ProfileHeader(props) {
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
@@ -27,18 +9,18 @@ function ProfileHeader() {
                 <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
             </div>
             <div className="uk-flex uk-flex-column">
-                <h2>{user.username}</h2>
+                <h2>{props.username}</h2>
                 <div className="uk-flex">
                     <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                        <span className="stat-val">{user.rank}</span>
+                        <span className="stat-val">{props.rank}</span>
                         <span className="stat-label">Rank</span>
                     </div>
                     <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                        <span className="stat-val">{user.wins}</span>
+                        <span className="stat-val">{props.wins}</span>
                         <span className="stat-label">Wins</span>
                     </div>
                     <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                        <span className="stat-val">{user.losses}</span>
+                        <span className="stat-val">{props.losses}</span>
                         <span className="stat-label">Losses</span>
                     </div>
                 </div>

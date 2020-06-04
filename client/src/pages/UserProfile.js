@@ -8,13 +8,21 @@ function UserProfile() {
 
     const [championList, setChampionList] = useState([]);
 
+    const [user, setUser] = useState({});
+
     useEffect(() => {
         API.getUserData()
             .then(async(user) => {
-                console.log(user.data);
+                // console.log(user.data);
                 const champions = await API.getChampionsByUserId(user.data.id);
-                console.log(champions.data);
+                // console.log(champions.data);
                 setChampionList(champions.data);
+                setUser({
+                    username: user.data.username,
+                    rank: user.data.rank,
+                    wins: user.data.wins,
+                    losses: user.data.losses
+                });
             })
 
     }, []);
@@ -39,7 +47,12 @@ function UserProfile() {
 
     return (
         <div className="user-profile-container">
-            <ProfileHeader />
+            <ProfileHeader 
+                username={user.username} 
+                rank={user.rank}
+                wins={user.wins}
+                losses={user.losses}
+            />
 
             <div className="user-champions-container">
                 <div className="uk-flex uk-flex-middle uk-flex-between">
