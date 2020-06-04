@@ -1,4 +1,5 @@
 import axios from "axios";
+require("dotenv").config();
 
 export default {
     signupUser: function (data) {
@@ -46,7 +47,7 @@ export default {
     //     return axios.get("/api/heroes/" + query);
     // }
     searchHeroes: function (query) {
-        const accessToken = "2839209799538545";
+        const accessToken = process.env.REACT_APP_ACCESS_TOKEN;
 
         let queryUrl = `https://cors-anywhere.herokuapp.com/https://superheroapi.com/api/${accessToken}/search/${query}`;
         return new Promise((resolve, reject) => {
