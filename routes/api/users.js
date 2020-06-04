@@ -77,4 +77,12 @@ router.get("/", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
+// Get user by username
+router.get("/:username", function(req, res) {
+    db.User
+        .find({ username: req.params.username })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+})
+
 module.exports = router;
