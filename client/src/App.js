@@ -62,7 +62,7 @@ function App() {
             <Route path="/signup">
               <Signup />
             </Route>
-            <Route path="/profile">
+            <Route exact path="/profile">
               <UserProfile />
             </Route>
             <Route path="/champions">
