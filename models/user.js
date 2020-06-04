@@ -40,8 +40,26 @@ const userSchema = new Schema({
     losses: {
         type: Number,
         default: 0
+    },
+    totalBattle: {
+        type: Number,
+        default: 0
+    },
+    winsPercent: {
+        type: Number,
+        default: 0
     }
 });
+
+userSchema.methods.calcTotalBattle = function() {
+    this.totalBattle = this.wins + this.losses;
+    return this.totalBattle;
+};
+
+userSchema.methods.calcWins = function() {
+    this.winsPercent = ((this.wins / this.totalBattle) * 100).toFixed();
+    return this.winsPercent;
+};
 
 userSchema.pre("save", async function save(next) {
     // Only hash the password if it has been modified (or is new)
