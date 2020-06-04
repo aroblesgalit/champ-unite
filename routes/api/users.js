@@ -56,7 +56,7 @@ router.put("/:id/:champion", function (req, res) {
         })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
-})
+});
 
 // Remove a champion from the champions array
 router.put("/champions/:user/:champion", function(req, res ) {
@@ -66,6 +66,15 @@ router.put("/champions/:user/:champion", function(req, res ) {
         }, { safe: true, multi: true })
             .then(res => res.json(res))
             .catch(err => res.status(422).json(err));
-})
+});
+
+// Get all users
+router.get("/", function (req, res) {
+    db.User
+        .find({})
+        .sort({username: 1})
+        .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
 
 module.exports = router;
