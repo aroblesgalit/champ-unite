@@ -10,7 +10,7 @@
     border-radius: 20px;
     overflow: hidden;
     margin-right: 12px;
-    margin-top: 2px;
+    margin-top: 4px;
 }
 
 .battle-other-user-avatar {
@@ -19,7 +19,7 @@
     border-radius: 20px;
     overflow: hidden;
     margin-left: 12px;
-    margin-top: 2px;    
+    margin-top: 4px;    
 }
 
 .battle-user-name {
@@ -29,19 +29,21 @@
 }
 
 .healthbar-container {
-    max-height: 24px;
+    max-height: 22px;
 }
 
 .healthbar-bar-border {
     width: 300px;
     border: 1px solid #c0c0c0;
     margin-right: 8px;
+    padding: 2px;
 }
 
 .healthbar-bar-border-reverse {
     width: 300px;
     border: 1px solid #c0c0c0;
     margin-left: 8px;
+    padding: 2px;
 }
 
 .healthbar-bar {
