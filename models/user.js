@@ -27,7 +27,8 @@ const userSchema = new Schema({
         type: [{
             type: Schema.Types.ObjectId,
             ref: "Champion"
-        }]
+        }],
+        validate: [arrayLimit, "Your champions list exceeds the limit of 3. Please delete a champion and try again."]
     },
     rank: {
         type: Number,
@@ -50,6 +51,10 @@ const userSchema = new Schema({
         default: 0
     }
 });
+
+function arrayLimit(val) {
+    return val.length <= 3;
+}
 
 userSchema.methods.calcTotalBattle = function() {
     this.totalBattle = this.wins + this.losses;
