@@ -8,7 +8,7 @@ function OtherUserProfile() {
 
     const { username } = useParams();
     // Get user's data based on username from the html route
-    const [user, setUser] = useState({});
+    const [otherUser, setOtherUser] = useState({});
     const [championList, setChampionList] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function OtherUserProfile() {
                 // console.log(userDB.data[0]);
                 const champions = await API.getChampionsByUserId(userDB.data[0]._id);
                 setChampionList(champions.data);
-                setUser({
+                setOtherUser({
                     username: userDB.data[0].username,
                     rank: userDB.data[0].rank,
                     wins: userDB.data[0].wins,
@@ -32,9 +32,9 @@ function OtherUserProfile() {
         <div className="user-profile-container">
             <ProfileHeader
                 username={username}
-                rank={user.rank}
-                wins={user.wins}
-                losses={user.losses}
+                rank={otherUser.rank}
+                wins={otherUser.wins}
+                losses={otherUser.losses}
             />
 
             <div className="user-champions-container">
