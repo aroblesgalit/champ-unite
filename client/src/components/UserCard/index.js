@@ -10,8 +10,10 @@ function UserCard(props) {
     useEffect(() => {
         API.getUserData()
             .then(user => {
+                // console.log(user.data);
                 setUser({
-                    isLoggedIn: true
+                    isLoggedIn: true,
+                    champions: user.data.champions
                 });
             })
             .catch(err => {
@@ -51,7 +53,7 @@ function UserCard(props) {
             <div className={ user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center" } >
                 <Link to="#" className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn && props.champions.length > 0 ? (
+                    user.isLoggedIn && props.champions.length > 0 && user.champions.length > 0 ? (
                         <Link to="#" className="uk-button secondary-btn">Battle</Link>
                     ) : ""
                 }
