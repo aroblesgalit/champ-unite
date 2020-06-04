@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import ChampionsSearch from "./pages/ChampionsSearch";
+import UsersSearch from "./pages/UsersSearch";
 import UserContext from './utils/UserContext';
 import API from "./utils/API";
 
@@ -65,6 +66,9 @@ function App() {
             </Route>
             <Route path="/champions">
               <ChampionsSearch />
+            </Route>
+            <Route path="/users">
+              <UsersSearch />
             </Route>
           </Switch>
           <Footer />

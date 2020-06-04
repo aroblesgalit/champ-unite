@@ -9,7 +9,8 @@
 .signup-container, 
 .user-profile-container,
 .champions-search-container,
-.user-champions-container {
+.user-champions-container,
+.users-search-container {
     min-height: calc(100vh - 230px);
 }
 
@@ -21,17 +22,20 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.champions-search-container {
+.champions-search-container,
+.users-search-container {
     margin: 0 100px;
     padding-top: 40px;
 }
 
-.champions-search-container h2 {
+.champions-search-container h2,
+.users-search-container h2 {
     margin: 0;
     margin-right: 20px;
 }
 
-.champions-search-results {
+.champions-search-results,
+.users-search-results {
     margin-top: 40px;
 }
 
@@ -70,7 +74,8 @@
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
-    .champions-search-container {
+    .champions-search-container,
+    .users-search-container {
         margin: 0 20px;
     }
   }

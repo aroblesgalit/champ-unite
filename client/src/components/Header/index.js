@@ -42,7 +42,7 @@ function Header() {
                     <Link className="uk-navbar-item uk-logo" to="/">ChampUnite</Link>
                     <ul className="uk-navbar-nav">
                         <li><Link to="">Ranking</Link></li>
-                        <li><Link to="">Users</Link></li>
+                        <li><Link to="/users">Users</Link></li>
                         <li><Link to="/champions">Champions</Link></li>
                     </ul>
                 </div>
