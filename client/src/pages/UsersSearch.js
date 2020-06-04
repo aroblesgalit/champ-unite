@@ -1,4 +1,5 @@
 import React from "react";
+import UserCard from "../components/UserCard";
 
 function UsersSearch() {
     return (
@@ -12,7 +13,7 @@ function UsersSearch() {
             </div>
 
             <div className="users-search-results uk-flex uk-flex-wrap">
-
+                <UserCard />
             </div>
         </section>
     );
