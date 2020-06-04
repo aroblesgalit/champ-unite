@@ -11,6 +11,7 @@ import UsersSearch from "./pages/UsersSearch";
 import UserContext from './utils/UserContext';
 import API from "./utils/API";
 import OtherUserProfile from './pages/OtherUserProfile';
+import Battle from "./pages/Battle";
 
 function App() {
 
@@ -73,6 +74,9 @@ function App() {
             </Route>
             <Route path="/profile/:username">
               <OtherUserProfile />
+            </Route>
+            <Route path="/battle">
+              <Battle />
             </Route>
           </Switch>
           <Footer />
