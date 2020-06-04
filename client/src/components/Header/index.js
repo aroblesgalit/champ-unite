@@ -1,17 +1,34 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 
 function Header() {
 
-    const { loggedIn } = useContext(UserContext);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        API.getUserData()
+            .then(user => {
+                setUser({
+                    isLoggedIn: true
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                setUser({
+                    isLoggedIn: false
+                });
+            })
+    }, []);
 
     function handleLogout() {
         API.logoutUser()
             .then(() => {
                 console.log("User logged out.");
+                setUser({
+                    isLoggedIn: false
+                });
             })
             .catch((err) => {
                 console.log(err);
@@ -31,7 +48,7 @@ function Header() {
                 </div>
                 <div className="uk-navbar-right">
                     {
-                        loggedIn ? (
+                        user.isLoggedIn ? (
                             <ul className="uk-navbar-nav">
                                 <li>
                                     <Link to="/profile">Profile</Link>

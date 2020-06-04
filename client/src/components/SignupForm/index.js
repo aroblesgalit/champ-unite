@@ -26,10 +26,11 @@ function SignupForm() {
                 password: password
             })
                 .then(function (res) {
+                    console.log("User is signed up...", res);
                     window.location.replace("/profile");
                 })
                 .catch(function (err) {
-                    console.log(err);
+                    console.log("Failed signup...", err);
                     setSignupFailed(true);
                 });
         } else {

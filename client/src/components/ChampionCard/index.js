@@ -1,12 +1,28 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./style.css";
-import UserContext from "../../utils/UserContext";
 import API from "../../utils/API";
 
 function ChampionCard(props) {
 
-    const { loggedIn, id, champions } = useContext(UserContext);
+    const [user, setUser] = useState({});
 
+    useEffect(() => {
+        API.getUserData()
+            .then(user => {
+                setUser({
+                    isLoggedIn: true,
+                    id: user.data.id,
+                    champions: user.data.champions
+                })
+            })
+            .catch(err => {
+                console.log(err);
+                setUser({
+                    isLoggedIn: false
+                })
+            })
+    }, []);
+    
     const [maxReached, setMaxReached] = useState(false);
 
     function calcBarWidth(a) {
@@ -15,10 +31,10 @@ function ChampionCard(props) {
 
     async function handleAdd() {
         try {
-            if (champions.length < 3) {
+            if (user.champions.length < 3) {
                 // console.log("Running conditional champions.length < 3...", champions.length);
                 const newUserChampion = await API.addChampion({
-                    user: id,
+                    user: user.id,
                     name: props.name,
                     image: props.image,
                     strength: props.strength,
@@ -31,7 +47,7 @@ function ChampionCard(props) {
                     defense: props.defense
                 })
                 // Update user's champions array
-                await API.updateUserChampions(id, newUserChampion.data._id);
+                await API.updateUserChampions(user.id, newUserChampion.data._id);
                 window.location.reload(false);
             } else {
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
@@ -54,7 +70,7 @@ function ChampionCard(props) {
             })
             .catch(err => console.log(err));
         // Remove from champions list in User model
-        API.removeChampionFromUser(id, props.id)
+        API.removeChampionFromUser(user.id, props.id)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
@@ -63,19 +79,18 @@ function ChampionCard(props) {
         <div className="champion-card uk-card uk-position-relatve">
             {
                 maxReached ? (
-                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom" uk-alert="true">
-                        <button className="uk-alert-close" uk-close="true"></button>
-                        <p>You've reached the max number of champions on your list! Please make room if you'd like to add another.</p>
+                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
+                        <p>You've reached the max of 3 champions! Please make room if you'd like to add another.</p>
                     </div>
                 ) : ""
             }
             {
-                props.type === "search" && loggedIn ? (
+                props.type === "search" && user.isLoggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
                 ) : ""
             }
             {
-                props.type === "user" && loggedIn ? (
+                props.type === "user" && user.isLoggedIn ? (
                     <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={handleDelete}></button>
                 ) : ""
             }

@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.post("/login", passport.authenticate("local"), function(req, res) {
     res.json(req.user);
-    // res.redirect("/users/" + req.user.username);
+    res.redirect("/profile");
 });
 
 router.post("/signup", function (req, res) {
@@ -15,7 +15,7 @@ router.post("/signup", function (req, res) {
         password: req.body.password
     })
         .then(function (dbUser) {
-            // res.redirect(307, "/api/users/login");
+            res.redirect(307, "/api/users/login");
             console.log(dbUser);
         })
         .catch(function (err) {

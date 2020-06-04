@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
-// import UserContext from "../utils/UserContext";
 import ChampionCard from "../components/ChampionCard";
 import API from "../utils/API";
 
