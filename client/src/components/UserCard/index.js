@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import API from "../../utils/API";
 
 function UserCard(props) {
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        API.getUserData()
+            .then(user => {
+                setUser({
+                    isLoggedIn: true
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                setUser({
+                    isLoggedIn: false
+                })
+            });
+    }, []);
+
     return (
         <div className="user-card uk-card">
             <div className="user-info uk-flex">
@@ -29,9 +48,13 @@ function UserCard(props) {
                     </div>
                 </div>
             </div>
-            <div className="user-card-links uk-flex uk-flex-between">
+            <div className={ user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center" } >
                 <Link to="#" className="uk-button secondary-btn">Profile</Link>
-                <Link to="#" className="uk-button secondary-btn">Battle</Link>
+                {
+                    user.isLoggedIn ? (
+                        <Link to="#" className="uk-button secondary-btn">Battle</Link>
+                    ) : ""
+                }
             </div>
         </div>
     );
