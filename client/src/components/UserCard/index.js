@@ -54,7 +54,7 @@ function UserCard(props) {
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
                     user.isLoggedIn && props.champions.length > 0 && user.champions.length > 0 ? (
-                        <Link to="#" className="uk-button secondary-btn">Battle</Link>
+                        <Link to="/battle" className="uk-button secondary-btn">Battle</Link>
                     ) : ""
                 }
             </div>

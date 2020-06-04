@@ -10,7 +10,8 @@
 .user-profile-container,
 .champions-search-container,
 .user-champions-container,
-.users-search-container {
+.users-search-container,
+.battle-container {
     min-height: calc(100vh - 230px);
 }
 
@@ -23,7 +24,8 @@
 }
 
 .champions-search-container,
-.users-search-container {
+.users-search-container,
+.battle-container {
     margin: 0 100px;
     padding-top: 40px;
 }
@@ -75,7 +77,8 @@
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
     .champions-search-container,
-    .users-search-container {
+    .users-search-container,
+    .battle-container {
         margin: 0 20px;
     }
   }

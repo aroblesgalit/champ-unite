@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.battle-user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-right: 12px;
+    margin-top: 2px;
+}
+
+.battle-other-user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-left: 12px;
+    margin-top: 2px;    
+}
+
+.battle-user-name {
+    text-transform: uppercase;
+    font-size: 16px;
+    margin: 0;
+}
+
+.healthbar-container {
+    max-height: 24px;
+}
+
+.healthbar-bar-border {
+    width: 300px;
+    border: 1px solid #c0c0c0;
+    margin-right: 8px;
+}
+
+.healthbar-bar-border-reverse {
+    width: 300px;
+    border: 1px solid #c0c0c0;
+    margin-left: 8px;
+}
+
+.healthbar-bar {
+    min-height: 20px;
+    min-width: 1px;
+    height: 20px;
+    background-color: rgb(218, 55, 55);
+}
+
+.healthbar-val p {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0;
+}

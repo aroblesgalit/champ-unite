@@ -1,13 +1,13 @@
 import React from "react";
+import HealthBar from "../components/HealthBar";
 
 function Battle() {
     return (
-        <section className="uk-flex uk-flex-column uk-flex-middle">
-            <h1>BATTLE</h1>
-            <div className="uk-flex uk-flex-middle uk-flex-between">
-                {
-                    // Insert 2 healthbar components
-                }
+        <section className="battle-container uk-flex uk-flex-column uk-flex-middle">
+            <h2>BATTLE</h2>
+            <div className="uk-flex uk-flex-middle uk-flex-between uk-width-expand">
+                <HealthBar type="user" />
+                <HealthBar type="otherUser" />
             </div>
         </section>
     );
