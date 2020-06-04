@@ -28,7 +28,7 @@ function UserCard(props) {
         <div className="user-card uk-card">
             <div className="user-info uk-flex">
                 <div className="user-image uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
-                    <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Avatar" />
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
                 </div>
                 <div className="uk-flex uk-flex-column">
                     <h3>{props.username}</h3>

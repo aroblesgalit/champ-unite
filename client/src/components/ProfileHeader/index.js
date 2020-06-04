@@ -24,7 +24,7 @@ function ProfileHeader() {
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
             <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right">
-                <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg" alt="Avatar" />
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
             </div>
             <div className="uk-flex uk-flex-column">
                 <h2>{user.username}</h2>
