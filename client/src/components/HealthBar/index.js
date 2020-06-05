@@ -11,9 +11,9 @@ function HealthBar(props) {
                 <p className="battle-champion-name">{props.name}</p>
                 <div className={ props.type === "user" ? "healthbar-container uk-flex uk-flex-middle" : "healthbar-container uk-flex uk-flex-row-reverse uk-flex-middle" }>
                     <div className={ props.type === "user" ? "healthbar-bar-border uk-flex uk-flex-left" : "healthbar-bar-border-reverse uk-flex uk-flex-right" }>
-                        <div className="healthbar-bar" style={{width:"20%"}}></div>
+                        <div className="healthbar-bar" style={{width:`${props.health}%`}}></div>
                     </div>
-                    <div className="healthbar-val"><p>20</p></div>
+                    <div className="healthbar-val"><p>{props.health}</p></div>
                 </div>
             </div>
         </div>
