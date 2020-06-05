@@ -9,6 +9,7 @@ function ProfileHeader(props) {
     const [user, setUser] = useState({});
     const [userChampions, setUserChampions] = useState([]);
     const [userChampionId, setUserChampionId] = useState("");
+    const [otherChampionId, setOtherChampionId] = useState("");
 
     useEffect(() => {
         API.getUserData()
@@ -27,16 +28,21 @@ function ProfileHeader(props) {
 
     function handleModal() {
         getUserChampions();
+        chooseOtherChampion();
         // Get other users's champion and select an ID to use for the window.locaiton.replace
     }
 
     function handleBattle() {
-        window.location.replace(`/battle/${userChampionId}/vs/${props.champions[0]}`);
+        window.location.replace(`/battle/${userChampionId}/vs/${otherChampionId}`);
     }
 
     function chooseOtherChampion() {
         if (props.champions && props.champions.length > 1) {
-            console.log("chooseOtherChampion ran...")
+            const champId = Math.floor(Math.random() * props.champions.length);
+            console.log("chooseOtherChampion ran...", champId);
+            setOtherChampionId(props.champions[champId]);
+        } else {
+            setOtherChampionId(props.champions[0]);
         }
     }
 
@@ -89,13 +95,13 @@ function ProfileHeader(props) {
             </div>
 
             <div id="user-champions-modal" uk-modal="true">
-                <div className="uk-modal-dialog uk-width-expand">
+                <div className="user-champions-modal-wrapper uk-modal-dialog">
                     <button className="uk-modal-close-default" type="button" uk-close="true"></button>
                     <div className="uk-modal-header">
                         <h2 className="uk-modal-title">My Champions</h2>
                         <p>Select one of your champions to go into battle.</p>
                     </div>
-                    <div className="uk-modal-body uk-flex uk-height-expand" uk-overflow-auto="true">
+                    <div className="uk-modal-body uk-flex uk-width-1-1">
                         {
                             userChampions && userChampions.length > 0 ? (
                                 userChampions.map(champion => {

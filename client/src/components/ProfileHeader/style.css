@@ -40,3 +40,7 @@
 .profile-header .secondary-btn {
     height: 38px;
 }
+
+.user-champions-modal-wrapper {
+    width: fit-content;
+}
