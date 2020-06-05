@@ -73,19 +73,19 @@ function ProfileHeader(props) {
                 {
                     props.type === "otherUser" && props.champions && user.champions && user.champions.length > 0 && props.champions.length > 0 ? (
                         // <Link to="#" className="uk-button secondary-btn" onClick={handleBattle}>Battle</Link>
-                        <button uk-toggle="target: #modal-overflow" className="uk-button secondary-btn" onClick={handleBattle}>Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleBattle}>Battle</button>
                     ) : ""
                 }
             </div>
 
-            <div id="modal-overflow" uk-modal="true">
-                <div className="uk-modal-dialog">
+            <div id="user-champions-modal" uk-modal="true">
+                <div className="uk-modal-dialog uk-width-expand">
                     <button className="uk-modal-close-default" type="button" uk-close="true"></button>
                     <div className="uk-modal-header">
                         <h2 className="uk-modal-title">My Champions</h2>
-                    </div>
-                    <div className="uk-modal-body uk-flex uk-flex-column" uk-overflow-auto="true">
                         <p>Select one of your champions to go into battle.</p>
+                    </div>
+                    <div className="uk-modal-body uk-flex uk-height-expand" uk-overflow-auto="true">
                         {
                             userChampions && userChampions.length > 0 ? (
                                 userChampions.map(champion => {
