@@ -7,6 +7,8 @@ function UserCard(props) {
 
     const [user, setUser] = useState({});
 
+    const [otherUserChampion, setOtherUserChampion] = useState({});
+
     useEffect(() => {
         API.getUserData()
             .then(user => {
@@ -15,6 +17,9 @@ function UserCard(props) {
                     isLoggedIn: true,
                     champions: user.data.champions
                 });
+                if (props.champions && props.champions.length > 0) {
+                    setOtherUserChampion(props.champions[0]);
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -23,6 +28,12 @@ function UserCard(props) {
                 })
             });
     }, []);
+
+    function handleBattle(e, otherChampion) {
+        e.preventDefault();
+
+        window.location.replace(`/battle/${user.champions[0]}/vs/${otherChampion}`);
+    };
 
     return (
         <div className="user-card uk-card">
@@ -70,7 +81,7 @@ function UserCard(props) {
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <Link to={`/battle/${user.champions ? user.champions[0] : `n/a`}/vs/${props.champions ? props.champions[0] : `n/a`}`} className="uk-button secondary-btn" type="button">Battle</Link>
+                        <button className="uk-button secondary-btn" type="button" onClick={(e) => handleBattle(e, otherUserChampion)}>Battle</button>
                     </div>
                 </div>
             </div>

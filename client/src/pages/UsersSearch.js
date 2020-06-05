@@ -9,7 +9,7 @@ function UsersSearch() {
     useEffect(() => {
         API.getAllUsers()
             .then(usersDB => {
-                // console.log(usersDB.data);
+                console.log("From UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
