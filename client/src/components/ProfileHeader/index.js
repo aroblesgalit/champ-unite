@@ -26,9 +26,12 @@ function ProfileHeader(props) {
     }, []);
 
     function handleModal() {
-        // window.location.replace(`/battle/${user.champions[0]}/vs/${props.champions[0]}`);
         getUserChampions();
-        // Get other users's champion
+        // Get other users's champion and select an ID to use for the window.locaiton.replace
+    }
+
+    function handleBattle() {
+        window.location.replace(`/battle/${userChampionId}/vs/${props.champions[0]}`);
     }
 
     function chooseOtherChampion() {
@@ -118,7 +121,7 @@ function ProfileHeader(props) {
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <button className="uk-button secondary-btn" type="button">Battle</button>
+                        <button className="uk-button secondary-btn" type="button" onClick={handleBattle}>Battle</button>
                     </div>
                 </div>
             </div>
