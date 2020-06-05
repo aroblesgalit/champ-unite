@@ -50,7 +50,7 @@ function Battle() {
                         health={userStats.health}
                     />
                     <ChampionCard
-                        type="search"
+                        type="none"
                         name={userChampion.name}
                         image={userChampion.image}
                         attack={userChampion.attack}
@@ -75,7 +75,7 @@ function Battle() {
                         health={otherStats.health}
                     />
                     <ChampionCard
-                        type="search"
+                        type="none"
                         name={otherChampion.name}
                         image={otherChampion.image}
                         attack={otherChampion.attack}
