@@ -18,6 +18,7 @@ function UserCard(props) {
                     champions: user.data.champions
                 });
                 if (props.champions && props.champions.length > 0) {
+                    console.log("useEffect running in UserCard...printing props.champions[0]", props.champions[0]);
                     setOtherUserChampion(props.champions[0]);
                 }
             })
@@ -27,12 +28,12 @@ function UserCard(props) {
                     isLoggedIn: false
                 })
             });
-    }, []);
+    }, [setUser, setOtherUserChampion]);
 
-    function handleBattle(e, otherChampion) {
+    function handleBattle(e, opponent) {
         e.preventDefault();
 
-        window.location.replace(`/battle/${user.champions[0]}/vs/${otherChampion}`);
+        window.location.replace(`/battle/${user.champions[0]}/vs/${opponent}`);
     };
 
     return (
@@ -64,7 +65,7 @@ function UserCard(props) {
             <div className={user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn && props.champions.length > 0 && user.champions.length > 0 ? (
+                    user.isLoggedIn && props.champions && props.champions.length > 0 && user.champions.length > 0 ? (
                         <button uk-toggle="target: #modal-overflow" className="uk-button secondary-btn">Battle</button>
                     ) : ""
                 }

@@ -22,6 +22,10 @@ function ProfileHeader(props) {
             })
     }, []);
 
+    function handleBattle() {
+        window.location.replace(`/battle/${user.champions[0]}/vs/${props.champions[0]}`);
+    }
+
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
             <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right">
@@ -47,7 +51,7 @@ function ProfileHeader(props) {
                 </div>
                 {
                     props.type === "otherUser" && props.champions && user.champions && user.champions.length > 0 && props.champions.length > 0 ? (
-                        <Link to="#" className="uk-button secondary-btn">Battle</Link>
+                        <Link to="#" className="uk-button secondary-btn" onClick={handleBattle}>Battle</Link>
                     ) : ""
                 }
             </div>
