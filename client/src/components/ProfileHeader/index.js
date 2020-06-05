@@ -8,6 +8,7 @@ function ProfileHeader(props) {
 
     const [user, setUser] = useState({});
     const [userChampions, setUserChampions] = useState([]);
+    const [userChampionId, setUserChampionId] = useState("");
 
     useEffect(() => {
         API.getUserData()
@@ -24,9 +25,10 @@ function ProfileHeader(props) {
             })
     }, []);
 
-    function handleBattle() {
+    function handleModal() {
         // window.location.replace(`/battle/${user.champions[0]}/vs/${props.champions[0]}`);
         getUserChampions();
+        // Get other users's champion
     }
 
     function chooseOtherChampion() {
@@ -45,6 +47,11 @@ function ProfileHeader(props) {
             }
             setUserChampions(newArr);
         }
+    }
+
+    function handleSelect(id) {
+        setUserChampionId(id)
+        console.log("handleSelect ran...printing id of clicked champion...", id);
     }
 
     return (
@@ -73,7 +80,7 @@ function ProfileHeader(props) {
                 {
                     props.type === "otherUser" && props.champions && user.champions && user.champions.length > 0 && props.champions.length > 0 ? (
                         // <Link to="#" className="uk-button secondary-btn" onClick={handleBattle}>Battle</Link>
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleBattle}>Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleModal}>Battle</button>
                     ) : ""
                 }
             </div>
@@ -102,7 +109,8 @@ function ProfileHeader(props) {
                                         durability={champion.durability}
                                         attack={champion.attack}
                                         defense={champion.defense}
-                                        type="otherUser"
+                                        type="battle"
+                                        handleSelect={() => handleSelect(champion._id)}
                                     />
                                 }) 
                             ) : <p>Search for Champions to add or create your own!</p>

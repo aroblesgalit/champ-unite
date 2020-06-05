@@ -94,6 +94,11 @@ function ChampionCard(props) {
                     <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={handleDelete}></button>
                 ) : ""
             }
+            {
+                props.type === "battle" && user.isLoggedIn ? (
+                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="check" onClick={props.handleSelect}></button>
+                ) : ""
+            }
             <div className="champion-name-container uk-position-absolute uk-text-center">
                 <span className="champion-name">{props.name}</span>
             </div>

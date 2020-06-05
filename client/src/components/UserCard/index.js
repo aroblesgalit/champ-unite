@@ -82,7 +82,7 @@ function UserCard(props) {
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <button className="uk-button secondary-btn" type="button" onClick={(e) => handleBattle(e, otherUserChampion)}>Battle</button>
+                        <button className="uk-button secondary-btn" type="button" onClick={(e, opponent) => handleBattle(e, otherUserChampion)}>Battle</button>
                     </div>
                 </div>
             </div>
