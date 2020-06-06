@@ -110,7 +110,7 @@ router.get("/search/:id", function (req, res) {
 });
 
 // Get a user by id
-router.get("/:id", function (req, res) {
+router.get("/id/:id", function (req, res) {
     db.User
         .find({ _id: req.params.id })
         .then(dbModel => res.json(dbModel))

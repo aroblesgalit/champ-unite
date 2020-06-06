@@ -71,5 +71,9 @@ export default {
     // Get all users but one
     getAllUsersButOne: function(id) {
         return axios.get("/api/users/search/" + id);
+    },
+    // Get a user by _id
+    getUserById: function(id) {
+        return axios.get("/api/users/id/" + id);
     }
 };
