@@ -6,6 +6,11 @@ import ChampionCard from "../components/ChampionCard";
 
 function Battle() {
 
+    const [battleStats, setBattleStats] = useState({
+        started: false,
+        timerDone: false
+    });
+
     const { userid, otheruserid } = useParams();
 
     console.log(userid, otheruserid);
@@ -38,10 +43,43 @@ function Battle() {
         }
     }
 
+    function hideStartBtn() {
+        setTimeout(function() {
+            setBattleStats({
+                started: true
+            })
+        }, 1000)
+    }
+
+    const [timeLeft, setTimeLeft] = useState(3);
+
+    function countDown() {
+        let currentTime = 3;
+        const countDown = setInterval(function () {
+            if (currentTime <= 0) {
+                clearInterval(countDown);
+                setBattleStats({
+                    started: true,
+                    timerDone: true,
+                });
+            } else {
+                currentTime--;
+            }
+            setTimeLeft(currentTime);
+        }, 1000)
+    }
+
+    function handleStart() {
+        setBattleStats({
+            started: true
+        });
+        countDown();
+        hideStartBtn();
+    }
+
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle">
-            <h2>BATTLE</h2>
-            <div className="uk-flex uk-flex-middle uk-flex-between uk-width-expand">
+            <div className="uk-flex uk-flex-top uk-flex-between uk-width-expand">
                 <div className="uk-flex uk-flex-column uk-flex-middle">
                     <HealthBar
                         type="user"
@@ -64,8 +102,18 @@ function Battle() {
                     />
                     <span className="battle-user-name">Username</span>
                 </div>
-                <div className="battle-vs">
-                    <span>VS</span>
+                <div className="battle-vs uk-flex uk-flex-column uk-flex-middle">
+                    <h2>BATTLE</h2>
+                    {
+                        battleStats.timerDone ? (
+                            <span>VS</span>
+                        ) : `${timeLeft}`
+                    }
+                    {
+                        battleStats.timerDone ? (
+                            <div className="battle-text">FIGHT!</div>
+                        ) : ""
+                    }
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-middle">
                     <HealthBar
@@ -90,7 +138,8 @@ function Battle() {
                     <span className="battle-user-name">Username</span>
                 </div>
             </div>
-            <button className="uk-button primary-btn">Start</button>
+            <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
+
         </section>
     );
 }
