@@ -107,9 +107,13 @@ function Battle() {
         if (damage >= 0) {
             // setOtherHealth(otherHealth - damage);
             otherHealthInit = otherHealthInit - damage;
-            setOtherHealth(otherHealthInit);
-            console.log("otherHealth: ", otherHealth);
-            return otherHealth;
+            if (otherHealthInit <= 0) {
+                setOtherHealth(0);
+                console.log("otherHealth: ", otherHealthInit);
+            } else {
+                setOtherHealth(otherHealthInit);
+                console.log("otherHealth: ", otherHealthInit);
+            }
         }
         // change playerturn
         // setPlayerTurn(1);
@@ -130,9 +134,14 @@ function Battle() {
         if (damage >= 0) {
             // setUserHealth(userHealth - damage);
             userHealthInit = userHealthInit - damage;
-            setUserHealth(userHealthInit);
-            console.log("userHealth: ", userHealth);
-            return userHealth;
+            if (userHealthInit <= 0) {
+                setUserHealth(0);
+                console.log("userHealth: ", userHealthInit);
+            } else {
+                setUserHealth(userHealthInit);
+                console.log("userHealth: ", userHealthInit);
+            }
+            
         }
         // change playerturn
         // setPlayerTurn(0);
@@ -150,13 +159,23 @@ function Battle() {
             userTurn();
             playerTurn = 1;
             // Set a timeout to begin startBattle again
-            startBattleAgain();
+            if (otherHealthInit <= 0 || userHealthInit <= 0) {
+                // endGame();
+                console.log("You win!")
+            } else {
+                startBattleAgain();
+            }
         // else playerTurn is 1, other goes
         } else if (playerTurn === 1) {
             otherTurn();
             playerTurn = 0;
             // Set a timeout to begin startBattle again
-            startBattleAgain();
+            if (userHealthInit <= 0 || otherHealthInit <= 0) {
+                // endGame();
+                console.log("You lose.")
+            } else {
+                startBattleAgain();
+            }
         }
     }
 
