@@ -75,5 +75,13 @@ export default {
     // Get a user by _id
     getUserById: function(id) {
         return axios.get("/api/users/id/" + id);
+    },
+    // Update user's wins
+    increaseUserWins: function(id) {
+        return axios.put("/api/users/wins/" + id);
+    },
+    // Update user's losses
+    decreaseUserLosses: function(id) {
+        return axios.put("/api/users/losses/" + id);
     }
 };

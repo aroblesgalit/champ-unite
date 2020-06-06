@@ -57,7 +57,7 @@ router.put("/:id/:champion", function (req, res) {
     db.User
         .findByIdAndUpdate(req.params.id, {
             $push: { champions: req.params.champion }
-        })
+        }, { new: true })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
@@ -67,7 +67,7 @@ router.put("/champions/:user/:champion", function (req, res) {
     db.User
         .updateOne({ _id: req.params.user }, {
             $pull: { champions: req.params.champion }
-        }, { safe: true, multi: true })
+        }, { new: true })
         .then(res => res.json(res))
         .catch(err => res.status(422).json(err));
 });
@@ -113,6 +113,26 @@ router.get("/search/:id", function (req, res) {
 router.get("/id/:id", function (req, res) {
     db.User
         .findOne({ _id: req.params.id })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
+// Increment user's wins
+router.put("/wins/:id", function (req, res) {
+    db.User
+        .findOneAndUpdate({ _id: req.params.id }, {
+            $inc: { wins: 1 }
+        }, { new: true })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
+// Increment user's losses
+router.put("/losses/:id", function (req, res) {
+    db.User
+        .findOneAndUpdate({ _id: req.params.id }, {
+            $inc: { losses: 1 }
+        }, { new: true })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
