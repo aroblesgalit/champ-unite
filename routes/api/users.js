@@ -2,7 +2,11 @@ const db = require("../../models");
 const passport = require("../../config/passport");
 const router = require("express").Router();
 
-router.post("/login", passport.authenticate("local"), function(req, res) {
+
+// ------------------- Authenticated ------------------- //
+// ------------------- Authenticated ------------------- //
+
+router.post("/login", passport.authenticate("local"), function (req, res) {
     res.json(req.user);
     res.redirect("/profile");
 });
@@ -54,31 +58,38 @@ router.put("/:id/:champion", function (req, res) {
         .findByIdAndUpdate(req.params.id, {
             $push: { champions: req.params.champion }
         })
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
 });
 
 // Remove a champion from the champions array
-router.put("/champions/:user/:champion", function(req, res ) {
+router.put("/champions/:user/:champion", function (req, res) {
     db.User
         .updateOne({ _id: req.params.user }, {
-            $pull: { champions:  req.params.champion }
+            $pull: { champions: req.params.champion }
         }, { safe: true, multi: true })
-            .then(res => res.json(res))
-            .catch(err => res.status(422).json(err));
+        .then(res => res.json(res))
+        .catch(err => res.status(422).json(err));
 });
+
+
+
+
+
+// ------------------- Unauthenticated ------------------- //
+// ------------------- Unauthenticated ------------------- //
 
 // Get all users
 router.get("/", function (req, res) {
     db.User
         .find({})
-        .sort({username: 1})
+        .sort({ username: 1 })
         .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
 });
 
 // Get user by username
-router.get("/:username", function(req, res) {
+router.get("/:username", function (req, res) {
     db.User
         .find({ username: req.params.username })
         .then(dbModel => res.json(dbModel))
@@ -93,8 +104,16 @@ router.get("/search/:id", function (req, res) {
                 $ne: req.params.id
             }
         })
-        .sort({username: 1})
+        .sort({ username: 1 })
         .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
+
+// Get a user by id
+router.get("/:id", function (req, res) {
+    db.User
+        .find({ _id: req.params.id })
+        .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
 
