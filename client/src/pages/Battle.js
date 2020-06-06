@@ -18,6 +18,10 @@ function Battle() {
     // Get Champion IDs from the url to render their cards and health bar
     const { userid, otheruserid } = useParams();
 
+    // Get user's and other user's data
+    const [userData, setUserData] = useState({});
+    const [otherData, setOtherData] = useState({});
+
     // console.log(userid, otheruserid);
 
     // User's champion's stats
@@ -32,10 +36,10 @@ function Battle() {
     // attack, combat, defense, durability, image, intelligence, name, power, speed, strength, user, _id
 
     useEffect(() => {
-        loadChampions();
+        loadChampionsAndUsers();
     }, []);
 
-    async function loadChampions() {
+    async function loadChampionsAndUsers() {
         try {
             const userChamp = await API.getChampionById(userid);
             const otherChamp = await API.getChampionById(otheruserid);
@@ -48,8 +52,14 @@ function Battle() {
             // setPlayerTurn(0);
             // console.log("useEffect running...from battle...userChamp.data...", userChamp.data);
             // console.log("useEffect running...from battle...otherChamp.data...", otherChamp.data);
+            const userDataRes = await API.getUserById(userChamp.data.user);
+            const otherDataRes = await API.getUserById(otherChamp.data.user);
+            setUserData(userDataRes.data);
+            setOtherData(otherDataRes.data);
+            console.log("useEffect running...from battle...userDataRes.data...", userDataRes.data);
+            console.log("useEffect running...from battle...otherDataRes.data...", otherDataRes.data);
         } catch (err) {
-            console.log(err);
+            console.log("Something went wrong...could not loadChampionsAndUsers...", err);
         }
     }
 
@@ -229,7 +239,7 @@ function Battle() {
                         durability={userChampion.durability}
                         speed={userChampion.speed}
                     />
-                    <span className="battle-user-name">Username</span>
+                    <span className="battle-user-name">{userData.username}</span>
                 </div>
                 <div className="battle-vs uk-flex uk-flex-column uk-flex-middle">
                     <h2>BATTLE</h2>
@@ -260,7 +270,7 @@ function Battle() {
                         durability={otherChampion.durability}
                         speed={otherChampion.speed}
                     />
-                    <span className="battle-user-name">Username</span>
+                    <span className="battle-user-name">{otherData.username}</span>
                 </div>
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>

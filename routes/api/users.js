@@ -112,7 +112,7 @@ router.get("/search/:id", function (req, res) {
 // Get a user by id
 router.get("/id/:id", function (req, res) {
     db.User
-        .find({ _id: req.params.id })
+        .findOne({ _id: req.params.id })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });
