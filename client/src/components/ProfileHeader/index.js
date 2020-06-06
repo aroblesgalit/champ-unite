@@ -39,7 +39,7 @@ function ProfileHeader(props) {
     function chooseOtherChampion() {
         if (props.champions && props.champions.length > 1) {
             const champId = Math.floor(Math.random() * props.champions.length);
-            console.log("chooseOtherChampion ran...", champId);
+            // console.log("chooseOtherChampion ran...", champId);
             setOtherChampionId(props.champions[champId]);
         } else {
             setOtherChampionId(props.champions[0]);
@@ -60,7 +60,7 @@ function ProfileHeader(props) {
 
     function handleSelect(id) {
         setUserChampionId(id)
-        console.log("handleSelect ran...printing id of clicked champion...", id);
+        // console.log("handleSelect ran...printing id of clicked champion...", id);
     }
 
     return (
