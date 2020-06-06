@@ -83,6 +83,19 @@ router.get("/:username", function(req, res) {
         .find({ username: req.params.username })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
-})
+});
+
+// Get all users but one
+router.get("/search/:id", function (req, res) {
+    db.User
+        .find({
+            _id: {
+                $ne: req.params.id
+            }
+        })
+        .sort({username: 1})
+        .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
 
 module.exports = router;

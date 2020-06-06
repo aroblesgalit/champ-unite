@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import UserCard from "../components/UserCard";
 import API from "../utils/API";
+import UserContext from "../utils/UserContext";
 
 function UsersSearch() {
 
     const [users, setUsers] = useState([]);
 
+    const { id } = useContext(UserContext);
+
     useEffect(() => {
-        API.getAllUsers()
+        if (id) {
+            API.getAllUsersButOne(id)
             .then(usersDB => {
                 console.log("From UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
+        } else {
+            API.getAllUsers()
+            .then(usersDB => {
+                console.log("From UsersSearch...printing usersDB.data...", usersDB.data);
+                setUsers(usersDB.data);
+            })
+            .catch(err => console.log(err));
+        }
+        
     }, []);
 
 
