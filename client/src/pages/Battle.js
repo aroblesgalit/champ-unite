@@ -8,7 +8,9 @@ function Battle() {
 
     const [battleStats, setBattleStats] = useState({
         started: false,
-        timerDone: false
+        timerDone: false,
+        textDisplay: "",
+        gameEnded: false,
     });
 
     // const [playerTurn, setPlayerTurn] = useState();
@@ -54,6 +56,7 @@ function Battle() {
     function hideStartBtn() {
         setTimeout(function () {
             setBattleStats({
+                ...battleStats,
                 started: true
             })
         }, 1000)
@@ -69,6 +72,7 @@ function Battle() {
                 setBattleStats({
                     started: true,
                     timerDone: true,
+                    textDisplay: "FIGHT!"
                 });
             } else {
                 currentTime--;
@@ -82,6 +86,7 @@ function Battle() {
 
     function handleStart() {
         setBattleStats({
+            ...battleStats,
             started: true
         });
         countDown();
@@ -141,16 +146,34 @@ function Battle() {
                 setUserHealth(userHealthInit);
                 console.log("userHealth: ", userHealthInit);
             }
-            
+
         }
         // change playerturn
         // setPlayerTurn(0);
     }
 
+    function endGame() {
+        if (userHealthInit <= 0) {
+            setBattleStats({
+                started: true,
+                timerDone: true,
+                textDisplay: "You lose.",
+                gameEnded: true
+            });
+        } else if (otherHealthInit <= 0) {
+            setBattleStats({
+                started: true,
+                timerDone: true,
+                textDisplay: "You win!",
+                gameEnded: true
+            })
+        }
+    }
+
     function startBattleAgain() {
         setTimeout(() => {
             startBattle();
-        }, 3000);
+        }, 1000);
     }
 
     function startBattle() {
@@ -160,23 +183,27 @@ function Battle() {
             playerTurn = 1;
             // Set a timeout to begin startBattle again
             if (otherHealthInit <= 0 || userHealthInit <= 0) {
-                // endGame();
+                endGame();
                 console.log("You win!")
             } else {
                 startBattleAgain();
             }
-        // else playerTurn is 1, other goes
+            // else playerTurn is 1, other goes
         } else if (playerTurn === 1) {
             otherTurn();
             playerTurn = 0;
             // Set a timeout to begin startBattle again
             if (userHealthInit <= 0 || otherHealthInit <= 0) {
-                // endGame();
+                endGame();
                 console.log("You lose.")
             } else {
                 startBattleAgain();
             }
         }
+    }
+
+    function handleLeave() {
+        window.location.replace("/profile");
     }
 
     return (
@@ -211,11 +238,7 @@ function Battle() {
                             <span>VS</span>
                         ) : `${timeLeft}`
                     }
-                    {
-                        battleStats.timerDone ? (
-                            <div className="battle-text">FIGHT!</div>
-                        ) : ""
-                    }
+                    <div className="battle-text">{battleStats.textDisplay}</div>
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-middle">
                     <HealthBar
@@ -241,7 +264,7 @@ function Battle() {
                 </div>
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
-
+            <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={handleLeave}>Leave</button>
         </section>
     );
 }

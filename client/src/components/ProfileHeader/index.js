@@ -33,7 +33,11 @@ function ProfileHeader(props) {
     }
 
     function handleBattle() {
-        window.location.replace(`/battle/${userChampionId}/vs/${otherChampionId}`);
+        if (!userChampionId) {
+            window.location.replace(`/battle/${user.champions[0]}/vs/${otherChampionId}`);
+        } else {
+            window.location.replace(`/battle/${userChampionId}/vs/${otherChampionId}`);
+        }
     }
 
     function chooseOtherChampion() {
