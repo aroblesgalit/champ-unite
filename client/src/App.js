@@ -12,6 +12,7 @@ import UserContext from './utils/UserContext';
 import API from "./utils/API";
 import OtherUserProfile from './pages/OtherUserProfile';
 import Battle from "./pages/Battle";
+import Ranking from "./pages/Ranking";
 
 function App() {
 
@@ -77,6 +78,9 @@ function App() {
             </Route>
             <Route path="/battle/:userid/vs/:otheruserid">
               <Battle />
+            </Route>
+            <Route path="/ranking">
+              <Ranking />
             </Route>
           </Switch>
           <Footer />
