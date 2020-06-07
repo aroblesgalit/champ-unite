@@ -76,7 +76,7 @@ function ChampionCard(props) {
     }
 
     return (
-        <div className="champion-card uk-card uk-position-relatve">
+        <div className="champion-card uk-card uk-position-relatve" style={ props.selected && props.selectedId === props.id  ? { border: "2px solid #221D54" } :{ border: "" } } >
             {
                 maxReached ? (
                     <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
@@ -96,11 +96,11 @@ function ChampionCard(props) {
             }
             {
                 props.type === "battle" && user.isLoggedIn ? (
-                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="check" onClick={props.handleSelect}></button>
+                    <button className="select-btn uk-icon-button uk-position-absolute" uk-icon="check" onClick={props.handleSelect}></button>
                 ) : ""
             }
-            <div className="champion-name-container uk-position-absolute uk-text-center">
-                <span className="champion-name">{props.name}</span>
+            <div className="champion-name-container uk-position-absolute uk-text-center" style={ props.selected && props.selectedId === props.id  ? { border: "1px solid #221D54" } :{ border: "" } } >
+                <span className="champion-name" >{props.name}</span>
             </div>
             <div className="champion-img-container uk-card-media-top uk-margin-top uk-position-relative">
                 <div className="battle-stats-container uk-position-absolute">

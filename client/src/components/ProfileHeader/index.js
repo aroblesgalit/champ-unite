@@ -11,6 +11,11 @@ function ProfileHeader(props) {
     const [userChampionId, setUserChampionId] = useState("");
     const [otherChampionId, setOtherChampionId] = useState("");
 
+    const [championSelected, setChampionSelected] = useState({
+        selected: false,
+        championId: ""
+    });
+
     useEffect(() => {
         API.getUserData()
             .then(user => {
@@ -65,6 +70,10 @@ function ProfileHeader(props) {
     function handleSelect(id) {
         setUserChampionId(id)
         // console.log("handleSelect ran...printing id of clicked champion...", id);
+        setChampionSelected({
+            selected: true,
+            championId: id
+        });
     }
 
     return (
@@ -124,6 +133,8 @@ function ProfileHeader(props) {
                                         defense={champion.defense}
                                         type="battle"
                                         handleSelect={() => handleSelect(champion._id)}
+                                        selected={championSelected.selected}
+                                        selectedId={championSelected.championId}
                                     />
                                 }) 
                             ) : <p>Search for Champions to add or create your own!</p>

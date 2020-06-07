@@ -11,6 +11,11 @@ function UserCard(props) {
     const [userChampionId, setUserChampionId] = useState("");
     const [otherChampionId, setOtherChampionId] = useState("");
 
+    const [championSelected, setChampionSelected] = useState({
+        selected: false,
+        championId: ""
+    });
+
     useEffect(() => {
         API.getUserData()
             .then(user => {
@@ -30,6 +35,10 @@ function UserCard(props) {
 
     function handleSelect(id) {
         setUserChampionId(id)
+        setChampionSelected({
+            selected: true,
+            championId: id
+        });
         // console.log("handleSelect ran...printing id of clicked champion...", id);
     }
 
@@ -116,7 +125,7 @@ function UserCard(props) {
                     </div>
                     <div className="uk-modal-body uk-flex uk-width-1-1">
                         {
-                            userChampions && userChampions.length > 0 ? (
+                            user.champions && user.champions.length > 0 ? (
                                 userChampions.map(champion => {
                                     return <ChampionCard
                                         key={champion._id || champion.image}
@@ -133,6 +142,8 @@ function UserCard(props) {
                                         defense={champion.defense}
                                         type="battle"
                                         handleSelect={() => handleSelect(champion._id)}
+                                        selected={championSelected.selected}
+                                        selectedId={championSelected.championId}
                                     />
                                 })
                             ) : <p>Search for Champions to add or create your own!</p>
@@ -140,7 +151,13 @@ function UserCard(props) {
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <button className="uk-button secondary-btn" type="button" onClick={handleBattle}>Battle</button>
+                        <button
+                            className="uk-button secondary-btn"
+                            type="button"
+                            onClick={handleBattle}
+                        >
+                            Battle
+                        </button>
                     </div>
                 </div>
             </div>
