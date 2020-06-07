@@ -8,14 +8,17 @@
     width: 260px;
     min-width: 260px;
     height: 100%;
-    border: 1px solid #c0c0c0;
+    border: 2px solid rgb(67, 198, 172);
+    border-radius: 8px;
     margin-right: 14px;
     margin-bottom: 14px;
+    background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
 }
 
 .champion-name-container {
     background-color: #fff;
-    border: 1px solid #c0c0c0;
+    border: 1px solid rgb(0, 180, 219);
+    border-radius: 4px;
     padding: 4px 10px;
     width: 90%;
     top: 10px;
@@ -24,8 +27,9 @@
 }
 
 .champion-name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
+    color: rgb(29, 58, 65);
 }
 
 .add-btn {
@@ -60,11 +64,21 @@
 }
 
 .battle-stats {
-    background-color: #fff;
-    border: 1px solid #c0c0c0;
     padding: 4px;
     padding-top: 0;
     width: 60px;
+    color: #f2f2f2;
+    border-radius: 4px;
+}
+
+.battle-stats-atk {
+    border: 1px solid rgb(237, 33, 58);
+    background-image: linear-gradient(to right, rgb(237, 33, 58), rgb(147, 41, 30));
+}
+
+.battle-stats-def {
+    border: 1px solid rgb(0, 180, 219);
+    background-image: linear-gradient(to right, rgb(0, 180, 219), rgb(0, 131, 176));
 }
 
 .battle-stats-val {
@@ -91,22 +105,25 @@
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 0;
+    color: rgb(25, 22, 84);
 }
 
 .stats-label {
     font-size: 12px;
     width: 30px;
+    color: rgb(25, 22, 84);
 }
 
 .stats-val {
     font-size: 12px;
     min-width: 20px;
+    color: rgb(101, 241, 213);
 }
 
 .stats-bar {
     height: 12px;
     min-width: 1px;
-    background-color: #444;
+    background-color: rgb(68, 255, 218);
     margin: 0 4px;
 }
 

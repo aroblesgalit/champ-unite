@@ -104,10 +104,10 @@ function ChampionCard(props) {
             </div>
             <div className="champion-img-container uk-card-media-top uk-margin-top uk-position-relative">
                 <div className="battle-stats-container uk-position-absolute">
-                    <div className="battle-stats uk-flex uk-flex-column uk-flex-middle uk-margin-small-bottom">
+                    <div className="battle-stats battle-stats-atk uk-flex uk-flex-column uk-flex-middle uk-margin-small-bottom">
                         <span className="battle-stats-val">{props.attack}</span><span className="battle-stats-label">ATK</span>
                     </div>
-                    <div className="battle-stats uk-flex uk-flex-column uk-flex-middle">
+                    <div className="battle-stats battle-stats-def uk-flex uk-flex-column uk-flex-middle">
                         <span className="battle-stats-val">{props.defense}</span><span className="battle-stats-label">DEF</span>
                     </div>
                 </div>
