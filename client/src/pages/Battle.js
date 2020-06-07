@@ -23,17 +23,17 @@ function Battle() {
     const [otherData, setOtherData] = useState({});
 
     // console.log(userid, otheruserid);
-
+    const [userAtkTurn, setUserAtkTurn] = useState();
     // User's champion's stats
     const [userChampion, setUserChampion] = useState({});
     const [userHealth, setUserHealth] = useState();
     const [userAttack, setUserAttack] = useState();
+    const [userDamage, setUserDamage] = useState();
     // Other's champion's stats
     const [otherChampion, setOtherChampion] = useState({});
     const [otherHealth, setOtherHealth] = useState();
     const [otherAttack, setOtherAttack] = useState();
-
-    // attack, combat, defense, durability, image, intelligence, name, power, speed, strength, user, _id
+    const [otherDamage, setOtherDamage] = useState();
 
     useEffect(() => {
         loadChampionsAndUsers();
@@ -120,6 +120,8 @@ function Battle() {
         console.log("damage: ", damage);
         // if difference is positive, subtract from other healthbar
         if (damage >= 0) {
+            setOtherDamage(damage);
+            setUserAtkTurn(true);
             // setOtherHealth(otherHealth - damage);
             otherHealthInit = otherHealthInit - damage;
             if (otherHealthInit <= 0) {
@@ -129,6 +131,9 @@ function Battle() {
                 setOtherHealth(otherHealthInit);
                 console.log("otherHealth: ", otherHealthInit);
             }
+        } else {
+            setOtherDamage(0);
+            setUserAtkTurn(true);
         }
         // change playerturn
         // setPlayerTurn(1);
@@ -147,6 +152,8 @@ function Battle() {
         console.log("damage: ", damage);
         // if difference is positive, subtract from other healthbar
         if (damage >= 0) {
+            setUserDamage(damage);
+            setUserAtkTurn(false);
             // setUserHealth(userHealth - damage);
             userHealthInit = userHealthInit - damage;
             if (userHealthInit <= 0) {
@@ -157,6 +164,9 @@ function Battle() {
                 console.log("userHealth: ", userHealthInit);
             }
 
+        } else {
+            setUserDamage(0);
+            setUserAtkTurn(false);
         }
         // change playerturn
         // setPlayerTurn(0);
@@ -261,7 +271,10 @@ function Battle() {
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle">
             <div className="uk-flex uk-flex-top uk-flex-between uk-width-expand">
-                <div className="uk-flex uk-flex-column uk-flex-middle">
+                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
+                    {
+                        userAtkTurn ? "" : <span className="health-damage uk-position-absolute">{userDamage}</span>
+                    }
                     <HealthBar
                         type="user"
                         image={userChampion.image}
@@ -281,7 +294,7 @@ function Battle() {
                         durability={userChampion.durability}
                         speed={userChampion.speed}
                     />
-                    <span className="battle-user-name">{userData.username}</span>
+                    <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {userData.username}</span>
                 </div>
                 <div className="battle-vs uk-flex uk-flex-column uk-flex-middle">
                     <h2>BATTLE</h2>
@@ -292,7 +305,10 @@ function Battle() {
                     }
                     <div className="battle-text">{battleStats.textDisplay}</div>
                 </div>
-                <div className="uk-flex uk-flex-column uk-flex-middle">
+                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
+                    {
+                        userAtkTurn ? <span className="health-damage uk-position-absolute">{otherDamage}</span> : ""
+                    }
                     <HealthBar
                         type="otherUser"
                         image={otherChampion.image}
@@ -312,7 +328,7 @@ function Battle() {
                         durability={otherChampion.durability}
                         speed={otherChampion.speed}
                     />
-                    <span className="battle-user-name">{otherData.username}</span>
+                    <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {otherData.username}</span>
                 </div>
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>

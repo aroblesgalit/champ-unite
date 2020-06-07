@@ -11,6 +11,7 @@
     overflow: hidden;
     margin-right: 12px;
     margin-top: 4px;
+    border: 1px solid rgb(67, 198, 172);
 }
 
 .battle-other-user-avatar {
@@ -20,6 +21,7 @@
     overflow: hidden;
     margin-left: 12px;
     margin-top: 4px;    
+    border: 1px solid rgb(67, 198, 172);
 }
 
 .battle-champion-name {
@@ -38,6 +40,7 @@
     border: 1px solid rgb(67, 198, 172);
     margin-right: 8px;
     padding: 2px;
+    border-radius: 4px;
 }
 
 .healthbar-bar-border-reverse {
@@ -45,6 +48,7 @@
     border: 1px solid rgb(67, 198, 172);
     margin-left: 8px;
     padding: 2px;
+    border-radius: 4px;
 }
 
 .healthbar-bar {
@@ -52,6 +56,7 @@
     min-width: 1px;
     height: 20px;
     background-color: rgb(218, 55, 55);
+    border-radius: 4px;
 }
 
 .healthbar-val p {

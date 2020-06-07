@@ -103,6 +103,27 @@
     color: rgb(96, 250, 219);
 }
 
+.health-damage {
+    font-size: 50px;
+    font-weight: 500;
+    color: rgb(218, 55, 55);
+    z-index: 5;
+    animation-name: damage;
+    animation-duration: 2s;
+}
+
+@keyframes damage {
+    from {
+        top: 80px;
+        opacity: 1;
+    } to {
+        top: 40px;
+        opacity: 0;
+    }
+}
+
+
+
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
