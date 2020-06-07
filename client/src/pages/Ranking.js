@@ -34,7 +34,7 @@ function Ranking() {
                 </thead>
                 <tbody>
                     {
-                        rankedUsers ? (
+                        rankedUsers.lenght > 0 ? (
                             rankedUsers.map((rankedUser, i) => {
                                 return <RankingRow
                                             key={rankedUser._id}
@@ -47,7 +47,7 @@ function Ranking() {
                                             winsPercent={rankedUser.winsPercent}
                                         />
                             }) 
-                        ) : <p>Battle 20 times to be on the ranking!</p>
+                        ) : <p className="uk-text-nowrap uk-text-muted">Battle 20 times to be on the ranking!</p>
                     }
                 </tbody>
             </table>

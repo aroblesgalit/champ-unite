@@ -92,7 +92,7 @@ router.get("/", function (req, res) {
 router.get("/ranking", function (req, res) {
     db.User
         .find({
-            totalBattle:  { $gte: 5 }
+            totalBattle:  { $gte: 20 }
         })
         .sort({ winsPercent: -1 })
         .then(dbModels => res.json(dbModels))
