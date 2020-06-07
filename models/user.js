@@ -45,6 +45,9 @@ const userSchema = new Schema({
     totalBattle: {
         type: Number,
         default: 0
+        // default: function() {
+        //     return this.wins + this.losses
+        // }
     },
     winsPercent: {
         type: Number,

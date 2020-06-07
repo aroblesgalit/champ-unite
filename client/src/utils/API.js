@@ -87,5 +87,9 @@ export default {
     // Update user's totalBattle
     increaseTotalBattle: function(id) {
         return axios.put("/api/users/update/total_battle/" + id);
+    },
+    // Update user's winsPercent
+    updateWinsPercent: function(id, data) {
+        return axios.put("/api/users/update/wins_percent/" + id, data);
     }
 };

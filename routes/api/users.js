@@ -148,11 +148,9 @@ router.put("/update/total_battle/:id", function (req, res) {
 });
 
 // Update wins percent
-router.put("/update/winspercent/:id", function (req, res) {
+router.put("/update/wins_percent/:id", function (req, res) {
     db.User
-        .findOneAndUpdate({ _id: req.params.id }, {
-            $set : { winsPercent: $.wins / $.total }
-        }, { new: true })
+        .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
 });

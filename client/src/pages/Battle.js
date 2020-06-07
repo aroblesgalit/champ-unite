@@ -162,6 +162,46 @@ function Battle() {
         // setPlayerTurn(0);
     }
 
+    async function updateOnUserWin() {
+        // Increase User's wins and increase Other User's losses
+        const newWinsUser = await API.increaseUserWins(userData._id);
+        const newWinsOther = await API.increaseUserLosses(otherData._id);
+        // Increase both user's totalBattle count
+        const newTotalBattleUser = await API.increaseTotalBattle(userData._id);
+        const newTotalBattleOther = await API.increaseTotalBattle(otherData._id);
+        console.log("updateOnUserWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
+        // Update states
+        setUserData(newTotalBattleUser.data);
+        setOtherData(newTotalBattleOther.data);
+        // Update both user's winsPercent
+        await API.updateWinsPercent(userData._id, {
+            winsPercent: ((newTotalBattleUser.data.wins / newTotalBattleUser.data.totalBattle) * 100).toFixed()
+        });
+        await API.updateWinsPercent(otherData._id, {
+            winsPercent: ((newTotalBattleOther.data.wins / newTotalBattleOther.data.totalBattle) * 100).toFixed()
+        });
+    }
+
+    async function updateOnOtherWin() {
+        // Increase User's losses and increase Other User's wins
+        const newWinsUser = await API.increaseUserLosses(userData._id);
+        const newWinsOther = await API.increaseUserWins(otherData._id);
+        // Increase both user's totalBattle count
+        const newTotalBattleUser = await API.increaseTotalBattle(userData._id);
+        const newTotalBattleOther = await API.increaseTotalBattle(otherData._id);
+        console.log("updateOnOtherWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
+        // Update states
+        setUserData(newTotalBattleUser.data);
+        setOtherData(newTotalBattleOther.data);
+        // Update both user's winsPercent
+        await API.updateWinsPercent(userData._id, {
+            winsPercent: ((newTotalBattleUser.data.wins / newTotalBattleUser.data.totalBattle) * 100).toFixed()
+        });
+        await API.updateWinsPercent(otherData._id, {
+            winsPercent: ((newTotalBattleOther.data.wins / newTotalBattleOther.data.totalBattle) * 100).toFixed()
+        });
+    }
+
     function endGame() {
         if (userHealthInit <= 0) {
             setBattleStats({
@@ -170,12 +210,7 @@ function Battle() {
                 textDisplay: "You lose.",
                 gameEnded: true
             });
-            // Increase User's losses and increase Other User's wins
-            API.increaseUserLosses(userData._id);
-            API.increaseUserWins(otherData._id);
-            // Increase both user's totalBattle count
-            API.increaseTotalBattle(userData._id);
-            API.increaseTotalBattle(otherData._id);
+            updateOnOtherWin();
         } else if (otherHealthInit <= 0) {
             setBattleStats({
                 started: true,
@@ -183,12 +218,7 @@ function Battle() {
                 textDisplay: "You win!",
                 gameEnded: true
             })
-            // Increase User's wins and increase Other User's losses
-            API.increaseUserWins(userData._id);
-            API.increaseUserLosses(otherData._id);
-            // Increase both user's totalBattle count
-            API.increaseTotalBattle(userData._id);
-            API.increaseTotalBattle(otherData._id);
+            updateOnUserWin();
         }
     }
 
