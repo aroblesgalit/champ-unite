@@ -7,10 +7,12 @@
 .user-card {
     width: 270px;
     min-width: 200px;
-    border: 1px solid #c0c0c0;
+    border: 2px solid rgb(219, 221, 223);
     margin-right: 14px;
     margin-bottom: 14px;
     padding: 20px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236));
 }
 
 .user-card-links {
