@@ -88,6 +88,17 @@ router.get("/", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
+// Get all users for ranking
+router.get("/ranking", function (req, res) {
+    db.User
+        .find({
+            totalBattle:  { $gte: 5 }
+        })
+        .sort({ winsPercent: 1 })
+        .then(dbModels => res.json(dbModels))
+        .catch(err => res.status(422).json(err));
+});
+
 // Get user by username
 router.get("/:username", function (req, res) {
     db.User

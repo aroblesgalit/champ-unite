@@ -64,6 +64,10 @@ export default {
     getAllUsers: function() {
         return axios.get("/api/users");
     },
+    // Get all users for ranking
+    getAllUsersForRanking: function() {
+        return axios.get("/api/users/ranking");
+    },
     // Get a user by the username
     getUserByUsername: function(username) {
         return axios.get("/api/users/" + username);
