@@ -94,7 +94,7 @@ router.get("/ranking", function (req, res) {
         .find({
             totalBattle:  { $gte: 5 }
         })
-        .sort({ winsPercent: 1 })
+        .sort({ winsPercent: -1 })
         .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
 });
