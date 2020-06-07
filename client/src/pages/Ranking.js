@@ -47,7 +47,7 @@ function Ranking() {
                                             winsPercent={rankedUser.winsPercent}
                                         />
                             }) 
-                        ) : <p className="uk-text-nowrap uk-text-muted">Battle 20 times to be on the ranking!</p>
+                        ) : <p className="uk-text-nowrap uk-text-muted">Battle 20 times to be in the ranking!</p>
                     }
                 </tbody>
             </table>

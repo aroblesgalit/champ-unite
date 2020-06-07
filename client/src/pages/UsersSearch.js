@@ -56,16 +56,18 @@ function UsersSearch() {
 
             <div className="users-search-results uk-flex uk-flex-wrap">
                 { 
-                    users.map(user => {
-                        return <UserCard 
-                            key={user._id}
-                            username={user.username}
-                            rank={user.rank}
-                            wins={user.wins}
-                            losses={user.losses}
-                            champions={user.champions}
-                        />
-                    })
+                    users && users.length > 0 ? (
+                        users.map(user => {
+                            return <UserCard 
+                                key={user._id}
+                                username={user.username}
+                                rank={user.rank}
+                                wins={user.wins}
+                                losses={user.losses}
+                                champions={user.champions}
+                            />
+                        })
+                    ) : <p className="uk-text-nowrap uk-text-muted">No users found by that query. Please try a different one.</p>
                 }
             </div>
         </section>
