@@ -13,6 +13,7 @@ import API from "./utils/API";
 import OtherUserProfile from './pages/OtherUserProfile';
 import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
+import CreateChampion from "./pages/CreateChampion";
 
 function App() {
 
@@ -81,6 +82,9 @@ function App() {
             </Route>
             <Route path="/ranking">
               <Ranking />
+            </Route>
+            <Route path="/create_champion">
+              <CreateChampion />
             </Route>
           </Switch>
           <Footer />

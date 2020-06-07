@@ -60,7 +60,7 @@ function UserProfile() {
                     <h3>My Champions</h3>
                     <div className="uk-flex">
                         <Link to="/champions" className="uk-button secondary-btn uk-margin-small-right">Search</Link>
-                        <button className="uk-button secondary-btn">Create</button>
+                        <Link to="/create_champion" className="uk-button secondary-btn">Create</Link>
                     </div>
                 </div>
                 <div className="champions-list-container uk-flex uk-flex-wrap">

@@ -22,8 +22,9 @@ function ChampionCard(props) {
                 })
             })
     }, []);
-    
+
     const [maxReached, setMaxReached] = useState(false);
+    const [championAdded, setChampionAdded] = useState(false);
 
     function calcBarWidth(a) {
         return a * 1.8;
@@ -32,6 +33,7 @@ function ChampionCard(props) {
     async function handleAdd() {
         try {
             if (user.champions.length < 3) {
+                setChampionAdded(true);
                 // console.log("Running conditional champions.length < 3...", champions.length);
                 const newUserChampion = await API.addChampion({
                     user: user.id,
@@ -49,12 +51,13 @@ function ChampionCard(props) {
                 // Update user's champions array
                 await API.updateUserChampions(user.id, newUserChampion.data._id);
                 window.location.reload(false);
+
             } else {
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
                 setMaxReached(true);
                 // After 3 seconds, setMaxReached backto false to close the alert
-                setTimeout(function(){ 
-                    setMaxReached(false); 
+                setTimeout(function () {
+                    setMaxReached(false);
                 }, 4000);
             }
         } catch (err) {
@@ -76,11 +79,18 @@ function ChampionCard(props) {
     }
 
     return (
-        <div className="champion-card uk-card uk-position-relatve" style={ props.selected && props.selectedId === props.id  ? { border: "2px solid #221D54" } :{ border: "" } } >
+        <div className="champion-card uk-card uk-position-relatve" style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
             {
                 maxReached ? (
                     <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
                         <p>You've reached the max of 3 champions! Please make room if you'd like to add another.</p>
+                    </div>
+                ) : ""
+            }
+            {
+                championAdded ? (
+                    <div className="champion-added-alert uk-alert-success uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
+                        <p>{props.name} successfuly added to your list!</p>
                     </div>
                 ) : ""
             }
@@ -99,7 +109,7 @@ function ChampionCard(props) {
                     <button className="select-btn uk-icon-button uk-position-absolute" uk-icon="check" onClick={props.handleSelect}></button>
                 ) : ""
             }
-            <div className="champion-name-container uk-position-absolute uk-text-center" style={ props.selected && props.selectedId === props.id  ? { border: "1px solid #221D54" } :{ border: "" } } >
+            <div className="champion-name-container uk-position-absolute uk-text-center" style={props.selected && props.selectedId === props.id ? { border: "1px solid #221D54" } : { border: "" }} >
                 <span className="champion-name" >{props.name}</span>
             </div>
             <div className="champion-img-container uk-card-media-top uk-margin-top uk-position-relative">

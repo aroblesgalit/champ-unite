@@ -145,3 +145,13 @@
     background-color: #f05050;
     color: #fff;
 }
+
+.champion-added-alert {
+    bottom: 10px;
+    left: 20px;
+    z-index: 5;
+    max-width: 400px;
+    width: 100%;
+    background-color: #50f080;
+    color: #fff;
+}
