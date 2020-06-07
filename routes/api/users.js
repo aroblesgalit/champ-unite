@@ -88,22 +88,22 @@ router.get("/", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
-// Get all users for ranking
-router.get("/ranking", function (req, res) {
-    db.User
-        .find({
-            totalBattle:  { $gte: 20 }
-        })
-        .sort({ winsPercent: -1 })
-        .then(dbModels => res.json(dbModels))
-        .catch(err => res.status(422).json(err));
-});
-
-// Get user by username
+// Get a user by username
 router.get("/:username", function (req, res) {
     db.User
         .find({ username: req.params.username })
         .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
+// Get all users for ranking
+router.get("/ranking", function (req, res) {
+    db.User
+        .find({
+            totalBattle: { $gte: 20 }
+        })
+        .sort({ winsPercent: -1 })
+        .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
 });
 
@@ -125,6 +125,19 @@ router.get("/id/:id", function (req, res) {
     db.User
         .findOne({ _id: req.params.id })
         .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
+// Search all users by query
+router.get("/search_by_username/:username", function (req, res) {
+    db.User
+        .find({
+            username: {
+                $regex: req.params.username,
+                $options: "i"
+            }
+        })
+        .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
 });
 

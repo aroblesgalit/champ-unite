@@ -95,5 +95,9 @@ export default {
     // Update user's winsPercent
     updateWinsPercent: function(id, data) {
         return axios.put("/api/users/update/wins_percent/" + id, data);
+    },
+    // Get users by a search username query
+    getUsersBySearch: function(username) {
+        return axios.get("/api/users/search_by_username/" + username);
     }
 };

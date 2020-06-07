@@ -34,7 +34,7 @@ function UsersSearch() {
         e.preventDefault();
 
         const usernameQuery = usernameRef.current.value;
-        API.getUserByUsername(usernameQuery)
+        API.getUsersBySearch(usernameQuery)
             .then(res => {
                 setUsers(res.data);
             })
