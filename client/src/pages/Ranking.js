@@ -1,4 +1,6 @@
 import React from "react";
+import "./pages.css";
+import RankingRow from "../components/RankingRow";
 
 function Ranking() {
     return (
@@ -16,30 +18,7 @@ function Ranking() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>superman</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>10</td>
-                        <td>100%</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>superman</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>10</td>
-                        <td>100%</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>superman</td>
-                        <td>10</td>
-                        <td>0</td>
-                        <td>10</td>
-                        <td>100%</td>
-                    </tr>
+                    <RankingRow />
                 </tbody>
             </table>
         </section>
