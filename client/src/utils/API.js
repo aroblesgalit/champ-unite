@@ -83,5 +83,9 @@ export default {
     // Update user's losses
     increaseUserLosses: function(id) {
         return axios.put("/api/users/losses/" + id);
+    },
+    // Update user's totalBattle
+    increaseTotalBattle: function(id) {
+        return axios.put("/api/users/total_battle/" + id);
     }
 };
