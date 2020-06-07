@@ -171,8 +171,11 @@ function Battle() {
                 gameEnded: true
             });
             // Increase User's losses and increase Other User's wins
-            API.increaseUserLosses(userData.id);
-            API.increaseUserWins(otherData.id);
+            API.increaseUserLosses(userData._id);
+            API.increaseUserWins(otherData._id);
+            // Increase both user's totalBattle count
+            API.increaseTotalBattle(userData._id);
+            API.increaseTotalBattle(otherData._id);
         } else if (otherHealthInit <= 0) {
             setBattleStats({
                 started: true,
@@ -181,8 +184,11 @@ function Battle() {
                 gameEnded: true
             })
             // Increase User's wins and increase Other User's losses
-            API.increaseUserWins(userData.id);
-            API.increaseUserLosses(otherData.id);
+            API.increaseUserWins(userData._id);
+            API.increaseUserLosses(otherData._id);
+            // Increase both user's totalBattle count
+            API.increaseTotalBattle(userData._id);
+            API.increaseTotalBattle(otherData._id);
         }
     }
 

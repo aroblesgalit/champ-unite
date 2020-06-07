@@ -78,14 +78,14 @@ export default {
     },
     // Update user's wins
     increaseUserWins: function(id) {
-        return axios.put("/api/users/wins/" + id);
+        return axios.put("/api/users/update/wins/" + id);
     },
     // Update user's losses
     increaseUserLosses: function(id) {
-        return axios.put("/api/users/losses/" + id);
+        return axios.put("/api/users/update/losses/" + id);
     },
     // Update user's totalBattle
     increaseTotalBattle: function(id) {
-        return axios.put("/api/users/total_battle/" + id);
+        return axios.put("/api/users/update/total_battle/" + id);
     }
 };

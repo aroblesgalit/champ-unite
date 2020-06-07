@@ -118,7 +118,7 @@ router.get("/id/:id", function (req, res) {
 });
 
 // Increment user's wins
-router.put("/wins/:id", function (req, res) {
+router.put("/update/wins/:id", function (req, res) {
     db.User
         .findOneAndUpdate({ _id: req.params.id }, {
             $inc: { wins: 1 }
@@ -128,7 +128,7 @@ router.put("/wins/:id", function (req, res) {
 });
 
 // Increment user's losses
-router.put("/losses/:id", function (req, res) {
+router.put("/update/losses/:id", function (req, res) {
     db.User
         .findOneAndUpdate({ _id: req.params.id }, {
             $inc: { losses: 1 }
@@ -138,7 +138,7 @@ router.put("/losses/:id", function (req, res) {
 });
 
 // Calculate total number of battles
-router.put("/total_battle/:id", function (req, res) {
+router.put("/update/total_battle/:id", function (req, res) {
     db.User
         .findOneAndUpdate({ _id: req.params.id }, {
             $inc: { totalBattle: 1 }
@@ -148,7 +148,7 @@ router.put("/total_battle/:id", function (req, res) {
 });
 
 // Update wins percent
-router.put("/winspercent/:id", function (req, res) {
+router.put("/update/winspercent/:id", function (req, res) {
     db.User
         .findOneAndUpdate({ _id: req.params.id }, {
             $set : { winsPercent: $.wins / $.total }
