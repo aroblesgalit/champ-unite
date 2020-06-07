@@ -38,6 +38,7 @@ function Ranking() {
                             rankedUsers.map((rankedUser, i) => {
                                 return <RankingRow
                                             key={rankedUser._id}
+                                            id={rankedUser._id}
                                             rank={i + 1}
                                             username={rankedUser.username}
                                             wins={rankedUser.wins}
@@ -46,14 +47,7 @@ function Ranking() {
                                             winsPercent={rankedUser.winsPercent}
                                         />
                             }) 
-                        ) : <RankingRow 
-                                rank="n/a"
-                                username="n/a"
-                                wins="n/a"
-                                losses="n/a"
-                                totalBattle="n/a"
-                                winsPercent="n/a"
-                            />
+                        ) : <p>Battle 20 times to be on the ranking!</p>
                     }
                 </tbody>
             </table>

@@ -21,7 +21,8 @@ function UserProfile() {
                     username: user.data.username,
                     rank: user.data.rank,
                     wins: user.data.wins,
-                    losses: user.data.losses
+                    losses: user.data.losses,
+                    rank: user.data.rank
                 });
             })
 
