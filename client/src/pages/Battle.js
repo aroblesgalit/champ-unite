@@ -287,7 +287,7 @@ function Battle() {
                     <h2>BATTLE</h2>
                     {
                         battleStats.timerDone ? (
-                            <span>VS</span>
+                            ""
                         ) : `${timeLeft}`
                     }
                     <div className="battle-text">{battleStats.textDisplay}</div>

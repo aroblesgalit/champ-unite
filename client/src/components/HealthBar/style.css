@@ -26,6 +26,7 @@
     text-transform: uppercase;
     font-size: 16px;
     margin: 0;
+    color: rgb(67, 198, 172);
 }
 
 .healthbar-container {
@@ -34,14 +35,14 @@
 
 .healthbar-bar-border {
     width: 300px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid rgb(67, 198, 172);
     margin-right: 8px;
     padding: 2px;
 }
 
 .healthbar-bar-border-reverse {
     width: 300px;
-    border: 1px solid #c0c0c0;
+    border: 1px solid rgb(67, 198, 172);
     margin-left: 8px;
     padding: 2px;
 }
@@ -57,4 +58,5 @@
     font-size: 22px;
     font-weight: 500;
     margin: 0;
+    color: #f2f2f2;
 }

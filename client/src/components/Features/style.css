@@ -1,0 +1,14 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.features-container {
+    background-color: rgb(20, 20, 22);
+    padding: 40px 100px;
+}
+
+.features-container h2 {
+    color: #f2f2f2;
+}
