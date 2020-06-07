@@ -81,7 +81,7 @@ export default {
         return axios.put("/api/users/wins/" + id);
     },
     // Update user's losses
-    decreaseUserLosses: function(id) {
+    increaseUserLosses: function(id) {
         return axios.put("/api/users/losses/" + id);
     }
 };

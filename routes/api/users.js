@@ -137,4 +137,24 @@ router.put("/losses/:id", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
+// Calculate total number of battles
+router.put("/total_battle/:id", function (req, res) {
+    db.User
+        .findOneAndUpdate({ _id: req.params.id }, {
+            $inc: { totalBattle: 1 }
+        }, { new: true })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
+// Update wins percent
+router.put("/winspercent/:id", function (req, res) {
+    db.User
+        .findOneAndUpdate({ _id: req.params.id }, {
+            $set : { winsPercent: $.wins / $.total }
+        }, { new: true })
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+});
+
 module.exports = router;

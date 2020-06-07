@@ -170,6 +170,9 @@ function Battle() {
                 textDisplay: "You lose.",
                 gameEnded: true
             });
+            // Increase User's losses and increase Other User's wins
+            API.increaseUserLosses(userData.id);
+            API.increaseUserWins(otherData.id);
         } else if (otherHealthInit <= 0) {
             setBattleStats({
                 started: true,
@@ -177,6 +180,9 @@ function Battle() {
                 textDisplay: "You win!",
                 gameEnded: true
             })
+            // Increase User's wins and increase Other User's losses
+            API.increaseUserWins(userData.id);
+            API.increaseUserLosses(otherData.id);
         }
     }
 
