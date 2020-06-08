@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
+import UserContext from "../utils/UserContext";
 
 function Battle() {
+
+    const { loggedIn } = useContext(UserContext);
 
     const [battleStats, setBattleStats] = useState({
         started: false,
@@ -37,7 +40,14 @@ function Battle() {
 
     useEffect(() => {
         loadChampionsAndUsers();
+        checkUserStatus();
     }, []);
+
+    function checkUserStatus() {
+        if (!loggedIn) {
+            window.location.replace("/login");
+        }
+    }
 
     async function loadChampionsAndUsers() {
         try {
@@ -265,7 +275,7 @@ function Battle() {
     }
 
     function handleLeave() {
-        window.location.replace("/profile");
+        window.location.replace("/users");
     }
 
     return (
@@ -273,7 +283,7 @@ function Battle() {
             <div className="uk-flex uk-flex-top uk-flex-between uk-width-expand">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
-                        userAtkTurn ? "" : <span className="health-damage uk-position-absolute">{userDamage}</span>
+                        userAtkTurn ? "" : <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{userDamage}</span>
                     }
                     <HealthBar
                         type="user"
@@ -307,7 +317,7 @@ function Battle() {
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
-                        userAtkTurn ? <span className="health-damage uk-position-absolute">{otherDamage}</span> : ""
+                        userAtkTurn ? <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{otherDamage}</span> : ""
                     }
                     <HealthBar
                         type="otherUser"

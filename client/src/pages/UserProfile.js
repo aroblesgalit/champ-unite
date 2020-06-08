@@ -25,7 +25,10 @@ function UserProfile() {
                     rank: user.data.rank
                 });
             })
-
+            .catch(err => {
+                window.location.replace("/login");
+                console.log("Something went wrong. You are now logged out...", err);
+            })
     }, []);
 
     // async function loadChampionList () {
