@@ -67,10 +67,9 @@ const championSchema = new Schema({
         min: 1,
         max: 100
     },
-    query: {
-        type: String,
-        lowercase: true,
-        trim: true
+    nullStats: {
+        type: Boolean,
+        default: false
     }
 });
 
