@@ -9,7 +9,7 @@ function ChampionsSearch() {
     // Champions search results
     const [searchResults, setSearchResults] = useState([]);
     const [noResults, setNoResults] = useState(false);
-    
+
     useEffect(() => {
         loadChampionsDB();
     }, []);
@@ -51,6 +51,8 @@ function ChampionsSearch() {
 
             if (!heroesResults.data.results) {
                 setNoResults(true);
+                console.log("No results for this search.")
+                return;
             }
             // Declare a new array for results
             const newResults = [];
@@ -134,7 +136,7 @@ function ChampionsSearch() {
             </div>
 
             <div className="champions-search-results uk-flex uk-flex-wrap">
-                { searchResults.length > 0 ?
+                {searchResults.length > 0 ?
                     searchResults.map(champion => {
                         return <ChampionCard
                             key={champion._id || champion.image}
@@ -150,22 +152,23 @@ function ChampionsSearch() {
                             defense={champion.defense}
                             type="search"
                         />
-                    }) : championsDB.map(champion => {
-                        return <ChampionCard
-                            key={champion._id || champion.image}
-                            name={champion.name}
-                            image={champion.image}
-                            strength={champion.strength}
-                            power={champion.power}
-                            combat={champion.combat}
-                            intelligence={champion.intelligence}
-                            speed={champion.speed}
-                            durability={champion.durability}
-                            attack={champion.attack}
-                            defense={champion.defense}
-                            type="search"
-                        />
-                    })
+                    }) : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
+                        championsDB.map(champion => {
+                            return <ChampionCard
+                                key={champion._id || champion.image}
+                                name={champion.name}
+                                image={champion.image}
+                                strength={champion.strength}
+                                power={champion.power}
+                                combat={champion.combat}
+                                intelligence={champion.intelligence}
+                                speed={champion.speed}
+                                durability={champion.durability}
+                                attack={champion.attack}
+                                defense={champion.defense}
+                                type="search"
+                            />
+                        })
                 }
             </div>
         </section>
