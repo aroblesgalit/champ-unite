@@ -101,6 +101,12 @@
     overflow: hidden;
 }
 
+.champion-img-container img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%;
+}
+
 .uk-card-body {
     padding: 10px;
 }

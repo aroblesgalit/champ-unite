@@ -8,6 +8,7 @@ function CreateChampionForm() {
 
     const [maxReached, setMaxReached] = useState(false);
     const [championAdded, setChampionAdded] = useState(false);
+    const [createFailed, setCreateFailed] = useState(false);
 
     useEffect(() => {
         API.getUserData()
@@ -79,26 +80,16 @@ function CreateChampionForm() {
                 }, 4000);
             }
         } catch (err) {
-            console.log("Add failed: ", err)
+            console.log("Add failed: ", err);
+            setCreateFailed(true);
+            setTimeout(() => {
+                setCreateFailed(false);
+            }, 3000);
         }
     }
 
     return (
         <form className="create-champion-form uk-flex uk-flex-column uk-flex-middle uk-height-1-1">
-            {
-                maxReached ? (
-                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>You've reached the max of 3 champions! Please make room if you'd like to add another.</p>
-                    </div>
-                ) : ""
-            }
-            {
-                championAdded ? (
-                    <div className="champion-added-alert uk-alert-success uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>Champion successfuly added to your list!</p>
-                    </div>
-                ) : ""
-            }
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: user"></span>
@@ -120,6 +111,27 @@ function CreateChampionForm() {
             <div className="uk-margin-small">
                 <button className="uk-button primary-btn" type="submit" onClick={handleAdd} >Create</button>
             </div>
+            {
+                maxReached ? (
+                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
+                        <p>You've reached the max of 3 champions! Please make room if you'd like to add another.</p>
+                    </div>
+                ) : ""
+            }
+            {
+                championAdded ? (
+                    <div className="champion-added-alert uk-alert-success uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
+                        <p>Champion successfuly added to your list!</p>
+                    </div>
+                ) : ""
+            }
+            {
+                createFailed ? (
+                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
+                        <p>Please fill in all the fields.</p>
+                    </div>
+                ) : ""
+            }
         </form>
     );
 }

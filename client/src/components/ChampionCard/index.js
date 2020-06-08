@@ -112,7 +112,7 @@ function ChampionCard(props) {
             <div className="champion-name-container uk-position-absolute uk-text-center" style={props.selected && props.selectedId === props.id ? { border: "1px solid #221D54" } : { border: "" }} >
                 <span className="champion-name" >{props.name}</span>
             </div>
-            <div className="champion-img-container uk-card-media-top uk-margin-top uk-position-relative">
+            <div className="champion-img-container uk-card-media-top uk-margin-top uk-position-relative uk-flex uk-flex-center uk-flex-top">
                 <div className="battle-stats-container uk-position-absolute">
                     <div className="battle-stats battle-stats-atk uk-flex uk-flex-column uk-flex-middle uk-margin-small-bottom">
                         <span className="battle-stats-val">{props.attack}</span><span className="battle-stats-label">ATK</span>
