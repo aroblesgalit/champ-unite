@@ -37,17 +37,27 @@ function Ranking() {
                         rankedUsers.lenght > 0 ? (
                             rankedUsers.map((rankedUser, i) => {
                                 return <RankingRow
-                                            key={rankedUser._id}
-                                            id={rankedUser._id}
-                                            rank={i + 1}
-                                            username={rankedUser.username}
-                                            wins={rankedUser.wins}
-                                            losses={rankedUser.losses}
-                                            totalBattle={rankedUser.totalBattle}
-                                            winsPercent={rankedUser.winsPercent}
-                                        />
-                            }) 
-                        ) : <p className="uk-text-nowrap uk-text-muted">Battle 20 times to be in the ranking!</p>
+                                    key={rankedUser._id}
+                                    id={rankedUser._id}
+                                    rank={i + 1}
+                                    username={rankedUser.username}
+                                    wins={rankedUser.wins}
+                                    losses={rankedUser.losses}
+                                    totalBattle={rankedUser.totalBattle}
+                                    winsPercent={rankedUser.winsPercent}
+                                />
+                            })
+                        ) : (
+                                <tr>
+                                    <td className="uk-text-nowrap uk-text-muted">
+                                        Battle 20 times to be in the ranking!
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            )
                     }
                 </tbody>
             </table>
