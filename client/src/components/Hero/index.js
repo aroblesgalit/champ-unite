@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function Hero() {
@@ -10,7 +11,7 @@ function Hero() {
                 <p>
                     Create your champion(s) now and battle against other users on a one-to-one match.
                 </p>
-                <button className="uk-button primary-btn">Sign up</button>
+                <Link to="/signup" className="uk-button primary-btn">Sign up</Link>
             </div>
         </div>
     );
