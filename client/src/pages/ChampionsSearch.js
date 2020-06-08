@@ -4,7 +4,9 @@ import API from "../utils/API";
 
 function ChampionsSearch() {
 
+    // Champions DB
     const [championsDB, setChampionsDB] = useState([]);
+    // Champions search results
     const [searchResults, setSearchResults] = useState([]);
     const [noResults, setNoResults] = useState(false);
     
