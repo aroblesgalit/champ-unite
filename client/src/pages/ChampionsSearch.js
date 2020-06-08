@@ -47,7 +47,7 @@ function ChampionsSearch() {
             console.log("No results form database. Running api call now...")
             // Otherwise, run the third party api
             const heroesResults = await API.searchHeroes(query);
-            console.log(heroesResults.data.results);
+            console.log("Printing results...", heroesResults.data.results);
 
             if (!heroesResults.data.results) {
                 setNoResults(true);

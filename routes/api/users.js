@@ -14,7 +14,6 @@ router.post("/login", passport.authenticate("local"), function (req, res) {
 router.post("/signup", function (req, res) {
     console.log("Post signup ran...");
     db.User.create({
-        email: req.body.email,
         username: req.body.username,
         password: req.body.password
     })
@@ -45,9 +44,9 @@ router.get("/user_data", function (req, res) {
             champions: req.user.champions,
             wins: req.user.wins,
             losses: req.user.losses,
-            rank: req.user.rank
-            // total battles > wins + losses
-            // percent for ranking > wins/(wins+losses)
+            rank: req.user.rank,
+            totalBattle: req.user.totalBattle,
+            winsPercent: req.user.winsPercent
         })
     }
 });
