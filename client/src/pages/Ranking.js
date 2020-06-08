@@ -10,13 +10,13 @@ function Ranking() {
     useEffect(() => {
         API.getAllUsersForRanking()
             .then(res => {
-                // console.log("useEffect from Ranking ran...printing res.data", res.data);
+                console.log("useEffect from Ranking ran...printing res.data", res.data);
                 setRankedUsers(res.data);
             })
             .catch(err => {
                 console.log(err);
             })
-    });
+    }, []);
 
     return (
         <section className="ranking-container uk-section">
@@ -34,7 +34,7 @@ function Ranking() {
                 </thead>
                 <tbody>
                     {
-                        rankedUsers.lenght > 0 ? (
+                        rankedUsers.length > 0 ? (
                             rankedUsers.map((rankedUser, i) => {
                                 return <RankingRow
                                     key={rankedUser._id}

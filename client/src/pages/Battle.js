@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
-import UserContext from "../utils/UserContext";
+// import UserContext from "../utils/UserContext";
 
 function Battle() {
 
-    const { loggedIn } = useContext(UserContext);
+    // const [user, setUser] = useContext(UserContext);
 
     const [battleStats, setBattleStats] = useState({
         started: false,
@@ -40,14 +40,19 @@ function Battle() {
 
     useEffect(() => {
         loadChampionsAndUsers();
-        checkUserStatus();
+        // setTimeout(() => {
+        //     checkUserStatus();
+        // }, 5000);
     }, []);
 
-    function checkUserStatus() {
-        if (!loggedIn) {
-            window.location.replace("/login");
-        }
-    }
+    // function checkUserStatus() {
+    //     if (user.loggedIn) {
+    //         // window.location.replace("/login");
+    //         console.log("If user is logged in...", user, user.loggedIn);
+    //     } else {
+    //         console.log("If user is NOT logged in...", user, user.loggedIn);
+    //     }
+    // }
 
     async function loadChampionsAndUsers() {
         try {
