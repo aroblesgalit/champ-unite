@@ -12,7 +12,8 @@
 .user-champions-container,
 .users-search-container,
 .battle-container,
-.ranking-container {
+.ranking-container,
+.create-container {
     min-height: calc(100vh - 230px);
 }
 
@@ -33,14 +34,16 @@
 .champions-search-container,
 .users-search-container,
 .battle-container,
-.ranking-container {
+.ranking-container,
+.create-container {
     padding: 40px 100px;
     padding-top: 40px;
 }
 
 .champions-search-container h2,
 .users-search-container h2,
-.ranking-container h2 {
+.ranking-container h2,
+.create-container h2 {
     margin: 0;
     margin-right: 20px;
 }
@@ -130,7 +133,8 @@
     .champions-search-container,
     .users-search-container,
     .battle-container,
-    .ranking-container {
+    .ranking-container,
+    .create-container {
         padding: 20px;
     }
   }
