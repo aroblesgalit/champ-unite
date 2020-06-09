@@ -53,25 +53,32 @@ function CreateChampionForm() {
         e.preventDefault();
         try {
             if (user.champions.length < 3) {
-                const newUserChampion = await API.addChampion({
-                    user: user.id,
-                    name: nameRef.current.value,
-                    image: imageRef.current.value,
-                    race: raceRef.current.value,
-                    strength: strength,
-                    power: power,
-                    combat: combat,
-                    intelligence: intelligence,
-                    speed: speed,
-                    durability: durability,
-                    attack: attack,
-                    defense: defense
-                });
-                console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
-                const updatedList = await API.updateUserChampions(user.id, newUserChampion.data._id);
-                console.log("handleAdd worked...printing updatedList...", updatedList);
-                setChampionAdded(true);
-                window.location.replace("/profile");
+                if (nameRef.current.value && imageRef.current.value) {
+                    const newUserChampion = await API.addChampion({
+                        user: user.id,
+                        name: nameRef.current.value,
+                        image: imageRef.current.value,
+                        race: raceRef.current.value,
+                        strength: strength,
+                        power: power,
+                        combat: combat,
+                        intelligence: intelligence,
+                        speed: speed,
+                        durability: durability,
+                        attack: attack,
+                        defense: defense
+                    });
+                    console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
+                    const updatedList = await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    console.log("handleAdd worked...printing updatedList...", updatedList);
+                    setChampionAdded(true);
+                    window.location.replace("/profile");
+                } else {
+                    setCreateFailed(true);
+                    setTimeout(() => {
+                        setCreateFailed(false);
+                    }, 4000);
+                }
             } else {
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
                 setMaxReached(true);
