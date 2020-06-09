@@ -35,22 +35,62 @@ function ChampionCard(props) {
             if (user.champions.length < 3) {
                 setChampionAdded(true);
                 // console.log("Running conditional champions.length < 3...", champions.length);
-                const newUserChampion = await API.addChampion({
-                    user: user.id,
-                    name: props.name,
-                    image: props.image,
-                    strength: props.strength,
-                    power: props.power,
-                    combat: props.combat,
-                    intelligence: props.intelligence,
-                    speed: props.speed,
-                    durability: props.durability,
-                    attack: props.attack,
-                    defense: props.defense
-                })
-                // Update user's champions array
-                await API.updateUserChampions(user.id, newUserChampion.data._id);
-                window.location.reload(false);
+                if (props.nullStats) {
+                    // Function to calculate attack and defense based on powerstats
+                    function calcBattleStat(a, b, c) {
+                        return ((a + b + c) / 30).toFixed();
+                    }
+                    // Function to generate a random value from 1 - 100
+                    function generateStat() {
+                        return Math.floor((Math.random() * 100) + 1);
+                    }
+                    // Store relevant data
+                    const strength = generateStat();
+                    const power = generateStat();
+                    const combat = generateStat();
+                    const intelligence = generateStat();
+                    const speed = generateStat();
+                    const durability = generateStat();
+                    // Calculate attack and defense
+                    const attack = calcBattleStat(strength, power, combat);
+                    const defense = calcBattleStat(intelligence, speed, durability);
+
+                    const newUserChampion = await API.addChampion({
+                        user: user.id,
+                        name: props.name,
+                        image: props.image,
+                        strength: strength,
+                        power: power,
+                        combat: combat,
+                        intelligence: intelligence,
+                        speed: speed,
+                        durability: durability,
+                        attack: attack,
+                        defense: defense,
+                        nullStats: props.nullStats
+                    })
+                    // Update user's champions array
+                    await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    window.location.reload(false);
+                } else {
+                    const newUserChampion = await API.addChampion({
+                        user: user.id,
+                        name: props.name,
+                        image: props.image,
+                        strength: props.strength,
+                        power: props.power,
+                        combat: props.combat,
+                        intelligence: props.intelligence,
+                        speed: props.speed,
+                        durability: props.durability,
+                        attack: props.attack,
+                        defense: props.defense,
+                        nullStats: props.nullStats
+                    })
+                    // Update user's champions array
+                    await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    window.location.reload(false);
+                }
 
             } else {
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
@@ -124,7 +164,8 @@ function ChampionCard(props) {
                 <img src={props.image} alt={props.name} />
             </div>
             <div className="uk-card-body">
-                <p className="stats-header">STATS</p>
+                <p className="stats-header uk-flex uk-flex-middle">STATS {props.nullStats ? (<span className="null-icon" uk-icon="icon: ban; ratio: .8;" uk-tooltip="title: Stats are randomized on add.; pos: right"></span>) : ""}
+                </p>
                 <div className="uk-flex uk-flex-middle">
                     <span className="stats-label">STR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.strength) + "px" }}></div><span className="stats-val">{props.strength}</span></div>
                 </div>

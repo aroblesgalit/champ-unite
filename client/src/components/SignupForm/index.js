@@ -6,44 +6,58 @@ import API from "../../utils/API";
 function SignupForm() {
 
     const usernameRef = useRef();
-    const emailRef = useRef();
     const passwordRef = useRef();
+    // const emailRef = useRef();
+    const confirmPasswordRef = useRef();
 
     const [signupFailed, setSignupFailed] = useState(false);
     const [missingFields, setMissingFields] = useState(false);
+    const [passNotMatch, setPassNotMatch] = useState(false);
+    const [shortPass, setShortPass] = useState(false);
 
     function handleSignup(e) {
         e.preventDefault();
 
-        const email = emailRef.current.value;
         const username = usernameRef.current.value;
+        // const email = emailRef.current.value;
         const password = passwordRef.current.value;
+        const confirmPassword = confirmPasswordRef.current.value;
 
-        if (email && username && password) {
-            API.signupUser({
-                email: email,
-                username: username,
-                password: password
-            })
-                .then(function (res) {
-                    console.log("User is signed up...", res);
-                    window.location.replace("/profile");
-                })
-                .catch(function (err) {
-                    console.log("Failed signup...", err);
-                    setSignupFailed(true);
-                });
+        if (username && password && confirmPassword) {
+            if (password.length >= 6) {
+                if (password === confirmPassword) {
+                    API.signupUser({
+                        username: username,
+                        password: password
+                        // email: email
+                    })
+                        .then(function (res) {
+                            console.log("User is signed up...", res);
+                            window.location.replace("/profile");
+                        })
+                        .catch(function (err) {
+                            console.log("Failed signup...", err);
+                            setSignupFailed(true);
+                        });
+                } else {
+                    setPassNotMatch(true);
+                }
+            } else {
+                setShortPass(true);
+            }
         } else {
             setMissingFields(true);
         }
+        handleAlertClose();
     };
 
-    function handleAlertClose(err) {
-        if (err === "signupFailed") {
+    function handleAlertClose() {
+        setTimeout(() => {
             setSignupFailed(false);
-        } else if (err === "missingFields") {
             setMissingFields(false);
-        }
+            setPassNotMatch(false);
+            setShortPass(false);
+        }, 3000);
     };
 
     return (
@@ -51,33 +65,41 @@ function SignupForm() {
             <h2>Signup</h2>
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
-                    <span className="uk-form-icon" uk-icon="icon: mail"></span>
-                    <input className="uk-input" type="text" placeholder="champion201@email.com" ref={emailRef} />
-                </div>
-            </div>
-            <div className="uk-margin-small uk-width-expand">
-                <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: user"></span>
                     <input className="uk-input" type="text" placeholder="champion201" ref={usernameRef} />
                 </div>
+                {signupFailed ? (
+                        <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Username is taken.</p>
+                ) : ""}
+            </div>
+            {
+                // <div className="uk-margin-small uk-width-expand">
+                //     <div className="uk-inline uk-width-expand">
+                //         <span className="uk-form-icon" uk-icon="icon: mail"></span>
+                //         <input className="uk-input" type="text" placeholder="champion201@email.com" ref={emailRef} />
+                //     </div>
+                // </div>
+            }
+            <div className="uk-margin-small uk-width-expand">
+                <div className="uk-inline uk-width-expand">
+                    <span className="uk-form-icon" uk-icon="icon: lock"></span>
+                    <input className="uk-input" type="password" placeholder="password" ref={passwordRef} />
+                </div>
+                {shortPass ? (
+                    <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Password too short.</p>
+                ) : ""}
             </div>
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: lock"></span>
-                    <input className="uk-input" type="password" placeholder="******" ref={passwordRef} />
+                    <input className="uk-input" type="password" placeholder="confirm password" ref={confirmPasswordRef} />
                 </div>
+                {passNotMatch ? (
+                    <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Password doesn't match.</p>
+                ) : ""}
             </div>
-            {signupFailed ? (
-                <div className="uk-alert-danger uk-width-expand uk-text-small" uk-alert="true">
-                    <button className="uk-alert-close" uk-close="true" onClick={() => handleAlertClose("signupFailed")}></button>
-                    <p>Signup failed. Please try again.</p>
-                </div>
-            ) : ""}
             {missingFields ? (
-                <div className="uk-alert-danger uk-width-expand uk-text-small" uk-alert="true">
-                    <button className="uk-alert-close" uk-close="true" onClick={() => handleAlertClose("missingFields")}></button>
-                    <p>Please fill in all the fields.</p>
-                </div>
+                <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Empty field(s).</p>
             ) : ""}
             <div className="uk-margin-small">
                 <button className="uk-button primary-btn" type="submit" onClick={handleSignup}>Sign up</button>

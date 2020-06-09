@@ -67,7 +67,7 @@ function UsersSearch() {
                                 champions={user.champions}
                             />
                         })
-                    ) : <p className="uk-text-nowrap uk-text-muted">No users found by that query. Please try a different one.</p>
+                    ) : <p className="uk-text-warning">No users found by that query. Please try a different one.</p>
                 }
             </div>
         </section>

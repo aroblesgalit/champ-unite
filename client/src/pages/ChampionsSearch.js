@@ -4,10 +4,12 @@ import API from "../utils/API";
 
 function ChampionsSearch() {
 
+    // Champions DB
     const [championsDB, setChampionsDB] = useState([]);
+    // Champions search results
     const [searchResults, setSearchResults] = useState([]);
     const [noResults, setNoResults] = useState(false);
-    
+
     useEffect(() => {
         loadChampionsDB();
     }, []);
@@ -34,92 +36,214 @@ function ChampionsSearch() {
         e.preventDefault();
         // Store value of search query - lowercased
         const query = searchRef.current.value.toLowerCase();
-        // Get champions from db by search query
-        const dbChampions = await API.getChampionsByQuery(query)
-        // If there is results
-        if (dbChampions.data.length) {
-            // Set search results to the db results
-            setSearchResults(dbChampions.data);
-            console.log("Grabbing from database...", dbChampions.data);
+
+        // Search querydb for query
+        const queryRes = await API.findAQuery(query);
+        console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
+        if (queryRes.data && queryRes.data.results) {
+            const champRes = await API.findChampionsByQuery(query);
+            console.log("Pringting results from findChampionsByQuery (champRes.data)...", champRes.data);
+            setSearchResults(champRes.data);
         } else {
-            console.log("No results form database. Running api call now...")
             // Otherwise, run the third party api
+            console.log("No results form database. Running api call now...");
             const heroesResults = await API.searchHeroes(query);
-            console.log(heroesResults.data.results);
+            console.log("Printing results from api call...", heroesResults.data.results);
+
 
             if (!heroesResults.data.results) {
+                console.log("No results for this search.")
                 setNoResults(true);
-            }
-            // Declare a new array for results
-            const newResults = [];
-            // Declare a function to calculate attack and defense
-            function calcBattleStat(a, b, c) {
-                return ((a + b + c) / 30).toFixed();
-            }
-            // Go through the results
-            for (let i = 0; i < heroesResults.data.results.length; i++) {
-                // Store each result
-                const champion = heroesResults.data.results[i];
-                console.log("Adding champions...");
-                console.log(champion);
+                // Add query to database
+                await API.addAQuery({
+                    query: query,
+                    results: false
+                });
+            } else {
+                // Add query to database
+                await API.addAQuery({
+                    query: query,
+                    results: true
+                });
+                // Declare a new array for api search results
+                const newResults = [];
+                // Declare a function to calculate attack and defense
+                function calcBattleStat(a, b, c) {
+                    return ((a + b + c) / 30).toFixed();
+                }
+                // Go through the results
+                for (let i = 0; i < heroesResults.data.results.length; i++) {
+                    // Store each result
+                    const champion = heroesResults.data.results[i];
+                    // console.log("Adding champions...", champion);
 
-                // Store relevant data
-                const name = champion.name;
-                const race = champion.appearance.race;
-                const image = champion.image.url;
-                let strength;
-                let power;
-                let combat;
-                let intelligence;
-                let speed;
-                let durability;
-                champion.powerstats.strength === "null" ? strength = generateStat() : strength = champion.powerstats.strength;
-                champion.powerstats.power === "null" ? power = generateStat() : power = champion.powerstats.power;
-                champion.powerstats.combat === "null" ? combat = generateStat() : combat = champion.powerstats.combat;
-                champion.powerstats.intelligence === "null" ? intelligence = generateStat() : intelligence = champion.powerstats.intelligence;
-                champion.powerstats.speed === "null" ? speed = generateStat() : speed = champion.powerstats.speed;
-                champion.powerstats.durability === "null" ? durability = generateStat() : durability = champion.powerstats.durability;
-                // Calculate attack and defense
-                const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
-                const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
-                // Push each result into the new result array
-                newResults.push({
-                    name: name,
-                    race: race,
-                    image: image,
-                    strength: strength,
-                    power: power,
-                    combat: combat,
-                    intelligence: intelligence,
-                    speed: speed,
-                    durability: durability,
-                    attack: attack,
-                    defense: defense,
-                    query: query
-                })
-                // Add each result to the database
-                API.addChampion({
-                    name: name,
-                    race: race,
-                    image: image,
-                    strength: strength,
-                    power: power,
-                    combat: combat,
-                    intelligence: intelligence,
-                    speed: speed,
-                    durability: durability,
-                    attack: attack,
-                    defense: defense,
-                    query: query
-                })
-                    .then(dbModel => console.log(dbModel))
-                    .catch(err => console.log(err));
+                    // Store relevant data
+                    const name = champion.name;
+                    const race = champion.appearance.race;
+                    const image = champion.image.url;
+                    let strength;
+                    let power;
+                    let combat;
+                    let intelligence;
+                    let speed;
+                    let durability;
+                    let nullStats;
+                    champion.powerstats.strength === "null" ? strength = generateStat() : strength = champion.powerstats.strength;
+                    champion.powerstats.power === "null" ? power = generateStat() : power = champion.powerstats.power;
+                    champion.powerstats.combat === "null" ? combat = generateStat() : combat = champion.powerstats.combat;
+                    champion.powerstats.intelligence === "null" ? intelligence = generateStat() : intelligence = champion.powerstats.intelligence;
+                    champion.powerstats.speed === "null" ? speed = generateStat() : speed = champion.powerstats.speed;
+                    champion.powerstats.durability === "null" ? durability = generateStat() : durability = champion.powerstats.durability;
+                    // Calculate attack and defense
+                    const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
+                    const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
+                    // If any of the powerstats is "null"
+                    if (champion.powerstats.strength === "null" || champion.powerstats.power === "null" || champion.powerstats.combat === "null" || champion.powerstats.intelligence === "null" || champion.powerstats.speed === "null" || champion.powerstats.durability === "null") {
+                        nullStats = true;
+                    } else {
+                        nullStats = false;
+                    }
+                    // Push each result into the new result array
+                    newResults.push({
+                        superHeroId: champion.id,
+                        name: name,
+                        race: race,
+                        image: image,
+                        strength: strength,
+                        power: power,
+                        combat: combat,
+                        intelligence: intelligence,
+                        speed: speed,
+                        durability: durability,
+                        attack: attack,
+                        defense: defense,
+                        nullStats: nullStats
+                    })
+
+                    const superheroIdRes = await API.findAChampionBySuperHeroId(champion.id);
+                    console.log("Find champion in db by superheroid. Printing result from findAChampionBySuperHeroId...", superheroIdRes);
+                    if (superheroIdRes.data) {
+                        console.log("Champion found in database. Not adding...");
+                    } else {
+                        console.log("Champion NOT in database. Adding now...")
+                        // Add each result to the database
+                        API.addChampion({
+                            superHeroId: champion.id,
+                            name: name,
+                            race: race,
+                            image: image,
+                            strength: strength,
+                            power: power,
+                            combat: combat,
+                            intelligence: intelligence,
+                            speed: speed,
+                            durability: durability,
+                            attack: attack,
+                            defense: defense,
+                            nullStats: nullStats
+                        })
+                            .then(dbModel => console.log("Champion added to db...", dbModel))
+                            .catch(err => console.log("Something went wrong while trying to add champion to db...", err));
+                    }
+                }
+                // Set search results to the new results array
+                setSearchResults(newResults);
+                console.log("New Results: ", newResults);
             }
-            // Set search results to the new results array
-            setSearchResults(newResults);
-            console.log("New Results: ", newResults);
         }
     }
+
+
+
+
+
+    // // Get champions from db by search query
+    // const dbChampions = await API.getChampionsByQuery(query)
+    // // If there is results
+    // if (dbChampions.data.length) {
+    //     // Set search results to the db results
+    //     setSearchResults(dbChampions.data);
+    //     console.log("Grabbing from database...", dbChampions.data);
+    // } else {
+    //     console.log("No results form database. Running api call now...")
+    //     // Otherwise, run the third party api
+    //     const heroesResults = await API.searchHeroes(query);
+    //     console.log("Printing results...", heroesResults.data.results);
+
+    //     if (!heroesResults.data.results) {
+    //         setNoResults(true);
+    //         console.log("No results for this search.")
+    //         return;
+    //     }
+    //     // Declare a new array for results
+    //     const newResults = [];
+    //     // Declare a function to calculate attack and defense
+    //     function calcBattleStat(a, b, c) {
+    //         return ((a + b + c) / 30).toFixed();
+    //     }
+    //     // Go through the results
+    //     for (let i = 0; i < heroesResults.data.results.length; i++) {
+    //         // Store each result
+    //         const champion = heroesResults.data.results[i];
+    //         console.log("Adding champions...");
+    //         console.log(champion);
+
+    //         // Store relevant data
+    //         const name = champion.name;
+    //         const race = champion.appearance.race;
+    //         const image = champion.image.url;
+    //         let strength;
+    //         let power;
+    //         let combat;
+    //         let intelligence;
+    //         let speed;
+    //         let durability;
+    //         champion.powerstats.strength === "null" ? strength = generateStat() : strength = champion.powerstats.strength;
+    //         champion.powerstats.power === "null" ? power = generateStat() : power = champion.powerstats.power;
+    //         champion.powerstats.combat === "null" ? combat = generateStat() : combat = champion.powerstats.combat;
+    //         champion.powerstats.intelligence === "null" ? intelligence = generateStat() : intelligence = champion.powerstats.intelligence;
+    //         champion.powerstats.speed === "null" ? speed = generateStat() : speed = champion.powerstats.speed;
+    //         champion.powerstats.durability === "null" ? durability = generateStat() : durability = champion.powerstats.durability;
+    //         // Calculate attack and defense
+    //         const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
+    //         const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
+    //         // Push each result into the new result array
+    //         newResults.push({
+    //             name: name,
+    //             race: race,
+    //             image: image,
+    //             strength: strength,
+    //             power: power,
+    //             combat: combat,
+    //             intelligence: intelligence,
+    //             speed: speed,
+    //             durability: durability,
+    //             attack: attack,
+    //             defense: defense,
+    //             query: query
+    //         })
+    //         // Add each result to the database
+    //         API.addChampion({
+    //             name: name,
+    //             race: race,
+    //             image: image,
+    //             strength: strength,
+    //             power: power,
+    //             combat: combat,
+    //             intelligence: intelligence,
+    //             speed: speed,
+    //             durability: durability,
+    //             attack: attack,
+    //             defense: defense,
+    //             query: query
+    //         })
+    //             .then(dbModel => console.log(dbModel))
+    //             .catch(err => console.log(err));
+    //     }
+    //     // Set search results to the new results array
+    //     setSearchResults(newResults);
+    //     console.log("New Results: ", newResults);
+    // }
 
     return (
         <section className="uk-section champions-search-container">
@@ -132,7 +256,7 @@ function ChampionsSearch() {
             </div>
 
             <div className="champions-search-results uk-flex uk-flex-wrap">
-                { searchResults.length > 0 ?
+                {searchResults.length > 0 ?
                     searchResults.map(champion => {
                         return <ChampionCard
                             key={champion._id || champion.image}
@@ -146,28 +270,32 @@ function ChampionsSearch() {
                             durability={champion.durability}
                             attack={champion.attack}
                             defense={champion.defense}
+                            nullStats={champion.nullStats}
                             type="search"
                         />
-                    }) : championsDB.map(champion => {
-                        return <ChampionCard
-                            key={champion._id || champion.image}
-                            name={champion.name}
-                            image={champion.image}
-                            strength={champion.strength}
-                            power={champion.power}
-                            combat={champion.combat}
-                            intelligence={champion.intelligence}
-                            speed={champion.speed}
-                            durability={champion.durability}
-                            attack={champion.attack}
-                            defense={champion.defense}
-                            type="search"
-                        />
-                    })
+                    }) : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
+                        championsDB.map(champion => {
+                            return <ChampionCard
+                                key={champion._id || champion.image}
+                                name={champion.name}
+                                image={champion.image}
+                                strength={champion.strength}
+                                power={champion.power}
+                                combat={champion.combat}
+                                intelligence={champion.intelligence}
+                                speed={champion.speed}
+                                durability={champion.durability}
+                                attack={champion.attack}
+                                defense={champion.defense}
+                                nullStats={champion.nullStats}
+                                type="search"
+                            />
+                        })
                 }
             </div>
         </section>
     );
 }
+
 
 export default ChampionsSearch;

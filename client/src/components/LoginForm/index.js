@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
@@ -7,6 +7,14 @@ function LoginForm() {
 
     const usernameRef = useRef();
     const passwordRef = useRef();
+
+    const [loginFailed, setLoginFailed] = useState(false);
+
+    function handleAlertClose() {
+        setTimeout(() => {
+            setLoginFailed(false);
+        }, 3000);
+    };
 
     function handleLogin(e) {
         e.preventDefault();
@@ -18,14 +26,17 @@ function LoginForm() {
             username: username,
             password: password
         })
-            .then(function(res) {
+            .then(function (res) {
                 window.location.replace("/profile");
-                console.log(res);
+                // console.log("Login successful! Printing res...", res);
                 console.log("You are now logged in.");
             })
-            .catch(function(err) {
-                console.log(err);
+            .catch(function (err) {
+                console.log("Something went wrong during login...", err);
+                setLoginFailed(true);
             });
+
+        handleAlertClose();
     }
 
     return (
@@ -43,6 +54,9 @@ function LoginForm() {
                     <input className="uk-input" type="password" placeholder="******" ref={passwordRef} />
                 </div>
             </div>
+            {loginFailed ? (
+                <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Login failed.</p>
+            ) : ""}
             <div className="uk-margin-small">
                 <button className="uk-button primary-btn" type="submit" onClick={handleLogin}>Log in</button>
             </div>

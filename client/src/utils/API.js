@@ -31,8 +31,14 @@ export default {
     getAllChampions: function () {
         return axios.get("/api/champions")
     },
-    getChampionsByQuery: function (query) {
+    // getChampionsByQuery: function (query) {
+    //     return axios.get("/api/champions/query/" + query)
+    // },
+    findChampionsByQuery: function(query) {
         return axios.get("/api/champions/query/" + query)
+    },
+    findAChampionBySuperHeroId: function (id) {
+        return axios.get("/api/champions/superhero_id/" + id);
     },
     getChampionById: function(id) {
         return axios.get("/api/champions/" + id)
@@ -99,5 +105,11 @@ export default {
     // Get users by a search username query
     getUsersBySearch: function(username) {
         return axios.get("/api/users/search_by_username/" + username);
+    },
+    findAQuery: function(query) {
+        return axios.get("/api/queries/" + query);
+    },
+    addAQuery: function(data) {
+        return axios.post("/api/queries", data);
     }
 };

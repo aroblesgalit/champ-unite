@@ -1,4 +1,5 @@
 module.exports = {
     User: require("./user"),
-    Champion: require("./champion")
+    Champion: require("./champion"),
+    Query: require("./query")
 };

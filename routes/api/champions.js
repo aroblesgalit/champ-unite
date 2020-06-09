@@ -12,9 +12,13 @@ router.route("/:id")
     .delete(championsController.remove);
 
 router.route("/query/:query")
-    .get(championsController.getByQuery)
+    .get(championsController.findChampionsByQuery)
+    // .get(championsController.getByQuery)
 
 router.route("/user/:id")
     .get(championsController.getByUserId)
+
+router.route("/superhero_id/:id")
+    .get(championsController.findAChampionBySuperHeroId)
 
 module.exports = router;
