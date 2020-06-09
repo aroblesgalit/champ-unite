@@ -118,6 +118,11 @@
     color: rgb(25, 22, 84);
 }
 
+.null-icon {
+    color: rgb(56, 255, 215);
+    margin-left: 4px;
+}
+
 .stats-label {
     font-size: 12px;
     width: 30px;

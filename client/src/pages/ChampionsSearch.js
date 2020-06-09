@@ -39,16 +39,16 @@ function ChampionsSearch() {
 
         // Search querydb for query
         const queryRes = await API.findAQuery(query);
-        console.log("Printing result from findAQuery...", queryRes)
+        console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
         if (queryRes.data && queryRes.data.results) {
             const champRes = await API.findChampionsByQuery(query);
-            console.log("Pringting results from findChampionsByQuery...", champRes);
+            console.log("Pringting results from findChampionsByQuery (champRes.data)...", champRes.data);
             setSearchResults(champRes.data);
         } else {
             // Otherwise, run the third party api
             console.log("No results form database. Running api call now...");
             const heroesResults = await API.searchHeroes(query);
-            console.log("Printing results...", heroesResults.data.results);
+            console.log("Printing results from api call...", heroesResults.data.results);
 
 
             if (!heroesResults.data.results) {
@@ -75,7 +75,7 @@ function ChampionsSearch() {
                 for (let i = 0; i < heroesResults.data.results.length; i++) {
                     // Store each result
                     const champion = heroesResults.data.results[i];
-                    console.log("Adding champions...", champion);
+                    // console.log("Adding champions...", champion);
 
                     // Store relevant data
                     const name = champion.name;
@@ -98,8 +98,10 @@ function ChampionsSearch() {
                     const attack = calcBattleStat(parseInt(strength), parseInt(power), parseInt(combat));
                     const defense = calcBattleStat(parseInt(intelligence), parseInt(speed), parseInt(durability));
                     // If any of the powerstats is "null"
-                    if (strength === "null" || power === "null" || combat === "null" || intelligence === "null" || speed === "null" || durability === "null") {
+                    if (champion.powerstats.strength === "null" || champion.powerstats.power === "null" || champion.powerstats.combat === "null" || champion.powerstats.intelligence === "null" || champion.powerstats.speed === "null" || champion.powerstats.durability === "null") {
                         nullStats = true;
+                    } else {
+                        nullStats = false;
                     }
                     // Push each result into the new result array
                     newResults.push({
@@ -119,7 +121,7 @@ function ChampionsSearch() {
                     })
 
                     const superheroIdRes = await API.findAChampionBySuperHeroId(champion.id);
-                    console.log("Printing result from findAChampionBySuperHeroId...", superheroIdRes);
+                    console.log("Find champion in db by superheroid. Printing result from findAChampionBySuperHeroId...", superheroIdRes);
                     if (superheroIdRes.data) {
                         console.log("Champion found in database. Not adding...");
                     } else {
@@ -140,14 +142,13 @@ function ChampionsSearch() {
                             defense: defense,
                             nullStats: nullStats
                         })
-                            .then(dbModel => console.log(dbModel))
-                            .catch(err => console.log(err));
+                            .then(dbModel => console.log("Champion added to db...", dbModel))
+                            .catch(err => console.log("Something went wrong while trying to add champion to db...", err));
                     }
                 }
                 // Set search results to the new results array
                 setSearchResults(newResults);
                 console.log("New Results: ", newResults);
-
             }
         }
     }
@@ -269,6 +270,7 @@ function ChampionsSearch() {
                             durability={champion.durability}
                             attack={champion.attack}
                             defense={champion.defense}
+                            nullStats={champion.nullStats}
                             type="search"
                         />
                     }) : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
@@ -285,6 +287,7 @@ function ChampionsSearch() {
                                 durability={champion.durability}
                                 attack={champion.attack}
                                 defense={champion.defense}
+                                nullStats={champion.nullStats}
                                 type="search"
                             />
                         })

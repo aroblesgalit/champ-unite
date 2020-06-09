@@ -124,7 +124,8 @@ function ChampionCard(props) {
                 <img src={props.image} alt={props.name} />
             </div>
             <div className="uk-card-body">
-                <p className="stats-header">STATS</p>
+                <p className="stats-header uk-flex uk-flex-middle">STATS { props.nullStats ? (<span className="null-icon" uk-icon="icon: ban; ratio: .8;" uk-tooltip="title: Stats are randomized on add.; pos: right"></span>) : "" }
+                </p>
                 <div className="uk-flex uk-flex-middle">
                     <span className="stats-label">STR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.strength) + "px" }}></div><span className="stats-val">{props.strength}</span></div>
                 </div>
