@@ -7,6 +7,7 @@ function SignupForm() {
 
     const usernameRef = useRef();
     const passwordRef = useRef();
+    // const emailRef = useRef();
     const confirmPasswordRef = useRef();
 
     const [signupFailed, setSignupFailed] = useState(false);
@@ -18,6 +19,7 @@ function SignupForm() {
         e.preventDefault();
 
         const username = usernameRef.current.value;
+        // const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
 
@@ -27,6 +29,7 @@ function SignupForm() {
                     API.signupUser({
                         username: username,
                         password: password
+                        // email: email
                     })
                         .then(function (res) {
                             console.log("User is signed up...", res);
@@ -69,6 +72,14 @@ function SignupForm() {
                         <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Username is taken.</p>
                 ) : ""}
             </div>
+            {
+                // <div className="uk-margin-small uk-width-expand">
+                //     <div className="uk-inline uk-width-expand">
+                //         <span className="uk-form-icon" uk-icon="icon: mail"></span>
+                //         <input className="uk-input" type="text" placeholder="champion201@email.com" ref={emailRef} />
+                //     </div>
+                // </div>
+            }
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: lock"></span>

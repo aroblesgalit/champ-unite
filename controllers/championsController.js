@@ -13,6 +13,7 @@ module.exports = {
     findChampionsByQuery: function (req, res) {
         db.Champion
             .find({
+                user: null,
                 name: {
                     $regex: req.params.query,
                     $options: "i"
