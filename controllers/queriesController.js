@@ -7,5 +7,11 @@ module.exports = {
             .findOne({ query: req.params.query })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    addAQuery: function (req, res) {
+        db.Query
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };

@@ -2,6 +2,25 @@ const db = require("../models");
 
 // Define methods for the champions
 module.exports = {
+    findAChampionBySuperHeroId: function (req, res) {
+        db.Champion
+            .findOne({
+                superHeroId: req.params.id
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    findChampionsByQuery: function (req, res) {
+        db.Champion
+            .find({
+                name: {
+                    $regex: req.params.query,
+                    $options: "i"
+                }
+            })
+            .then(dbModels => res.json(dbModels))
+            .catch(err => res.status(422).json(err));
+    },
     getAll: function (req, res) {
         db.Champion
             .find({user: null})
