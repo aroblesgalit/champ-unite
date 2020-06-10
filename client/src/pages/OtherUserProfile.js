@@ -27,7 +27,7 @@ function OtherUserProfile() {
                 });
             })
             .catch(err => console.log(err));
-    }, []);
+    }, [username]);
 
     return (
         <div className="user-profile-container">

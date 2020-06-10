@@ -112,8 +112,31 @@
     color: rgb(218, 55, 55);
     z-index: 5;
     animation-name: damage;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
+
+.battle-speed-toggle-container {
+    bottom: 20px;
+    right: 20px;
+}
+
+.battle-speed-toggle {
+    border: none;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgb(67, 235, 201);
+    cursor: pointer;
+}
+
+.toggle-ball {
+    height: 14px;
+    width: 14px;
+    border-radius: 7px;
+    background-color: rgb(16, 46, 39);
+    margin: 2px;
+}
+
 
 @keyframes damage {
     from {

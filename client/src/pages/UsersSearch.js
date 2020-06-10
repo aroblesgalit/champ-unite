@@ -15,20 +15,20 @@ function UsersSearch() {
         if (id) {
             API.getAllUsersButOne(id)
             .then(usersDB => {
-                console.log("From UsersSearch...printing usersDB.data...", usersDB.data);
+                console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
         } else {
             API.getAllUsers()
             .then(usersDB => {
-                console.log("From UsersSearch...printing usersDB.data...", usersDB.data);
+                console.log("User not logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
         }
         
-    }, []);
+    }, [id]);
 
     function handleSearch(e) {
         e.preventDefault();

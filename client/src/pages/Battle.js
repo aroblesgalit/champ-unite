@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
@@ -37,6 +37,11 @@ function Battle() {
     const [otherHealth, setOtherHealth] = useState();
     const [otherAttack, setOtherAttack] = useState();
     const [otherDamage, setOtherDamage] = useState();
+    // Battle speed
+    // const [battleSpeed, setBattleSpeed] = useState();
+    // const [speedToggleClicked, setSpeedToggleClicked] = useState(true);
+
+    // let speedValue = 1000;
 
     useEffect(() => {
         loadChampionsAndUsers();
@@ -51,6 +56,24 @@ function Battle() {
     //         console.log("If user is logged in...", user, user.loggedIn);
     //     } else {
     //         console.log("If user is NOT logged in...", user, user.loggedIn);
+    //     }
+    // }
+
+    // function toggleSpeed() {
+    //     setSpeedToggleClicked(!speedToggleClicked);
+
+    //     if (!speedToggleClicked) {
+    //         speedValue = 500;
+    //         setBattleSpeed(speedValue);
+    //         console.log("Running toggleSpeed...this is the IF statement ------------------");
+    //         console.log("speedToggleClicked value...", speedToggleClicked);
+    //         console.log("battleSpeed value...", battleSpeed);
+    //     } else {
+    //         speedValue = 1000;
+    //         setBattleSpeed(speedValue);
+    //         console.log("Running toggleSpeed...this is the ELSE statement ------------------");
+    //         console.log("speedToggleClicked value...", speedToggleClicked);
+    //         console.log("battleSpeed value...", battleSpeed);
     //     }
     // }
 
@@ -250,7 +273,7 @@ function Battle() {
     function startBattleAgain() {
         setTimeout(() => {
             startBattle();
-        }, 1000);
+        }, 500); // Set this value to a state for users to manipulate
     }
 
     function startBattle() {
@@ -284,7 +307,7 @@ function Battle() {
     }
 
     return (
-        <section className="battle-container uk-flex uk-flex-column uk-flex-middle">
+        <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
             <div className="uk-flex uk-flex-top uk-flex-between uk-width-expand">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
@@ -348,6 +371,11 @@ function Battle() {
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
             <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={handleLeave}>Leave</button>
+            {
+                // <div className="battle-speed-toggle-container uk-position-absolute">
+                //     <div className={speedToggleClicked ? "battle-speed-toggle uk-flex uk-flex-left uk-flex-middle" : "battle-speed-toggle uk-flex uk-flex-right uk-flex-middle"} onClick={toggleSpeed}><div className="toggle-ball"></div></div>
+                // </div>
+            }
         </section>
     );
 }
