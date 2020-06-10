@@ -162,4 +162,9 @@
     .champions-list-container {
         padding: 10px;
     }
+
+    .battle-text {
+        font-size: 30px;
+    }
+    
   }

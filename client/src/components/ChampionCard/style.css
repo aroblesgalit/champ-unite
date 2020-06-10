@@ -245,5 +245,12 @@
     .battle-stats-atk {
         margin-bottom: 4px !important;
     }
+
+    .add-btn,
+    .select-btn,
+    .delete-btn {
+        top: 3px;
+        right: 3px;
+    }
     
 }

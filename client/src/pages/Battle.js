@@ -308,7 +308,7 @@ function Battle() {
 
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
-            <div className="uk-flex uk-flex-top uk-width-expand uk-child-width-1-2">
+            <div className="uk-flex uk-flex-top uk-width-expand uk-flex-between">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ? "" : <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{userDamage}</span>
@@ -335,15 +335,14 @@ function Battle() {
                     <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {userData.username}</span>
                 </div>
                 {
-                    // <div className="battle-vs uk-flex uk-flex-column uk-flex-middle">
-                    //     <h2>BATTLE</h2>
-                    //     {
-                    //         battleStats.timerDone ? (
-                    //             ""
-                    //         ) : `${timeLeft}`
-                    //     }
-                    //     <div className="battle-text">{battleStats.textDisplay}</div>
-                    // </div>
+                    <div className="battle-vs uk-flex uk-flex-column uk-flex-middle uk-margin-large-top">
+                        {
+                            battleStats.timerDone ? (
+                                ""
+                            ) : `${timeLeft}`
+                        }
+                        <div className="battle-text uk-position-fixed">{battleStats.textDisplay}</div>
+                    </div>
                 }
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
@@ -371,10 +370,8 @@ function Battle() {
                     <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {otherData.username}</span>
                 </div>
             </div>
-            {
-                // <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
-                // <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={handleLeave}>Leave</button>
-            }
+            <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
+            <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={handleLeave}>Leave</button>
             {
                 // <div className="battle-speed-toggle-container uk-position-absolute">
                 //     <div className={speedToggleClicked ? "battle-speed-toggle uk-flex uk-flex-left uk-flex-middle" : "battle-speed-toggle uk-flex uk-flex-right uk-flex-middle"} onClick={toggleSpeed}><div className="toggle-ball"></div></div>

@@ -59,4 +59,8 @@
         border-radius: 80px;
     }
 
+    .uk-modal-body {
+        padding: 2px;
+    }
+
 }
