@@ -166,5 +166,9 @@
     .battle-text {
         font-size: 30px;
     }
+
+    .battle-user-name {
+        font-size: 18px;
+    }
     
   }

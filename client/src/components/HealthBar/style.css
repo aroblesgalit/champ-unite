@@ -70,6 +70,10 @@
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
 
+    .healthbar-wrapper {
+        margin-bottom: 20px !important;
+    }
+
     .battle-user-avatar {
         height: 32px;
         width: 32px;
