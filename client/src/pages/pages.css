@@ -35,7 +35,8 @@
 .users-search-container,
 .battle-container,
 .ranking-container,
-.create-container {
+.create-container,
+.user-champions-container {
     padding: 40px 100px;
     padding-top: 40px;
 }
@@ -51,10 +52,6 @@
 .champions-search-results,
 .users-search-results {
     margin-top: 40px;
-}
-
-.user-champions-container {
-    margin: 40px 100px;
 }
 
 .user-champions-container h3 {
@@ -157,7 +154,12 @@
     .users-search-container,
     .battle-container,
     .ranking-container,
-    .create-container {
+    .create-container,
+    .user-champions-container {
         padding: 20px;
+    }
+
+    .champions-list-container {
+        padding: 10px;
     }
   }

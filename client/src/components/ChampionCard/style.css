@@ -10,9 +10,12 @@
     height: 100%;
     border: 2px solid rgb(67, 198, 172);
     border-radius: 8px;
+    background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
+}
+
+.champion-card:not(:last-child) {
     margin-right: 14px;
     margin-bottom: 14px;
-    background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
 }
 
 .champion-name-container {
