@@ -309,7 +309,7 @@ function Battle() {
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
             <div className="uk-flex uk-flex-top uk-width-expand uk-child-width-1-2">
-                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative uk-background-primary">
+                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ? "" : <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{userDamage}</span>
                     }
@@ -345,7 +345,7 @@ function Battle() {
                     //     <div className="battle-text">{battleStats.textDisplay}</div>
                     // </div>
                 }
-                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative uk-background-default">
+                <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ? <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{otherDamage}</span> : ""
                     }
