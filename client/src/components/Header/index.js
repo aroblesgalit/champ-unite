@@ -70,7 +70,7 @@ function Header() {
                     <button className="nav-small-icon uk-button uk-button-default" type="button" uk-toggle="target: #nav-small"><span uk-icon="icon: menu"></span></button>
                     <div id="nav-small" uk-offcanvas="flip: true; overlay: true">
                         <div className="nav-bar-small uk-offcanvas-bar uk-flex uk-flex-column">
-                            <button class="uk-offcanvas-close" type="button" uk-close="true"></button>
+                            <button className="uk-offcanvas-close" type="button" uk-close="true"></button>
                             {
                                 user.isLoggedIn ? (
                                     <ul className="uk-nav uk-nav-primary uk-nav-center">

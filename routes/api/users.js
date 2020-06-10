@@ -88,7 +88,7 @@ router.get("/", function (req, res) {
 });
 
 // Get a user by username
-router.get("/:username", function (req, res) {
+router.get("/username/:username", function (req, res) {
     db.User
         .find({ username: req.params.username })
         .then(dbModel => res.json(dbModel))
