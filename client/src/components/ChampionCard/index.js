@@ -27,7 +27,7 @@ function ChampionCard(props) {
     const [championAdded, setChampionAdded] = useState(false);
 
     function calcBarWidth(a) {
-        return a * 1.8;
+        return a * .8;
     }
 
     async function handleAdd() {
@@ -166,23 +166,23 @@ function ChampionCard(props) {
             <div className="uk-card-body">
                 <p className="stats-header uk-flex uk-flex-middle">STATS {props.nullStats ? (<span className="null-icon" uk-icon="icon: ban; ratio: .8;" uk-tooltip="title: Stats are randomized on add.; pos: right"></span>) : ""}
                 </p>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">STR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.strength) + "px" }}></div><span className="stats-val">{props.strength}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">STR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.strength) + "%" }}></div><span className="stats-val">{props.strength}</span></div>
                 </div>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">PWR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.power) + "px" }}></div><span className="stats-val">{props.power}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">PWR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.power) + "%" }}></div><span className="stats-val">{props.power}</span></div>
                 </div>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">CBT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.combat) + "px" }}></div><span className="stats-val">{props.combat}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">CBT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.combat) + "%" }}></div><span className="stats-val">{props.combat}</span></div>
                 </div>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">INT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.intelligence) + "px" }}></div><span className="stats-val">{props.intelligence}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">INT</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.intelligence) + "%" }}></div><span className="stats-val">{props.intelligence}</span></div>
                 </div>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">SPD</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.speed) + "px" }}></div><span className="stats-val">{props.speed}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">SPD</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.speed) + "%" }}></div><span className="stats-val">{props.speed}</span></div>
                 </div>
-                <div className="uk-flex uk-flex-middle">
-                    <span className="stats-label">DUR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.durability) + "px" }}></div><span className="stats-val">{props.durability}</span></div>
+                <div className="stat-row uk-flex uk-flex-middle">
+                    <span className="stats-label">DUR</span><div className="stats-bar-container uk-flex uk-flex-middle uk-width-expand"><div className="stats-bar" style={{ width: calcBarWidth(props.durability) + "%" }}></div><span className="stats-val">{props.durability}</span></div>
                 </div>
             </div>
         </div>

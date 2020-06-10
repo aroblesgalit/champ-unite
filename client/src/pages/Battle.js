@@ -308,7 +308,7 @@ function Battle() {
 
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
-            <div className="uk-flex uk-flex-top uk-flex-between uk-width-expand">
+            <div className="uk-flex uk-flex-top uk-width-expand uk-flex-between">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ? "" : <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{userDamage}</span>
@@ -334,15 +334,16 @@ function Battle() {
                     />
                     <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {userData.username}</span>
                 </div>
-                <div className="battle-vs uk-flex uk-flex-column uk-flex-middle">
-                    <h2>BATTLE</h2>
-                    {
-                        battleStats.timerDone ? (
-                            ""
-                        ) : `${timeLeft}`
-                    }
-                    <div className="battle-text">{battleStats.textDisplay}</div>
-                </div>
+                {
+                    <div className="battle-vs uk-flex uk-flex-column uk-flex-middle uk-margin-large-top">
+                        {
+                            battleStats.timerDone ? (
+                                ""
+                            ) : `${timeLeft}`
+                        }
+                        <div className="battle-text uk-position-fixed">{battleStats.textDisplay}</div>
+                    </div>
+                }
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ? <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{otherDamage}</span> : ""

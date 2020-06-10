@@ -44,3 +44,23 @@
 .user-champions-modal-wrapper {
     width: fit-content;
 }
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+
+    .profile-header {
+        padding: 20px;
+    }
+
+    .profile-img-container {
+        height: 160px;
+        width: 160px;
+        border-radius: 80px;
+    }
+
+    .uk-modal-body {
+        padding: 2px;
+    }
+
+}

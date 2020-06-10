@@ -3,7 +3,7 @@ import "./style.css";
 
 function HealthBar(props) {
     return (
-        <div className={ props.type === "user" ? "uk-flex uk-flex-middle uk-margin-large-bottom" : "uk-flex uk-flex-row-reverse uk-flex-middle uk-margin-large-bottom" }>
+        <div className={ props.type === "user" ? "healthbar-wrapper uk-flex uk-flex-middle uk-margin-large-bottom" : "healthbar-wrapper uk-flex uk-flex-row-reverse uk-flex-middle uk-margin-large-bottom" }>
             <div className={ props.type === "user" ? "battle-user-avatar uk-flex uk-flex-center uk-flex-middle" : "battle-other-user-avatar uk-flex uk-flex-center uk-flex-middle" }>
                 <img src={props.image} alt="Avatar" />
             </div>
