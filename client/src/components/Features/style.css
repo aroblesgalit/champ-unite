@@ -6,9 +6,32 @@
 
 .features-container {
     background-color: rgb(20, 20, 22);
-    padding: 40px 100px;
+    padding: 60px 100px;
 }
 
 .features-container h2 {
     color: #f2f2f2;
+}
+
+/* .feature-img {
+    max-width: 100%;
+} */
+
+.feature-text>p {
+    color: #c0c0c0;
+}
+
+.feature-text>h4 {
+    color: rgb(67, 198, 172);
+    font-weight: 600;
+}
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+
+    .features-container {
+        padding: 40px 20px;
+    }
+
 }
