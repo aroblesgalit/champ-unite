@@ -1,23 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.9a7b65c2.chunk.css",
-    "main.js": "/static/js/main.878d47af.chunk.js",
-    "main.js.map": "/static/js/main.878d47af.chunk.js.map",
+    "main.css": "/static/css/main.d957deac.chunk.css",
+    "main.js": "/static/js/main.f171ffd4.chunk.js",
+    "main.js.map": "/static/js/main.f171ffd4.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6c7dd537.js",
     "runtime-main.js.map": "/static/js/runtime-main.6c7dd537.js.map",
-    "static/js/2.b90f2c35.chunk.js": "/static/js/2.b90f2c35.chunk.js",
-    "static/js/2.b90f2c35.chunk.js.map": "/static/js/2.b90f2c35.chunk.js.map",
+    "static/js/2.222078d9.chunk.js": "/static/js/2.222078d9.chunk.js",
+    "static/js/2.222078d9.chunk.js.map": "/static/js/2.222078d9.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.23fe2769b11140ce3771106bd361bc54.js": "/precache-manifest.23fe2769b11140ce3771106bd361bc54.js",
+    "precache-manifest.700e23a51f836853ecce545730348008.js": "/precache-manifest.700e23a51f836853ecce545730348008.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/main.9a7b65c2.chunk.css.map": "/static/css/main.9a7b65c2.chunk.css.map",
-    "static/js/2.b90f2c35.chunk.js.LICENSE.txt": "/static/js/2.b90f2c35.chunk.js.LICENSE.txt",
-    "static/media/pages.css": "/static/media/battle-bg.dd1cd199.svg"
+    "static/css/main.d957deac.chunk.css.map": "/static/css/main.d957deac.chunk.css.map",
+    "static/js/2.222078d9.chunk.js.LICENSE.txt": "/static/js/2.222078d9.chunk.js.LICENSE.txt",
+    "static/media/pages.css": "/static/media/battle-bg.dd1cd199.svg",
+    "static/media/battle-feature.png": "/static/media/battle-feature.538625ee.png",
+    "static/media/create-feature.png": "/static/media/create-feature.f8762ccd.png",
+    "static/media/ranking-feature.png": "/static/media/ranking-feature.2308d2e7.png",
+    "static/media/search-feature.png": "/static/media/search-feature.27916b86.png",
+    "static/media/select-feature.png": "/static/media/select-feature.602f516a.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6c7dd537.js",
-    "static/js/2.b90f2c35.chunk.js",
-    "static/css/main.9a7b65c2.chunk.css",
-    "static/js/main.878d47af.chunk.js"
+    "static/js/2.222078d9.chunk.js",
+    "static/css/main.d957deac.chunk.css",
+    "static/js/main.f171ffd4.chunk.js"
   ]
 }

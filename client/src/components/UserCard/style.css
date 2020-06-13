@@ -24,10 +24,7 @@
 }
 
 .user-image {
-    height: 80px;
     width: 80px;
-    overflow: hidden;
-    border-radius: 40px;
 }
 
 .user-card h3 {
@@ -41,4 +38,12 @@
 .user-card hr {
     height: 40px;
     margin: 10px 0 0 0;
+}
+
+.user-card-champion-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgb(67, 198, 172);
 }
