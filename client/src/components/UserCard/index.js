@@ -124,7 +124,7 @@ function UserCard(props) {
                     <img className="uk-border-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
                 </div>
                 <div className="uk-flex uk-flex-column">
-                    <h3>{props.username}</h3>
+                    <h3>{props.displayName}</h3>
                     <div className="uk-flex">
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
                             <p className="stat-val">{props.rank}</p>

@@ -60,6 +60,7 @@ function UsersSearch() {
                         users.map(user => {
                             return <UserCard 
                                 key={user._id}
+                                displayName={user.displayName}
                                 username={user.username}
                                 rank={user.rank}
                                 wins={user.wins}

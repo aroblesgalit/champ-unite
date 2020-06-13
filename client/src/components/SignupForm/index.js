@@ -18,7 +18,8 @@ function SignupForm() {
     function handleSignup(e) {
         e.preventDefault();
 
-        const username = usernameRef.current.value;
+        const displayName = usernameRef.current.value;
+        const username = displayName.toLowerCase();
         // const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
@@ -27,6 +28,7 @@ function SignupForm() {
             if (password.length >= 6) {
                 if (password === confirmPassword) {
                     API.signupUser({
+                        displayName: displayName,
                         username: username,
                         password: password
                         // email: email

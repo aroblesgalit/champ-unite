@@ -19,7 +19,7 @@ function LoginForm() {
     function handleLogin(e) {
         e.preventDefault();
 
-        const username = usernameRef.current.value;
+        const username = usernameRef.current.value.toLowerCase();
         const password = passwordRef.current.value;
 
         API.loginUser({
