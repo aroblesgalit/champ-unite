@@ -18,6 +18,7 @@ function UserProfile() {
                 // console.log(champions.data);
                 setChampionList(champions.data);
                 setUser({
+                    displayName: user.data.displayName,
                     username: user.data.username,
                     rank: user.data.rank,
                     wins: user.data.wins,
@@ -51,6 +52,7 @@ function UserProfile() {
     return (
         <div className="user-profile-container">
             <ProfileHeader 
+                displayName={user.displayName}
                 username={user.username} 
                 rank={user.rank}
                 wins={user.wins}
