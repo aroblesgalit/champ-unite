@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./style.css";
 import API from "../../utils/API";
 
-function RankingRow({ id, rank, username, wins, losses, totalBattle, winsPercent }) {
+function RankingRow({ id, rank, displayName, wins, losses, totalBattle, winsPercent }) {
 
     useEffect(() => {
         API.updateWinsPercent(id, {
@@ -19,7 +19,7 @@ function RankingRow({ id, rank, username, wins, losses, totalBattle, winsPercent
     return (
         <tr>
             <td>{rank}</td>
-            <td>{username}</td>
+            <td>{displayName}</td>
             <td>{wins}</td>
             <td>{losses}</td>
             <td>{totalBattle}</td>

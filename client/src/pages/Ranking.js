@@ -40,6 +40,7 @@ function Ranking() {
                                     key={rankedUser._id}
                                     id={rankedUser._id}
                                     rank={i + 1}
+                                    displayName={rankedUser.displayName}
                                     username={rankedUser.username}
                                     wins={rankedUser.wins}
                                     losses={rankedUser.losses}
