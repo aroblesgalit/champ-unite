@@ -19,6 +19,7 @@ function UserCard(props) {
 
     useEffect(() => {
         getOtherChampions();
+        chooseOtherChampion();
         // getUserChampions();
         API.getUserData()
             .then(user => {
@@ -73,10 +74,10 @@ function UserCard(props) {
         }
     }
 
-    function handleModal() {
-        chooseOtherChampion();
-        // Get other users's champion and select an ID to use for the window.locaiton.replace
-    }
+    // function handleModal() {
+    //     chooseOtherChampion();
+    //     // Get other users's champion and select an ID to use for the window.locaiton.replace
+    // }
 
     // async function getUserChampions() {
     //     if (user.champions && user.champions.length > 0) {
@@ -110,7 +111,7 @@ function UserCard(props) {
     function chooseOtherChampion() {
         if (props.champions && props.champions.length > 1) {
             const champId = Math.floor(Math.random() * props.champions.length);
-            // console.log("chooseOtherChampion ran...", champId);
+            console.log("chooseOtherChampion ran...", champId);
             setOtherChampionId(props.champions[champId]);
         } else {
             setOtherChampionId(props.champions[0]);
@@ -159,7 +160,7 @@ function UserCard(props) {
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
                     user.isLoggedIn && props.champions && props.champions.length > 0 && user.champions.length > 0 ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleModal}>Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn">Battle</button>
                     ) : ""
                 }
             </div>
