@@ -83,7 +83,7 @@ function ProfileHeader(props) {
             </div>
             <div className="uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">
-                    <h2>{props.username}</h2>
+                    <h2>{props.displayName}</h2>
                     <div className="uk-flex">
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
                             <span className="stat-val">{props.rank}</span>

@@ -19,6 +19,7 @@ function OtherUserProfile() {
                 const champions = await API.getChampionsByUserId(userDB.data[0]._id);
                 setChampionList(champions.data);
                 setOtherUser({
+                    displayName: userDB.data[0].displayName,
                     username: userDB.data[0].username,
                     rank: userDB.data[0].rank,
                     wins: userDB.data[0].wins,
@@ -32,6 +33,7 @@ function OtherUserProfile() {
     return (
         <div className="user-profile-container">
             <ProfileHeader
+                displayName={otherUser.displayName}
                 username={username}
                 rank={otherUser.rank}
                 wins={otherUser.wins}
