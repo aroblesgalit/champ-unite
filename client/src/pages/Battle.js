@@ -4,6 +4,8 @@ import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
 // import UserContext from "../utils/UserContext";
+import Sound from "react-sound";
+import slash from "../images/442903__qubodup__slash.wav";
 
 function Battle() {
 
@@ -311,7 +313,25 @@ function Battle() {
             <div className="uk-flex uk-flex-top uk-width-expand uk-flex-between">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
-                        userAtkTurn ? "" : <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{userDamage}</span>
+                        userAtkTurn ?
+                            "" :
+                            (
+                                <span
+                                    className="health-damage uk-position-absolute"
+                                    style={{ display: battleStats.gameEnded ? "none" : "block" }}
+                                >
+                                    {userDamage}
+                                    {
+                                        userDamage ?
+                                            <Sound
+                                                url={slash}
+                                                playStatus={Sound.status.PLAYING}
+                                                playFromPosition={0 /* in milliseconds */}
+                                            /> :
+                                            ""
+                                    }
+                                </span>
+                            )
                     }
                     <HealthBar
                         type="user"
@@ -346,7 +366,25 @@ function Battle() {
                 }
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
-                        userAtkTurn ? <span className="health-damage uk-position-absolute" style={{ display: battleStats.gameEnded ? "none" : "block" }}>{otherDamage}</span> : ""
+                        userAtkTurn ?
+                            (
+                                <span 
+                                    className="health-damage uk-position-absolute" 
+                                    style={{ display: battleStats.gameEnded ? "none" : "block" }}
+                                >
+                                    {otherDamage}
+                                    {
+                                        otherDamage ?
+                                            <Sound
+                                                url={slash}
+                                                playStatus={Sound.status.PLAYING}
+                                                playFromPosition={0 /* in milliseconds */}
+                                            /> :
+                                            ""
+                                    }</span>
+                            )
+                            :
+                            ""
                     }
                     <HealthBar
                         type="otherUser"

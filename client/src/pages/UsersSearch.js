@@ -15,14 +15,14 @@ function UsersSearch() {
         if (id) {
             API.getAllUsersButOne(id)
             .then(usersDB => {
-                console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
+                // console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
         } else {
             API.getAllUsers()
             .then(usersDB => {
-                console.log("User not logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
+                // console.log("User not logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
@@ -34,6 +34,9 @@ function UsersSearch() {
         e.preventDefault();
 
         const usernameQuery = usernameRef.current.value;
+        if (!usernameQuery) {
+            return;
+        }
         API.getUsersBySearch(usernameQuery)
             .then(res => {
                 setUsers(res.data);

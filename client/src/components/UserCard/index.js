@@ -9,8 +9,8 @@ function UserCard(props) {
     const [user, setUser] = useState({});
     const [userChampions, setUserChampions] = useState([]);
     const [otherChampions, setOtherChampions] = useState([]);
-    const [userChampionId, setUserChampionId] = useState("");
-    const [otherChampionId, setOtherChampionId] = useState("");
+    const [otherChampionId, setOtherChampionId] = useState(props.champions[0]);
+    const [pageLoaded, setPageLoaded] = useState(false);
 
     const [championSelected, setChampionSelected] = useState({
         selected: false,
@@ -18,8 +18,8 @@ function UserCard(props) {
     });
 
     useEffect(() => {
-        getOtherChampions();
         chooseOtherChampion();
+        getOtherChampions();
         // getUserChampions();
         API.getUserData()
             .then(user => {
@@ -58,7 +58,6 @@ function UserCard(props) {
     }, []);
 
     function handleSelect(id) {
-        setUserChampionId(id)
         setChampionSelected({
             selected: true,
             championId: id
@@ -66,12 +65,12 @@ function UserCard(props) {
         // console.log("handleSelect ran...printing id of clicked champion...", id);
     }
 
-    function handleBattle() {
-        if (!userChampionId) {
-            window.location.replace(`/battle/${user.champions[0]}/vs/${otherChampionId}`);
-        } else {
-            window.location.replace(`/battle/${userChampionId}/vs/${otherChampionId}`);
-        }
+    function handleBattle(id1, id2) {
+        // if (!id1 || !id2 || !userId || !otherId) {
+        //     window.location.replace(`/battle/${userId}/vs/${otherId}`);
+        // } else {
+            window.location.replace(`/battle/${id1}/vs/${id2}`);
+        // }
     }
 
     // function handleModal() {
@@ -104,17 +103,16 @@ function UserCard(props) {
                 newArr.push(res.data);
             }
             setOtherChampions(newArr);
+            setPageLoaded(true);
             // console.log("getOtherChampions() is running...printing newArr...", newArr);
         }
     }
 
     function chooseOtherChampion() {
-        if (props.champions && props.champions.length > 1) {
-            const champId = Math.floor(Math.random() * props.champions.length);
-            // console.log("chooseOtherChampion ran...", champId);
-            setOtherChampionId(props.champions[champId]);
-        } else {
-            setOtherChampionId(props.champions[0]);
+        if (props.champions && props.champions.length > 0) {
+            const champIndex = Math.floor(Math.random() * props.champions.length);
+            // console.log("chooseOtherChampion ran...printing user and champion id...", props.username, props.champions[champIndex]);
+            setOtherChampionId(props.champions[champIndex]);
         }
     }
 
@@ -152,14 +150,13 @@ function UserCard(props) {
                                 <img src={champion.image} alt={champion.name} />
                             </div>
                         })
-
                     ) : "No Champions"
                 }
             </div>
             <div className={user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn && props.champions && props.champions.length > 0 && user.champions.length > 0 ? (
+                    user.isLoggedIn && props.champions && props.champions.length > 0 && user.champions.length > 0 && pageLoaded ? (
                         <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn">Battle</button>
                     ) : ""
                 }
@@ -203,7 +200,7 @@ function UserCard(props) {
                         <button
                             className="uk-button secondary-btn"
                             type="button"
-                            onClick={handleBattle}
+                            onClick={() => handleBattle(championSelected.championId, otherChampionId)}
                         >
                             Battle
                         </button>
