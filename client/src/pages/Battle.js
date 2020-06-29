@@ -5,7 +5,8 @@ import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
 // import UserContext from "../utils/UserContext";
 import Sound from "react-sound";
-import slash from "../images/442903__qubodup__slash.wav";
+import slash from "../sounds/442903__qubodup__slash.wav";
+import battleSound from "../sounds/510953__theojt__cinematic-battle-song.mp3";
 
 function Battle() {
 
@@ -17,6 +18,9 @@ function Battle() {
         textDisplay: "",
         gameEnded: false,
     });
+
+    // Play background music
+    const [playMusic, setPlayMusic] = useState(false);
 
     // const [playerTurn, setPlayerTurn] = useState();
 
@@ -135,6 +139,7 @@ function Battle() {
     }
 
     function handleStart() {
+        setPlayMusic(true);
         setBattleStats({
             ...battleStats,
             started: true
@@ -368,8 +373,8 @@ function Battle() {
                     {
                         userAtkTurn ?
                             (
-                                <span 
-                                    className="health-damage uk-position-absolute" 
+                                <span
+                                    className="health-damage uk-position-absolute"
                                     style={{ display: battleStats.gameEnded ? "none" : "block" }}
                                 >
                                     {otherDamage}
@@ -414,6 +419,16 @@ function Battle() {
                 // <div className="battle-speed-toggle-container uk-position-absolute">
                 //     <div className={speedToggleClicked ? "battle-speed-toggle uk-flex uk-flex-left uk-flex-middle" : "battle-speed-toggle uk-flex uk-flex-right uk-flex-middle"} onClick={toggleSpeed}><div className="toggle-ball"></div></div>
                 // </div>
+            }
+            {
+                playMusic ?
+                    <Sound
+                        url={battleSound}
+                        playStatus={Sound.status.PLAYING}
+                        // playFromPosition={0 /* in milliseconds */}
+                        loop={true}
+                    /> :
+                    ""
             }
         </section>
     );
