@@ -1,27 +1,35 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8af32cb92530921103894f62b91e3428",
+    "revision": "b18e89bfcee06e747fb3ce167e6a03ab",
     "url": "/index.html"
   },
   {
-    "revision": "38ba4f041eb4e7bd522e",
+    "revision": "a6a2fdbbf659474fed80",
     "url": "/static/css/main.f617f817.chunk.css"
   },
   {
-    "revision": "2e501924a54df513f075",
-    "url": "/static/js/2.222078d9.chunk.js"
+    "revision": "4380050979f540c54d91",
+    "url": "/static/js/2.ad3e2f14.chunk.js"
   },
   {
-    "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/static/js/2.222078d9.chunk.js.LICENSE.txt"
+    "revision": "e420ff54aaee9ec65dfee3e735742ec2",
+    "url": "/static/js/2.ad3e2f14.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "38ba4f041eb4e7bd522e",
-    "url": "/static/js/main.68b2cc63.chunk.js"
+    "revision": "a6a2fdbbf659474fed80",
+    "url": "/static/js/main.e98ca927.chunk.js"
   },
   {
     "revision": "38193581709f049d5302",
     "url": "/static/js/runtime-main.6c7dd537.js"
+  },
+  {
+    "revision": "3a7ec4054eead2e19fa6262d083fc392",
+    "url": "/static/media/442903__qubodup__slash.3a7ec405.wav"
+  },
+  {
+    "revision": "065aeb08a8aedcf40b240424c328a54e",
+    "url": "/static/media/510953__theojt__cinematic-battle-song.065aeb08.mp3"
   },
   {
     "revision": "dd1cd1997600829d4b45be7d3958a39c",

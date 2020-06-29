@@ -14,6 +14,7 @@ import OtherUserProfile from './pages/OtherUserProfile';
 import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
+import Credits from "./pages/Credits";
 
 function App() {
 
@@ -85,6 +86,9 @@ function App() {
             </Route>
             <Route path="/create_champion">
               <CreateChampion />
+            </Route>
+            <Route path="/credits">
+              <Credits />
             </Route>
           </Switch>
           <Footer />

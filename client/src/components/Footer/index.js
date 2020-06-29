@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function Footer() {
@@ -9,8 +10,7 @@ function Footer() {
                 <a href="https://www.linkedin.com/in/aroblesgalit/" target="_blank" rel="noopener noreferrer"><span uk-icon="icon: linkedin" className="uk-icon"></span></a>
             </div>
             <p className="uk-text-small">© 2020 Alvin Galit</p>
-            <a className="uk-text-small" href="https://superheroapi.com/index.html">Superhero API</a>
-            <a className="uk-text-small" href="https://www.freepik.com/free-photos-vectors/sport">Battle page background created by starline</a>
+            <Link className="uk-text-small" to="/credits">Credits</Link>
         </footer>
     );
 }
