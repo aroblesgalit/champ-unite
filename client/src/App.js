@@ -25,9 +25,9 @@ function App() {
   }, []);
 
   async function getUserData() {
-    console.log("getUserData() ran...")
+    // console.log("getUserData() ran...")
     const { data } = await API.getUserData();
-    console.log("Running getUserData() from App.js...", data);
+    // console.log("Running getUserData() from App.js...", data);
     if (data) {
       setUser({
         loggedIn: true,

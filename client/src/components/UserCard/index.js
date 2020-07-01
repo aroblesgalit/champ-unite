@@ -8,19 +8,13 @@ function UserCard(props) {
 
     const [user, setUser] = useState({});
     const [userChampions, setUserChampions] = useState([]);
-    const [otherChampions, setOtherChampions] = useState([]);
-    const [otherChampionId, setOtherChampionId] = useState(props.champions[0]);
-    const [pageLoaded, setPageLoaded] = useState(false);
-
     const [championSelected, setChampionSelected] = useState({
         selected: false,
         championId: ""
     });
+    const [otherId, setOtherId] = useState("");
 
     useEffect(() => {
-        chooseOtherChampion();
-        getOtherChampions();
-        // getUserChampions();
         API.getUserData()
             .then(user => {
                 // console.log(user.data);
@@ -50,70 +44,45 @@ function UserCard(props) {
                 }
             })
             .catch(err => {
-                console.log(err);
+                console.log("Something went wrong while trying to getUserData...", err);
                 setUser({
                     isLoggedIn: false
                 })
             });
     }, []);
 
+    // Choose the other user's champion by random
+    function chooseOtherChampion(champions) {
+        console.log("Battle button clicked...chooseOtherChampion is running...printing champions", champions);
+        if (champions.length > 1) {
+            const index = Math.floor(Math.random() * champions.length);
+            setOtherId(champions[index]);
+            console.log("champions.length > 1...printing champion id...", champions[index]);
+        } else {
+            setOtherId(champions[0]);
+            console.log("champions.length = 1...printing champion id...", champions[0]);
+        }
+        console.log("Battle button clicked...printing otherId...", otherId);
+    }
+
     function handleSelect(id) {
         setChampionSelected({
             selected: true,
             championId: id
         });
-        // console.log("handleSelect ran...printing id of clicked champion...", id);
     }
 
     function handleBattle(id1, id2) {
-        // if (!id1 || !id2 || !userId || !otherId) {
-        //     window.location.replace(`/battle/${userId}/vs/${otherId}`);
-        // } else {
+        if (id1) {
             window.location.replace(`/battle/${id1}/vs/${id2}`);
+        } else {
+            window.location.replace(`/battle/${user.champions[0]}/vs/${id2}`);
+        } 
+        // else if (id1) {
+        //     window.location.replace(`/battle/${id1}/vs/${props.champions[0]}`);
+        // } else {
+        //     window.location.replace(`/battle/${user.champions[0]}/vs/${props.champions[0]}`);
         // }
-    }
-
-    // function handleModal() {
-    //     chooseOtherChampion();
-    //     // Get other users's champion and select an ID to use for the window.locaiton.replace
-    // }
-
-    // async function getUserChampions() {
-    //     if (user.champions && user.champions.length > 0) {
-    //         // console.log("getUserChampions() is running...this is in the if statement...printing user.champions: ", user.champions);
-    //         const newArr = [];
-    //         for (let i = 0; i < user.champions.length; i++) {
-    //             // console.log("getUserChampions() is running...this is in the for-loop...printing user.champions[i]: ", user.champions[i]);
-    //             let res = await API.getChampionById(user.champions[i])
-    //             // res.data is the champion object
-    //             newArr.push(res.data);
-    //             // console.log("newArr: ", newArr)
-    //         }
-    //         setUserChampions(newArr);
-    //     }
-    // }
-
-    async function getOtherChampions() {
-        if (props.champions && props.champions.length > 0) {
-            // console.log("getOtherChampions() is running...this is the if statement...printing props.champions: ", props.champions);
-            const newArr = [];
-            for (let i = 0; i < props.champions.length; i++) {
-                // console.log("getOtherChampions() is running...this is in the for-loop...printing props.champions[i]: ", props.champions[i]);
-                let res = await API.getChampionById(props.champions[i]);
-                newArr.push(res.data);
-            }
-            setOtherChampions(newArr);
-            setPageLoaded(true);
-            // console.log("getOtherChampions() is running...printing newArr...", newArr);
-        }
-    }
-
-    function chooseOtherChampion() {
-        if (props.champions && props.champions.length > 0) {
-            const champIndex = Math.floor(Math.random() * props.champions.length);
-            // console.log("chooseOtherChampion ran...printing user and champion id...", props.username, props.champions[champIndex]);
-            setOtherChampionId(props.champions[champIndex]);
-        }
     }
 
     return (
@@ -144,8 +113,8 @@ function UserCard(props) {
             </div>
             <div className="uk-flex uk-flex-around uk-margin-top">
                 {
-                    otherChampions && otherChampions.length > 0 ? (
-                        otherChampions.map(champion => {
+                    props.champArr ? (
+                        props.champArr.map(champion => {
                             return <div key={champion._id} className="user-card-champion-image" uk-tooltip={champion.name}>
                                 <img src={champion.image} alt={champion.name} />
                             </div>
@@ -156,8 +125,14 @@ function UserCard(props) {
             <div className={user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn && props.champions && props.champions.length > 0 && user.champions.length > 0 && pageLoaded ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn">Battle</button>
+                    user.isLoggedIn && props.champions && user.champions ? (
+                        <button 
+                            uk-toggle="target: #user-champions-modal" 
+                            className="uk-button secondary-btn"
+                            onClick={() => chooseOtherChampion(props.champions)}
+                        >
+                            Battle
+                        </button>
                     ) : ""
                 }
             </div>
@@ -200,7 +175,7 @@ function UserCard(props) {
                         <button
                             className="uk-button secondary-btn"
                             type="button"
-                            onClick={() => handleBattle(championSelected.championId, otherChampionId)}
+                            onClick={() => handleBattle(championSelected.championId, otherId)}
                         >
                             Battle
                         </button>

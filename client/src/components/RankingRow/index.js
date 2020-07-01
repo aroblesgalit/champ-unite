@@ -9,7 +9,7 @@ function RankingRow({ id, rank, displayName, wins, losses, totalBattle, winsPerc
             rank: rank
         })
             .then(res => {
-                console.log(res.data)
+                console.log(res.data);
             })
             .catch(err => {
                 console.log("Something went wrong inside the RankingRow component...", err);

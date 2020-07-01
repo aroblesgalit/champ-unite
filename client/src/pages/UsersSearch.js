@@ -16,19 +16,39 @@ function UsersSearch() {
             API.getAllUsersButOne(id)
             .then(usersDB => {
                 // console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
-                setUsers(usersDB.data);
+                getChampArr(usersDB);
             })
             .catch(err => console.log(err));
         } else {
             API.getAllUsers()
             .then(usersDB => {
                 // console.log("User not logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
-                setUsers(usersDB.data);
+                getChampArr(usersDB);
             })
             .catch(err => console.log(err));
         }
         
     }, [id]);
+
+    // Get users champions as objects using the id's
+    function getChampArr(arr) {
+        const usersTemp = [...arr.data];
+        usersTemp.forEach(user => {
+            if (user.champions && user.champions.length > 0) {
+                const champArr = [];
+                for (let i = 0; i < user.champions.length; i++) {
+                    // console.log("getOtherChampions() is running...this is in the for-loop...printing props.champions[i]: ", props.champions[i]);
+                    API.getChampionById(user.champions[i])
+                        .then(res => {
+                            champArr.push(res.data);
+                        })
+                        .catch(err => console.log("Something went wrong while getChampionById...", err));
+                }
+                user.champArr = champArr;
+            }
+        })
+        setUsers(usersTemp);
+    }
 
     function handleSearch(e) {
         e.preventDefault();
@@ -69,6 +89,7 @@ function UsersSearch() {
                                 wins={user.wins}
                                 losses={user.losses}
                                 champions={user.champions}
+                                champArr={user.champArr}
                             />
                         })
                     ) : <p className="uk-text-warning">No users found by that query. Please try a different one.</p>
