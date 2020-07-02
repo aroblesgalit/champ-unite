@@ -6,50 +6,17 @@ import ChampionCard from "../ChampionCard";
 
 function UserCard(props) {
 
-    const [user, setUser] = useState({});
-    const [userChampions, setUserChampions] = useState([]);
+    const { displayName, username, rank, wins, losses, champions, champArr, loggedUser, loggedUserChampions } = props;
+
     const [championSelected, setChampionSelected] = useState({
         selected: false,
         championId: ""
     });
     const [otherId, setOtherId] = useState("");
 
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                // console.log(user.data);
-                setUser({
-                    isLoggedIn: true,
-                    champions: user.data.champions
-                });
-
-                // Get user's champions
-                if (user.data.champions && user.data.champions.length > 0) {
-                    // console.log("getUserChampions() is running...this is in the if statement...printing user.champions: ", user.champions);
-                    const newArr = [];
-                    for (let i = 0; i < user.data.champions.length; i++) {
-                        // console.log("getUserChampions() is running...this is in the for-loop...printing user.champions[i]: ", user.champions[i]);
-                        API.getChampionById(user.data.champions[i])
-                            .then(res => {
-                                // res.data is the champion object
-                                newArr.push(res.data);
-                                setUserChampions(newArr);
-                                // console.log("getChampionById() running from useEffect...printing newArr...", newArr);
-                            })
-                            .catch(err => {
-                                console.log("Something went wrong while fetching the user's champions from useEffect...", err);
-                            })
-                        // console.log("newArr: ", newArr)
-                    }
-                }
-            })
-            .catch(err => {
-                console.log("Something went wrong while trying to getUserData...", err);
-                setUser({
-                    isLoggedIn: false
-                })
-            });
-    }, []);
+    // useEffect(() => {
+        
+    // }, []);
 
     // Choose the other user's champion by random
     function chooseOtherChampion(champions) {
@@ -76,7 +43,7 @@ function UserCard(props) {
         if (id1) {
             window.location.replace(`/battle/${id1}/vs/${id2}`);
         } else {
-            window.location.replace(`/battle/${user.champions[0]}/vs/${id2}`);
+            window.location.replace(`/battle/${loggedUser.champions[0]}/vs/${id2}`);
         } 
         // else if (id1) {
         //     window.location.replace(`/battle/${id1}/vs/${props.champions[0]}`);
@@ -92,20 +59,20 @@ function UserCard(props) {
                     <img className="uk-border-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
                 </div>
                 <div className="uk-flex uk-flex-column">
-                    <h3>{props.displayName}</h3>
+                    <h3>{displayName}</h3>
                     <div className="uk-flex">
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
-                            <p className="stat-val">{props.rank}</p>
+                            <p className="stat-val">{rank}</p>
                             <p className="stat-label">R</p>
                         </div>
                         <hr className="uk-divider-vertical uk-margin-small-left uk-margin-small-right" />
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
-                            <p className="stat-val">{props.wins}</p>
+                            <p className="stat-val">{wins}</p>
                             <p className="stat-label">W</p>
                         </div>
                         <hr className="uk-divider-vertical uk-margin-small-left uk-margin-small-right" />
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
-                            <p className="stat-val">{props.losses}</p>
+                            <p className="stat-val">{losses}</p>
                             <p className="stat-label">L</p>
                         </div>
                     </div>
@@ -113,8 +80,8 @@ function UserCard(props) {
             </div>
             <div className="uk-flex uk-flex-around uk-margin-top">
                 {
-                    props.champArr ? (
-                        props.champArr.map(champion => {
+                    champArr ? (
+                        champArr.map(champion => {
                             return <div key={champion._id} className="user-card-champion-image" uk-tooltip={champion.name}>
                                 <img src={champion.image} alt={champion.name} />
                             </div>
@@ -122,14 +89,14 @@ function UserCard(props) {
                     ) : "No Champions"
                 }
             </div>
-            <div className={user.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
-                <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
+            <div className={loggedUser.isLoggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
+                <Link to={`/profile/${username}`} className="uk-button secondary-btn">Profile</Link>
                 {
-                    user.isLoggedIn && props.champions && user.champions ? (
+                    loggedUser.isLoggedIn && champions && loggedUser.champions ? (
                         <button 
                             uk-toggle="target: #user-champions-modal" 
                             className="uk-button secondary-btn"
-                            onClick={() => chooseOtherChampion(props.champions)}
+                            onClick={() => chooseOtherChampion(champions)}
                         >
                             Battle
                         </button>
@@ -146,8 +113,8 @@ function UserCard(props) {
                     </div>
                     <div className="uk-modal-body uk-flex uk-width-1-1">
                         {
-                            user.champions && user.champions.length > 0 ? (
-                                userChampions.map(champion => {
+                            loggedUser.champions && loggedUser.champions.length > 0 ? (
+                                loggedUserChampions.map(champion => {
                                     return <ChampionCard
                                         key={champion._id || champion.image}
                                         id={champion._id}
