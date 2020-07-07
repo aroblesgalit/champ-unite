@@ -60,7 +60,7 @@ THEN I am taken to the ranking page with a table of users who have battle at lea
 ## Deployed Application
 [ChampUnite](https://champ-unite-v01.herokuapp.com/)
 
-## Screenshots
+## Wireframes
 ![Home](./client/src/images/Home.png)   
 ![Signup](./client/src/images/Signup.png)  
 ![Login](./client/src/images/Login.png)  
