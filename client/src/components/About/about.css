@@ -1,0 +1,9 @@
+.about-section {
+    background-color: #fff;
+    padding: 100px 20px;
+}
+
+.hero-text,
+.hero-text>h1 {
+    color: rgb(26, 26, 26);
+}
