@@ -3,6 +3,7 @@
 }
 
 .feature-img img {
+    border-radius: 0.5rem !important;
     -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
     -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
     box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
