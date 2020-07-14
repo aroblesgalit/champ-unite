@@ -1,0 +1,18 @@
+.feature-img {
+    height: 100%;
+}
+
+.feature-img img {
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.33);
+}
+
+.feature-text>p {
+    color: rgb(77, 77, 77);
+}
+
+.feature-text>h4 {
+    color: rgb(67, 198, 172);
+    font-weight: 600;
+}

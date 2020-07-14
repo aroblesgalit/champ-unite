@@ -13,19 +13,6 @@
     color: rgb(26, 26, 26);
 }
 
-/* .feature-img {
-    max-width: 100%;
-} */
-
-.feature-text>p {
-    color: rgb(77, 77, 77);
-}
-
-.feature-text>h4 {
-    color: rgb(67, 198, 172);
-    font-weight: 600;
-}
-
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
