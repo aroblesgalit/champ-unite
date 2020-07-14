@@ -10,7 +10,7 @@ function Features() {
     return (
         <section className="features-container uk-section uk-flex uk-flex-column uk-flex-middle">
             <h2>Features</h2>
-            <div className="uk-margin-top uk-flex uk-flex-column uk-flex-middle">
+            <div className="uk-margin-top">
                 <div className="uk-child-width-expand@s uk-text-left@s uk-text-center" uk-grid="true">
                     <img className="feature-img uk-width-1-3@m uk-width-1-2@s" src={searchFeature} alt="Search feature" uk-img="true" />
                     <div className="feature-text uk-flex uk-flex-column">
