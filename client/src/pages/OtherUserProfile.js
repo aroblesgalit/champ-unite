@@ -1,36 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ProfileHeader from "../components/ProfileHeader";
-import { useParams } from "react-router-dom";
 import ChampionCard from "../components/ChampionCard";
-import API from "../utils/API";
 import { UsersConsumer } from "../utils/UsersContext";
 
 function OtherUserProfile() {
-
-    // const { username } = useParams();
-    // // Get user's data based on username from the html route
-    // const [otherUser, setOtherUser] = useState({});
-    // const [championList, setChampionList] = useState([]);
-
-    // useEffect(() => {
-    //     // console.log("useEffect in OtherUserProfile.js running...Printing username...", username);
-    //     API.getUserByUsername(username)
-    //         .then(async (userDB) => {
-    //             // console.log(userDB.data[0]);
-    //             const champions = await API.getChampionsByUserId(userDB.data[0]._id);
-    //             setChampionList(champions.data);
-    //             setOtherUser({
-    //                 displayName: userDB.data[0].displayName,
-    //                 username: userDB.data[0].username,
-    //                 rank: userDB.data[0].rank,
-    //                 wins: userDB.data[0].wins,
-    //                 losses: userDB.data[0].losses,
-    //                 champions: userDB.data[0].champions
-    //             });
-    //         })
-    //         .catch(err => console.log(err));
-    // }, [username]);
-
     return (
         <UsersConsumer>
             {

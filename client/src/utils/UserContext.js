@@ -23,12 +23,13 @@ function UserProvider(props) {
 
     function fetchUserData() {
         API.getUserData()
-            .then(res => {
+            .then(async function(res) {
+                const championsRes = await API.getChampionsByUserId(res.data.id);
                 setUser({
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: getChampions(res.data.champions)
+                    champions: championsRes.data
                 });
             })
             .catch(err => {
@@ -89,23 +90,6 @@ function UserProvider(props) {
                 loginFailed: false
             })
         }, 3000);
-    };
-
-    function getChampions(champions) {
-        const newArr = [];
-        if (!champions) {
-            return;
-        }
-        for (let i = 0; i < champions.length; i++) {
-            API.getChampionById(champions[i])
-                .then(res => {
-                    newArr.push(res.data);
-                })
-                .catch(err => {
-                    console.log("Something went wrong while fetching the user's champions from useEffect...", err);
-                })
-        }
-        return newArr;
     };
 
     function handleSelect(id) {
