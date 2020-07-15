@@ -31,10 +31,10 @@ function UsersProvider(props) {
     async function getUsers() {
         const { data } = await API.getAllUsers();
         const tempRankings = data.filter(user => user.rank).sort((a, b) => b.winsPercent - a.winsPercent);
-        setUsers({
-            ...users,
-            rankings: tempRankings
-        });
+        // setUsers({
+        //     ...users,
+        //     rankings: tempRankings
+        // });
         for (let i = 0; i < data.length; i++) {
             if (data[i].champions && data[i].champions.length > 0) {
                 data[i].championsArr = [];

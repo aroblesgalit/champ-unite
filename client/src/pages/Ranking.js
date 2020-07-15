@@ -23,6 +23,7 @@ function Ranking() {
                         {
                             value => {
                                 const { rankings } = value;
+                                console.log(rankings);
                                 return rankings.length > 0 ? (
                                     rankings.map((user, i) => {
                                         return <RankingRow
