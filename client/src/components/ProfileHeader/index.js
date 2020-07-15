@@ -1,34 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./style.css";
-// import { Link } from "react-router-dom";
-import API from "../../utils/API";
 import ChampionCard from "../ChampionCard";
 import UserContext, { UserConsumer } from "../../utils/UserContext";
+import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
     const { loggedIn, champions, selectedId } = useContext(UserContext);
-
-    const [otherChampionId, setOtherChampionId] = useState("");
-
-    function handleModal() {
-        chooseOtherChampion();
-    }
+    const {  handleChampionSelect, selectedChampId } = useContext(UsersContext);
 
     function handleBattle() {
         if (!selectedId) {
-            window.location.replace(`/battle/${champions[0]}/vs/${otherChampionId}`);
+            window.location.replace(`/battle/${champions[0]}/vs/${selectedChampId}`);
         } else {
-            window.location.replace(`/battle/${selectedId}/vs/${otherChampionId}`);
-        }
-    }
-
-    function chooseOtherChampion() {
-        if (props.champions && props.champions.length > 1) {
-            const champId = Math.floor(Math.random() * props.champions.length);
-            setOtherChampionId(props.champions[champId]);
-        } else {
-            setOtherChampionId(props.champions[0]);
+            window.location.replace(`/battle/${selectedId}/vs/${selectedChampId}`);
         }
     }
 
@@ -57,7 +42,7 @@ function ProfileHeader(props) {
                 </div>
                 {
                     props.type === "otherUser" && props.champions && champions && champions.length > 0 && props.champions.length > 0 ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleModal}>Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={() => handleChampionSelect(props.champions)}>Battle</button>
                     ) : ""
                 }
             </div>

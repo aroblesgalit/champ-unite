@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, {  useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
 import ChampionCard from "../ChampionCard";
 import UserContext, { UserConsumer } from "../../utils/UserContext";
 import UsersContext from "../../utils/UsersContext";
