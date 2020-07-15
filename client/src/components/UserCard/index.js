@@ -7,7 +7,7 @@ import UsersContext from "../../utils/UsersContext";
 function UserCard(props) {
 
     const { loggedIn, champions, handleModal } = useContext(UserContext);
-    const { handleChampionSelect } = useContext(UsersContext);
+    const { handleChampionSelect, handleDetailUser } = useContext(UsersContext);
 
     // function handleBattle(id1, id2) {
     //     window.location.replace(`/battle/${id1}/vs/${id2}`);
@@ -51,7 +51,14 @@ function UserCard(props) {
                 }
             </div>
             <div className={loggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
-                <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
+                <Link to={`/profile/${props.username}`}>
+                    <button
+                        className="uk-button secondary-btn"
+                        onClick={() => handleDetailUser(props.id)}
+                    >
+                        Profile
+                    </button>
+                </Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
                         <button
@@ -60,7 +67,7 @@ function UserCard(props) {
                             onClick={() => {
                                 handleChampionSelect(props.champions);
                                 handleModal();
-                             }}
+                            }}
                         >
                             Battle
                         </button>

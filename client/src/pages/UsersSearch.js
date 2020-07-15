@@ -45,6 +45,7 @@ function UsersSearch() {
                                     value.list.map(user => {
                                         return <UserCard
                                             key={user._id}
+                                            id={user._id}
                                             displayName={user.displayName}
                                             username={user.username}
                                             rank={user.rank}

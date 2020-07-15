@@ -10,7 +10,8 @@ function UsersProvider(props) {
         list: [],
         selectedUser: {},
         selectedChampId: "",
-        selectedChampion: {}
+        selectedChampion: {},
+        detailUser: {}
     });
 
     useEffect(() => {
@@ -24,10 +25,6 @@ function UsersProvider(props) {
                 data[i].championsArr = [];
                 const championsRes = await API.getChampionsByUserId(data[i]._id);
                 data[i].championsArr = championsRes.data;
-                // for (let j = 0; j < data[i].champions.length; j++) {
-                //     const res = await API.getChampionById(data[i].champions[j])
-                //     data[i].championsArr[j] = res.data;
-                // }
             } else {
                 data[i].championsArr = [];
             }
@@ -59,11 +56,21 @@ function UsersProvider(props) {
         });
     };
 
+    async function handleDetailUser(id) {
+        const userRes = users.list.find(user => user._id === id);
+        console.log("Logging userRes...", userRes);
+        setUsers({
+            ...users,
+            detailUser: userRes
+        })
+    };
+
     return (
         <UsersContext.Provider
             value={{
                 ...users,
-                handleChampionSelect
+                handleChampionSelect,
+                handleDetailUser
             }}
         >
             {props.children}
