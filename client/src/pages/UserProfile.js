@@ -24,7 +24,7 @@ function UserProfile() {
                                 <div className="uk-flex uk-flex-middle uk-flex-between">
                                     <h3>My Champions</h3>
                                     <div className="uk-flex">
-                                        <Link to="/champions" className="uk-link-reset uk-button outline-btn uk-margin-small-right">Search</Link>
+                                        <Link to="/champions" className="uk-button outline-btn uk-margin-small-right">Search</Link>
                                         <Link to="/create_champion" className="uk-button secondary-btn">Create</Link>
                                     </div>
                                 </div>
