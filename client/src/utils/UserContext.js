@@ -13,7 +13,8 @@ function UserProvider(props) {
         champions: [],
         championSelected: false,
         selectedId: "",
-        selectedChampion: {}
+        selectedChampion: {},
+        champModalOpen: false
     });
 
     useEffect(() => {
@@ -114,7 +115,15 @@ function UserProvider(props) {
             championSelected: true,
             selectedId: id,
         })
-    }
+    };
+
+    function handleModal() {
+        setUser({
+            ...user,
+            champModalOpen: !user.champModalOpen
+        })
+        console.log("handleModal ran...", user.champModalOpen);
+    };
 
     return (
         <UserContext.Provider
@@ -122,7 +131,8 @@ function UserProvider(props) {
                 ...user,
                 handleSelect,
                 handleLogin,
-                handleLogout
+                handleLogout,
+                handleModal
             }}
         >
             {props.children}
