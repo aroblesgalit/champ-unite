@@ -148,3 +148,15 @@
         padding: 0.2rem;
     }
 }
+
+/* Medium devices (landscape tablets, 450px and below) */
+@media only screen and (max-width: 450px) {
+    .user-info {
+        padding: 1rem 1rem 0rem 1rem;
+    }
+
+    .champions-avatars {
+        top: 1.6rem;
+        right: 0;
+    }
+}
