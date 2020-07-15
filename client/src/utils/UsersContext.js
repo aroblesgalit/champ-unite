@@ -10,7 +10,10 @@ function UsersProvider(props) {
     const { info, loggedIn } = useContext(UserContext);
 
     const [users, setUsers] = useState({
-        list: []
+        list: [],
+        selectedUser: {},
+        selectedChampId: "",
+        selectedChampion: {}
     });
 
     useEffect(() => {

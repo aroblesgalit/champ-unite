@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
 import ChampionCard from "../ChampionCard";
+import { UserConsumer } from "../../utils/UserContext";
 
 function UserCard(props) {
 
@@ -69,7 +70,7 @@ function UserCard(props) {
         // if (!id1 || !id2 || !userId || !otherId) {
         //     window.location.replace(`/battle/${userId}/vs/${otherId}`);
         // } else {
-            window.location.replace(`/battle/${id1}/vs/${id2}`);
+        window.location.replace(`/battle/${id1}/vs/${id2}`);
         // }
     }
 
@@ -161,52 +162,60 @@ function UserCard(props) {
                     ) : ""
                 }
             </div>
-
-            <div id="user-champions-modal" uk-modal="true">
-                <div className="user-champions-modal-wrapper uk-modal-dialog">
-                    <button className="uk-modal-close-default" type="button" uk-close="true"></button>
-                    <div className="uk-modal-header">
-                        <h2 className="uk-modal-title">My Champions</h2>
-                        <p>Select one of your champions to go into battle.</p>
-                    </div>
-                    <div className="uk-modal-body uk-flex uk-width-1-1">
-                        {
-                            user.champions && user.champions.length > 0 ? (
-                                userChampions.map(champion => {
-                                    return <ChampionCard
-                                        key={champion._id || champion.image}
-                                        id={champion._id}
-                                        name={champion.name}
-                                        image={champion.image}
-                                        strength={champion.strength}
-                                        power={champion.power}
-                                        combat={champion.combat}
-                                        intelligence={champion.intelligence}
-                                        speed={champion.speed}
-                                        durability={champion.durability}
-                                        attack={champion.attack}
-                                        defense={champion.defense}
-                                        type="battle"
-                                        handleSelect={() => handleSelect(champion._id)}
-                                        selected={championSelected.selected}
-                                        selectedId={championSelected.championId}
-                                    />
-                                })
-                            ) : <p>Search for Champions to add or create your own!</p>
-                        }
-                    </div>
-                    <div className="uk-modal-footer uk-text-right">
-                        <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <button
-                            className="uk-button secondary-btn"
-                            type="button"
-                            onClick={() => handleBattle(championSelected.championId, otherChampionId)}
-                        >
-                            Battle
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <UserConsumer>
+                {
+                    value => {
+                        console.log("Console logging value.champions...", value.champions)
+                        return (
+                            <div id="user-champions-modal" uk-modal="true">
+                                <div className="user-champions-modal-wrapper uk-modal-dialog">
+                                    <button className="uk-modal-close-default" type="button" uk-close="true"></button>
+                                    <div className="uk-modal-header">
+                                        <h2 className="uk-modal-title">My Champions</h2>
+                                        <p>Select one of your champions to go into battle.</p>
+                                    </div>
+                                    <div className="uk-modal-body uk-flex uk-width-1-1">
+                                        {
+                                            value.champions && value.champions.length > 0 ? (
+                                                value.champions.map(champion => {
+                                                    return <ChampionCard
+                                                        key={champion._id || champion.image}
+                                                        id={champion._id}
+                                                        name={champion.name}
+                                                        image={champion.image}
+                                                        strength={champion.strength}
+                                                        power={champion.power}
+                                                        combat={champion.combat}
+                                                        intelligence={champion.intelligence}
+                                                        speed={champion.speed}
+                                                        durability={champion.durability}
+                                                        attack={champion.attack}
+                                                        defense={champion.defense}
+                                                        type="battle"
+                                                        handleSelect={() => value.handleSelect(champion._id)}
+                                                        selected={value.championSelected}
+                                                        selectedId={value.selectedId}
+                                                    />
+                                                })
+                                            ) : <p>Search for Champions to add or create your own!</p>
+                                        }
+                                    </div>
+                                    <div className="uk-modal-footer uk-text-right">
+                                        <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
+                                        <button
+                                            className="uk-button secondary-btn"
+                                            type="button"
+                                            onClick={() => handleBattle(value.selectedId, otherChampionId)}
+                                        >
+                                            Battle
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                }
+            </UserConsumer>
         </div>
     );
 }

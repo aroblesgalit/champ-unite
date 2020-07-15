@@ -9,7 +9,10 @@ function UserProvider(props) {
     const [user, setUser] = useState({
         loggedIn: false,
         info: {},
-        champions: []
+        champions: [],
+        championSelected: false,
+        selectedId: "",
+        selectedChampion: {}
     });
 
     useEffect(() => {
@@ -19,12 +22,11 @@ function UserProvider(props) {
     async function getUserData() {
         const { data } = await API.getUserData();
         if (data) {
-            const championsArr = getChampions(data.champions);
+            getChampions(data.champions);
             setUser({
                 ...user,
                 loggedIn: true,
-                info: data,
-                champions: championsArr
+                info: data
             });
         } else {
             setUser({
@@ -38,23 +40,37 @@ function UserProvider(props) {
 
     function getChampions(champions) {
         const newArr = [];
+        if (!champions) {
+            return;
+        }
         for (let i = 0; i < champions.length; i++) {
             API.getChampionById(champions[i])
                 .then(res => {
                     newArr.push(res.data);
-                    return newArr;
+                    setUser({
+                        ...user,
+                        champions: newArr
+                    });
                 })
                 .catch(err => {
                     console.log("Something went wrong while fetching the user's champions from useEffect...", err);
-                    return newArr;
                 })
         }
     };
 
+    function handleSelect(id) {
+        setUser({
+            ...user,
+            championSelected: true,
+            selectedId: id,
+        })
+    }
+
     return (
         <UserContext.Provider
             value={{
-                ...user
+                ...user,
+                handleSelect
             }}
         >
             {props.children}
