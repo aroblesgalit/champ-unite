@@ -32,7 +32,7 @@ function UserProvider(props) {
                 });
             })
             .catch(err => {
-                console.log("Something went wrong while fetching user_data. User may not be logged in...", err);
+                console.log("User is NOT logged in.");
                 setUser({
                     ...user,
                     loggedIn: false,
@@ -105,7 +105,6 @@ function UserProvider(props) {
                     console.log("Something went wrong while fetching the user's champions from useEffect...", err);
                 })
         }
-        console.log("Console logging newArr...", newArr);
         return newArr;
     };
 

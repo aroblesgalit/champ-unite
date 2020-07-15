@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import ChampionCard from "../ChampionCard";
-import UserContext, { UserConsumer } from "../../utils/UserContext";
+import UserContext from "../../utils/UserContext";
 import UsersContext from "../../utils/UsersContext";
 
 function UserCard(props) {

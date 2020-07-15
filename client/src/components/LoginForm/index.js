@@ -1,44 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
 import { UserConsumer } from "../../utils/UserContext";
 
 function LoginForm() {
 
     const usernameRef = useRef();
     const passwordRef = useRef();
-
-    // const [loginFailed, setLoginFailed] = useState(false);
-
-    // function handleAlertClose() {
-    //     setTimeout(() => {
-    //         setLoginFailed(false);
-    //     }, 3000);
-    // };
-
-    // function handleLogin(e) {
-    //     e.preventDefault();
-
-    //     const username = usernameRef.current.value.toLowerCase();
-    //     const password = passwordRef.current.value;
-
-    //     API.loginUser({
-    //         username: username,
-    //         password: password
-    //     })
-    //         .then(function (res) {
-    //             // window.location.replace("/profile");
-    //             console.log("Login successful! Printing res...", res);
-    //             console.log("You are now logged in.");
-    //         })
-    //         .catch(function (err) {
-    //             console.log("Something went wrong during login...", err);
-    //             setLoginFailed(true);
-    //         });
-
-    //     handleAlertClose();
-    // }
 
     return (
         <form className="login-form uk-flex uk-flex-column uk-flex-middle uk-height-1-1">

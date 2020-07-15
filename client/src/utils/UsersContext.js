@@ -1,13 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import API from "./API";
-import UserContext from "./UserContext";
 
 const UsersContext = React.createContext();
 
 // Provider
 function UsersProvider(props) {
-
-    const { info, loggedIn } = useContext(UserContext);
 
     const [users, setUsers] = useState({
         list: [],
@@ -33,18 +30,22 @@ function UsersProvider(props) {
                 data[i].championsArr = [];
             }
         }
-        if (loggedIn) {
-            let newTempUsers = data.filter(users => users._id !== info.id);
-            setUsers({
-                ...users,
-                list: newTempUsers
+        API.getUserData()
+            .then(res => {
+                let newTempUsers = data.filter(user => user._id !== res.data.id);
+                setUsers({
+                    ...users,
+                    list: newTempUsers
+                })
             })
-        } else {
-            setUsers({
-                ...users,
-                list: data
-            });
-        }
+            .catch(err => {
+                console.log("User is NOT logged in.");
+                setUsers({
+                    ...users,
+                    list: data
+                });
+            })
+
     };
 
     function handleChampionSelect(champions) {

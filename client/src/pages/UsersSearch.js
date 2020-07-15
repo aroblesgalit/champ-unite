@@ -1,5 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import "./pages.css";
 import UserCard from "../components/UserCard";
 import API from "../utils/API";
