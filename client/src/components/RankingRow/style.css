@@ -3,3 +3,14 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+.ranking-row {
+    border: 1px solid #242e2e;
+    background-color: #131a1a;
+    margin-bottom: 4px;
+    color: rgb(213, 227, 228);
+}
+
+.ranking-row:hover {
+    background-color: #3e4b4b!important;
+}

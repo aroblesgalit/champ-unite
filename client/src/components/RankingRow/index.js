@@ -6,7 +6,7 @@ function RankingRow(props) {
     const { rank, displayName, wins, losses, totalBattle, winsPercent } = props;
 
     return (
-        <tr>
+        <tr className="ranking-row">
             <td><strong>#{rank}</strong></td>
             <td>{displayName}</td>
             <td>{wins}</td>

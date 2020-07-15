@@ -41,7 +41,7 @@ function Ranking() {
                                         <tr>
                                             <td className="uk-text-nowrap uk-text-muted">
                                                 Battle 20 times to be in the ranking!
-                                    </td>
+                                            </td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
