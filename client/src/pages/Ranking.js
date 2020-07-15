@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import "./pages.css";
 import RankingRow from "../components/RankingRow";
 import API from "../utils/API";
+import { UsersConsumer } from "../utils/UsersContext";
 
 function Ranking() {
 
-    const [rankedUsers, setRankedUsers] = useState([]);
+    // const [users, setusers] = useState([]);
 
-    useEffect(() => {
-        API.getAllUsersForRanking()
-            .then(res => {
-                // console.log("useEffect from Ranking ran...printing res.data", res.data);
-                setRankedUsers(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, []);
+    // useEffect(() => {
+    //     API.getAllUsersForRanking()
+    //         .then(res => {
+    //             // console.log("useEffect from Ranking ran...printing res.data", res.data);
+    //             setusers(res.data);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }, []);
 
     return (
         <section className="ranking-container uk-section">
@@ -33,33 +34,38 @@ function Ranking() {
                     </tr>
                 </thead>
                 <tbody>
-                    {
-                        rankedUsers.length > 0 ? (
-                            rankedUsers.map((rankedUser, i) => {
-                                return <RankingRow
-                                    key={rankedUser._id}
-                                    id={rankedUser._id}
-                                    rank={i + 1}
-                                    displayName={rankedUser.displayName}
-                                    username={rankedUser.username}
-                                    wins={rankedUser.wins}
-                                    losses={rankedUser.losses}
-                                    totalBattle={rankedUser.totalBattle}
-                                    winsPercent={rankedUser.winsPercent}
-                                />
-                            })
-                        ) : (
-                                <tr>
-                                    <td className="uk-text-nowrap uk-text-muted">
-                                        Battle 20 times to be in the ranking!
+                    <UsersConsumer>
+                        {
+                            value => {
+                                const { rankings } = value;
+                                return rankings.length > 0 ? (
+                                    rankings.map((user, i) => {
+                                        return <RankingRow
+                                            key={user._id}
+                                            id={user._id}
+                                            rank={i + 1}
+                                            displayName={user.displayName}
+                                            username={user.username}
+                                            wins={user.wins}
+                                            losses={user.losses}
+                                            totalBattle={user.totalBattle}
+                                            winsPercent={user.winsPercent}
+                                        />
+                                    })
+                                ) : (
+                                        <tr>
+                                            <td className="uk-text-nowrap uk-text-muted">
+                                                Battle 20 times to be in the ranking!
                                     </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            )
-                    }
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    )
+                            }
+                        }
+                    </UsersConsumer>
                 </tbody>
             </table>
         </section>
