@@ -11,22 +11,9 @@ function UserCard(props) {
     const { loggedIn, champions } = useContext(UserContext);
     const {  handleChampionSelect, selectedChampId } = useContext(UsersContext);
 
-    // const [otherChampionId, setOtherChampionId] = useState(props.champions[0]);
-
-    // useEffect(() => {
-    //     chooseOtherChampion();
-    // }, []);
-
     function handleBattle(id1, id2) {
         window.location.replace(`/battle/${id1}/vs/${id2}`);
     }
-
-    // function chooseOtherChampion() {
-    //     if (props.champions && props.champions.length > 0) {
-    //         const champIndex = Math.floor(Math.random() * props.champions.length);
-    //         setOtherChampionId(props.champions[champIndex]);
-    //     }
-    // }
 
     return (
         <div className="user-card uk-card">

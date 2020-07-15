@@ -12,25 +12,6 @@ function UsersSearch() {
 
     const usernameRef = useRef();
 
-    // useEffect(() => {
-    //     if (info.id) {
-    //         API.getAllUsersButOne(info.id)
-    //             .then(usersDB => {
-    //                 console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
-    //                 setUsers(usersDB.data);
-    //             })
-    //             .catch(err => console.log(err));
-    //     } else {
-    //         API.getAllUsers()
-    //             .then(usersDB => {
-    //                 // console.log("User not logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
-    //                 setUsers(usersDB.data);
-    //             })
-    //             .catch(err => console.log(err));
-    //     }
-
-    // }, [info.id]);
-
     function handleSearch(e) {
         e.preventDefault();
 
@@ -76,7 +57,7 @@ function UsersSearch() {
                                             championsArr={user.championsArr}
                                         />
                                     })
-                                ) : <p className="uk-text-warning">No users found by that query. Please try a different one.</p>
+                                ) : <p className="uk-text-warning">Loading users...</p>
                             )
                         }
                     }

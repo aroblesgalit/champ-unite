@@ -1,79 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./style.css";
 // import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import ChampionCard from "../ChampionCard";
+import UserContext, { UserConsumer } from "../../utils/UserContext";
 
 function ProfileHeader(props) {
 
-    const [user, setUser] = useState({});
-    const [userChampions, setUserChampions] = useState([]);
-    const [userChampionId, setUserChampionId] = useState("");
+    const { loggedIn, champions, selectedId } = useContext(UserContext);
+
     const [otherChampionId, setOtherChampionId] = useState("");
 
-    const [championSelected, setChampionSelected] = useState({
-        selected: false,
-        championId: ""
-    });
-
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    isLoggedIn: true,
-                    champions: user.data.champions
-                });
-            })
-            .catch(err => {
-                setUser({
-                    isLoggedIn: false
-                });
-            })
-    }, []);
-
     function handleModal() {
-        getUserChampions();
         chooseOtherChampion();
-        // Get other users's champion and select an ID to use for the window.locaiton.replace
     }
 
     function handleBattle() {
-        if (!userChampionId) {
-            window.location.replace(`/battle/${user.champions[0]}/vs/${otherChampionId}`);
+        if (!selectedId) {
+            window.location.replace(`/battle/${champions[0]}/vs/${otherChampionId}`);
         } else {
-            window.location.replace(`/battle/${userChampionId}/vs/${otherChampionId}`);
+            window.location.replace(`/battle/${selectedId}/vs/${otherChampionId}`);
         }
     }
 
     function chooseOtherChampion() {
         if (props.champions && props.champions.length > 1) {
             const champId = Math.floor(Math.random() * props.champions.length);
-            // console.log("chooseOtherChampion ran...", champId);
             setOtherChampionId(props.champions[champId]);
         } else {
             setOtherChampionId(props.champions[0]);
         }
-    }
-
-    async function getUserChampions() {
-        if (user.champions && user.champions.length > 0) {
-            const newArr = [];
-            for (let i = 0; i < user.champions.length; i++) {
-                let res = await API.getChampionById(user.champions[i])
-                // res.data is the champion object
-                newArr.push(res.data);
-            }
-            setUserChampions(newArr);
-        }
-    }
-
-    function handleSelect(id) {
-        setUserChampionId(id)
-        // console.log("handleSelect ran...printing id of clicked champion...", id);
-        setChampionSelected({
-            selected: true,
-            championId: id
-        });
     }
 
     return (
@@ -100,8 +56,7 @@ function ProfileHeader(props) {
                     </div>
                 </div>
                 {
-                    props.type === "otherUser" && props.champions && user.champions && user.champions.length > 0 && props.champions.length > 0 ? (
-                        // <Link to="#" className="uk-button secondary-btn" onClick={handleBattle}>Battle</Link>
+                    props.type === "otherUser" && props.champions && champions && champions.length > 0 && props.champions.length > 0 ? (
                         <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={handleModal}>Battle</button>
                     ) : ""
                 }
@@ -115,30 +70,36 @@ function ProfileHeader(props) {
                         <p>Select one of your champions to go into battle.</p>
                     </div>
                     <div className="uk-modal-body uk-flex uk-width-1-1">
-                        {
-                            userChampions && userChampions.length > 0 ? (
-                                userChampions.map(champion => {
-                                    return <ChampionCard
-                                        key={champion._id || champion.image}
-                                        id={champion._id}
-                                        name={champion.name}
-                                        image={champion.image}
-                                        strength={champion.strength}
-                                        power={champion.power}
-                                        combat={champion.combat}
-                                        intelligence={champion.intelligence}
-                                        speed={champion.speed}
-                                        durability={champion.durability}
-                                        attack={champion.attack}
-                                        defense={champion.defense}
-                                        type="battle"
-                                        handleSelect={() => handleSelect(champion._id)}
-                                        selected={championSelected.selected}
-                                        selectedId={championSelected.championId}
-                                    />
-                                }) 
-                            ) : <p>Search for Champions to add or create your own!</p>
-                        }
+                        <UserConsumer>
+                            {
+                                value => {
+                                    return (
+                                        value.champions && value.champions.length > 0 ? (
+                                            value.champions.map(champion => {
+                                                return <ChampionCard
+                                                    key={champion._id || champion.image}
+                                                    id={champion._id}
+                                                    name={champion.name}
+                                                    image={champion.image}
+                                                    strength={champion.strength}
+                                                    power={champion.power}
+                                                    combat={champion.combat}
+                                                    intelligence={champion.intelligence}
+                                                    speed={champion.speed}
+                                                    durability={champion.durability}
+                                                    attack={champion.attack}
+                                                    defense={champion.defense}
+                                                    type="battle"
+                                                    handleSelect={() => value.handleSelect(champion._id)}
+                                                    selected={value.championSelected}
+                                                    selectedId={value.selectedId}
+                                                />
+                                            })
+                                        ) : <p>Search for Champions to add or create your own!</p>
+                                    )
+                                }
+                            }
+                        </UserConsumer>
                     </div>
                     <div className="uk-modal-footer uk-text-right">
                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
