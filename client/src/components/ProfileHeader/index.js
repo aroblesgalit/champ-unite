@@ -1,21 +1,12 @@
 import React, { useContext } from "react";
 import "./style.css";
-import ChampionCard from "../ChampionCard";
-import UserContext, { UserConsumer } from "../../utils/UserContext";
+import UserContext from "../../utils/UserContext";
 import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
-    const { loggedIn, champions, selectedId } = useContext(UserContext);
-    const {  handleChampionSelect, selectedChampId } = useContext(UsersContext);
-
-    function handleBattle() {
-        if (!selectedId) {
-            window.location.replace(`/battle/${champions[0]}/vs/${selectedChampId}`);
-        } else {
-            window.location.replace(`/battle/${selectedId}/vs/${selectedChampId}`);
-        }
-    }
+    const { loggedIn, champions, handleModal } = useContext(UserContext);
+    const { handleChampionSelect } = useContext(UsersContext);
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
@@ -42,55 +33,17 @@ function ProfileHeader(props) {
                 </div>
                 {
                     props.type === "otherUser" && props.champions && champions && champions.length > 0 && props.champions.length > 0 ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={() => handleChampionSelect(props.champions)}>Battle</button>
+                        <button
+                            className="uk-button secondary-btn"
+                            onClick={() => {
+                                handleChampionSelect(props.champions);
+                                handleModal();
+                            }}
+                        >
+                            Battle
+                        </button>
                     ) : ""
                 }
-            </div>
-
-            <div id="user-champions-modal" uk-modal="true">
-                <div className="user-champions-modal-wrapper uk-modal-dialog">
-                    <button className="uk-modal-close-default" type="button" uk-close="true"></button>
-                    <div className="uk-modal-header">
-                        <h2 className="uk-modal-title">My Champions</h2>
-                        <p>Select one of your champions to go into battle.</p>
-                    </div>
-                    <div className="uk-modal-body uk-flex uk-width-1-1">
-                        <UserConsumer>
-                            {
-                                value => {
-                                    return (
-                                        value.champions && value.champions.length > 0 ? (
-                                            value.champions.map(champion => {
-                                                return <ChampionCard
-                                                    key={champion._id || champion.image}
-                                                    id={champion._id}
-                                                    name={champion.name}
-                                                    image={champion.image}
-                                                    strength={champion.strength}
-                                                    power={champion.power}
-                                                    combat={champion.combat}
-                                                    intelligence={champion.intelligence}
-                                                    speed={champion.speed}
-                                                    durability={champion.durability}
-                                                    attack={champion.attack}
-                                                    defense={champion.defense}
-                                                    type="battle"
-                                                    handleSelect={() => value.handleSelect(champion._id)}
-                                                    selected={value.championSelected}
-                                                    selectedId={value.selectedId}
-                                                />
-                                            })
-                                        ) : <p>Search for Champions to add or create your own!</p>
-                                    )
-                                }
-                            }
-                        </UserConsumer>
-                    </div>
-                    <div className="uk-modal-footer uk-text-right">
-                        <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                        <button className="uk-button secondary-btn" type="button" onClick={handleBattle}>Battle</button>
-                    </div>
-                </div>
             </div>
         </section>
     );
