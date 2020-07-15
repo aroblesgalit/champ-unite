@@ -18,18 +18,18 @@
 }
 
 .user-info {
-    /* background-color: rgb(176, 176, 221); */
+    background-color: rgb(244, 244, 248);
     border: 1px solid rgb(219, 221, 223);
     /* background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236)); */
     padding: 1rem;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     width: 100%;
     border-radius: 8px 8px 0 0;
 }
 
 .champions-avatars {
     position: absolute;
-    top: 72px;
+    top: 70px;
     width: 80%;
     margin: 0 auto;
     /* background-color: chartreuse; */
@@ -70,11 +70,11 @@
 }
 
 .user-card-links {
-    /* background-color: cadetblue; */
+    background-color: rgb(67, 198, 172);
     border: 1px solid rgb(219, 221, 223);
     /* background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236)); */
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     border-radius: 0 0 8px 8px;
     /* padding: 30px 1rem 1rem 1rem; */
 }
@@ -86,21 +86,20 @@
 
 .user-btn {
     background-color: transparent;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.875rem;
     height: 100%;
     width: 100%;
     padding: 0.8rem 0 0;
+    color: #fff;
 }
 
 .user-btn:hover {
-    background-color: rgb(67, 198, 172);
-    color: #fff;
+    background-color: rgb(25, 22, 84);;
 }
 
 .user-card-links hr {
     height: 40px;
     margin: 0;
     width: 0;
-    border-color: rgb(240, 237, 237);
+    border-color: rgb(125, 233, 211);
 }

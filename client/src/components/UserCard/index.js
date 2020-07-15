@@ -47,7 +47,7 @@ function UserCard(props) {
                                 <img src={champion.image} alt={champion.name} />
                             </div>
                         })
-                    ) : "No Champions"
+                    ) : ""
                 }
             </div>
             <div className={loggedIn ? "user-card-links uk-flex uk-flex-between uk-child-width-1-2" : "user-card-links uk-flex uk-flex-center"} >
