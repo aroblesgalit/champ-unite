@@ -1,19 +1,18 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import API from "./API";
-import UserContext from "./UserContext";
+import { set } from "mongoose";
 
 const UsersContext = React.createContext();
 
 // Provider
 function UsersProvider(props) {
 
-    const { info, loggedIn } = useContext(UserContext);
-
     const [users, setUsers] = useState({
         list: [],
         selectedUser: {},
         selectedChampId: "",
-        selectedChampion: {}
+        selectedChampion: {},
+        detailUser: {}
     });
 
     useEffect(() => {
@@ -25,26 +24,28 @@ function UsersProvider(props) {
         for (let i = 0; i < data.length; i++) {
             if (data[i].champions && data[i].champions.length > 0) {
                 data[i].championsArr = [];
-                for (let j = 0; j < data[i].champions.length; j++) {
-                    const res = await API.getChampionById(data[i].champions[j])
-                    data[i].championsArr[j] = res.data;
-                }
+                const championsRes = await API.getChampionsByUserId(data[i]._id);
+                data[i].championsArr = championsRes.data;
             } else {
                 data[i].championsArr = [];
             }
         }
-        if (loggedIn) {
-            let newTempUsers = data.filter(users => users._id !== info.id);
-            setUsers({
-                ...users,
-                list: newTempUsers
+        API.getUserData()
+            .then(res => {
+                let newTempUsers = data.filter(user => user._id !== res.data.id);
+                setUsers({
+                    ...users,
+                    list: newTempUsers
+                })
             })
-        } else {
-            setUsers({
-                ...users,
-                list: data
-            });
-        }
+            .catch(err => {
+                console.log("User is NOT logged in.");
+                setUsers({
+                    ...users,
+                    list: data
+                });
+            })
+
     };
 
     function handleChampionSelect(champions) {
@@ -56,11 +57,38 @@ function UsersProvider(props) {
         });
     };
 
+    async function handleDetailUser(id) {
+        const userRes = users.list.find(user => user._id === id);
+        console.log("Logging userRes...", userRes);
+        setUsers({
+            ...users,
+            detailUser: userRes
+        })
+    };
+
+    function handleUserSearch(e, query) {
+        e.preventDefault();
+
+        if (query === "") {
+            getUsers();
+        }
+
+        let lowercaseQuery = query.toLowerCase();
+        let tempList = [...users.list];
+        let filteredList = tempList.filter(user => user.username.includes(lowercaseQuery));
+        setUsers({
+            ...users,
+            list: filteredList
+        })
+    };
+
     return (
         <UsersContext.Provider
             value={{
                 ...users,
-                handleChampionSelect
+                handleChampionSelect,
+                handleDetailUser,
+                handleUserSearch
             }}
         >
             {props.children}

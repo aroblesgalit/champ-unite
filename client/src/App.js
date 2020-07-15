@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Footer from "./components/Footer";
@@ -8,51 +8,16 @@ import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import ChampionsSearch from "./pages/ChampionsSearch";
 import UsersSearch from "./pages/UsersSearch";
-import API from "./utils/API";
 import OtherUserProfile from './pages/OtherUserProfile';
 import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
-import { UserProvider } from "./utils/UserContext";
+import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 
 function App() {
-
-  // const [user, setUser] = useState({});
-
-  // useEffect(() => {
-  //   getUserData();
-  // }, []);
-
-  // async function getUserData() {
-  //   console.log("getUserData() ran...")
-  //   const { data } = await API.getUserData();
-  //   console.log("Running getUserData() from App.js...", data);
-  //   if (data) {
-  //     setUser({
-  //       loggedIn: true,
-  //       id: data.id,
-  //       username: data.username,
-  //       rank: data.rank,
-  //       wins: data.wins,
-  //       losses: data.losses,
-  //       champions: data.champions
-  //     });
-  //   } else {
-  //     setUser({
-  //       loggedIn: false,
-  //       id: "",
-  //       username: "",
-  //       rank: 0,
-  //       wins: 0,
-  //       losses: 0,
-  //       champions: []
-  //     });
-  //   }
-  // }
-
   return (
     <UserProvider>
       <UsersProvider>
@@ -65,13 +30,26 @@ function App() {
                 <Homepage />
               </Route>
               <Route path="/login">
-                <Login />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <Redirect to="/profile" /> : <Login />
+                    }
+
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/signup">
                 <Signup />
               </Route>
               <Route exact path="/profile">
-                <UserProfile />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
+                    }
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/champions">
                 <ChampionsSearch />

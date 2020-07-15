@@ -1,14 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import ChampionCard from "../ChampionCard";
-import UserContext, { UserConsumer } from "../../utils/UserContext";
+import UserContext from "../../utils/UserContext";
 import UsersContext from "../../utils/UsersContext";
 
 function UserCard(props) {
 
     const { loggedIn, champions, handleModal } = useContext(UserContext);
-    const { handleChampionSelect } = useContext(UsersContext);
+    const { handleChampionSelect, handleDetailUser } = useContext(UsersContext);
 
     // function handleBattle(id1, id2) {
     //     window.location.replace(`/battle/${id1}/vs/${id2}`);
@@ -24,7 +23,7 @@ function UserCard(props) {
                     <h3>{props.displayName}</h3>
                     <div className="uk-flex">
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
-                            <p className="stat-val">{props.rank}</p>
+                            <p className="stat-val">{props.rank === 0 ? "-" : props.rank}</p>
                             <p className="stat-label">R</p>
                         </div>
                         <hr className="uk-divider-vertical uk-margin-small-left uk-margin-small-right" />
@@ -52,7 +51,14 @@ function UserCard(props) {
                 }
             </div>
             <div className={loggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
-                <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
+                <Link to={`/profile/${props.username}`}>
+                    <button
+                        className="uk-button secondary-btn"
+                        onClick={() => handleDetailUser(props.id)}
+                    >
+                        Profile
+                    </button>
+                </Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
                         <button
@@ -61,7 +67,7 @@ function UserCard(props) {
                             onClick={() => {
                                 handleChampionSelect(props.champions);
                                 handleModal();
-                             }}
+                            }}
                         >
                             Battle
                         </button>

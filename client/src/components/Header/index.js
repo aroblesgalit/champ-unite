@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 
 function Header() {

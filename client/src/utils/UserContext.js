@@ -23,16 +23,17 @@ function UserProvider(props) {
 
     function fetchUserData() {
         API.getUserData()
-            .then(res => {
+            .then(async function(res) {
+                const championsRes = await API.getChampionsByUserId(res.data.id);
                 setUser({
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: getChampions(res.data.champions)
+                    champions: championsRes.data
                 });
             })
-            .catch(err => {
-                console.log("Something went wrong while fetching user_data. User may not be logged in...", err);
+            .catch(() => {
+                console.log("User is NOT logged in.");
                 setUser({
                     ...user,
                     loggedIn: false,
@@ -50,10 +51,11 @@ function UserProvider(props) {
             password: password
         })
             .then(() => {
-                setUser({
-                    ...user,
-                    loggedIn: true
-                })
+                // fetchUserData();
+                // setUser({
+                //     ...user,
+                //     loggedIn: true
+                // })
                 window.location.replace("/profile");
                 console.log("You are now logged in.");
             })
@@ -76,6 +78,7 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: false
                 });
+                fetchUserData();
             })
             .catch(err => {
                 console.log("Something went wrong while trying to log out...", err);
@@ -89,24 +92,6 @@ function UserProvider(props) {
                 loginFailed: false
             })
         }, 3000);
-    };
-
-    function getChampions(champions) {
-        const newArr = [];
-        if (!champions) {
-            return;
-        }
-        for (let i = 0; i < champions.length; i++) {
-            API.getChampionById(champions[i])
-                .then(res => {
-                    newArr.push(res.data);
-                })
-                .catch(err => {
-                    console.log("Something went wrong while fetching the user's champions from useEffect...", err);
-                })
-        }
-        console.log("Console logging newArr...", newArr);
-        return newArr;
     };
 
     function handleSelect(id) {
