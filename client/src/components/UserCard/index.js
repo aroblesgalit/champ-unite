@@ -4,27 +4,29 @@ import "./style.css";
 import API from "../../utils/API";
 import ChampionCard from "../ChampionCard";
 import UserContext, { UserConsumer } from "../../utils/UserContext";
+import UsersContext from "../../utils/UsersContext";
 
 function UserCard(props) {
 
     const { loggedIn, champions } = useContext(UserContext);
+    const {  handleChampionSelect, selectedChampId } = useContext(UsersContext);
 
-    const [otherChampionId, setOtherChampionId] = useState(props.champions[0]);
+    // const [otherChampionId, setOtherChampionId] = useState(props.champions[0]);
 
-    useEffect(() => {
-        chooseOtherChampion();
-    }, []);
+    // useEffect(() => {
+    //     chooseOtherChampion();
+    // }, []);
 
     function handleBattle(id1, id2) {
         window.location.replace(`/battle/${id1}/vs/${id2}`);
     }
 
-    function chooseOtherChampion() {
-        if (props.champions && props.champions.length > 0) {
-            const champIndex = Math.floor(Math.random() * props.champions.length);
-            setOtherChampionId(props.champions[champIndex]);
-        }
-    }
+    // function chooseOtherChampion() {
+    //     if (props.champions && props.champions.length > 0) {
+    //         const champIndex = Math.floor(Math.random() * props.champions.length);
+    //         setOtherChampionId(props.champions[champIndex]);
+    //     }
+    // }
 
     return (
         <div className="user-card uk-card">
@@ -67,7 +69,7 @@ function UserCard(props) {
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn">Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={() =>  handleChampionSelect(props.champions)}>Battle</button>
                     ) : ""
                 }
             </div>
@@ -113,7 +115,7 @@ function UserCard(props) {
                                         <button
                                             className="uk-button secondary-btn"
                                             type="button"
-                                            onClick={() => handleBattle(value.selectedId, otherChampionId)}
+                                            onClick={() => handleBattle(value.selectedId, selectedChampId)}
                                         >
                                             Battle
                                         </button>

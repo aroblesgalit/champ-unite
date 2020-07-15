@@ -47,10 +47,20 @@ function UsersProvider(props) {
         }
     };
 
+    function handleChampionSelect(champions) {
+        const champIndex = Math.floor(Math.random() * champions.length);
+
+        setUsers({
+            ...users,
+            selectedChampId: champions[champIndex]
+        });
+    };
+
     return (
         <UsersContext.Provider
             value={{
-                ...users
+                ...users,
+                handleChampionSelect
             }}
         >
             {props.children}
