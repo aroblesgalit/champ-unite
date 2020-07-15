@@ -14,6 +14,7 @@ import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
+import ChampSelectModal from "./components/ChampSelectModal";
 import { UserProvider } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 
@@ -57,6 +58,7 @@ function App() {
       <UsersProvider>
         <Router>
           <div>
+            <ChampSelectModal />
             <Header />
             <Switch>
               <Route exact path="/">
