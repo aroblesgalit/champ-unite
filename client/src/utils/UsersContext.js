@@ -6,21 +6,21 @@ const UsersContext = React.createContext();
 // Provider
 function UsersProvider(props) {
 
+    const [rankings, setRankings] = useState([]);
+
     const [users, setUsers] = useState({
         list: [],
         selectedUser: {},
         selectedChampId: "",
         selectedChampion: {},
-        detailUser: {},
-        rankings: []
+        detailUser: {}
     });
 
     useEffect(() => {
         getUsers();
     }, []);
 
-    async function getUsers() {
-        const { data } = await API.getAllUsers();
+    function updateRankings(data) {
         // Filter data into array of users with rank value and sort it based on winsPercent
         // Then set each of their rank value to their new index based on the sort
         // Finally, update these users in the database
@@ -29,6 +29,12 @@ function UsersProvider(props) {
             user.rank = index + 1;
             API.updateWinsPercent(user._id, { rank: user.rank });
         });
+        setRankings(tempRankings);
+    };
+
+    async function getUsers() {
+        const { data } = await API.getAllUsers();
+        updateRankings(data);
         // For each of the users, declare an array for their champions as objects using the champ ids
         for (let i = 0; i < data.length; i++) {
             if (data[i].champions && data[i].champions.length > 0) {
@@ -46,16 +52,14 @@ function UsersProvider(props) {
                 let newTempUsers = data.filter(user => user._id !== res.data.id);
                 setUsers({
                     ...users,
-                    list: newTempUsers,
-                    rankings: tempRankings
+                    list: newTempUsers
                 })
             })
             .catch(() => {
                 console.log("User is NOT logged in.");
                 setUsers({
                     ...users,
-                    list: data,
-                    rankings: tempRankings
+                    list: data
                 });
             })
     };
@@ -98,6 +102,7 @@ function UsersProvider(props) {
         <UsersContext.Provider
             value={{
                 ...users,
+                rankings,
                 handleChampionSelect,
                 handleDetailUser,
                 handleUserSearch

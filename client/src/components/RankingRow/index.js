@@ -1,24 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./style.css";
-import API from "../../utils/API";
 
-function RankingRow({ id, rank, displayName, wins, losses, totalBattle, winsPercent }) {
+function RankingRow(props) {
 
-    // useEffect(() => {
-    //     API.updateWinsPercent(id, {
-    //         rank: rank
-    //     })
-    //         .then(res => {
-    //             console.log(res.data)
-    //         })
-    //         .catch(err => {
-    //             console.log("Something went wrong inside the RankingRow component...", err);
-    //         })
-    // }, []);
+    const { rank, displayName, wins, losses, totalBattle, winsPercent } = props;
 
     return (
         <tr>
-            <td>{rank}</td>
+            <td><strong>#{rank}</strong></td>
             <td>{displayName}</td>
             <td>{wins}</td>
             <td>{losses}</td>
