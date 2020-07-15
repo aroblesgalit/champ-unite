@@ -25,3 +25,11 @@
     color: #f2f2f2;
     background-image: linear-gradient(to left, rgb(67, 198, 172), rgb(25, 22, 84));
 }
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+    .home-hero {
+        padding: 3rem 0;
+    }
+}
