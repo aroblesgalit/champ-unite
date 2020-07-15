@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Footer from "./components/Footer";
@@ -14,7 +14,7 @@ import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
-import { UserProvider } from "./utils/UserContext";
+import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 
 function App() {
@@ -30,13 +30,26 @@ function App() {
                 <Homepage />
               </Route>
               <Route path="/login">
-                <Login />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <Redirect to="/profile" /> : <Login />
+                    }
+
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/signup">
                 <Signup />
               </Route>
               <Route exact path="/profile">
-                <UserProfile />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
+                    }
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/champions">
                 <ChampionsSearch />

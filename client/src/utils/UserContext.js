@@ -32,7 +32,7 @@ function UserProvider(props) {
                     champions: championsRes.data
                 });
             })
-            .catch(err => {
+            .catch(() => {
                 console.log("User is NOT logged in.");
                 setUser({
                     ...user,
@@ -51,10 +51,11 @@ function UserProvider(props) {
             password: password
         })
             .then(() => {
-                setUser({
-                    ...user,
-                    loggedIn: true
-                })
+                // fetchUserData();
+                // setUser({
+                //     ...user,
+                //     loggedIn: true
+                // })
                 window.location.replace("/profile");
                 console.log("You are now logged in.");
             })
@@ -77,6 +78,7 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: false
                 });
+                fetchUserData();
             })
             .catch(err => {
                 console.log("Something went wrong while trying to log out...", err);
