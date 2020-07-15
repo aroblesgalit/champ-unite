@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
@@ -7,8 +7,11 @@ import ChampionCard from "../components/ChampionCard";
 import Sound from "react-sound";
 import slash from "../sounds/442903__qubodup__slash.wav";
 import battleSound from "../sounds/510953__theojt__cinematic-battle-song.mp3";
+import UserContext from "../utils/UserContext";
 
 function Battle() {
+
+    const { handleLeave } = useContext(UserContext);
 
     // const [user, setUser] = useContext(UserContext);
 
@@ -415,7 +418,7 @@ function Battle() {
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
             <Link to="/users" className="uk-link-reset">
-                <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }}>Leave</button>
+                <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={() => handleLeave()}>Leave</button>
             </Link>
             {
                 // <div className="battle-speed-toggle-container uk-position-absolute">

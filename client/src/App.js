@@ -24,7 +24,13 @@ function App() {
         <Router>
           <div>
             <ChampSelectModal />
-            <Header />
+            <UserConsumer>
+              {
+                value => {
+                  return value.battleMode ? "" : <Header />
+                }
+              }
+            </UserConsumer>
             <Switch>
               <Route exact path="/">
                 <Homepage />
@@ -73,7 +79,13 @@ function App() {
                 <Credits />
               </Route>
             </Switch>
-            <Footer />
+            <UserConsumer>
+              {
+                value => {
+                  return value.battleMode ? "" : <Footer />
+                }
+              }
+            </UserConsumer>
           </div>
         </Router>
       </UsersProvider>
