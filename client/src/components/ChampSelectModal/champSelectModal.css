@@ -11,4 +11,9 @@
 
 .user-champions-modal-wrapper {
     background-color: #fff;
+    max-height: 100vh;
+}
+
+.uk-modal-header {
+    background-color: chocolate;
 }

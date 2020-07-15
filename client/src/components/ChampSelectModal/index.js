@@ -16,9 +16,7 @@ function ChampSelectModal() {
                         value.champModalOpen ? (
                             <div className="user-champions-modal uk-flex uk-flex-middle uk-flex-center">
                                 <div className="user-champions-modal-wrapper">
-                                    <button type="button" onClick={() => value.handleModal()}></button>
                                     <div className="uk-modal-header">
-                                        <h2 className="uk-modal-title">My Champions</h2>
                                         <p>Select one of your champions to go into battle.</p>
                                     </div>
                                     <div className="uk-modal-body uk-flex uk-width-1-1">
@@ -48,7 +46,7 @@ function ChampSelectModal() {
                                         }
                                     </div>
                                     <div className="uk-modal-footer uk-text-right">
-                                        <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => value.handleModal()}>Cancel</button>
+                                        <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => value.handleModal()}>Cancel</button>
                                         <Link to={`/battle/${value.selectedId || value.info.champions[0]}/vs/${selectedChampId}`} >
                                             <button
                                                 className="uk-button secondary-btn"
