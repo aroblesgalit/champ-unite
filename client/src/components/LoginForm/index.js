@@ -2,42 +2,43 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
+import { UserConsumer } from "../../utils/UserContext";
 
 function LoginForm() {
 
     const usernameRef = useRef();
     const passwordRef = useRef();
 
-    const [loginFailed, setLoginFailed] = useState(false);
+    // const [loginFailed, setLoginFailed] = useState(false);
 
-    function handleAlertClose() {
-        setTimeout(() => {
-            setLoginFailed(false);
-        }, 3000);
-    };
+    // function handleAlertClose() {
+    //     setTimeout(() => {
+    //         setLoginFailed(false);
+    //     }, 3000);
+    // };
 
-    function handleLogin(e) {
-        e.preventDefault();
+    // function handleLogin(e) {
+    //     e.preventDefault();
 
-        const username = usernameRef.current.value.toLowerCase();
-        const password = passwordRef.current.value;
+    //     const username = usernameRef.current.value.toLowerCase();
+    //     const password = passwordRef.current.value;
 
-        API.loginUser({
-            username: username,
-            password: password
-        })
-            .then(function (res) {
-                window.location.replace("/profile");
-                // console.log("Login successful! Printing res...", res);
-                console.log("You are now logged in.");
-            })
-            .catch(function (err) {
-                console.log("Something went wrong during login...", err);
-                setLoginFailed(true);
-            });
+    //     API.loginUser({
+    //         username: username,
+    //         password: password
+    //     })
+    //         .then(function (res) {
+    //             // window.location.replace("/profile");
+    //             console.log("Login successful! Printing res...", res);
+    //             console.log("You are now logged in.");
+    //         })
+    //         .catch(function (err) {
+    //             console.log("Something went wrong during login...", err);
+    //             setLoginFailed(true);
+    //         });
 
-        handleAlertClose();
-    }
+    //     handleAlertClose();
+    // }
 
     return (
         <form className="login-form uk-flex uk-flex-column uk-flex-middle uk-height-1-1">
@@ -54,15 +55,28 @@ function LoginForm() {
                     <input className="uk-input" type="password" placeholder="******" ref={passwordRef} />
                 </div>
             </div>
-            {loginFailed ? (
-                <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Login failed.</p>
-            ) : ""}
-            <div className="uk-margin-small">
-                <button className="uk-button primary-btn" type="submit" onClick={handleLogin}>Log in</button>
-            </div>
-            <p className="signup-login-text">
-                Don't have an account? <Link to="/signup"><span>Sign up here now.</span></Link>
-            </p>
+            <UserConsumer>
+                {
+                    value => {
+                        return (
+                            <React.Fragment>
+                                {
+                                    value.loginFailed ? (
+                                        <p className="uk-text-small uk-text-danger uk-margin-remove uk-padding-remove uk-text-right">Login failed.</p>
+                                    ) : ""
+                                }
+                                <div className="uk-margin-small">
+                                    <button className="uk-button primary-btn" type="submit" onClick={(e) => value.handleLogin(e, usernameRef.current.value.toLowerCase(), passwordRef.current.value)}>Log in</button>
+                                </div>
+                                <p className="signup-login-text">
+                                    Don't have an account? <Link to="/signup"><span>Sign up here now.</span></Link>
+                                </p>
+                            </React.Fragment>
+                        )
+                    }
+                }
+            </UserConsumer>
+
         </form>
     );
 }

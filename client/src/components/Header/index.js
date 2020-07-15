@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
+import UserContext from "../../utils/UserContext";
 
 function Header() {
 
+    const { loggedIn } = useContext(UserContext);
+
     const [user, setUser] = useState({});
 
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    isLoggedIn: true
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                setUser({
-                    isLoggedIn: false
-                });
-            })
-    }, []);
+    // useEffect(() => {
+    //     API.getUserData()
+    //         .then(user => {
+    //             setUser({
+    //                 isLoggedIn: true
+    //             });
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             setUser({
+    //                 isLoggedIn: false
+    //             });
+    //         })
+    // }, []);
 
     function handleLogout() {
         API.logoutUser()
@@ -48,7 +51,7 @@ function Header() {
                 </div>
                 <div className="nav-right-large uk-navbar-right">
                     {
-                        user.isLoggedIn ? (
+                        loggedIn ? (
                             <ul className="uk-navbar-nav">
                                 <li>
                                     <Link to="/profile">Profile</Link>
@@ -72,7 +75,7 @@ function Header() {
                         <div className="nav-bar-small uk-offcanvas-bar uk-flex uk-flex-column">
                             <button className="uk-offcanvas-close" type="button" uk-close="true"></button>
                             {
-                                user.isLoggedIn ? (
+                                loggedIn ? (
                                     <ul className="uk-nav uk-nav-primary uk-nav-center">
                                         <li><Link to="/Ranking">Ranking</Link></li>
                                         <li><Link to="/users">Users</Link></li>

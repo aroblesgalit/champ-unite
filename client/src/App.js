@@ -14,7 +14,8 @@ import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
-import { UserProvider } from './utils/UserContext';
+import { UserProvider } from "./utils/UserContext";
+import { UsersProvider } from "./utils/UsersContext";
 
 function App() {
 
@@ -53,47 +54,49 @@ function App() {
 
   return (
     <UserProvider>
-      <Router>
-        <div>
-          <Header />
-          <Switch>
-            <Route exact path="/">
-              <Homepage />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route exact path="/profile">
-              <UserProfile />
-            </Route>
-            <Route path="/champions">
-              <ChampionsSearch />
-            </Route>
-            <Route path="/users">
-              <UsersSearch />
-            </Route>
-            <Route path="/profile/:username">
-              <OtherUserProfile />
-            </Route>
-            <Route path="/battle/:userid/vs/:otheruserid">
-              <Battle />
-            </Route>
-            <Route path="/ranking">
-              <Ranking />
-            </Route>
-            <Route path="/create_champion">
-              <CreateChampion />
-            </Route>
-            <Route path="/credits">
-              <Credits />
-            </Route>
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
+      <UsersProvider>
+        <Router>
+          <div>
+            <Header />
+            <Switch>
+              <Route exact path="/">
+                <Homepage />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/signup">
+                <Signup />
+              </Route>
+              <Route exact path="/profile">
+                <UserProfile />
+              </Route>
+              <Route path="/champions">
+                <ChampionsSearch />
+              </Route>
+              <Route path="/users">
+                <UsersSearch />
+              </Route>
+              <Route path="/profile/:username">
+                <OtherUserProfile />
+              </Route>
+              <Route path="/battle/:userid/vs/:otheruserid">
+                <Battle />
+              </Route>
+              <Route path="/ranking">
+                <Ranking />
+              </Route>
+              <Route path="/create_champion">
+                <CreateChampion />
+              </Route>
+              <Route path="/credits">
+                <Credits />
+              </Route>
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </UsersProvider>
     </UserProvider>
   );
 }

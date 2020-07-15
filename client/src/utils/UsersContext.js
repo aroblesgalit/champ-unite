@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import API from "./API";
 import UserContext from "./UserContext";
 
@@ -20,50 +20,38 @@ function UsersProvider(props) {
         getUsers();
     }, [])
 
-    function getUsers() {
-        API.getAllUsers()
-            .then(res => {
-                let tempUsers = [...res.data];
-                for (let i = 0; i < tempUsers.length; i++) {
-                    let championIds = tempUsers[i].champions;
-                    tempUsers[i].championsArr = getChampions(championIds);
+    async function getUsers() {
+        const { data } = await API.getAllUsers();
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].champions && data[i].champions.length > 0) {
+                data[i].championsArr = [];
+                for (let j = 0; j < data[i].champions.length; j++) {
+                    const res = await API.getChampionById(data[i].champions[j])
+                    data[i].championsArr[j] = res.data;
                 }
-                if (loggedIn) {
-                    let newTempUsers = tempUsers.filter(users => users._id !== info.id);
-                    setUsers({
-                        ...users,
-                        list: newTempUsers
-                    })
-                } else {
-                    setUsers({
-                        ...users,
-                        list: tempUsers
-                    });
-                }
+            } else {
+                data[i].championsArr = [];
+            }
+        }
+        if (loggedIn) {
+            let newTempUsers = data.filter(users => users._id !== info.id);
+            setUsers({
+                ...users,
+                list: newTempUsers
             })
-            .catch(err => {
-                console.log("Something went wrong while fetching users...", err);
-            })
-    };
-
-    function getChampions(champions) {
-        const newArr = [];
-        for (let j = 0; j < champions.length; j++) {
-            API.getChampionById(champions[j])
-                .then(res => {
-                    newArr.push(res.data);
-                    return newArr;
-                })
-                .catch(err => {
-                    console.log("Something went wrong while fetching the user's champions from useEffect...", err);
-                    return newArr;
-                })
+        } else {
+            setUsers({
+                ...users,
+                list: data
+            });
         }
     };
 
     return (
         <UsersContext.Provider
-
+            value={{
+                ...users
+            }}
         >
             {props.children}
         </UsersContext.Provider>
