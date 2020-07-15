@@ -21,7 +21,7 @@
     background-color: rgb(53, 59, 59);
     /* border: 1px solid rgb(158, 207, 197); */
     /* background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236)); */
-    padding: 1rem;
+    padding: 1rem 1rem 0.5rem 1rem;
     margin-bottom: 2px;
     width: 100%;
     border-radius: 8px 8px 0 0;
@@ -37,12 +37,16 @@
 }
 
 .user-image {
-    width: 60px;
+    width: 46px;
+    margin-right: 16px !important;
+    border: 2px solid rgb(67, 198, 172);
+    border-radius: 50%;
 }
 
 .user-card h3 {
-    margin-bottom: 0;
+    margin-bottom: 4px;
     color: #fff;
+    line-height: 1;
 }
 
 .user-card p {
@@ -50,8 +54,8 @@
 }
 
 .user-info hr {
-    height: 40px;
-    margin: 0;
+    height: 30px;
+    margin-top: 5px;
     border-color: rgb(105, 110, 110);
 }
 
@@ -116,4 +120,31 @@
     margin: 0;
     width: 0;
     border-color: rgb(125, 233, 211);
+}
+
+
+
+
+/* Medium devices (landscape tablets, 624px and below) */
+@media only screen and (max-width: 624px) {
+    .user-card {
+        width: 100%;
+        margin-right: 0;
+        position: relative;
+    }
+
+    .user-info {
+        padding: 1rem 2rem 0rem 2rem;
+    }
+
+    .champions-avatars {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem;
+        width: 180px;
+    }
+
+    .user-btn {
+        padding: 0.2rem;
+    }
 }

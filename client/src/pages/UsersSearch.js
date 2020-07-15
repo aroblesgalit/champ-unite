@@ -31,7 +31,7 @@ function UsersSearch() {
                 </form>
             </div>
 
-            <div className="users-search-results uk-flex uk-flex-wrap">
+            <div className="users-search-results uk-flex uk-flex-wrap uk-flex-center uk-flex-left@m">
                 <UsersConsumer>
                     {
                         value => {
