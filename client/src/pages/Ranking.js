@@ -1,67 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./pages.css";
-import RankingRow from "../components/RankingRow";
-import API from "../utils/API";
+import RankingTable from "../components/RankingTable";
+import RankingTitle, { ReactComponent as Trophy } from "../images/ranking-title.svg";
 
 function Ranking() {
-
-    const [rankedUsers, setRankedUsers] = useState([]);
-
-    useEffect(() => {
-        API.getAllUsersForRanking()
-            .then(res => {
-                // console.log("useEffect from Ranking ran...printing res.data", res.data);
-                setRankedUsers(res.data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }, []);
-
     return (
-        <section className="ranking-container uk-section">
-            <h2>Ranking</h2>
-            <table className="uk-table uk-table-responsive uk-table-hover uk-table-middle uk-table-divider">
-                <thead>
-                    <tr>
-                        <th className="uk-width-small">Rank</th>
-                        <th className="uk-width-large">Username</th>
-                        <th>Wins</th>
-                        <th>Losses</th>
-                        <th># Battles</th>
-                        <th>% Wins</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        rankedUsers.length > 0 ? (
-                            rankedUsers.map((rankedUser, i) => {
-                                return <RankingRow
-                                    key={rankedUser._id}
-                                    id={rankedUser._id}
-                                    rank={i + 1}
-                                    displayName={rankedUser.displayName}
-                                    username={rankedUser.username}
-                                    wins={rankedUser.wins}
-                                    losses={rankedUser.losses}
-                                    totalBattle={rankedUser.totalBattle}
-                                    winsPercent={rankedUser.winsPercent}
-                                />
-                            })
-                        ) : (
-                                <tr>
-                                    <td className="uk-text-nowrap uk-text-muted">
-                                        Battle 20 times to be in the ranking!
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            )
-                    }
-                </tbody>
-            </table>
+        <section className="ranking-container uk-section uk-flex uk-flex-column uk-flex-middle">
+            <div><img src={RankingTitle} alt="Trophy with title." /></div>
+            <Trophy />
+            <RankingTable />
         </section>
     );
 }

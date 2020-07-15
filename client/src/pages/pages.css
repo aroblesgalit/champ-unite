@@ -17,6 +17,14 @@
     min-height: calc(100vh - 230px);
 }
 
+.ranking-container {
+    background-color: #000202;
+}
+
+/* .ranking-container th {
+    font-size: 0.7rem!important;
+} */
+
 .battle-container {
     background: url("../images/battle-bg.svg") no-repeat center;
     background-size: cover;
@@ -34,11 +42,14 @@
 .champions-search-container,
 .users-search-container,
 .battle-container,
-.ranking-container,
 .create-container,
 .user-champions-container {
     padding: 40px 100px;
     padding-top: 40px;
+}
+
+.ranking-container {
+    padding: 0 100px 40px 100px;
 }
 
 .champions-search-container h2,
@@ -47,6 +58,15 @@
 .create-container h2 {
     margin: 0;
     margin-right: 20px;
+}
+
+/* .ranking-container h2 {
+    color: #f2f2f2;
+} */
+
+.ranking-container svg {
+    max-width: 300px;
+    margin-bottom: 0.4rem;
 }
 
 .champions-search-results,
@@ -187,6 +207,10 @@
 
     .battle-user-name {
         font-size: 18px;
+    }
+
+    .ranking-container svg {
+        max-width: 220px;
     }
     
   }

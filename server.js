@@ -4,6 +4,7 @@ const routes = require("./routes");
 const app = express();
 const session = require("express-session");
 const passport = require("./config/passport");
+const cors = require("cors");
 require("dotenv").config();
 const PORT = process.env.PORT || 3001;
 
@@ -14,6 +15,8 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
+
+app.use(cors());
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "champUnite", resave: true, saveUninitialized: true }));

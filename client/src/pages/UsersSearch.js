@@ -12,7 +12,7 @@ function UsersSearch() {
     return (
         <section className="uk-section users-search-container">
             <div className="uk-flex uk-flex-middle">
-                <h2>Search Users</h2>
+                <h2>Users</h2>
                 <form className="uk-search uk-search-default uk-width-1-4@l uk-width-1-3@m uk-width-1-2@s uk-width-1-1">
                     <button
                         className="uk-search-icon-flip"
@@ -31,7 +31,7 @@ function UsersSearch() {
                 </form>
             </div>
 
-            <div className="users-search-results uk-flex uk-flex-wrap">
+            <div className="users-search-results uk-flex uk-flex-wrap uk-flex-center uk-flex-left@m">
                 <UsersConsumer>
                     {
                         value => {

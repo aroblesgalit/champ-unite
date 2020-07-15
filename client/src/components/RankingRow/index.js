@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
+import UsersContext from "../../utils/UsersContext";
 
-function RankingRow({ id, rank, displayName, wins, losses, totalBattle, winsPercent }) {
+function RankingRow(props) {
 
-    useEffect(() => {
-        API.updateWinsPercent(id, {
-            rank: rank
-        })
-            .then(res => {
-                console.log(res.data)
-            })
-            .catch(err => {
-                console.log("Something went wrong inside the RankingRow component...", err);
-            })
-    }, []);
+    const { handleDetailUser } = useContext(UsersContext);
+
+    const { id, rank, username, displayName, wins, losses, totalBattle, winsPercent } = props;
 
     return (
-        <tr>
-            <td>{rank}</td>
-            <td>{displayName}</td>
+        <tr className="ranking-row">
+            <td><strong>#{rank}</strong></td>
+            <td>
+                <Link
+                    to={`/profile/${username}`}
+                    onClick={() => handleDetailUser(id)}
+                    className="uk-link-reset"
+                >
+                    {displayName}
+                </Link>
+            </td>
             <td>{wins}</td>
             <td>{losses}</td>
             <td>{totalBattle}</td>

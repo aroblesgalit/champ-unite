@@ -1,55 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
-import API from "../utils/API";
 import { UserConsumer } from "../utils/UserContext";
 
 function UserProfile() {
-
-    // const [championList, setChampionList] = useState([]);
-
-    // const [user, setUser] = useState({});
-
-    // useEffect(() => {
-    //     API.getUserData()
-    //         .then(async (user) => {
-    //             // console.log(user.data);
-    //             const champions = await API.getChampionsByUserId(user.data.id);
-    //             // console.log(champions.data);
-    //             setChampionList(champions.data);
-    //             setUser({
-    //                 displayName: user.data.displayName,
-    //                 username: user.data.username,
-    //                 rank: user.data.rank,
-    //                 wins: user.data.wins,
-    //                 losses: user.data.losses
-    //             });
-    //         })
-    //         .catch(err => {
-    //             window.location.replace("/login");
-    //             console.log("Something went wrong. You are now logged out...", err);
-    //         })
-    // }, []);
-
-    // async function loadChampionList () {
-    //     console.log("loadChampionList() running...")
-    //     if (champions && champions.length > 0) {
-    //         console.log("loadChampionList() running...if conditional running...")
-    //         const newData = [];
-    //         for (let i = 0; i < champions.length; i++) {
-    //            const championData = await API.getChampionById(champions[i]);
-    //            console.log(championData);
-    //            newData.push(championData);
-    //         }
-    //         setChampionList(newData);
-    //     } else {
-    //         console.log("champions is null");
-    //     }
-    // }
-
-    // Go thru champions array and find each champion by id and create a new array with all data
-
     return (
         <UserConsumer>
             {
