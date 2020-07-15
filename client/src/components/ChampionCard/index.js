@@ -1,27 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./style.css";
 import API from "../../utils/API";
+import UserContext from "../../utils/UserContext";
 
 function ChampionCard(props) {
 
+    const { loggedIn, info } = useContext(UserContext);
+
     const [user, setUser] = useState({});
 
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    isLoggedIn: true,
-                    id: user.data.id,
-                    champions: user.data.champions
-                })
-            })
-            .catch(err => {
-                console.log(err);
-                setUser({
-                    isLoggedIn: false
-                })
-            })
-    }, []);
+    // useEffect(() => {
+    //     API.getUserData()
+    //         .then(user => {
+    //             setUser({
+    //                 isLoggedIn: true,
+    //                 id: user.data.id,
+    //                 champions: user.data.champions
+    //             })
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //             setUser({
+    //                 isLoggedIn: false
+    //             })
+    //         })
+    // }, []);
 
     const [maxReached, setMaxReached] = useState(false);
     const [championAdded, setChampionAdded] = useState(false);
@@ -32,7 +35,7 @@ function ChampionCard(props) {
 
     async function handleAdd() {
         try {
-            if (user.champions.length < 3) {
+            if (info.champions.length < 3) {
                 setChampionAdded(true);
                 // console.log("Running conditional champions.length < 3...", champions.length);
                 if (props.nullStats) {
@@ -56,7 +59,7 @@ function ChampionCard(props) {
                     const defense = calcBattleStat(intelligence, speed, durability);
 
                     const newUserChampion = await API.addChampion({
-                        user: user.id,
+                        user: info.id,
                         name: props.name,
                         image: props.image,
                         strength: strength,
@@ -70,11 +73,11 @@ function ChampionCard(props) {
                         nullStats: props.nullStats
                     })
                     // Update user's champions array
-                    await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    await API.updateUserChampions(info.id, newUserChampion.data._id);
                     window.location.reload(false);
                 } else {
                     const newUserChampion = await API.addChampion({
-                        user: user.id,
+                        user: info.id,
                         name: props.name,
                         image: props.image,
                         strength: props.strength,
@@ -88,7 +91,7 @@ function ChampionCard(props) {
                         nullStats: props.nullStats
                     })
                     // Update user's champions array
-                    await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    await API.updateUserChampions(info.id, newUserChampion.data._id);
                     window.location.reload(false);
                 }
 
@@ -113,7 +116,7 @@ function ChampionCard(props) {
             })
             .catch(err => console.log(err));
         // Remove from champions list in User model
-        API.removeChampionFromUser(user.id, props.id)
+        API.removeChampionFromUser(info.id, props.id)
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
@@ -135,17 +138,17 @@ function ChampionCard(props) {
                 ) : ""
             }
             {
-                props.type === "search" && user.isLoggedIn ? (
+                props.type === "search" && loggedIn ? (
                     <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
                 ) : ""
             }
             {
-                props.type === "user" && user.isLoggedIn ? (
+                props.type === "user" && loggedIn ? (
                     <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={handleDelete}></button>
                 ) : ""
             }
             {
-                props.type === "battle" && user.isLoggedIn ? (
+                props.type === "battle" && loggedIn ? (
                     <button className="select-btn uk-icon-button uk-position-absolute" uk-icon="check" onClick={props.handleSelect}></button>
                 ) : ""
             }
