@@ -97,6 +97,24 @@
     background-color: rgb(25, 22, 84);
 }
 
+.outline-btn {
+    background-color: transparent;
+    border: 1px solid rgb(67, 198, 172);
+    color: rgb(67, 198, 172);
+}
+
+.outline-btn:hover {
+    border: 1px solid rgb(25, 22, 84);
+    color: rgb(25, 22, 84);
+}
+
+.outline-btn a {
+    color: rgb(67, 198, 172)!important;
+}
+
+.outline-btn a:hover {
+    color: rgb(25, 22, 84)!important;
+}
 
 .signup-container {
     background-image: url("https://images.unsplash.com/photo-1569701813229-33284b643e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80");
