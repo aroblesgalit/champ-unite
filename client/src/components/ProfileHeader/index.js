@@ -5,7 +5,7 @@ import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
-    const { loggedIn, champions, handleModal } = useContext(UserContext);
+    const { champions, handleModal } = useContext(UserContext);
     const { handleChampionSelect } = useContext(UsersContext);
 
     return (

@@ -7,7 +7,7 @@ function RankingTableRow(props) {
 
     const { handleDetailUser } = useContext(UsersContext);
 
-    const { id, rank, username, displayName, wins, losses, totalBattle, winsPercent } = props;
+    const { id, rank, username, displayName, wins, losses } = props;
 
     return (
         <div
@@ -20,8 +20,8 @@ function RankingTableRow(props) {
                     )
                 } uk-flex uk-flex-middle`
             }>
-            <div className="uk-width-1-5@s">{rank}</div>
-            <div className="uk-width-3-5@s">
+            <div className="uk-width-small">{rank}</div>
+            <div className="uk-width-5-10">
                 <Link
                     to={`/profile/${username}`}
                     onClick={() => handleDetailUser(id)}
@@ -30,7 +30,7 @@ function RankingTableRow(props) {
                     {displayName}
                 </Link>
             </div>
-            <div className="uk-width-1-5@s"><span>{wins}</span>/<span>{losses}</span></div>
+            <div className="uk-width-3-10"><span>{wins}</span>/<span>{losses}</span></div>
         </div>
     )
 }
