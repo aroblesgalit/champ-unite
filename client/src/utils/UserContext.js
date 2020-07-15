@@ -23,7 +23,6 @@ function UserProvider(props) {
     function fetchUserData() {
         API.getUserData()
             .then(res => {
-                console.log("Console logging res.data.champions from fetchUserData...", res.data.champions);
                 setUser({
                     ...user,
                     loggedIn: true,
@@ -68,6 +67,20 @@ function UserProvider(props) {
         handleAlertClose();
     };
 
+    function handleLogout() {
+        API.logoutUser()
+            .then(() => {
+                console.log("User logged out.");
+                setUser({
+                    ...user,
+                    loggedIn: false
+                });
+            })
+            .catch(err => {
+                console.log("Something went wrong while trying to log out...", err);
+            })
+    };
+
     function handleAlertClose() {
         setTimeout(() => {
             setUser({
@@ -108,7 +121,8 @@ function UserProvider(props) {
             value={{
                 ...user,
                 handleSelect,
-                handleLogin
+                handleLogin,
+                handleLogout
             }}
         >
             {props.children}

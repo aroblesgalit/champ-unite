@@ -1,4 +1,4 @@
-import React, {  useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import ChampionCard from "../ChampionCard";
@@ -8,7 +8,7 @@ import UsersContext from "../../utils/UsersContext";
 function UserCard(props) {
 
     const { loggedIn, champions } = useContext(UserContext);
-    const {  handleChampionSelect, selectedChampId } = useContext(UsersContext);
+    const { handleChampionSelect, selectedChampId } = useContext(UsersContext);
 
     function handleBattle(id1, id2) {
         window.location.replace(`/battle/${id1}/vs/${id2}`);
@@ -55,7 +55,7 @@ function UserCard(props) {
                 <Link to={`/profile/${props.username}`} className="uk-button secondary-btn">Profile</Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
-                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={() =>  handleChampionSelect(props.champions)}>Battle</button>
+                        <button uk-toggle="target: #user-champions-modal" className="uk-button secondary-btn" onClick={() => handleChampionSelect(props.champions)}>Battle</button>
                     ) : ""
                 }
             </div>
@@ -98,13 +98,15 @@ function UserCard(props) {
                                     </div>
                                     <div className="uk-modal-footer uk-text-right">
                                         <button className="uk-button secondary-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button>
-                                        <button
-                                            className="uk-button secondary-btn"
-                                            type="button"
-                                            onClick={() => handleBattle(value.selectedId, selectedChampId)}
-                                        >
-                                            Battle
+                                        <Link to={`/battle/${value.selectedId}/vs/${selectedChampId}`} >
+                                            <button
+                                                className="uk-button secondary-btn"
+                                                type="button"
+                                                // onClick={() => handleBattle(value.selectedId, selectedChampId)}
+                                            >
+                                                Battle
                                         </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

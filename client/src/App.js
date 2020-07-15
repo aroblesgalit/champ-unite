@@ -19,38 +19,38 @@ import { UsersProvider } from "./utils/UsersContext";
 
 function App() {
 
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
 
-  useEffect(() => {
-    getUserData();
-  }, []);
+  // useEffect(() => {
+  //   getUserData();
+  // }, []);
 
-  async function getUserData() {
-    console.log("getUserData() ran...")
-    const { data } = await API.getUserData();
-    console.log("Running getUserData() from App.js...", data);
-    if (data) {
-      setUser({
-        loggedIn: true,
-        id: data.id,
-        username: data.username,
-        rank: data.rank,
-        wins: data.wins,
-        losses: data.losses,
-        champions: data.champions
-      });
-    } else {
-      setUser({
-        loggedIn: false,
-        id: "",
-        username: "",
-        rank: 0,
-        wins: 0,
-        losses: 0,
-        champions: []
-      });
-    }
-  }
+  // async function getUserData() {
+  //   console.log("getUserData() ran...")
+  //   const { data } = await API.getUserData();
+  //   console.log("Running getUserData() from App.js...", data);
+  //   if (data) {
+  //     setUser({
+  //       loggedIn: true,
+  //       id: data.id,
+  //       username: data.username,
+  //       rank: data.rank,
+  //       wins: data.wins,
+  //       losses: data.losses,
+  //       champions: data.champions
+  //     });
+  //   } else {
+  //     setUser({
+  //       loggedIn: false,
+  //       id: "",
+  //       username: "",
+  //       rank: 0,
+  //       wins: 0,
+  //       losses: 0,
+  //       champions: []
+  //     });
+  //   }
+  // }
 
   return (
     <UserProvider>

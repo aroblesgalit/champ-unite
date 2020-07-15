@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
 import API from "../../utils/API";
@@ -6,37 +6,7 @@ import UserContext from "../../utils/UserContext";
 
 function Header() {
 
-    const { loggedIn } = useContext(UserContext);
-
-    const [user, setUser] = useState({});
-
-    // useEffect(() => {
-    //     API.getUserData()
-    //         .then(user => {
-    //             setUser({
-    //                 isLoggedIn: true
-    //             });
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             setUser({
-    //                 isLoggedIn: false
-    //             });
-    //         })
-    // }, []);
-
-    function handleLogout() {
-        API.logoutUser()
-            .then(() => {
-                console.log("User logged out.");
-                setUser({
-                    isLoggedIn: false
-                });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
+    const { loggedIn, handleLogout } = useContext(UserContext);
 
     return (
         <header>
@@ -57,7 +27,7 @@ function Header() {
                                     <Link to="/profile">Profile</Link>
                                 </li>
                                 <li>
-                                    <Link to="/login" onClick={handleLogout} >Logout</Link>
+                                    <Link to="/login" onClick={() => handleLogout()} >Logout</Link>
                                 </li>
                             </ul>
                         ) : (
