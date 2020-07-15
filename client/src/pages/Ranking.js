@@ -1,24 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./pages.css";
 import RankingRow from "../components/RankingRow";
-import API from "../utils/API";
 import { UsersConsumer } from "../utils/UsersContext";
 
 function Ranking() {
-
-    // const [users, setusers] = useState([]);
-
-    // useEffect(() => {
-    //     API.getAllUsersForRanking()
-    //         .then(res => {
-    //             // console.log("useEffect from Ranking ran...printing res.data", res.data);
-    //             setusers(res.data);
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }, []);
-
     return (
         <section className="ranking-container uk-section">
             <h2>Ranking</h2>
