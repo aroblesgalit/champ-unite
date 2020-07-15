@@ -12,15 +12,25 @@ function UsersProvider(props) {
         selectedUser: {},
         selectedChampId: "",
         selectedChampion: {},
-        detailUser: {}
+        detailUser: {},
+        rankings: []
     });
 
     useEffect(() => {
         getUsers();
-    }, [])
+    }, []);
+
+    function fetchRankings(data) {
+        const tempRankings = data.filter(user => user.rank).sort((a, b) => a.rank - b.rank);
+        setUsers({
+            ...users,
+            rankings: tempRankings
+        });
+    };
 
     async function getUsers() {
         const { data } = await API.getAllUsers();
+        fetchRankings(data);
         for (let i = 0; i < data.length; i++) {
             if (data[i].champions && data[i].champions.length > 0) {
                 data[i].championsArr = [];
@@ -69,7 +79,7 @@ function UsersProvider(props) {
     function handleUserSearch(e, query) {
         e.preventDefault();
 
-        if (query === "") {
+        if (!query) {
             getUsers();
         }
 
