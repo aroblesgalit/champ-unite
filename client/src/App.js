@@ -8,13 +8,13 @@ import Signup from "./pages/Signup";
 import UserProfile from "./pages/UserProfile";
 import ChampionsSearch from "./pages/ChampionsSearch";
 import UsersSearch from "./pages/UsersSearch";
-import UserContext from './utils/UserContext';
 import API from "./utils/API";
 import OtherUserProfile from './pages/OtherUserProfile';
 import Battle from "./pages/Battle";
 import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
+import { UserProvider } from './utils/UserContext';
 
 function App() {
 
@@ -52,9 +52,9 @@ function App() {
   }
 
   return (
-    <Router>
-      <div>
-        <UserContext.Provider value={user} >
+    <UserProvider>
+      <Router>
+        <div>
           <Header />
           <Switch>
             <Route exact path="/">
@@ -92,10 +92,9 @@ function App() {
             </Route>
           </Switch>
           <Footer />
-        </UserContext.Provider>
-      </div>
-    </Router>
-
+        </div>
+      </Router>
+    </UserProvider>
   );
 }
 

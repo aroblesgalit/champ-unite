@@ -7,13 +7,13 @@ function UsersSearch() {
 
     const [users, setUsers] = useState([]);
 
-    const { id } = useContext(UserContext);
+    const { info } = useContext(UserContext);
 
     const usernameRef = useRef();
 
     useEffect(() => {
-        if (id) {
-            API.getAllUsersButOne(id)
+        if (info.id) {
+            API.getAllUsersButOne(info.id)
             .then(usersDB => {
                 // console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
@@ -28,7 +28,7 @@ function UsersSearch() {
             .catch(err => console.log(err));
         }
         
-    }, [id]);
+    }, [info.id]);
 
     function handleSearch(e) {
         e.preventDefault();
