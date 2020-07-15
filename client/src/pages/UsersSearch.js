@@ -15,7 +15,7 @@ function UsersSearch() {
         if (info.id) {
             API.getAllUsersButOne(info.id)
             .then(usersDB => {
-                // console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
+                console.log("User logged in...from UsersSearch...printing usersDB.data...", usersDB.data);
                 setUsers(usersDB.data);
             })
             .catch(err => console.log(err));
