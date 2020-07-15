@@ -14,3 +14,11 @@
 .ranking-row:hover {
     background-color: #3e4b4b!important;
 }
+
+.ranking-row a {
+    padding: 1rem 1rem 0 0;
+}
+
+.ranking-row a:hover {
+    color: rgb(67, 235, 201)!important;
+}
