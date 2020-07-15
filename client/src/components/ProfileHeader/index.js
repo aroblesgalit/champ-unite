@@ -18,7 +18,7 @@ function ProfileHeader(props) {
                     <h2>{props.displayName}</h2>
                     <div className="uk-flex">
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                            <span className="stat-val">{props.rank}</span>
+                            <span className="stat-val">{props.rank === 0 ? "-" : props.rank}</span>
                             <span className="stat-label">Rank</span>
                         </div>
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">

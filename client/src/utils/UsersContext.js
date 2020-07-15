@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "./API";
+import { set } from "mongoose";
 
 const UsersContext = React.createContext();
 
@@ -65,12 +66,29 @@ function UsersProvider(props) {
         })
     };
 
+    function handleUserSearch(e, query) {
+        e.preventDefault();
+
+        if (query === "") {
+            getUsers();
+        }
+
+        let lowercaseQuery = query.toLowerCase();
+        let tempList = [...users.list];
+        let filteredList = tempList.filter(user => user.username.includes(lowercaseQuery));
+        setUsers({
+            ...users,
+            list: filteredList
+        })
+    };
+
     return (
         <UsersContext.Provider
             value={{
                 ...users,
                 handleChampionSelect,
-                handleDetailUser
+                handleDetailUser,
+                handleUserSearch
             }}
         >
             {props.children}

@@ -10,7 +10,7 @@ function Ranking() {
     useEffect(() => {
         API.getAllUsersForRanking()
             .then(res => {
-                console.log("useEffect from Ranking ran...printing res.data", res.data);
+                // console.log("useEffect from Ranking ran...printing res.data", res.data);
                 setRankedUsers(res.data);
             })
             .catch(err => {
