@@ -14,12 +14,12 @@ function UserCard(props) {
     // }
 
     return (
-        <div className="user-card uk-card">
-            <div className="user-info uk-flex">
+        <div className="user-card uk-card uk-flex uk-flex-column uk-flex-middle">
+            <div className="user-info uk-flex uk-flex-middle">
                 <div className="user-image uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
                     <img className="uk-border-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
                 </div>
-                <div className="uk-flex uk-flex-column">
+                <div className="uk-flex uk-flex-column uk-flex-center">
                     <h3>{props.displayName}</h3>
                     <div className="uk-flex">
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
@@ -39,7 +39,7 @@ function UserCard(props) {
                     </div>
                 </div>
             </div>
-            <div className="uk-flex uk-flex-around uk-margin-top">
+            <div className="champions-avatars uk-flex uk-flex-around uk-margin-top">
                 {
                     props.championsArr && props.championsArr.length > 0 ? (
                         props.championsArr.map(champion => {
@@ -50,10 +50,10 @@ function UserCard(props) {
                     ) : "No Champions"
                 }
             </div>
-            <div className={loggedIn ? "user-card-links uk-flex uk-flex-between" : "user-card-links uk-flex uk-flex-center"} >
-                <Link to={`/profile/${props.username}`}>
+            <div className={loggedIn ? "user-card-links uk-flex uk-flex-between uk-child-width-1-2" : "user-card-links uk-flex uk-flex-center"} >
+                <Link to={`/profile/${props.username}`} className="uk-link-reset">
                     <button
-                        className="uk-button secondary-btn"
+                        className="uk-button user-btn"
                         onClick={() => handleDetailUser(props.id)}
                     >
                         Profile
@@ -61,16 +61,19 @@ function UserCard(props) {
                 </Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
-                        <button
-                            // uk-toggle="target: #user-champions-modal"
-                            className="uk-button secondary-btn"
-                            onClick={() => {
-                                handleChampionSelect(props.champions);
-                                handleModal();
-                            }}
-                        >
-                            Battle
+                        <React.Fragment>
+                            <hr className="uk-divider-vertical" />
+                            <button
+                                // uk-toggle="target: #user-champions-modal"
+                                className="uk-button user-btn"
+                                onClick={() => {
+                                    handleChampionSelect(props.champions);
+                                    handleModal();
+                                }}
+                            >
+                                Battle
                         </button>
+                        </React.Fragment>
                     ) : ""
                 }
             </div>

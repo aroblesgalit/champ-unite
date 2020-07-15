@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
@@ -100,8 +100,8 @@ function Battle() {
             const otherDataRes = await API.getUserById(otherChamp.data.user);
             setUserData(userDataRes.data);
             setOtherData(otherDataRes.data);
-            console.log("useEffect running...from battle...userDataRes.data...", userDataRes.data);
-            console.log("useEffect running...from battle...otherDataRes.data...", otherDataRes.data);
+            // console.log("useEffect running...from battle...userDataRes.data...", userDataRes.data);
+            // console.log("useEffect running...from battle...otherDataRes.data...", otherDataRes.data);
         } catch (err) {
             console.log("Something went wrong...could not loadChampionsAndUsers...", err);
         }
@@ -153,16 +153,16 @@ function Battle() {
     let otherHealthInit = 100;
 
     function userTurn() {
-        console.log("------------------------------------------");
-        console.log("Player 1 attacks");
+        // console.log("------------------------------------------");
+        // console.log("Player 1 attacks");
         // get user's attack value
-        console.log("userAtk: ", userAttack);
+        // console.log("userAtk: ", userAttack);
         // randomize a number ranging between 1 and other defense
         const otherDef = Math.floor((Math.random() * otherChampion.defense) + 1);
-        console.log("otherDef: ", otherDef);
+        // console.log("otherDef: ", otherDef);
         // get the difference
         const damage = userAttack - otherDef;
-        console.log("damage: ", damage);
+        // console.log("damage: ", damage);
         // if difference is positive, subtract from other healthbar
         if (damage >= 0) {
             setOtherDamage(damage);
@@ -171,10 +171,10 @@ function Battle() {
             otherHealthInit = otherHealthInit - damage;
             if (otherHealthInit <= 0) {
                 setOtherHealth(0);
-                console.log("otherHealth: ", otherHealthInit);
+                // console.log("otherHealth: ", otherHealthInit);
             } else {
                 setOtherHealth(otherHealthInit);
-                console.log("otherHealth: ", otherHealthInit);
+                // console.log("otherHealth: ", otherHealthInit);
             }
         } else {
             setOtherDamage(0);
@@ -185,16 +185,16 @@ function Battle() {
     }
 
     function otherTurn() {
-        console.log("------------------------------------------");
-        console.log("Player 2 attacks");
+        // console.log("------------------------------------------");
+        // console.log("Player 2 attacks");
         // get user's attack value
-        console.log("otherAtk: ", otherAttack);
+        // console.log("otherAtk: ", otherAttack);
         // randomize a number ranging between 1 and other defense
         const userDef = Math.floor((Math.random() * userChampion.defense) + 1);
-        console.log("userDef: ", userDef);
+        // console.log("userDef: ", userDef);
         // get the difference
         const damage = otherAttack - userDef;
-        console.log("damage: ", damage);
+        // console.log("damage: ", damage);
         // if difference is positive, subtract from other healthbar
         if (damage >= 0) {
             setUserDamage(damage);
@@ -203,10 +203,10 @@ function Battle() {
             userHealthInit = userHealthInit - damage;
             if (userHealthInit <= 0) {
                 setUserHealth(0);
-                console.log("userHealth: ", userHealthInit);
+                // console.log("userHealth: ", userHealthInit);
             } else {
                 setUserHealth(userHealthInit);
-                console.log("userHealth: ", userHealthInit);
+                // console.log("userHealth: ", userHealthInit);
             }
 
         } else {
@@ -224,7 +224,7 @@ function Battle() {
         // Increase both user's totalBattle count
         const newTotalBattleUser = await API.increaseTotalBattle(userData._id);
         const newTotalBattleOther = await API.increaseTotalBattle(otherData._id);
-        console.log("updateOnUserWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
+        // console.log("updateOnUserWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
         // Update states
         setUserData(newTotalBattleUser.data);
         setOtherData(newTotalBattleOther.data);
@@ -244,7 +244,7 @@ function Battle() {
         // Increase both user's totalBattle count
         const newTotalBattleUser = await API.increaseTotalBattle(userData._id);
         const newTotalBattleOther = await API.increaseTotalBattle(otherData._id);
-        console.log("updateOnOtherWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
+        // console.log("updateOnOtherWin...newWinsUser: ", newWinsUser, " - newWinsOther: ", newWinsOther, " - newTotalBattleUser: ", newTotalBattleUser, " - newTotalBattleOther: ", newTotalBattleOther);
         // Update states
         setUserData(newTotalBattleUser.data);
         setOtherData(newTotalBattleOther.data);
@@ -291,7 +291,7 @@ function Battle() {
             // Set a timeout to begin startBattle again
             if (otherHealthInit <= 0 || userHealthInit <= 0) {
                 endGame();
-                console.log("You win!")
+                // console.log("You win!")
             } else {
                 startBattleAgain();
             }
@@ -302,16 +302,16 @@ function Battle() {
             // Set a timeout to begin startBattle again
             if (userHealthInit <= 0 || otherHealthInit <= 0) {
                 endGame();
-                console.log("You lose.")
+                // console.log("You lose.")
             } else {
                 startBattleAgain();
             }
         }
     }
 
-    function handleLeave() {
-        window.location.replace("/users");
-    }
+    // function handleLeave() {
+    //     window.location.replace("/users");
+    // }
 
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
@@ -414,7 +414,9 @@ function Battle() {
                 </div>
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
-            <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={handleLeave}>Leave</button>
+            <Link to="/users" className="uk-link-reset">
+                <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }}>Leave</button>
+            </Link>
             {
                 // <div className="battle-speed-toggle-container uk-position-absolute">
                 //     <div className={speedToggleClicked ? "battle-speed-toggle uk-flex uk-flex-left uk-flex-middle" : "battle-speed-toggle uk-flex uk-flex-right uk-flex-middle"} onClick={toggleSpeed}><div className="toggle-ball"></div></div>
