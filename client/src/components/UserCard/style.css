@@ -18,13 +18,14 @@
 }
 
 .user-info {
-    background-color: rgb(244, 244, 248);
-    border: 1px solid rgb(219, 221, 223);
+    background-color: rgb(53, 59, 59);
+    /* border: 1px solid rgb(158, 207, 197); */
     /* background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236)); */
     padding: 1rem;
     margin-bottom: 2px;
     width: 100%;
     border-radius: 8px 8px 0 0;
+    color: rgb(217, 222, 223);
 }
 
 .champions-avatars {
@@ -41,6 +42,7 @@
 
 .user-card h3 {
     margin-bottom: 0;
+    color: #fff;
 }
 
 .user-card p {
@@ -50,7 +52,7 @@
 .user-info hr {
     height: 40px;
     margin: 0;
-    border-color: rgb(240, 237, 237);
+    border-color: rgb(105, 110, 110);
 }
 
 .user-card-champion-image {
@@ -65,13 +67,25 @@
     font-size: 1rem;
 }
 
+.user-info-container:nth-child(1) {
+    color: rgb(197, 219, 245);
+}
+
+.user-info-container:nth-child(3) {
+    color: rgb(28, 218, 123);
+}
+
+.user-info-container:nth-child(5) {
+    color: rgb(248, 85, 85);
+}
+
 .user-card .stat-label {
     font-size: 0.65rem;
 }
 
 .user-card-links {
     background-color: rgb(67, 198, 172);
-    border: 1px solid rgb(219, 221, 223);
+    border: 1px solid rgb(67, 198, 172);
     /* background-image: linear-gradient(to right, rgb(236, 240, 245), rgb(230, 231, 236)); */
     width: 100%;
     /* overflow: hidden; */

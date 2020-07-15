@@ -26,6 +26,18 @@
     margin-right: 30px;
 }
 
+.user-stats:nth-child(1) {
+    color: rgb(197, 219, 245);
+}
+
+.user-stats:nth-child(2) {
+    color: rgb(28, 218, 123);
+}
+
+.user-stats:nth-child(3) {
+    color: rgb(248, 85, 85);
+}
+
 .stat-val {
     font-size: 24px;
     font-weight: bold;

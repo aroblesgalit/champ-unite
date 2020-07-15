@@ -21,7 +21,7 @@ function UserCard(props) {
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-center">
                     <h3>{props.displayName}</h3>
-                    <div className="uk-flex">
+                    <div className="user-stats uk-flex">
                         <div className="user-info-container uk-flex uk-flex-column uk-flex-middle">
                             <p className="stat-val">{props.rank === 0 ? "-" : props.rank}</p>
                             <p className="stat-label">R</p>
