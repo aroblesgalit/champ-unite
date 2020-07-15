@@ -22,10 +22,12 @@ function UsersProvider(props) {
         for (let i = 0; i < data.length; i++) {
             if (data[i].champions && data[i].champions.length > 0) {
                 data[i].championsArr = [];
-                for (let j = 0; j < data[i].champions.length; j++) {
-                    const res = await API.getChampionById(data[i].champions[j])
-                    data[i].championsArr[j] = res.data;
-                }
+                const championsRes = await API.getChampionsByUserId(data[i]._id);
+                data[i].championsArr = championsRes.data;
+                // for (let j = 0; j < data[i].champions.length; j++) {
+                //     const res = await API.getChampionById(data[i].champions[j])
+                //     data[i].championsArr[j] = res.data;
+                // }
             } else {
                 data[i].championsArr = [];
             }

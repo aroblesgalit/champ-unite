@@ -7,25 +7,6 @@ function ChampionCard(props) {
 
     const { loggedIn, info } = useContext(UserContext);
 
-    const [user, setUser] = useState({});
-
-    // useEffect(() => {
-    //     API.getUserData()
-    //         .then(user => {
-    //             setUser({
-    //                 isLoggedIn: true,
-    //                 id: user.data.id,
-    //                 champions: user.data.champions
-    //             })
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //             setUser({
-    //                 isLoggedIn: false
-    //             })
-    //         })
-    // }, []);
-
     const [maxReached, setMaxReached] = useState(false);
     const [championAdded, setChampionAdded] = useState(false);
 
