@@ -23,13 +23,12 @@ function Ranking() {
                         {
                             value => {
                                 const { rankings } = value;
-                                console.log(rankings);
                                 return rankings.length > 0 ? (
-                                    rankings.map((user, i) => {
+                                    rankings.map(user => {
                                         return <RankingRow
                                             key={user._id}
                                             id={user._id}
-                                            rank={i + 1}
+                                            rank={user.rank}
                                             displayName={user.displayName}
                                             username={user.username}
                                             wins={user.wins}

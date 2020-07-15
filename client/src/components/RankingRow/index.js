@@ -4,17 +4,17 @@ import API from "../../utils/API";
 
 function RankingRow({ id, rank, displayName, wins, losses, totalBattle, winsPercent }) {
 
-    useEffect(() => {
-        API.updateWinsPercent(id, {
-            rank: rank
-        })
-            .then(res => {
-                // console.log(res.data)
-            })
-            .catch(err => {
-                console.log("Something went wrong inside the RankingRow component...", err);
-            })
-    }, []);
+    // useEffect(() => {
+    //     API.updateWinsPercent(id, {
+    //         rank: rank
+    //     })
+    //         .then(res => {
+    //             console.log(res.data)
+    //         })
+    //         .catch(err => {
+    //             console.log("Something went wrong inside the RankingRow component...", err);
+    //         })
+    // }, []);
 
     return (
         <tr>
