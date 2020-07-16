@@ -243,6 +243,21 @@ function UserProvider(props) {
 
     // ------------ Champion Create Ends ------------ //
 
+
+    // ------------ Champion Card Begins ------------ //
+
+    // Function to delete champion from the champion model
+    function handleDelete(id) {
+        API.removeChampion(id)
+            .then(() => {
+                console.log("Champion deleted!");
+                fetchUserData();
+            })
+            .catch(err => console.log("Something went wrong while trying to delete the champion from the database...", err));
+    };
+
+    // ------------ Champion Card Ends ------------ //
+
     return (
         <UserContext.Provider
             value={{
@@ -257,7 +272,8 @@ function UserProvider(props) {
                 updateUserImage,
                 handleImageModal,
                 handleBattleMode,
-                handleCreate
+                handleCreate,
+                handleDelete
             }}
         >
             {props.children}

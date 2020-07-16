@@ -5,7 +5,7 @@ import UserContext from "../../utils/UserContext";
 
 function ChampionCard(props) {
 
-    const { loggedIn, info } = useContext(UserContext);
+    const { loggedIn, info, handleDelete } = useContext(UserContext);
 
     const [maxReached, setMaxReached] = useState(false);
     const [championAdded, setChampionAdded] = useState(false);
@@ -89,18 +89,18 @@ function ChampionCard(props) {
         }
     }
 
-    function handleDelete() {
-        API.removeChampion(props.id)
-            .then(res => {
-                console.log(res);
-                window.location.reload(false);
-            })
-            .catch(err => console.log(err));
-        // Remove from champions list in User model
-        API.removeChampionFromUser(info.id, props.id)
-            .then(res => console.log(res))
-            .catch(err => console.log(err));
-    }
+    // function handleDelete() {
+    //     API.removeChampion(props.id)
+    //         .then(res => {
+    //             console.log(res);
+    //             window.location.reload(false);
+    //         })
+    //         .catch(err => console.log(err));
+    //     // Remove from champions list in User model
+    //     API.removeChampionFromUser(info.id, props.id)
+    //         .then(res => console.log(res))
+    //         .catch(err => console.log(err));
+    // }
 
     return (
         <div className="champion-card uk-card uk-position-relatve" style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
@@ -125,7 +125,7 @@ function ChampionCard(props) {
             }
             {
                 props.type === "user" && loggedIn ? (
-                    <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={handleDelete}></button>
+                    <button className="delete-btn uk-icon-button uk-position-absolute" uk-icon="close" onClick={() => handleDelete(props.id)}></button>
                 ) : ""
             }
             {
