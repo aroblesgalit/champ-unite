@@ -37,15 +37,15 @@ function UsersProvider(props) {
         const { data } = await API.getAllUsers();
         updateRankings(data);
         // For each of the users, declare an array for their champions as objects using the champ ids
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].champions && data[i].champions.length > 0) {
-                data[i].championsArr = [];
-                const championsRes = await API.getChampionsByUserId(data[i]._id);
-                data[i].championsArr = championsRes.data;
-            } else {
-                data[i].championsArr = [];
-            }
-        }
+        // for (let i = 0; i < data.length; i++) {
+        //     if (data[i].champions && data[i].champions.length > 0) {
+        //         data[i].championsArr = [];
+        //         const championsRes = await API.getChampionsByUserId(data[i]._id);
+        //         data[i].championsArr = championsRes.data;
+        //     } else {
+        //         data[i].championsArr = [];
+        //     }
+        // }
         // Check if a user is logged in
         // If so, filter the list of users so it doesn't include the authenticated user
         API.getUserData()

@@ -38,8 +38,8 @@ function UserCard(props) {
             </div>
             <div className="champions-avatars uk-flex uk-flex-around uk-margin-top">
                 {
-                    props.championsArr && props.championsArr.length > 0 ? (
-                        props.championsArr.map(champion => {
+                    props.champions && props.champions.length > 0 ? (
+                        props.champions.map(champion => {
                             return <ChampionAvatar key={champion._id} name={champion.name} image={champion.image} />
                         })
                     ) : ""

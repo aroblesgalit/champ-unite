@@ -86,6 +86,7 @@ router.get("/", function (req, res) {
     db.User
         .find({})
         .sort({ username: 1 })
+        .populate("champions")
         .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
 });

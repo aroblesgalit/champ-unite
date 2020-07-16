@@ -68,8 +68,8 @@ function OtherUserProfile() {
                                 </div>
                                 <div className="champions-list-container uk-flex uk-flex-wrap">
                                     {
-                                        detailUser.championsArr && detailUser.championsArr.length > 0 ? (
-                                            detailUser.championsArr.map(champion => {
+                                        userDetail.champions && userDetail.champions.length > 0 ? (
+                                            userDetail.champions.map(champion => {
                                                 return <ChampionCard
                                                     key={champion._id || champion.image}
                                                     id={champion._id}
