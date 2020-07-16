@@ -10,10 +10,6 @@ function UserCard(props) {
     const { loggedIn, champions, handleModal } = useContext(UserContext);
     const { handleChampionSelect, handleDetailUser } = useContext(UsersContext);
 
-    // function handleBattle(id1, id2) {
-    //     window.location.replace(`/battle/${id1}/vs/${id2}`);
-    // }
-
     return (
         <div className="user-card uk-card uk-flex uk-flex-column uk-flex-middle">
             <div className="user-info uk-flex uk-flex-top">

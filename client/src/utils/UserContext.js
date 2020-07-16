@@ -114,6 +114,12 @@ function UserProvider(props) {
         console.log("handleModal ran...", user.champModalOpen);
     };
 
+    async function updateUserImage(id, data) {
+        const res = API.updateWinsPercent(id, data);
+        console.log(res);
+        fetchUserData();
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -122,7 +128,8 @@ function UserProvider(props) {
                 handleLogin,
                 handleLogout,
                 handleModal,
-                fetchUserData
+                fetchUserData,
+                updateUserImage
             }}
         >
             {props.children}
