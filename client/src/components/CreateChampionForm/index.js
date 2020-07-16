@@ -1,32 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./style.css";
 import API from "../../utils/API";
+import UserContext from "../../utils/UserContext";
 
 function CreateChampionForm() {
 
-    const [user, setUser] = useState({});
+    // Get authenticated user's info from UserContext
+    const { info } = useContext(UserContext);
 
     const [maxReached, setMaxReached] = useState(false);
     const [championAdded, setChampionAdded] = useState(false);
     const [createFailed, setCreateFailed] = useState(false);
 
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    isLoggedIn: true,
-                    id: user.data.id,
-                    champions: user.data.champions
-                })
-            })
-            .catch(err => {
-                console.log("Something went wrong when trying to get the user's data...", err);
-                setUser({
-                    isLoggedIn: false
-                })
-            })
-    }, []);
-
+    // Create references for the input fields
     const nameRef = useRef();
     const imageRef = useRef();
     const raceRef = useRef();
@@ -36,26 +22,31 @@ function CreateChampionForm() {
         return Math.floor((Math.random() * 100) + 1);
     }
 
+    // Function to calculate attack and defense
     function calcBattleStat(a, b, c) {
         return ((a + b + c) / 30).toFixed();
     }
 
+    // Generate values for strength, power, combat, intelligence, speed, and durability
     const strength = generateStat();
     const power = generateStat();
     const combat = generateStat();
     const intelligence = generateStat();
     const speed = generateStat();
     const durability = generateStat();
+    // Calculate the attack and defense based on the above stats
     const attack = calcBattleStat(strength, power, combat);
     const defense = calcBattleStat(intelligence, speed, durability);
 
+    // Add the new champion to the datbase
+    // and update the authenticated user's champions by adding this new one
     async function handleAdd(e) {
         e.preventDefault();
         try {
-            if (user.champions.length < 3) {
+            if (info.champions.length < 3) {
                 if (nameRef.current.value && imageRef.current.value) {
                     const newUserChampion = await API.addChampion({
-                        user: user.id,
+                        user: info._id,
                         name: nameRef.current.value,
                         image: imageRef.current.value,
                         race: raceRef.current.value,
@@ -69,7 +60,7 @@ function CreateChampionForm() {
                         defense: defense
                     });
                     console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
-                    const updatedList = await API.updateUserChampions(user.id, newUserChampion.data._id);
+                    const updatedList = await API.updateUserChampions(info._id, newUserChampion.data._id);
                     console.log("handleAdd worked...printing updatedList...", updatedList);
                     setChampionAdded(true);
                     window.location.replace("/profile");

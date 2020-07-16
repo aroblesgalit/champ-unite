@@ -27,10 +27,6 @@ function UserProvider(props) {
     function fetchUserData() {
         API.getUserData()
             .then(res => {
-                // const array = res.data.champions.populate();
-                // console.log("logging array of champions of authenticated user: ", array);
-                // const championsRes = await API.getChampionsByUserId(res.data.id);
-                console.log("user_data: ", res.data);
                 setUser({
                     ...user,
                     loggedIn: true,
@@ -62,7 +58,7 @@ function UserProvider(props) {
                 window.location.replace("/profile");
                 console.log("You are now logged in.");
             })
-            .catch(function (err) {
+            .catch(err => {
                 console.log("Something went wrong during login...", err);
                 setUser({
                     ...user,
