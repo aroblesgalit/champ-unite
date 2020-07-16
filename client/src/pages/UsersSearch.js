@@ -43,6 +43,7 @@ function UsersSearch() {
                                             id={user._id}
                                             displayName={user.displayName}
                                             username={user.username}
+                                            image={user.image}
                                             rank={user.rank}
                                             wins={user.wins}
                                             losses={user.losses}
