@@ -7,9 +7,11 @@ import UsersContext from "../../utils/UsersContext";
 
 function UserCard(props) {
 
+    // Get authenticated user's data and event handler for the champion select modal
     const { loggedIn, info, handleModal } = useContext(UserContext);
+    // Get event handler for selecting other user's champion
     const { handleChampionSelect } = useContext(UsersContext);
-
+    // Get user's values from props to render
     const { displayName, username, image, rank, wins, losses, champions } = props;
 
     return (
@@ -56,7 +58,6 @@ function UserCard(props) {
                         <React.Fragment>
                             <hr className="uk-divider-vertical" />
                             <button
-                                // uk-toggle="target: #user-champions-modal"
                                 className="uk-button user-btn"
                                 onClick={() => {
                                     handleChampionSelect(champions);
