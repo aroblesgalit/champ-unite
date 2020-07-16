@@ -9,17 +9,21 @@
     padding: 20px 100px 40px 100px;
 }
 
+.pro-img-cont-wrapper {
+
+}
+
 .profile-img-container {
     height: 200px;
     width: 200px;
     overflow: hidden;
-    border-radius: 50%
+    border-radius: 50%;
 }
 
 .profile-img-container img {
     object-fit: cover;
-    min-width: 100%;
-    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .profile-header h2 {
@@ -84,8 +88,12 @@
     }
 
     .profile-img-container {
-        width: 160px;
-        height: 160px;
+        width: 150px;
+    }
+
+    .profile-img-container img {
+        max-width: 100%;
+        max-height: 100%;
     }
 
     .uk-modal-body {

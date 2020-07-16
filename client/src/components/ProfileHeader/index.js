@@ -10,17 +10,19 @@ function ProfileHeader(props) {
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
-            <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
-                {
-                    info.username === props.username ? (
-                        <span 
-                        uk-icon="image" 
-                        className="uk-position-absolute uk-icon-button" 
-                        onClick={() => handleImageModal()}
-                        />
-                    ) : ""
-                }
-                <img src={props.image} alt="Avatar" />
+            <div className="pro-img-cont-wrapper">
+                <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
+                    {
+                        info.username === props.username ? (
+                            <span
+                                uk-icon="image"
+                                className="uk-position-absolute uk-icon-button"
+                                onClick={() => handleImageModal()}
+                            />
+                        ) : ""
+                    }
+                    <img src={props.image} alt="Avatar" />
+                </div>
             </div>
             <div className="uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">

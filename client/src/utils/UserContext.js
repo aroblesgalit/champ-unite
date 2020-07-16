@@ -120,7 +120,7 @@ function UserProvider(props) {
     async function updateUserImage(e, id, data) {
         e.preventDefault();
 
-        const res = API.updateWinsPercent(id, data);
+        const res = await API.updateWinsPercent(id, data);
         console.log("Logging result from updating user's image...", res);
         fetchUserData();
     };
