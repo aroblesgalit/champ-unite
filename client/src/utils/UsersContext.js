@@ -26,7 +26,6 @@ function UsersProvider(props) {
         // Then set each of their rank value to their new index based on the sort
         // Finally, update these users in the database
         const tempRankings = data.filter(user => user.totalBattle >= 20).sort((a, b) => b.winsPercent - a.winsPercent);
-        console.log(tempRankings);
         tempRankings.forEach((user, index) => {
             user.rank = index + 1;
             API.updateWinsPercent(user._id, { rank: user.rank });
@@ -55,8 +54,7 @@ function UsersProvider(props) {
                 setUsers({
                     ...users,
                     list: newTempUsers,
-                    permList: newTempUsers,
-                    usersLoaded: true
+                    permList: newTempUsers
                 })
             })
             .catch(() => {
@@ -64,8 +62,7 @@ function UsersProvider(props) {
                 setUsers({
                     ...users,
                     list: data,
-                    permList: data,
-                    usersLoaded: true
+                    permList: data
                 });
             })
     };
@@ -113,7 +110,8 @@ function UsersProvider(props) {
                 rankings,
                 handleChampionSelect,
                 handleDetailUser,
-                handleUserSearch
+                handleUserSearch,
+                getUsers
             }}
         >
             {props.children}
