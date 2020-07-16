@@ -109,7 +109,7 @@
 
 .user-card-links hr {
     height: 40px;
-    margin: 0;
+    margin: 5px 0 0 0;
     width: 0;
     border-color: rgb(125, 233, 211);
 }

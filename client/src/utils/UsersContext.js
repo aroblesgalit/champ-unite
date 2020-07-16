@@ -10,6 +10,7 @@ function UsersProvider(props) {
 
     const [users, setUsers] = useState({
         list: [],
+        permList: [],
         selectedUser: {},
         selectedChampId: "",
         selectedChampion: {},
@@ -52,14 +53,16 @@ function UsersProvider(props) {
                 let newTempUsers = data.filter(user => user._id !== res.data.id);
                 setUsers({
                     ...users,
-                    list: newTempUsers
+                    list: newTempUsers,
+                    permList: newTempUsers
                 })
             })
             .catch(() => {
                 console.log("User is NOT logged in.");
                 setUsers({
                     ...users,
-                    list: data
+                    list: data,
+                    permList: data
                 });
             })
     };
@@ -86,11 +89,14 @@ function UsersProvider(props) {
         e.preventDefault();
 
         if (!query) {
-            getUsers();
+            setUsers({
+                users,
+                list: users.permList
+            })
         }
 
         let lowercaseQuery = query.toLowerCase();
-        let tempList = [...users.list];
+        let tempList = [...users.permList];
         let filteredList = tempList.filter(user => user.username.includes(lowercaseQuery));
         setUsers({
             ...users,
