@@ -25,15 +25,16 @@ function UserProvider(props) {
 
     function fetchUserData() {
         API.getUserData()
-            .then(async function(res) {
-                const array = res.data.champions.populate();
-                console.log("logging array of champions of authenticated user: ", array);
-                const championsRes = await API.getChampionsByUserId(res.data.id);
+            .then(res => {
+                // const array = res.data.champions.populate();
+                // console.log("logging array of champions of authenticated user: ", array);
+                // const championsRes = await API.getChampionsByUserId(res.data.id);
+                console.log("user_data: ", res.data);
                 setUser({
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: championsRes.data,
+                    champions: res.data.champions,
                     battleMode: false,
                     imageModalOpen: false
                 });
@@ -59,11 +60,6 @@ function UserProvider(props) {
             password: password
         })
             .then(() => {
-                // fetchUserData();
-                // setUser({
-                //     ...user,
-                //     loggedIn: true
-                // })
                 window.location.replace("/profile");
                 console.log("You are now logged in.");
             })

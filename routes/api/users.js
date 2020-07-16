@@ -39,18 +39,11 @@ router.get("/user_data", function (req, res) {
     if (!req.user) {
         res.status(401).json({});
     } else {
-        res.json({
-            id: req.user._id,
-            displayName: req.user.displayName,
-            username: req.user.username,
-            champions: req.user.champions,
-            wins: req.user.wins,
-            losses: req.user.losses,
-            rank: req.user.rank,
-            totalBattle: req.user.totalBattle,
-            winsPercent: req.user.winsPercent,
-            image: req.user.image
-        })
+        db.User
+            .findOne({ username: req.user.username })
+            .populate("champions")
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 });
 
@@ -92,13 +85,13 @@ router.get("/", function (req, res) {
 });
 
 // Get all users with champions populated
-router.get("/with_champs_populated", function (req, res) {
-    db.User
-        .find({})
-        .populate("champions")
-        .then(dbModels => res.json(dbModels))
-        .catch(err => res.status(422).json(err));
-});
+// router.get("/with_champs_populated", function (req, res) {
+//     db.User
+//         .find({})
+//         .populate("champions")
+//         .then(dbModels => res.json(dbModels))
+//         .catch(err => res.status(422).json(err));
+// });
 
 
 // Get a user by username

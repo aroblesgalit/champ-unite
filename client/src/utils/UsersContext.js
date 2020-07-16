@@ -39,7 +39,7 @@ function UsersProvider(props) {
         // If so, filter the list of users so it doesn't include the authenticated user
         API.getUserData()
             .then(res => {
-                let newTempUsers = data.filter(user => user._id !== res.data.id);
+                let newTempUsers = data.filter(user => user._id !== res.data._id);
                 setUsers({
                     ...users,
                     list: newTempUsers,

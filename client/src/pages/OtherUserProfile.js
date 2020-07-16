@@ -16,16 +16,13 @@ function OtherUserProfile() {
     }, [])
 
     function handleDetailUser() {
+        // Check localStorage for stored data with Getter
         const storedData = JSON.parse(localStorage.getItem("userDetailData"));
-        // console.log("localData from localStorage...", storedData);
         if (storedData && storedData.username === username) {
-            // console.log("localData exists...");
             setUserDetail(storedData);
         } else {
-            // console.log("localData DOES NOT exists...");
             const userRes = list.find(user => user.username === username);
             setUserDetail(userRes);
-            // console.log("userRes...", userRes);
             // Setter
             localStorage.setItem("userDetailData", JSON.stringify(userRes));
         }
