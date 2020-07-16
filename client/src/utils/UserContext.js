@@ -172,7 +172,7 @@ function UserProvider(props) {
 
     // Add the new champion to the datbase
     // and update the authenticated user's champions by adding this new one
-    async function handleAdd(e, name, image, race) {
+    async function handleCreate(e, name, image, race) {
         e.preventDefault();
         generateStats();
         try {
@@ -253,6 +253,7 @@ function UserProvider(props) {
             value={{
                 ...user,
                 ...battle,
+                ...createChamp,
                 handleSelect,
                 handleLogin,
                 handleLogout,
@@ -261,7 +262,7 @@ function UserProvider(props) {
                 updateUserImage,
                 handleImageModal,
                 handleBattleMode,
-                handleAdd
+                handleCreate
             }}
         >
             {props.children}
