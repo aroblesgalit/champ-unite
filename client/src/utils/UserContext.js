@@ -32,7 +32,8 @@ function UserProvider(props) {
                     loggedIn: true,
                     info: res.data,
                     champions: championsRes.data,
-                    battleMode: false
+                    battleMode: false,
+                    imageModalOpen: false
                 });
             })
             .catch(() => {
@@ -42,7 +43,8 @@ function UserProvider(props) {
                     loggedIn: false,
                     info: {},
                     champions: [],
-                    battleMode: false
+                    battleMode: false,
+                    imageModalOpen: false
                 });
             })
     };
@@ -115,13 +117,15 @@ function UserProvider(props) {
         console.log("handleModal ran...", user.champModalOpen);
     };
 
-    async function updateUserImage(id, data) {
+    async function updateUserImage(e, id, data) {
+        e.preventDefault();
+
         const res = API.updateWinsPercent(id, data);
         console.log("Logging result from updating user's image...", res);
         fetchUserData();
     };
 
-    function handleImageModal() {
+    function handleImageModal(e) {
         setUser({
             ...user,
             imageModalOpen: !user.imageModalOpen

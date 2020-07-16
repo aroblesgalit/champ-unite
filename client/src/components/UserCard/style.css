@@ -38,9 +38,17 @@
 
 .user-image {
     width: 46px;
+    height: 46px;
     margin-right: 16px !important;
     border: 2px solid rgb(67, 198, 172);
     border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-image img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .user-card h3 {

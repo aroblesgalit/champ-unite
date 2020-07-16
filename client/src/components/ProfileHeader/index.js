@@ -20,7 +20,7 @@ function ProfileHeader(props) {
                         />
                     ) : ""
                 }
-                <img className="uk-border-circle" src={props.image} alt="Avatar" />
+                <img src={props.image} alt="Avatar" />
             </div>
             <div className="uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">

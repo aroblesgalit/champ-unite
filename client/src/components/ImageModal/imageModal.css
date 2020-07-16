@@ -1,5 +1,5 @@
 /* Champion select modal */
-.user-champions-modal {
+.image-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,13 +7,18 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.521);
     z-index: 10;
+    padding: 1rem;
 }
 
-.user-champions-modal-wrapper {
+.image-modal-wrapper {
     background-color: #fff;
     max-height: 100vh;
 }
 
-.uk-modal-header {
-    background-color: chocolate;
+.uk-modal-body {
+    padding: 2rem;
 }
+
+/* .uk-modal-header {
+    background-color: chocolate;
+} */

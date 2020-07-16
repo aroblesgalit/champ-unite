@@ -12,7 +12,14 @@
 .profile-img-container {
     height: 200px;
     width: 200px;
+    overflow: hidden;
     border-radius: 50%
+}
+
+.profile-img-container img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .profile-header h2 {
@@ -59,8 +66,8 @@
 .profile-img-container span {
     cursor: pointer;
     display: none;
-    height: 160px;
-    width: 160px;
+    height: 100%;
+    width: 100%;
     background-color: rgba(0,0,0,0.5)!important;
 }
 
@@ -78,6 +85,7 @@
 
     .profile-img-container {
         width: 160px;
+        height: 160px;
     }
 
     .uk-modal-body {

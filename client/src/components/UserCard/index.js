@@ -14,7 +14,7 @@ function UserCard(props) {
         <div className="user-card uk-card uk-flex uk-flex-column uk-flex-middle">
             <div className="user-info uk-flex uk-flex-top">
                 <div className="user-image uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
-                    <img className="uk-border-circle" src={props.image} alt="Avatar" />
+                    <img src={props.image} alt="Avatar" />
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-center">
                     <h3>{props.displayName}</h3>
