@@ -26,6 +26,8 @@ function UserProvider(props) {
     function fetchUserData() {
         API.getUserData()
             .then(async function(res) {
+                const array = res.data.champions.populate();
+                console.log("logging array of champions of authenticated user: ", array);
                 const championsRes = await API.getChampionsByUserId(res.data.id);
                 setUser({
                     ...user,
@@ -120,7 +122,7 @@ function UserProvider(props) {
     async function updateUserImage(e, id, data) {
         e.preventDefault();
 
-        const res = API.updateWinsPercent(id, data);
+        const res = await API.updateWinsPercent(id, data);
         console.log("Logging result from updating user's image...", res);
         fetchUserData();
     };

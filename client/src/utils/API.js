@@ -19,7 +19,7 @@ export default {
         return axios.put("/api/users/" + id + "/" + champion);
     },
     // Update user's champions by removing an id from the array
-    removeChampionFromUser: function(user, champion) {
+    removeChampionFromUser: function (user, champion) {
         return axios.put("/api/users/champions/" + user + "/" + champion)
     },
     // searchHeroes: function (query) {
@@ -34,19 +34,19 @@ export default {
     // getChampionsByQuery: function (query) {
     //     return axios.get("/api/champions/query/" + query)
     // },
-    findChampionsByQuery: function(query) {
+    findChampionsByQuery: function (query) {
         return axios.get("/api/champions/query/" + query)
     },
     findAChampionBySuperHeroId: function (id) {
         return axios.get("/api/champions/superhero_id/" + id);
     },
-    getChampionById: function(id) {
+    getChampionById: function (id) {
         return axios.get("/api/champions/" + id)
     },
-    getChampionsByUserId: function(id) {
+    getChampionsByUserId: function (id) {
         return axios.get("/api/champions/user/" + id)
     },
-    removeChampion: function(id) {
+    removeChampion: function (id) {
         return axios.delete("/api/champions/" + id);
     },
     // searchHeroes: function (query) {
@@ -67,49 +67,53 @@ export default {
         })
     },
     // Get all users
-    getAllUsers: function() {
+    getAllUsers: function () {
         return axios.get("/api/users");
     },
+    // Get all usesrs with champions popuplated with their objects
+    getAllUsersAndChamps: function () {
+        return axios.get("/api/users/with_champs_populated");
+    },
     // Get all users for ranking
-    getAllUsersForRanking: function() {
+    getAllUsersForRanking: function () {
         return axios.get("/api/users/ranking");
     },
     // Get a user by the username
-    getUserByUsername: function(username) {
+    getUserByUsername: function (username) {
         return axios.get("/api/users/username/" + username);
     },
     // Get all users but one
-    getAllUsersButOne: function(id) {
+    getAllUsersButOne: function (id) {
         return axios.get("/api/users/search/" + id);
     },
     // Get a user by _id
-    getUserById: function(id) {
+    getUserById: function (id) {
         return axios.get("/api/users/id/" + id);
     },
     // Update user's wins
-    increaseUserWins: function(id) {
+    increaseUserWins: function (id) {
         return axios.put("/api/users/update/wins/" + id);
     },
     // Update user's losses
-    increaseUserLosses: function(id) {
+    increaseUserLosses: function (id) {
         return axios.put("/api/users/update/losses/" + id);
     },
     // Update user's totalBattle
-    increaseTotalBattle: function(id) {
+    increaseTotalBattle: function (id) {
         return axios.put("/api/users/update/total_battle/" + id);
     },
     // Update user's winsPercent
-    updateWinsPercent: function(id, data) {
+    updateWinsPercent: function (id, data) {
         return axios.put("/api/users/update/wins_percent/" + id, data);
     },
     // Get users by a search username query
-    getUsersBySearch: function(username) {
+    getUsersBySearch: function (username) {
         return axios.get("/api/users/search_by_username/" + username);
     },
-    findAQuery: function(query) {
+    findAQuery: function (query) {
         return axios.get("/api/queries/" + query);
     },
-    addAQuery: function(data) {
+    addAQuery: function (data) {
         return axios.post("/api/queries", data);
     }
 };

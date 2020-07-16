@@ -31,13 +31,12 @@ const userSchema = new Schema({
         trim: true,
         default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
     },
-    champions: {
-        type: [{
+    champions: [
+        {
             type: Schema.Types.ObjectId,
             ref: "Champion"
-        }],
-        validate: [arrayLimit, "Your champions list exceeds the limit of 3. Please delete a champion and try again."]
-    },
+        }
+    ],
     rank: {
         type: Number,
         default: 0
@@ -67,12 +66,12 @@ function arrayLimit(val) {
     return val.length <= 3;
 }
 
-userSchema.methods.calcTotalBattle = function() {
+userSchema.methods.calcTotalBattle = function () {
     this.totalBattle = this.wins + this.losses;
     return this.totalBattle;
 };
 
-userSchema.methods.calcWins = function() {
+userSchema.methods.calcWins = function () {
     this.winsPercent = ((this.wins / this.totalBattle) * 100).toFixed();
     return this.winsPercent;
 };

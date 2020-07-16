@@ -13,16 +13,16 @@ function ProfileHeader(props) {
             <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
                 {
                     info.username === props.username ? (
-                        <span 
-                        uk-icon="image" 
-                        className="uk-position-absolute uk-icon-button" 
-                        onClick={() => handleImageModal()}
+                        <span
+                            uk-icon="image"
+                            className="uk-position-absolute uk-icon-button"
+                            onClick={() => handleImageModal()}
                         />
                     ) : ""
                 }
                 <img src={props.image} alt="Avatar" />
             </div>
-            <div className="uk-flex uk-flex-bottom">
+            <div className="user-stats-wrapper uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">
                     <h2>{props.displayName}</h2>
                     <div className="uk-flex">

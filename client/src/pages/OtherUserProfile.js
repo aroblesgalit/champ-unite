@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
-import { UsersConsumer } from "../utils/UsersContext";
+import UsersContext, { UsersConsumer } from "../utils/UsersContext";
 
 function OtherUserProfile() {
+
+    const { username } = useParams();
+    const { list } = useContext(UsersContext);
+
+    const [userDetail, setUserDetail] = useState({});
+
+    useEffect(() => {
+        handleDetailUser();
+    }, [])
+
+    function handleDetailUser() {
+        const storedData = JSON.parse(localStorage.getItem("userDetailData"));
+        // console.log("localData from localStorage...", storedData);
+        if (storedData && storedData.username === username) {
+            // console.log("localData exists...");
+            setUserDetail(storedData);
+        } else {
+            // console.log("localData DOES NOT exists...");
+            const userRes = list.find(user => user.username === username);
+            setUserDetail(userRes);
+            // console.log("userRes...", userRes);
+            // Setter
+            localStorage.setItem("userDetailData", JSON.stringify(userRes));
+        }
+    };
+
     return (
         <UsersConsumer>
             {
@@ -12,13 +39,13 @@ function OtherUserProfile() {
                     return (
                         <div className="user-profile-container">
                             <ProfileHeader
-                                displayName={detailUser.displayName}
-                                username={detailUser.username}
-                                rank={detailUser.rank}
-                                wins={detailUser.wins}
-                                losses={detailUser.losses}
-                                champions={detailUser.champions}
-                                image={detailUser.image}
+                                displayName={userDetail.displayName}
+                                username={userDetail.username}
+                                rank={userDetail.rank}
+                                wins={userDetail.wins}
+                                losses={userDetail.losses}
+                                champions={userDetail.champions}
+                                image={userDetail.image}
                                 type="otherUser"
                             />
 
@@ -28,8 +55,8 @@ function OtherUserProfile() {
                                 </div>
                                 <div className="champions-list-container uk-flex uk-flex-wrap">
                                     {
-                                        detailUser.championsArr && detailUser.championsArr.length > 0 ? (
-                                            detailUser.championsArr.map(champion => {
+                                        userDetail.champions && userDetail.champions.length > 0 ? (
+                                            userDetail.champions.map(champion => {
                                                 return <ChampionCard
                                                     key={champion._id || champion.image}
                                                     id={champion._id}
