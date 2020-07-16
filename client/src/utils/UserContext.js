@@ -26,6 +26,8 @@ function UserProvider(props) {
     function fetchUserData() {
         API.getUserData()
             .then(async function(res) {
+                const array = res.data.champions.populate();
+                console.log("logging array of champions of authenticated user: ", array);
                 const championsRes = await API.getChampionsByUserId(res.data.id);
                 setUser({
                     ...user,

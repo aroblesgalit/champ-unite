@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
 import UsersContext, { UsersConsumer } from "../utils/UsersContext";
-import API from "../utils/API";
-import { inspect } from "util";
 
 function OtherUserProfile() {
 
@@ -18,30 +16,19 @@ function OtherUserProfile() {
     }, [])
 
     function handleDetailUser() {
-        API.getAllUsersAndChamps()
-            .then(res => console.log(inspect(res, { depth : null }) ))
-            .catch(err => console.error(err))
         const storedData = JSON.parse(localStorage.getItem("userDetailData"));
-        console.log("localData from localStorage...", storedData);
+        // console.log("localData from localStorage...", storedData);
         if (storedData && storedData.username === username) {
-            console.log("localData exists...");
+            // console.log("localData exists...");
             setUserDetail(storedData);
         } else {
-            console.log("localData DOES NOT exists...");
+            // console.log("localData DOES NOT exists...");
             const userRes = list.find(user => user.username === username);
             setUserDetail(userRes);
-            console.log("userRes...", userRes);
+            // console.log("userRes...", userRes);
             // Setter
             localStorage.setItem("userDetailData", JSON.stringify(userRes));
-            // const localData = localStorage.getItem("userDetailData");
-            // console.log("JSON.parse(localData) from localStorage...", JSON.parse(localData));
         }
-
-        // Getter
-
-        // setUserDetail({
-
-        // })
     };
 
     return (
