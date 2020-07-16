@@ -48,7 +48,6 @@ function UsersSearch() {
                                             wins={user.wins}
                                             losses={user.losses}
                                             champions={user.champions}
-                                            // championsArr={user.championsArr}
                                         />
                                     })
                                 ) : <p className="uk-text-warning">Loading users...</p>

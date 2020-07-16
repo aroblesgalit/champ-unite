@@ -84,16 +84,21 @@
 @media only screen and (max-width: 768px) {
 
     .profile-header {
-        padding: 20px;
+        padding: 1rem;
     }
 
     .profile-img-container {
-        width: 150px;
+        width: auto;
     }
 
     .profile-img-container img {
         max-width: 100%;
         max-height: 100%;
+        border-radius: 50%;
+    }
+
+    .user-stats-wrapper {
+        width: auto;
     }
 
     .uk-modal-body {

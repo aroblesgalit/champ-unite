@@ -24,7 +24,7 @@ function ProfileHeader(props) {
                     <img src={props.image} alt="Avatar" />
                 </div>
             </div>
-            <div className="uk-flex uk-flex-bottom">
+            <div className="user-stats-wrapper uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">
                     <h2>{props.displayName}</h2>
                     <div className="uk-flex">

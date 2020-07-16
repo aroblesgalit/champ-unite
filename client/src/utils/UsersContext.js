@@ -13,8 +13,7 @@ function UsersProvider(props) {
         permList: [],
         selectedUser: {},
         selectedChampId: "",
-        selectedChampion: {},
-        detailUser: {}
+        selectedChampion: {}
     });
 
     useEffect(() => {
@@ -36,16 +35,6 @@ function UsersProvider(props) {
     async function getUsers() {
         const { data } = await API.getAllUsers();
         updateRankings(data);
-        // For each of the users, declare an array for their champions as objects using the champ ids
-        // for (let i = 0; i < data.length; i++) {
-        //     if (data[i].champions && data[i].champions.length > 0) {
-        //         data[i].championsArr = [];
-        //         const championsRes = await API.getChampionsByUserId(data[i]._id);
-        //         data[i].championsArr = championsRes.data;
-        //     } else {
-        //         data[i].championsArr = [];
-        //     }
-        // }
         // Check if a user is logged in
         // If so, filter the list of users so it doesn't include the authenticated user
         API.getUserData()
@@ -72,16 +61,8 @@ function UsersProvider(props) {
 
         setUsers({
             ...users,
-            selectedChampId: champions[champIndex]
+            selectedChampId: champions[champIndex]._id
         });
-    };
-
-    async function handleDetailUser(id) {
-        const userRes = users.list.find(user => user._id === id);
-        setUsers({
-            ...users,
-            detailUser: userRes
-        })
     };
 
     function handleUserSearch(e, query) {
@@ -109,7 +90,6 @@ function UsersProvider(props) {
                 ...users,
                 rankings,
                 handleChampionSelect,
-                handleDetailUser,
                 handleUserSearch,
                 getUsers
             }}

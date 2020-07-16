@@ -8,7 +8,7 @@ import UsersContext from "../../utils/UsersContext";
 function UserCard(props) {
 
     const { loggedIn, champions, handleModal } = useContext(UserContext);
-    const { handleChampionSelect, handleDetailUser } = useContext(UsersContext);
+    const { handleChampionSelect } = useContext(UsersContext);
 
     return (
         <div className="user-card uk-card uk-flex uk-flex-column uk-flex-middle">
@@ -47,12 +47,7 @@ function UserCard(props) {
             </div>
             <div className={loggedIn ? "user-card-links uk-flex uk-flex-between uk-child-width-1-2" : "user-card-links uk-flex uk-flex-center"} >
                 <Link to={`/profile/${props.username}`} className="uk-link-reset">
-                    <button
-                        className="uk-button user-btn"
-                        onClick={() => handleDetailUser(props.id)}
-                    >
-                        Profile
-                    </button>
+                    <button className="uk-button user-btn">Profile</button>
                 </Link>
                 {
                     loggedIn && champions.length > 0 && props.champions.length > 0 ? (
