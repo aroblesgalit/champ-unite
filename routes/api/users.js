@@ -91,12 +91,14 @@ router.get("/", function (req, res) {
 });
 
 // Get all users with champions populated
-router.get("/with_champs_populated")
+router.get("/with_champs_populated", function (req, res) {
     db.User
         .find({})
         .populate("champions")
         .then(dbModels => res.json(dbModels))
         .catch(err => res.status(422).json(err));
+});
+
 
 // Get a user by username
 router.get("/username/:username", function (req, res) {

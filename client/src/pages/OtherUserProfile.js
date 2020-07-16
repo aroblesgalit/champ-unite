@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
 import UsersContext, { UsersConsumer } from "../utils/UsersContext";
+import API from "../utils/API";
+import { inspect } from "util";
 
 function OtherUserProfile() {
 
@@ -16,6 +18,9 @@ function OtherUserProfile() {
     }, [])
 
     function handleDetailUser() {
+        API.getAllUsersAndChamps()
+            .then(res => console.log(inspect(res, { depth : null }) ))
+            .catch(err => console.error(err))
         const storedData = JSON.parse(localStorage.getItem("userDetailData"));
         console.log("localData from localStorage...", storedData);
         if (storedData && storedData.username === username) {
@@ -33,7 +38,7 @@ function OtherUserProfile() {
         }
 
         // Getter
-        
+
         // setUserDetail({
 
         // })
