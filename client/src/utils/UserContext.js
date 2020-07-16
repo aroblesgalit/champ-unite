@@ -112,7 +112,6 @@ function UserProvider(props) {
             champModalOpen: !user.champModalOpen,
             battleMode: true
         })
-        console.log("handleModal ran...", user.champModalOpen);
     };
 
     async function updateUserImage(e, id, data) {

@@ -6,7 +6,7 @@ import UsersContext from "../../utils/UsersContext";
 
 function ChampSelectModal() {
 
-    const { selectedChampId } = useContext(UsersContext);
+    const { champId } = useContext(UsersContext);
 
     return (
         <UserConsumer>
@@ -47,12 +47,11 @@ function ChampSelectModal() {
                                     </div>
                                     <div className="uk-modal-footer uk-text-right">
                                         <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => value.handleModal()}>Cancel</button>
-                                        <Link to={`/battle/${value.selectedId || value.info.champions[0]}/vs/${selectedChampId}`} >
+                                        <Link to={`/battle/${value.selectedId || value.info.champions[0]}/vs/${champId}`} >
                                             <button
                                                 className="uk-button secondary-btn"
                                                 type="button"
                                                 onClick={() => value.handleModal()}
-                                            // onClick={() => handleBattle(value.selectedId, selectedChampId)}
                                             >
                                                 Battle
                                                 </button>
