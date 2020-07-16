@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import ChampionAvatar from "../ChampionAvatar";
 import UserContext from "../../utils/UserContext";
 import UsersContext from "../../utils/UsersContext";
 
@@ -43,9 +44,7 @@ function UserCard(props) {
                 {
                     props.championsArr && props.championsArr.length > 0 ? (
                         props.championsArr.map(champion => {
-                            return <div key={champion._id} className="user-card-champion-image" uk-tooltip={champion.name}>
-                                <img src={champion.image} alt={champion.name} />
-                            </div>
+                            return <ChampionAvatar key={champion._id} name={champion.name} image={champion.image} />
                         })
                     ) : ""
                 }

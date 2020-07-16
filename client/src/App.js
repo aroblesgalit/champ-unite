@@ -67,7 +67,13 @@ function App() {
                 <OtherUserProfile />
               </Route>
               <Route path="/battle/:userid/vs/:otheruserid">
-                <Battle />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <Battle /> : <Redirect to="/login" />
+                    }
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/ranking">
                 <Ranking />

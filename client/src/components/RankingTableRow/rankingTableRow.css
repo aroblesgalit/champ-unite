@@ -26,7 +26,7 @@
 }
 
 .second div:nth-child(1) {
-    color: rgb(197, 200, 202)
+    color: rgb(197, 200, 202);
 }
 
 .third div:nth-child(1) {
@@ -58,3 +58,23 @@
 .ranking-table-row a:hover {
     color: rgb(31, 54, 50)!important;
 }
+
+
+.ranking-table-row:nth-child(1) {
+    background-image: linear-gradient(to right, rgb(48, 56, 56) 60%, rgb(230, 175, 36));
+}
+
+.ranking-table-row:nth-child(2) {
+    background-image: linear-gradient(to right, rgb(48, 56, 56) 60%, rgb(197, 200, 202));
+}
+
+.ranking-table-row:nth-child(3) {
+    background-image: linear-gradient(to right, rgb(48, 56, 56) 60%, rgb(202, 106, 38));
+}
+
+.ranking-table-row:nth-child(1):hover,
+.ranking-table-row:nth-child(2):hover,
+.ranking-table-row:nth-child(3):hover {
+    background-image: linear-gradient(rgb(67, 198, 172), rgb(67, 198, 172));
+}
+

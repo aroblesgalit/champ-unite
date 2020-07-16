@@ -11,10 +11,13 @@
 .champions-search-container,
 .user-champions-container,
 .users-search-container,
-.battle-container,
 .ranking-container,
 .create-container {
     min-height: calc(100vh - 230px);
+}
+
+.battle-container {
+    min-height: 100vh;
 }
 
 .ranking-container {
@@ -25,7 +28,8 @@
     font-size: 0.7rem!important;
 } */
 
-.battle-container {
+.battle-container,
+.ranking-container {
     background: url("../images/battle-bg.svg") no-repeat center;
     background-size: cover;
     background-color: #000202;

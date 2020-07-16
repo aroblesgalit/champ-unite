@@ -1,0 +1,13 @@
+.champion-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgb(67, 198, 172);
+}
+
+.champion-avatar img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+}

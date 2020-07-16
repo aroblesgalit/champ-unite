@@ -10,6 +10,7 @@ function UsersProvider(props) {
 
     const [users, setUsers] = useState({
         list: [],
+        permList: [],
         selectedUser: {},
         selectedChampId: "",
         selectedChampion: {},
@@ -24,7 +25,8 @@ function UsersProvider(props) {
         // Filter data into array of users with rank value and sort it based on winsPercent
         // Then set each of their rank value to their new index based on the sort
         // Finally, update these users in the database
-        const tempRankings = data.filter(user => user.rank).sort((a, b) => b.winsPercent - a.winsPercent);
+        const tempRankings = data.filter(user => user.totalBattle >= 20).sort((a, b) => b.winsPercent - a.winsPercent);
+        console.log(tempRankings);
         tempRankings.forEach((user, index) => {
             user.rank = index + 1;
             API.updateWinsPercent(user._id, { rank: user.rank });
@@ -52,14 +54,18 @@ function UsersProvider(props) {
                 let newTempUsers = data.filter(user => user._id !== res.data.id);
                 setUsers({
                     ...users,
-                    list: newTempUsers
+                    list: newTempUsers,
+                    permList: newTempUsers,
+                    usersLoaded: true
                 })
             })
             .catch(() => {
                 console.log("User is NOT logged in.");
                 setUsers({
                     ...users,
-                    list: data
+                    list: data,
+                    permList: data,
+                    usersLoaded: true
                 });
             })
     };
@@ -75,7 +81,6 @@ function UsersProvider(props) {
 
     async function handleDetailUser(id) {
         const userRes = users.list.find(user => user._id === id);
-        console.log("Logging userRes...", userRes);
         setUsers({
             ...users,
             detailUser: userRes
@@ -86,11 +91,14 @@ function UsersProvider(props) {
         e.preventDefault();
 
         if (!query) {
-            getUsers();
+            setUsers({
+                users,
+                list: users.permList
+            })
         }
 
         let lowercaseQuery = query.toLowerCase();
-        let tempList = [...users.list];
+        let tempList = [...users.permList];
         let filteredList = tempList.filter(user => user.username.includes(lowercaseQuery));
         setUsers({
             ...users,
