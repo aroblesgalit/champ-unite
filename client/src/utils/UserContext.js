@@ -34,7 +34,6 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: res.data.champions,
                     battleMode: false,
                     imageModalOpen: false
                 });
@@ -45,7 +44,6 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: false,
                     info: {},
-                    champions: [],
                     battleMode: false,
                     imageModalOpen: false
                 });

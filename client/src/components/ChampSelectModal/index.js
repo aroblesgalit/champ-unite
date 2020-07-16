@@ -21,8 +21,8 @@ function ChampSelectModal() {
                                     </div>
                                     <div className="uk-modal-body uk-flex uk-width-1-1">
                                         {
-                                            value.champions && value.champions.length > 0 ? (
-                                                value.champions.map(champion => {
+                                            value.info.champions && value.info.champions.length > 0 ? (
+                                                value.info.champions.map(champion => {
                                                     return <ChampionCard
                                                         key={champion._id || champion.image}
                                                         id={champion._id}
@@ -47,7 +47,7 @@ function ChampSelectModal() {
                                     </div>
                                     <div className="uk-modal-footer uk-text-right">
                                         <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => value.handleModal()}>Cancel</button>
-                                        <Link to={`/battle/${value.selectedId || value.info.champions[0]}/vs/${champId}`} >
+                                        <Link to={`/battle/${value.selectedId || value.info.champions[0]._id}/vs/${champId}`} >
                                             <button
                                                 className="uk-button secondary-btn"
                                                 type="button"
