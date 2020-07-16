@@ -5,12 +5,15 @@ import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
-    const { champions, handleModal } = useContext(UserContext);
+    const { info, champions, handleModal } = useContext(UserContext);
     const { handleChampionSelect } = useContext(UsersContext);
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
-            <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right">
+            <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
+                {
+                    info.username === props.username ? <span uk-icon="image" className="uk-position-absolute uk-icon-button" /> : ""
+                }
                 <img className="uk-border-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
             </div>
             <div className="uk-flex uk-flex-bottom">

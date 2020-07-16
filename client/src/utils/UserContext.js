@@ -15,6 +15,7 @@ function UserProvider(props) {
         selectedId: "",
         selectedChampion: {},
         champModalOpen: false,
+        imageModalOpen: false,
         battleMode: false
     });
 
@@ -116,8 +117,15 @@ function UserProvider(props) {
 
     async function updateUserImage(id, data) {
         const res = API.updateWinsPercent(id, data);
-        console.log(res);
+        console.log("Logging result from updating user's image...", res);
         fetchUserData();
+    };
+
+    function handleImageModal() {
+        setUser({
+            ...user,
+            imageModalOpen: !user.imageModalOpen
+        })
     };
 
     return (
@@ -129,7 +137,8 @@ function UserProvider(props) {
                 handleLogout,
                 handleModal,
                 fetchUserData,
-                updateUserImage
+                updateUserImage, 
+                handleImageModal
             }}
         >
             {props.children}
