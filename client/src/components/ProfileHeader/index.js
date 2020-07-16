@@ -8,7 +8,7 @@ function ProfileHeader(props) {
     const { info, handleModal, handleImageModal } = useContext(UserContext);
     const { handleChampionSelect } = useContext(UsersContext);
 
-    const {displayName, username, rank, wins, losses, champions, image, type } = props;
+    const { displayName, username, rank, wins, losses, champions, image, type } = props;
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
@@ -43,11 +43,11 @@ function ProfileHeader(props) {
                     </div>
                 </div>
                 {
-                    type === "otherUser" && champions && info.champions && info.champions.length > 0 &&  champions.length > 0 ? (
+                    type === "otherUser" && champions && info.champions && info.champions.length > 0 && champions.length > 0 ? (
                         <button
                             className="uk-button secondary-btn"
                             onClick={() => {
-                                handleChampionSelect( champions);
+                                handleChampionSelect(champions);
                                 handleModal();
                             }}
                         >
