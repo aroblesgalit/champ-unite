@@ -81,7 +81,13 @@ function App() {
                 <Ranking />
               </Route>
               <Route path="/create_champion">
-                <CreateChampion />
+                <UserConsumer>
+                  {
+                    value => {
+                      return value.loggedIn ? <CreateChampion /> : <Redirect to="/login" />
+                    }
+                  }
+                </UserConsumer>
               </Route>
               <Route path="/credits">
                 <Credits />
