@@ -20,12 +20,12 @@ function CreateChampionForm() {
     // Function to generate a random value from 1 - 100
     function generateStat() {
         return Math.floor((Math.random() * 100) + 1);
-    }
+    };
 
     // Function to calculate attack and defense
     function calcBattleStat(a, b, c) {
         return ((a + b + c) / 30).toFixed();
-    }
+    };
 
     // Generate values for strength, power, combat, intelligence, speed, and durability
     const strength = generateStat();

@@ -12,6 +12,12 @@ function UserProvider(props) {
         selectedId: ""
     });
 
+    const [createChamp, setCreateChamp] = useState({
+        maxReached: false,
+        championAdded: false,
+        createFailed: false
+    });
+
     const [user, setUser] = useState({
         loggedIn: false,
         loginFailed: false,
@@ -133,6 +139,115 @@ function UserProvider(props) {
         console.log("image modal is open...", !user.imageModalOpen)
     };
 
+
+    // ------------ Champion Create Begins ------------ //
+
+    // Function to generate a random value from 1 - 100
+    function generateVal() {
+        return Math.floor((Math.random() * 100) + 1);
+    };
+
+    // Function to calculate attack and defense
+    function calcBattleStat(a, b, c) {
+        return ((a + b + c) / 30).toFixed();
+    };
+
+    // Declare variables for stats
+    let strength, power, combat, intelligence, speed, durability;
+    let attack, defense;
+
+    // Function to generate all the stats at once
+    function generateStats() {
+        // Generate values for strength, power, combat, intelligence, speed, and durability
+        strength = generateVal();
+        power = generateVal();
+        combat = generateVal();
+        intelligence = generateVal();
+        speed = generateVal();
+        durability = generateVal();
+        // Calculate the attack and defense based on the above stats
+        attack = calcBattleStat(strength, power, combat);
+        defense = calcBattleStat(intelligence, speed, durability);
+    };
+
+    // Add the new champion to the datbase
+    // and update the authenticated user's champions by adding this new one
+    async function handleAdd(e, name, image, race) {
+        e.preventDefault();
+        generateStats();
+        try {
+            if (user.info.champions.length < 3) {
+                if (name && image) {
+                    const newUserChampion = await API.addChampion({
+                        user: user.info._id,
+                        name: name,
+                        image: image,
+                        race: race,
+                        strength: strength,
+                        power: power,
+                        combat: combat,
+                        intelligence: intelligence,
+                        speed: speed,
+                        durability: durability,
+                        attack: attack,
+                        defense: defense
+                    });
+                    console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
+                    const updatedList = await API.updateUserChampions(user.info._id, newUserChampion.data._id);
+                    console.log("handleAdd worked...printing updatedList...", updatedList);
+                    setCreateChamp({
+                        ...createChamp,
+                        championAdded: true
+                    });
+                    setTimeout(() => {
+                        setCreateChamp({
+                            ...createChamp,
+                            championAdded: false
+                        });
+                    }, 4000);
+                    // window.location.replace("/profile");
+                    fetchUserData();
+                } else {
+                    setCreateChamp({
+                        ...createChamp,
+                        createFailed: true
+                    });
+                    setTimeout(() => {
+                        setCreateChamp({
+                            ...createChamp,
+                            createFailed: false
+                        });
+                    }, 4000);
+                }
+            } else {
+                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
+                setCreateChamp({
+                    ...createChamp,
+                    maxReached: true
+                });
+                setTimeout(() => {
+                    setCreateChamp({
+                        ...createChamp,
+                        maxReached: false
+                    });
+                }, 4000);
+            }
+        } catch (err) {
+            setCreateChamp({
+                ...createChamp,
+                createFailed: true
+            });
+            setTimeout(() => {
+                setCreateChamp({
+                    ...createChamp,
+                    createFailed: false
+                });
+            }, 4000);
+        }
+    }
+
+    // ------------ Champion Create Ends ------------ //
+
     return (
         <UserContext.Provider
             value={{
@@ -145,7 +260,8 @@ function UserProvider(props) {
                 fetchUserData,
                 updateUserImage,
                 handleImageModal,
-                handleBattleMode
+                handleBattleMode,
+                handleAdd
             }}
         >
             {props.children}
