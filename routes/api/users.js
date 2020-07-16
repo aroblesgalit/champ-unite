@@ -48,7 +48,8 @@ router.get("/user_data", function (req, res) {
             losses: req.user.losses,
             rank: req.user.rank,
             totalBattle: req.user.totalBattle,
-            winsPercent: req.user.winsPercent
+            winsPercent: req.user.winsPercent,
+            image: req.user.image
         })
     }
 });

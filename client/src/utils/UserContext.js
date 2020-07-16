@@ -126,6 +126,7 @@ function UserProvider(props) {
             ...user,
             imageModalOpen: !user.imageModalOpen
         })
+        console.log("image modal is open...", !user.imageModalOpen)
     };
 
     return (

@@ -12,8 +12,7 @@
 .profile-img-container {
     height: 200px;
     width: 200px;
-    overflow: hidden;
-    border-radius: 100px;
+    border-radius: 50%
 }
 
 .profile-header h2 {
@@ -55,6 +54,18 @@
 
 .user-champions-modal-wrapper {
     width: fit-content;
+}
+
+.profile-img-container span {
+    cursor: pointer;
+    display: none;
+    height: 160px;
+    width: 160px;
+    background-color: rgba(0,0,0,0.5)!important;
+}
+
+.profile-img-container:hover span {
+    display: flex;
 }
 
 
