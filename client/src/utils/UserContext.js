@@ -142,6 +142,9 @@ function UserProvider(props) {
 
     // ------------ Champion Create Begins ------------ //
 
+    // Declare variabe for a timeout for resetting states
+    let resetCreateTimeout;
+
     // Function to generate a random value from 1 - 100
     function generateVal() {
         return Math.floor((Math.random() * 100) + 1);
@@ -174,6 +177,7 @@ function UserProvider(props) {
     // and update the authenticated user's champions by adding this new one
     async function handleCreate(e, name, image, race) {
         e.preventDefault();
+        clearTimeout(resetCreateTimeout);
         generateStats();
         try {
             if (user.info.champions.length < 3) {
@@ -199,12 +203,7 @@ function UserProvider(props) {
                         ...createChamp,
                         championAdded: true
                     });
-                    setTimeout(() => {
-                        setCreateChamp({
-                            ...createChamp,
-                            championAdded: false
-                        });
-                    }, 4000);
+                    resetCreateStates();
                     // window.location.replace("/profile");
                     fetchUserData();
                 } else {
@@ -212,12 +211,7 @@ function UserProvider(props) {
                         ...createChamp,
                         createFailed: true
                     });
-                    setTimeout(() => {
-                        setCreateChamp({
-                            ...createChamp,
-                            createFailed: false
-                        });
-                    }, 4000);
+                    resetCreateStates();
                 }
             } else {
                 console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
@@ -225,26 +219,27 @@ function UserProvider(props) {
                     ...createChamp,
                     maxReached: true
                 });
-                setTimeout(() => {
-                    setCreateChamp({
-                        ...createChamp,
-                        maxReached: false
-                    });
-                }, 4000);
+                resetCreateStates();
             }
         } catch (err) {
             setCreateChamp({
                 ...createChamp,
                 createFailed: true
             });
-            setTimeout(() => {
-                setCreateChamp({
-                    ...createChamp,
-                    createFailed: false
-                });
-            }, 4000);
+            resetCreateStates()
         }
-    }
+    };
+
+    // Reset for statess
+    function resetCreateStates() {
+        resetCreateTimeout = setTimeout(() => {
+            setCreateChamp({
+                maxReached: false,
+                championAdded: false,
+                createFailed: false
+            });
+        }, 3000);
+    };
 
     // ------------ Champion Create Ends ------------ //
 
