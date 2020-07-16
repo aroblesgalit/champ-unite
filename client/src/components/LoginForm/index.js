@@ -5,6 +5,7 @@ import { UserConsumer } from "../../utils/UserContext";
 
 function LoginForm() {
 
+    // Create references for the username and password input fields
     const usernameRef = useRef();
     const passwordRef = useRef();
 

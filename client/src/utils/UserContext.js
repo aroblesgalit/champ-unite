@@ -7,17 +7,15 @@ const UserContext = React.createContext();
 function UserProvider(props) {
 
     const [battle, setBattle] = useState({
-        battleMode: false
+        battleMode: false,
+        championSelected: false,
+        selectedId: ""
     });
 
     const [user, setUser] = useState({
         loggedIn: false,
         loginFailed: false,
         info: {},
-        champions: [],
-        championSelected: false,
-        selectedId: "",
-        selectedChampion: {},
         champModalOpen: false,
         imageModalOpen: false
     });
@@ -100,8 +98,8 @@ function UserProvider(props) {
     };
 
     function handleSelect(id) {
-        setUser({
-            ...user,
+        setBattle({
+            ...battle,
             championSelected: true,
             selectedId: id
         })
@@ -116,7 +114,8 @@ function UserProvider(props) {
 
     function handleBattleMode() {
         setBattle({
-            battleMode: !battle.battleMode
+            ...battle,
+            battleMode: true
         })
     };
 
@@ -148,7 +147,7 @@ function UserProvider(props) {
                 handleLogout,
                 handleModal,
                 fetchUserData,
-                updateUserImage, 
+                updateUserImage,
                 handleImageModal,
                 handleBattleMode
             }}
