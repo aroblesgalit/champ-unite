@@ -6,6 +6,10 @@ const UserContext = React.createContext();
 // Provider
 function UserProvider(props) {
 
+    const [battle, setBattle] = useState({
+        battleMode: false
+    });
+
     const [user, setUser] = useState({
         loggedIn: false,
         loginFailed: false,
@@ -15,8 +19,7 @@ function UserProvider(props) {
         selectedId: "",
         selectedChampion: {},
         champModalOpen: false,
-        imageModalOpen: false,
-        battleMode: false
+        imageModalOpen: false
     });
 
     useEffect(() => {
@@ -107,8 +110,13 @@ function UserProvider(props) {
     function handleModal() {
         setUser({
             ...user,
-            champModalOpen: !user.champModalOpen,
-            battleMode: true
+            champModalOpen: !user.champModalOpen
+        })
+    };
+
+    function handleBattleMode() {
+        setBattle({
+            battleMode: !battle.battleMode
         })
     };
 
@@ -121,6 +129,8 @@ function UserProvider(props) {
     };
 
     function handleImageModal(e) {
+        e.preventDefault();
+
         setUser({
             ...user,
             imageModalOpen: !user.imageModalOpen
@@ -132,13 +142,15 @@ function UserProvider(props) {
         <UserContext.Provider
             value={{
                 ...user,
+                ...battle,
                 handleSelect,
                 handleLogin,
                 handleLogout,
                 handleModal,
                 fetchUserData,
                 updateUserImage, 
-                handleImageModal
+                handleImageModal,
+                handleBattleMode
             }}
         >
             {props.children}

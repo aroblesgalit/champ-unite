@@ -5,9 +5,12 @@ import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
+    // Get authenticated user's info and event handlers for champion select modal and image upload modal from UserContext
     const { info, handleModal, handleImageModal } = useContext(UserContext);
+    // Get event handler for selecting other user's champion
     const { handleChampionSelect } = useContext(UsersContext);
 
+    // Get user's data values from props for rendering
     const { displayName, username, rank, wins, losses, champions, image, type } = props;
 
     return (

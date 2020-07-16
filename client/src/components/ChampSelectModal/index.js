@@ -6,14 +6,17 @@ import UsersContext from "../../utils/UsersContext";
 
 function ChampSelectModal() {
 
+    // Get the other user's selected champion's id from the UsersContext
+    // Pass it to the link route on the battle button
     const { champId } = useContext(UsersContext);
 
     return (
         <UserConsumer>
             {
                 value => {
+                    const { handleModal, handleBattleMode, champModalOpen, handleSelect, championSelected, info, selectedId } = value;
                     return (
-                        value.champModalOpen ? (
+                        champModalOpen ? (
                             <div className="user-champions-modal uk-flex uk-flex-middle uk-flex-center">
                                 <div className="user-champions-modal-wrapper">
                                     <div className="uk-modal-header">
@@ -21,8 +24,8 @@ function ChampSelectModal() {
                                     </div>
                                     <div className="uk-modal-body uk-flex uk-width-1-1">
                                         {
-                                            value.info.champions && value.info.champions.length > 0 ? (
-                                                value.info.champions.map(champion => {
+                                            info.champions && info.champions.length > 0 ? (
+                                                info.champions.map(champion => {
                                                     return <ChampionCard
                                                         key={champion._id || champion.image}
                                                         id={champion._id}
@@ -37,21 +40,24 @@ function ChampSelectModal() {
                                                         attack={champion.attack}
                                                         defense={champion.defense}
                                                         type="battle"
-                                                        handleSelect={() => value.handleSelect(champion._id)}
-                                                        selected={value.championSelected}
-                                                        selectedId={value.selectedId}
+                                                        handleSelect={() => handleSelect(champion._id)}
+                                                        selected={championSelected}
+                                                        selectedId={selectedId}
                                                     />
                                                 })
                                             ) : <p>Search for Champions to add or create your own!</p>
                                         }
                                     </div>
                                     <div className="uk-modal-footer uk-text-right">
-                                        <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => value.handleModal()}>Cancel</button>
-                                        <Link to={`/battle/${value.selectedId || value.info.champions[0]._id}/vs/${champId}`} >
+                                        <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => handleModal()}>Cancel</button>
+                                        <Link to={`/battle/${selectedId || info.champions[0]._id}/vs/${champId}`} >
                                             <button
                                                 className="uk-button secondary-btn"
                                                 type="button"
-                                                onClick={() => value.handleModal()}
+                                                onClick={() => {
+                                                    handleModal();
+                                                    handleBattleMode();
+                                                }}
                                             >
                                                 Battle
                                                 </button>
