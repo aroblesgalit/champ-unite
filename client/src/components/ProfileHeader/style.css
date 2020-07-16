@@ -13,7 +13,13 @@
     height: 200px;
     width: 200px;
     overflow: hidden;
-    border-radius: 100px;
+    border-radius: 50%
+}
+
+.profile-img-container img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .profile-header h2 {
@@ -57,6 +63,18 @@
     width: fit-content;
 }
 
+.profile-img-container span {
+    cursor: pointer;
+    display: none;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5)!important;
+}
+
+.profile-img-container:hover span {
+    display: flex;
+}
+
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
@@ -67,6 +85,7 @@
 
     .profile-img-container {
         width: 160px;
+        height: 160px;
     }
 
     .uk-modal-body {

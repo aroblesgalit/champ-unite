@@ -48,7 +48,8 @@ router.get("/user_data", function (req, res) {
             losses: req.user.losses,
             rank: req.user.rank,
             totalBattle: req.user.totalBattle,
-            winsPercent: req.user.winsPercent
+            winsPercent: req.user.winsPercent,
+            image: req.user.image
         })
     }
 });
@@ -172,7 +173,7 @@ router.put("/update/total_battle/:id", function (req, res) {
         .catch(err => res.status(422).json(err));
 });
 
-// Update wins percent
+// Update wins percent or anything
 router.put("/update/wins_percent/:id", function (req, res) {
     db.User
         .findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })

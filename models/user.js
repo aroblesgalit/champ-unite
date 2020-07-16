@@ -26,6 +26,11 @@ const userSchema = new Schema({
         trim: true,
         validate: [({ length }) => length >= 6, "Password should be longer."]
     },
+    image: {
+        type: String,
+        trim: true,
+        default: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
+    },
     champions: {
         type: [{
             type: Schema.Types.ObjectId,

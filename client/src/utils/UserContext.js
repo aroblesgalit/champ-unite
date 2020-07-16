@@ -15,6 +15,7 @@ function UserProvider(props) {
         selectedId: "",
         selectedChampion: {},
         champModalOpen: false,
+        imageModalOpen: false,
         battleMode: false
     });
 
@@ -31,7 +32,8 @@ function UserProvider(props) {
                     loggedIn: true,
                     info: res.data,
                     champions: championsRes.data,
-                    battleMode: false
+                    battleMode: false,
+                    imageModalOpen: false
                 });
             })
             .catch(() => {
@@ -41,7 +43,8 @@ function UserProvider(props) {
                     loggedIn: false,
                     info: {},
                     champions: [],
-                    battleMode: false
+                    battleMode: false,
+                    imageModalOpen: false
                 });
             })
     };
@@ -114,6 +117,22 @@ function UserProvider(props) {
         console.log("handleModal ran...", user.champModalOpen);
     };
 
+    async function updateUserImage(e, id, data) {
+        e.preventDefault();
+
+        const res = API.updateWinsPercent(id, data);
+        console.log("Logging result from updating user's image...", res);
+        fetchUserData();
+    };
+
+    function handleImageModal(e) {
+        setUser({
+            ...user,
+            imageModalOpen: !user.imageModalOpen
+        })
+        console.log("image modal is open...", !user.imageModalOpen)
+    };
+
     return (
         <UserContext.Provider
             value={{
@@ -122,7 +141,9 @@ function UserProvider(props) {
                 handleLogin,
                 handleLogout,
                 handleModal,
-                fetchUserData
+                fetchUserData,
+                updateUserImage, 
+                handleImageModal
             }}
         >
             {props.children}

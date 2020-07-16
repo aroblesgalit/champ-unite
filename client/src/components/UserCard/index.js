@@ -10,15 +10,11 @@ function UserCard(props) {
     const { loggedIn, champions, handleModal } = useContext(UserContext);
     const { handleChampionSelect, handleDetailUser } = useContext(UsersContext);
 
-    // function handleBattle(id1, id2) {
-    //     window.location.replace(`/battle/${id1}/vs/${id2}`);
-    // }
-
     return (
         <div className="user-card uk-card uk-flex uk-flex-column uk-flex-middle">
             <div className="user-info uk-flex uk-flex-top">
                 <div className="user-image uk-flex uk-flex-center uk-flex-middle uk-margin-small-right">
-                    <img className="uk-border-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="Avatar" />
+                    <img src={props.image} alt="Avatar" />
                 </div>
                 <div className="uk-flex uk-flex-column uk-flex-center">
                     <h3>{props.displayName}</h3>

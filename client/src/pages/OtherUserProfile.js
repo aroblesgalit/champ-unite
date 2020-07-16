@@ -18,6 +18,7 @@ function OtherUserProfile() {
                                 wins={detailUser.wins}
                                 losses={detailUser.losses}
                                 champions={detailUser.champions}
+                                image={detailUser.image}
                                 type="otherUser"
                             />
 

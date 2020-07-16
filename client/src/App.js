@@ -14,6 +14,7 @@ import Ranking from "./pages/Ranking";
 import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
+import ImageModal from "./components/ImageModal";
 import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 
@@ -24,6 +25,7 @@ function App() {
         <Router>
           <div>
             <ChampSelectModal />
+            <ImageModal />
             <UserConsumer>
               {
                 value => {

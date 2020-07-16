@@ -18,6 +18,7 @@ function UserProfile() {
                                 rank={info.rank}
                                 wins={info.wins}
                                 losses={info.losses}
+                                image={info.image}
                             />
 
                             <div className="user-champions-container">
