@@ -5,8 +5,11 @@ import UsersContext, { UsersConsumer } from "../utils/UsersContext";
 
 function UsersSearch() {
 
+    // Get the event handler for searching users from UsersContext
+    // When used, pass in the username reference's (below) value
     const { handleUserSearch } = useContext(UsersContext);
 
+    // Declare username reference for the search field
     const usernameRef = useRef();
 
     return (

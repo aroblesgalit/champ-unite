@@ -9,7 +9,7 @@ function UserProfile() {
         <UserConsumer>
             {
                 value => {
-                    const { info, champions } = value;
+                    const { info } = value;
                     return (
                         <div className="user-profile-container">
                             <ProfileHeader
@@ -31,8 +31,8 @@ function UserProfile() {
                                 </div>
                                 <div className="champions-list-container uk-flex uk-flex-wrap">
                                     {
-                                        champions && champions.length > 0 ? (
-                                            champions.map(champion => {
+                                        info.champions && info.champions.length > 0 ? (
+                                            info.champions.map(champion => {
                                                 return <ChampionCard
                                                     key={champion._id || champion.image}
                                                     id={champion._id}

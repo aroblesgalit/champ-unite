@@ -5,14 +5,19 @@ import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
-    const { info, champions, handleModal, handleImageModal } = useContext(UserContext);
+    // Get authenticated user's info and event handlers for champion select modal and image upload modal from UserContext
+    const { info, handleModal, handleImageModal } = useContext(UserContext);
+    // Get event handler for selecting other user's champion
     const { handleChampionSelect } = useContext(UsersContext);
+
+    // Get user's data values from props for rendering
+    const { displayName, username, rank, wins, losses, champions, image, type } = props;
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-middle uk-light">
             <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
                 {
-                    info.username === props.username ? (
+                    info.username === username ? (
                         <span
                             uk-icon="image"
                             className="uk-position-absolute uk-icon-button"
@@ -20,32 +25,32 @@ function ProfileHeader(props) {
                         />
                     ) : ""
                 }
-                <img src={props.image} alt="Avatar" />
+                <img src={image} alt="Avatar" />
             </div>
             <div className="user-stats-wrapper uk-flex uk-flex-bottom">
                 <div className="uk-flex uk-flex-column uk-margin-large-right">
-                    <h2>{props.displayName}</h2>
+                    <h2>{displayName}</h2>
                     <div className="uk-flex">
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                            <span className="stat-val">{props.rank === 0 ? "-" : props.rank}</span>
+                            <span className="stat-val">{rank === 0 ? "-" : rank}</span>
                             <span className="stat-label">Rank</span>
                         </div>
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                            <span className="stat-val">{props.wins}</span>
+                            <span className="stat-val">{wins}</span>
                             <span className="stat-label">Wins</span>
                         </div>
                         <div className="user-stats uk-flex uk-flex-column uk-flex-middle">
-                            <span className="stat-val">{props.losses}</span>
+                            <span className="stat-val">{losses}</span>
                             <span className="stat-label">Losses</span>
                         </div>
                     </div>
                 </div>
                 {
-                    props.type === "otherUser" && props.champions && champions && champions.length > 0 && props.champions.length > 0 ? (
+                    type === "otherUser" && champions && info.champions && info.champions.length > 0 && champions.length > 0 ? (
                         <button
                             className="uk-button secondary-btn"
                             onClick={() => {
-                                handleChampionSelect(props.champions);
+                                handleChampionSelect(champions);
                                 handleModal();
                             }}
                         >

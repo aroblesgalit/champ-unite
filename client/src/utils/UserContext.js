@@ -6,6 +6,10 @@ const UserContext = React.createContext();
 // Provider
 function UserProvider(props) {
 
+    const [battle, setBattle] = useState({
+        battleMode: false
+    });
+
     const [user, setUser] = useState({
         loggedIn: false,
         loginFailed: false,
@@ -15,8 +19,7 @@ function UserProvider(props) {
         selectedId: "",
         selectedChampion: {},
         champModalOpen: false,
-        imageModalOpen: false,
-        battleMode: false
+        imageModalOpen: false
     });
 
     useEffect(() => {
@@ -25,15 +28,15 @@ function UserProvider(props) {
 
     function fetchUserData() {
         API.getUserData()
-            .then(async function(res) {
-                const array = res.data.champions.populate();
-                console.log("logging array of champions of authenticated user: ", array);
-                const championsRes = await API.getChampionsByUserId(res.data.id);
+            .then(res => {
+                // const array = res.data.champions.populate();
+                // console.log("logging array of champions of authenticated user: ", array);
+                // const championsRes = await API.getChampionsByUserId(res.data.id);
+                console.log("user_data: ", res.data);
                 setUser({
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: championsRes.data,
                     battleMode: false,
                     imageModalOpen: false
                 });
@@ -44,7 +47,6 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: false,
                     info: {},
-                    champions: [],
                     battleMode: false,
                     imageModalOpen: false
                 });
@@ -59,11 +61,6 @@ function UserProvider(props) {
             password: password
         })
             .then(() => {
-                // fetchUserData();
-                // setUser({
-                //     ...user,
-                //     loggedIn: true
-                // })
                 window.location.replace("/profile");
                 console.log("You are now logged in.");
             })
@@ -113,10 +110,14 @@ function UserProvider(props) {
     function handleModal() {
         setUser({
             ...user,
-            champModalOpen: !user.champModalOpen,
-            battleMode: true
+            champModalOpen: !user.champModalOpen
         })
-        console.log("handleModal ran...", user.champModalOpen);
+    };
+
+    function handleBattleMode() {
+        setBattle({
+            battleMode: !battle.battleMode
+        })
     };
 
     async function updateUserImage(e, id, data) {
@@ -128,6 +129,8 @@ function UserProvider(props) {
     };
 
     function handleImageModal(e) {
+        e.preventDefault();
+
         setUser({
             ...user,
             imageModalOpen: !user.imageModalOpen
@@ -139,13 +142,15 @@ function UserProvider(props) {
         <UserContext.Provider
             value={{
                 ...user,
+                ...battle,
                 handleSelect,
                 handleLogin,
                 handleLogout,
                 handleModal,
                 fetchUserData,
                 updateUserImage, 
-                handleImageModal
+                handleImageModal,
+                handleBattleMode
             }}
         >
             {props.children}

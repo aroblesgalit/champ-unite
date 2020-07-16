@@ -8,12 +8,14 @@ function UsersProvider(props) {
 
     const [rankings, setRankings] = useState([]);
 
+    const [battle, setBattle] = useState({
+        champId: ""
+    });
+
     const [users, setUsers] = useState({
         list: [],
         permList: [],
-        selectedUser: {},
-        selectedChampId: "",
-        selectedChampion: {}
+        selectedChampId: ""
     });
 
     useEffect(() => {
@@ -39,7 +41,7 @@ function UsersProvider(props) {
         // If so, filter the list of users so it doesn't include the authenticated user
         API.getUserData()
             .then(res => {
-                let newTempUsers = data.filter(user => user._id !== res.data.id);
+                let newTempUsers = data.filter(user => user._id !== res.data._id);
                 setUsers({
                     ...users,
                     list: newTempUsers,
@@ -59,9 +61,9 @@ function UsersProvider(props) {
     function handleChampionSelect(champions) {
         const champIndex = Math.floor(Math.random() * champions.length);
 
-        setUsers({
-            ...users,
-            selectedChampId: champions[champIndex]._id
+        setBattle({
+            ...battle,
+            champId: champions[champIndex]._id
         });
     };
 
@@ -89,6 +91,7 @@ function UsersProvider(props) {
             value={{
                 ...users,
                 rankings,
+                ...battle,
                 handleChampionSelect,
                 handleUserSearch,
                 getUsers
