@@ -4,24 +4,29 @@
     box-sizing: border-box;
 }
 
-.battle-user-avatar {
-    height: 40px;
-    width: 40px;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-right: 12px;
-    margin-top: 4px;
-    border: 1px solid rgb(67, 198, 172);
-}
-
+.battle-user-avatar,
 .battle-other-user-avatar {
     height: 40px;
     width: 40px;
     border-radius: 20px;
     overflow: hidden;
-    margin-left: 12px;
-    margin-top: 4px;    
+    margin-top: 4px;
     border: 1px solid rgb(67, 198, 172);
+}
+
+.battle-user-avatar {
+    margin-right: 12px;
+}
+
+.battle-other-user-avatar {
+    margin-left: 12px;
+}
+
+.battle-user-avatar img,
+.battle-other-user-avatar img {
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .battle-champion-name {

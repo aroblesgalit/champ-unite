@@ -11,10 +11,13 @@
 .champions-search-container,
 .user-champions-container,
 .users-search-container,
-.battle-container,
 .ranking-container,
 .create-container {
     min-height: calc(100vh - 230px);
+}
+
+.battle-container {
+    min-height: 100vh;
 }
 
 .ranking-container {
