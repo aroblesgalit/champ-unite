@@ -8,10 +8,12 @@ import Sound from "react-sound";
 import slash from "../sounds/442903__qubodup__slash.wav";
 import battleSound from "../sounds/510953__theojt__cinematic-battle-song.mp3";
 import UserContext from "../utils/UserContext";
+import UsersContext from "../utils/UsersContext";
 
 function Battle() {
 
-    const { handleLeave } = useContext(UserContext);
+    const { fetchUserData } = useContext(UserContext);
+    const { getUsers } = useContext(UsersContext);
 
     // const [user, setUser] = useContext(UserContext);
 
@@ -418,7 +420,16 @@ function Battle() {
             </div>
             <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
             <Link to="/users" className="uk-link-reset">
-                <button className="uk-button secondary-btn" style={{ display: battleStats.gameEnded ? "block" : "none" }} onClick={() => handleLeave()}>Leave</button>
+                <button
+                    className="uk-button secondary-btn"
+                    style={{ display: battleStats.gameEnded ? "block" : "none" }}
+                    onClick={() => { 
+                        fetchUserData();
+                        getUsers(); 
+                    }}
+                >
+                    Leave
+                </button>
             </Link>
             {
                 // <div className="battle-speed-toggle-container uk-position-absolute">

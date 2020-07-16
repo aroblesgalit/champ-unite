@@ -28,9 +28,16 @@
     font-size: 0.7rem!important;
 } */
 
+.battle-container {
+    background: url("../images/battle-bg.svg") no-repeat center;
+}
+
+.ranking-container {
+    background: url("../images/ranking-bg.svg") no-repeat center;
+}
+
 .battle-container,
 .ranking-container {
-    background: url("../images/battle-bg.svg") no-repeat center;
     background-size: cover;
     background-color: #000202;
 }

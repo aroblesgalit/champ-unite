@@ -30,7 +30,8 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: true,
                     info: res.data,
-                    champions: championsRes.data
+                    champions: championsRes.data,
+                    battleMode: false
                 });
             })
             .catch(() => {
@@ -39,7 +40,8 @@ function UserProvider(props) {
                     ...user,
                     loggedIn: false,
                     info: {},
-                    champions: []
+                    champions: [],
+                    battleMode: false
                 });
             })
     };
@@ -112,13 +114,6 @@ function UserProvider(props) {
         console.log("handleModal ran...", user.champModalOpen);
     };
 
-    function handleLeave() {
-        setUser({
-            ...user,
-            battleMode: false
-        })
-    };
-
     return (
         <UserContext.Provider
             value={{
@@ -127,7 +122,7 @@ function UserProvider(props) {
                 handleLogin,
                 handleLogout,
                 handleModal,
-                handleLeave
+                fetchUserData
             }}
         >
             {props.children}
