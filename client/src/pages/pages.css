@@ -220,9 +220,6 @@
 
 
 
-
-
-
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
     .champions-search-container,
@@ -240,6 +237,7 @@
 
     .battle-text {
         font-size: 30px;
+        color: rgb(25, 22, 84);
     }
 
     .battle-user-name {
@@ -274,11 +272,6 @@
         margin-right: 0;
     }
     
-  }
-
-
-/* Medium devices (landscape tablets, 639px and below) */
-@media only screen and (max-width: 639px) {
     .battle-top {
         flex-direction: column;
     }
@@ -293,11 +286,14 @@
         margin-top: 1rem !important;
     }
 
-    .battle-text {
-        color: rgb(25, 22, 84);
-    }
-
     .battle-top>div:nth-child(3) {
         align-self: flex-end;
     }
+
+  }
+
+
+/* Medium devices (landscape tablets, 639px and below) */
+@media only screen and (max-width: 639px) {
+
 }

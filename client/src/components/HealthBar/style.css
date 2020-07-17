@@ -72,8 +72,8 @@
 }
 
 
-/* Medium devices (landscape tablets, 768px and below) */
-@media only screen and (max-width: 768px) {
+/* Medium devices (landscape tablets, 1000px and below) */
+@media only screen and (max-width: 1000px) {
 
     .healthbar-wrapper {
         margin-bottom: 20px !important;

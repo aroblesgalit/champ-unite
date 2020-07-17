@@ -14,8 +14,6 @@ function Battle() {
     const { fetchUserData } = useContext(UserContext);
     const { getUsers } = useContext(UsersContext);
 
-    // const [user, setUser] = useContext(UserContext);
-
     const [battleStats, setBattleStats] = useState({
         started: false,
         timerDone: false,
@@ -55,20 +53,9 @@ function Battle() {
 
     useEffect(() => {
         loadChampionsAndUsers();
-        // setTimeout(() => {
-        //     checkUserStatus();
-        // }, 5000);
     }, []);
 
-    // function checkUserStatus() {
-    //     if (user.loggedIn) {
-    //         // window.location.replace("/login");
-    //         console.log("If user is logged in...", user, user.loggedIn);
-    //     } else {
-    //         console.log("If user is NOT logged in...", user, user.loggedIn);
-    //     }
-    // }
-
+    // Toggle speed of battle
     // function toggleSpeed() {
     //     setSpeedToggleClicked(!speedToggleClicked);
 
