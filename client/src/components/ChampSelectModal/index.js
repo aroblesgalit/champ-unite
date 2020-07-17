@@ -22,7 +22,7 @@ function ChampSelectModal() {
                                     <div className="uk-modal-header">
                                         <p>Select one of your champions to go into battle.</p>
                                     </div>
-                                    <div className="uk-modal-body uk-flex uk-width-1-1">
+                                    <div className="uk-modal-body uk-flex uk-flex-wrap">
                                         {
                                             info.champions && info.champions.length > 0 ? (
                                                 info.champions.map(champion => {
