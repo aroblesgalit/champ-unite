@@ -1,11 +1,9 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import UserContext, { UserConsumer } from "../../utils/UserContext";
+import { UserConsumer } from "../../utils/UserContext";
 
 function CreateChampionForm() {
-
-    const { championAdded} = useContext(UserContext);
 
     // Create references for the input fields
     const nameRef = useRef();
@@ -20,8 +18,8 @@ function CreateChampionForm() {
     });
 
     // Clear the fields after clicking create
-    function clearInput() {
-        if (championAdded) {
+    function clearInput(maxReached) {
+        if(champion.name && champion.image && maxReached === false ) {
             setTimeout(() => {
                 setChampion({
                     name: "",
@@ -93,7 +91,7 @@ function CreateChampionForm() {
             <UserConsumer>
                 {
                     value => {
-                        const { handleCreate, resetStatGeneration, startGeneration, chances, attack, defense } = value;
+                        const { maxReached, handleCreate, resetStatGeneration, startGeneration, chances, attack, defense } = value;
                         return (
                             <div>
                                 <div className="uk-margin-small uk-width-expand uk-flex uk-flex-column uk-flex-middle">
@@ -116,7 +114,7 @@ function CreateChampionForm() {
                                         type="submit"
                                         onClick={e => {
                                             handleCreate(e, champion.name, champion.image, champion.race);
-                                            clearInput();
+                                            clearInput(maxReached);
                                         }}
                                     >
                                         Create
