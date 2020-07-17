@@ -194,6 +194,15 @@
 }
 
 
+
+/* Users Search */
+.user-search-input {
+    padding-left: 2.2rem!important;
+}
+
+
+
+
 /* Champion select modal */
 .user-champions-modal {
     position: fixed;

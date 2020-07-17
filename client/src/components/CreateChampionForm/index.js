@@ -1,144 +1,107 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import "./style.css";
-import API from "../../utils/API";
+import { UserConsumer } from "../../utils/UserContext";
 
 function CreateChampionForm() {
 
-    const [user, setUser] = useState({});
-
-    const [maxReached, setMaxReached] = useState(false);
-    const [championAdded, setChampionAdded] = useState(false);
-    const [createFailed, setCreateFailed] = useState(false);
-
-    useEffect(() => {
-        API.getUserData()
-            .then(user => {
-                setUser({
-                    isLoggedIn: true,
-                    id: user.data.id,
-                    champions: user.data.champions
-                })
-            })
-            .catch(err => {
-                console.log("Something went wrong when trying to get the user's data...", err);
-                setUser({
-                    isLoggedIn: false
-                })
-            })
-    }, []);
-
+    // Create references for the input fields
     const nameRef = useRef();
     const imageRef = useRef();
     const raceRef = useRef();
 
-    // Function to generate a random value from 1 - 100
-    function generateStat() {
-        return Math.floor((Math.random() * 100) + 1);
-    }
+    // Declare variable and states for the fields
+    const [champion, setChampion] = useState({
+        name: "",
+        image: "",
+        race: ""
+    });
 
-    function calcBattleStat(a, b, c) {
-        return ((a + b + c) / 30).toFixed();
-    }
-
-    const strength = generateStat();
-    const power = generateStat();
-    const combat = generateStat();
-    const intelligence = generateStat();
-    const speed = generateStat();
-    const durability = generateStat();
-    const attack = calcBattleStat(strength, power, combat);
-    const defense = calcBattleStat(intelligence, speed, durability);
-
-    async function handleAdd(e) {
-        e.preventDefault();
-        try {
-            if (user.champions.length < 3) {
-                if (nameRef.current.value && imageRef.current.value) {
-                    const newUserChampion = await API.addChampion({
-                        user: user.id,
-                        name: nameRef.current.value,
-                        image: imageRef.current.value,
-                        race: raceRef.current.value,
-                        strength: strength,
-                        power: power,
-                        combat: combat,
-                        intelligence: intelligence,
-                        speed: speed,
-                        durability: durability,
-                        attack: attack,
-                        defense: defense
-                    });
-                    console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
-                    const updatedList = await API.updateUserChampions(user.id, newUserChampion.data._id);
-                    console.log("handleAdd worked...printing updatedList...", updatedList);
-                    setChampionAdded(true);
-                    window.location.replace("/profile");
-                } else {
-                    setCreateFailed(true);
-                    setTimeout(() => {
-                        setCreateFailed(false);
-                    }, 4000);
-                }
-            } else {
-                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
-                setMaxReached(true);
-                setTimeout(() => {
-                    setMaxReached(false);
-                }, 4000);
-            }
-        } catch (err) {
-            console.log("Add failed: ", err);
-            setCreateFailed(true);
-            setTimeout(() => {
-                setCreateFailed(false);
-            }, 3000);
-        }
-    }
+    // Clear the fields after clicking create
+    function clearInput() {
+        setTimeout(() => {
+            setChampion({
+                name: "",
+                image: "",
+                race: ""
+            })
+        }, 1500);
+    };
 
     return (
         <form className="create-champion-form uk-flex uk-flex-column uk-flex-middle uk-height-1-1">
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: user"></span>
-                    <input className="uk-input" type="text" placeholder="champion_name" ref={nameRef} />
+                    <input
+                        className="uk-input"
+                        type="text"
+                        placeholder="champion_name"
+                        ref={nameRef}
+                        value={champion.name}
+                        onChange={() => setChampion({
+                            ...champion,
+                            name: nameRef.current.value
+                        })}
+                    />
                 </div>
             </div>
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: image"></span>
-                    <input className="uk-input" type="text" placeholder="image_url" ref={imageRef} />
+                    <input
+                        className="uk-input"
+                        type="text"
+                        placeholder="image_url"
+                        ref={imageRef}
+                        value={champion.image}
+                        onChange={() => setChampion({
+                            ...champion,
+                            image: imageRef.current.value
+                        })}
+                    />
                 </div>
             </div>
             <div className="uk-margin-small uk-width-expand">
                 <div className="uk-inline uk-width-expand">
                     <span className="uk-form-icon" uk-icon="icon: reddit"></span>
-                    <input className="uk-input" type="text" placeholder="race" ref={raceRef} />
+                    <input
+                        className="uk-input"
+                        type="text"
+                        placeholder="race"
+                        ref={raceRef}
+                        value={champion.race}
+                        onChange={() => setChampion({
+                            ...champion,
+                            race: raceRef.current.value
+                        })}
+                    />
                 </div>
             </div>
-            <div className="uk-margin-small">
-                <button className="uk-button primary-btn" type="submit" onClick={handleAdd} >Create</button>
-            </div>
-            {
-                maxReached ? (
-                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>You've reached the max of 3 champions! Please make room if you'd like to add another.</p>
-                    </div>
-                ) : ""
-            }
-            {
-                championAdded ? (
-                    <div className="champion-added-alert uk-alert-success uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>Champion successfuly added to your list!</p>
-                    </div>
-                ) : ""
-            }
-            {
-                createFailed ? (
-                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>Please fill in all the fields.</p>
-                    </div>
-                ) : ""
-            }
+            <UserConsumer>
+                {
+                    value => {
+                        const { handleCreate } = value;
+                        return (
+                            <React.Fragment>
+                                <div className="uk-margin-small">
+                                    <Link to="/profile"><button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button></Link>
+                                    <button
+                                        className="uk-button primary-btn"
+                                        type="submit"
+                                        onClick={e => {
+                                            handleCreate(e, champion.name, champion.image, champion.race);
+                                            clearInput();
+                                        }}
+                                    >
+                                        Create
+                                    </button>
+                                </div>
+                            </React.Fragment>
+                        )
+                    }
+                }
+            </UserConsumer>
         </form>
     );
 }

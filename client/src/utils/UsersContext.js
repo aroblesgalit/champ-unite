@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "./API";
+import { debounce } from "lodash";
 
 const UsersContext = React.createContext();
 
@@ -67,8 +68,8 @@ function UsersProvider(props) {
         });
     };
 
-    function handleUserSearch(e, query) {
-        e.preventDefault();
+    const handleUserSearch = debounce((e, query) => {
+        e.persist();
 
         if (!query) {
             setUsers({
@@ -84,7 +85,7 @@ function UsersProvider(props) {
             ...users,
             list: filteredList
         })
-    };
+    }, 500);
 
     return (
         <UsersContext.Provider
