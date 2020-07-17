@@ -176,6 +176,7 @@ function UserProvider(props) {
     function generateStats() {
         // e.preventDefault();
         if (statGeneration.chances === 0) return;
+
         // Generate values for strength, power, combat, intelligence, speed, and durability
         strength = generateVal();
         power = generateVal();
@@ -197,6 +198,10 @@ function UserProvider(props) {
             speed: speed,
             durability: durability
         });
+    };
+
+    // Function to create a visual num generation
+    function startGeneration() {
         if (statGeneration.chances === 1) {
             setCreateChamp({
                 ...createChamp,
@@ -204,6 +209,13 @@ function UserProvider(props) {
             });
             resetCreateStates();
         }
+        const statInterval = setInterval(() => {
+            generateStats();
+        }, 25);
+
+        setTimeout(() => {
+            clearInterval(statInterval);
+        }, 500);
     };
 
     function resetStatGeneration() {
@@ -247,6 +259,7 @@ function UserProvider(props) {
                         ...createChamp,
                         championAdded: true
                     });
+                    resetStatGeneration();
                     resetCreateStates();
                     // window.location.replace("/profile");
                     fetchUserData();
@@ -272,7 +285,6 @@ function UserProvider(props) {
             });
             resetCreateStates();
         }
-        resetStatGeneration();
     };
 
     // Reset for statess
@@ -390,8 +402,8 @@ function UserProvider(props) {
                 handleCreate,
                 handleDelete,
                 handleAdd,
-                generateStats,
-                resetStatGeneration
+                resetStatGeneration,
+                startGeneration
             }}
         >
             {props.children}

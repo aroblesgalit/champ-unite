@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
-import { UserConsumer } from "../../utils/UserContext";
+import UserContext, { UserConsumer } from "../../utils/UserContext";
 
 function CreateChampionForm() {
+
+    const { championAdded} = useContext(UserContext);
 
     // Create references for the input fields
     const nameRef = useRef();
@@ -19,13 +21,15 @@ function CreateChampionForm() {
 
     // Clear the fields after clicking create
     function clearInput() {
-        setTimeout(() => {
-            setChampion({
-                name: "",
-                image: "",
-                race: ""
-            })
-        }, 1500);
+        if (championAdded) {
+            setTimeout(() => {
+                setChampion({
+                    name: "",
+                    image: "",
+                    race: ""
+                })
+            }, 1500);
+        }
     };
 
     return (
@@ -89,7 +93,7 @@ function CreateChampionForm() {
             <UserConsumer>
                 {
                     value => {
-                        const { handleCreate, generateStats, resetStatGeneration, chances, attack, defense } = value;
+                        const { handleCreate, resetStatGeneration, startGeneration, chances, attack, defense } = value;
                         return (
                             <div>
                                 <div className="uk-margin-small uk-width-expand uk-flex uk-flex-column uk-flex-middle">
@@ -103,7 +107,7 @@ function CreateChampionForm() {
                                             <p className="uk-text-small uk-text-muted uk-margin-remove">DEF</p>
                                         </div>
                                     </div>
-                                    <div className="uk-button secondary-btn uk-margin-top" onClick={() => generateStats()}>Generate x{chances}</div>
+                                    <div className="uk-button secondary-btn uk-margin-top" onClick={() => startGeneration()}>Generate x{chances}</div>
                                 </div>
                                 <div className="uk-margin-large uk-flex uk-flex-center">
                                     <Link to="/profile"><button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => resetStatGeneration()}>Cancel</button></Link>
