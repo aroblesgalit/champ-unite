@@ -6,7 +6,7 @@ function ChampionCardAlerts() {
         <UserConsumer>
             {
                 value => {
-                    const { maxReached, championAdded, createFailed } = value;
+                    const { maxReached, championAdded, createFailed, statGenOut } = value;
                     return (
                         <React.Fragment>
                             {
@@ -23,6 +23,10 @@ function ChampionCardAlerts() {
                                                 createFailed ? (
                                                     <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
                                                         <p>Please fill in all the fields.</p>
+                                                    </div>
+                                                ) : statGenOut ? (
+                                                    <div className="max-reached-alert uk-alert-danger uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" animation="true" duration={200} uk-alert="true">
+                                                        <p>You're out of chances.</p>
                                                     </div>
                                                 ) : ""
                                             )

@@ -7,3 +7,27 @@
 .create-champion-form {
     margin-top: 40px;
 }
+
+.image-prev {
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.create-champion-form .stat-val {
+    height: 5rem;
+    width: 5rem;
+    background-color: #f2f2f2;
+    margin: 0.5rem;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+}
+
+.create-champion-form h2 {
+    margin: 0;
+    font-size: 3rem;
+    line-height: 3rem;
+}
+
+.create-champion-form .stat-val p {
+    font-weight: 400;
+}
