@@ -76,6 +76,8 @@
 }
 
 
+
+
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
 
@@ -96,4 +98,20 @@
         padding: 2px;
     }
 
+}
+
+
+/* Medium devices (landscape tablets, 476x and below) */
+@media only screen and (max-width: 476px) {
+    .profile-header {
+        flex-direction: column;
+    }
+
+    .img-and-stats {
+        align-self: flex-start;
+    }
+
+    .profile-header button { 
+        margin-top: 1rem;
+    }
 }
