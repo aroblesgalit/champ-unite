@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import "./champSelectModal.css";
 import ChampionCard from "../ChampionCard";
 import { UserConsumer } from "../../utils/UserContext"
 import UsersContext from "../../utils/UsersContext";
@@ -17,12 +18,12 @@ function ChampSelectModal() {
                     const { handleModal, handleBattleMode, champModalOpen, handleSelect, championSelected, info, selectedId } = value;
                     return (
                         champModalOpen ? (
-                            <div className="user-champions-modal uk-flex uk-flex-middle uk-flex-center">
-                                <div className="user-champions-modal-wrapper">
-                                    <div className="uk-modal-header">
+                            <div className="user-champions-modal-wrapper uk-flex uk-flex-middle uk-flex-center">
+                                <div className="user-champions-modal">
+                                    <div className="user-champions-modal-header">
                                         <p>Select one of your champions to go into battle.</p>
                                     </div>
-                                    <div className="uk-modal-body uk-flex uk-flex-wrap">
+                                    <div className="user-champions-modal-body uk-flex uk-flex-wrap">
                                         {
                                             info.champions && info.champions.length > 0 ? (
                                                 info.champions.map(champion => {
@@ -48,7 +49,7 @@ function ChampSelectModal() {
                                             ) : <p>Search for Champions to add or create your own!</p>
                                         }
                                     </div>
-                                    <div className="uk-modal-footer uk-text-right">
+                                    <div className="user-champions-modal-footer uk-text-right">
                                         <button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => handleModal()}>Cancel</button>
                                         <Link to={`/battle/${selectedId || info.champions[0]._id}/vs/${champId}`} >
                                             <button
