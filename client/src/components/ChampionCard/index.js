@@ -4,8 +4,10 @@ import UserContext from "../../utils/UserContext";
 
 function ChampionCard(props) {
 
+    // Get value for loggedIn and event handlers for deleting and adding a champion
     const { loggedIn, handleDelete, handleAdd } = useContext(UserContext);
 
+    // Calculate width of bar for the stats
     function calcBarWidth(a) {
         return a * .8;
     };
