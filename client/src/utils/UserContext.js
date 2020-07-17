@@ -196,7 +196,7 @@ function UserProvider(props) {
                         attack: attack,
                         defense: defense
                     });
-                    const updatedList = await API.updateUserChampions(user.info._id, newUserChampion.data._id);
+                    await API.updateUserChampions(user.info._id, newUserChampion.data._id);
                     setCreateChamp({
                         ...createChamp,
                         championAdded: true

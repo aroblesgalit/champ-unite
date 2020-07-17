@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import API from "./API";
-import { load } from "dotenv/types";
 
 const ChampionsContext = React.createContext();
 
