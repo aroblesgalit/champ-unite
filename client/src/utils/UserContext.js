@@ -22,7 +22,13 @@ function UserProvider(props) {
     const [statGeneration, setStatGeneration] = useState({
         chances: 3,
         attack: 0,
-        defense: 0
+        defense: 0,
+        strength: 0,
+        power: 0,
+        combat: 0,
+        intelligence: 0,
+        speed: 0,
+        durability: 0
     });
 
     const [user, setUser] = useState({
@@ -167,10 +173,9 @@ function UserProvider(props) {
     let attack, defense;
 
     // Function to generate all the stats at once
-    function generateStats(e) {
-        e.preventDefault();
+    function generateStats() {
+        // e.preventDefault();
         if (statGeneration.chances === 0) return;
-        console.log("GenerateStats clicked...", statGeneration.chances, " left")
         // Generate values for strength, power, combat, intelligence, speed, and durability
         strength = generateVal();
         power = generateVal();
@@ -179,12 +184,18 @@ function UserProvider(props) {
         speed = generateVal();
         durability = generateVal();
         // Calculate the attack and defense based on the above stats
-        attack = calcBattleStat(strength, power, combat);
-        defense = calcBattleStat(intelligence, speed, durability);
+        attack = parseInt(calcBattleStat(strength, power, combat));
+        defense = parseInt(calcBattleStat(intelligence, speed, durability));
         setStatGeneration({
             chances: statGeneration.chances - 1,
             attack: attack,
-            defense: defense
+            defense: defense,
+            strength: strength,
+            power: power,
+            combat: combat,
+            intelligence: intelligence,
+            speed: speed,
+            durability: durability
         });
         if (statGeneration.chances === 1) {
             setCreateChamp({
@@ -199,7 +210,13 @@ function UserProvider(props) {
         setStatGeneration({
             chances: 3,
             attack: 0,
-            defense: 0
+            defense: 0,
+            strength: 0,
+            power: 0,
+            combat: 0,
+            intelligence: 0,
+            speed: 0,
+            durability: 0
         });
     };
 
@@ -208,7 +225,6 @@ function UserProvider(props) {
     async function handleCreate(e, name, image, race) {
         e.preventDefault();
         clearTimeout(resetCreateTimeout);
-        // generateStats();
         try {
             if (user.info.champions.length < 3) {
                 if (name && image) {
@@ -217,14 +233,14 @@ function UserProvider(props) {
                         name: name,
                         image: image,
                         race: race,
-                        strength: strength,
-                        power: power,
-                        combat: combat,
-                        intelligence: intelligence,
-                        speed: speed,
-                        durability: durability,
-                        attack: attack,
-                        defense: defense
+                        strength: statGeneration.strength,
+                        power: statGeneration.power,
+                        combat: statGeneration.combat,
+                        intelligence: statGeneration.intelligence,
+                        speed: statGeneration.speed,
+                        durability: statGeneration.durability,
+                        attack: statGeneration.attack,
+                        defense: statGeneration.defense
                     });
                     await API.updateUserChampions(user.info._id, newUserChampion.data._id);
                     setCreateChamp({
@@ -256,6 +272,7 @@ function UserProvider(props) {
             });
             resetCreateStates();
         }
+        resetStatGeneration();
     };
 
     // Reset for statess

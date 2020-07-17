@@ -103,7 +103,7 @@ function CreateChampionForm() {
                                             <p className="uk-text-small uk-text-muted uk-margin-remove">DEF</p>
                                         </div>
                                     </div>
-                                    <button className="uk-button secondary-btn uk-margin-top" onClick={e => generateStats(e)}>Generate x{chances}</button>
+                                    <div className="uk-button secondary-btn uk-margin-top" onClick={() => generateStats()}>Generate x{chances}</div>
                                 </div>
                                 <div className="uk-margin-large uk-flex uk-flex-center">
                                     <Link to="/profile"><button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button" onClick={() => resetStatGeneration()}>Cancel</button></Link>
@@ -113,7 +113,6 @@ function CreateChampionForm() {
                                         onClick={e => {
                                             handleCreate(e, champion.name, champion.image, champion.race);
                                             clearInput();
-                                            resetStatGeneration();
                                         }}
                                     >
                                         Create
