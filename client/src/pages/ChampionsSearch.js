@@ -42,7 +42,7 @@ function ChampionsSearch() {
         console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
         if (queryRes.data && queryRes.data.results) {
             const champRes = await API.findChampionsByQuery(query);
-            console.log("Pringting results from findChampionsByQuery (champRes.data)...", champRes.data);
+            console.log("Printing results from findChampionsByQuery (champRes.data)...", champRes.data);
             setSearchResults(champRes.data);
         } else {
             // Otherwise, run the third party api

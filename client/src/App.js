@@ -18,92 +18,95 @@ import ImageModal from "./components/ImageModal";
 import ChampionCardAlerts from "./components/ChampionCardAlerts";
 import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
+import { ChampionsProvider } from "./utils/ChampionsContext";
 
 function App() {
   return (
     <UserProvider>
       <UsersProvider>
-        <Router>
-          <div>
-            <ChampSelectModal />
-            <ImageModal />
-            <ChampionCardAlerts />
-            <UserConsumer>
-              {
-                value => {
-                  return value.battleMode ? "" : <Header />
+        <ChampionsProvider>
+          <Router>
+            <div>
+              <ChampSelectModal />
+              <ImageModal />
+              <ChampionCardAlerts />
+              <UserConsumer>
+                {
+                  value => {
+                    return value.battleMode ? "" : <Header />
+                  }
                 }
-              }
-            </UserConsumer>
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route path="/login">
-                <UserConsumer>
-                  {
-                    value => {
-                      return value.loggedIn ? <Redirect to="/profile" /> : <Login />
-                    }
+              </UserConsumer>
+              <Switch>
+                <Route exact path="/">
+                  <Homepage />
+                </Route>
+                <Route path="/login">
+                  <UserConsumer>
+                    {
+                      value => {
+                        return value.loggedIn ? <Redirect to="/profile" /> : <Login />
+                      }
 
-                  }
-                </UserConsumer>
-              </Route>
-              <Route path="/signup">
-                <Signup />
-              </Route>
-              <Route exact path="/profile">
-                <UserConsumer>
-                  {
-                    value => {
-                      return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
                     }
-                  }
-                </UserConsumer>
-              </Route>
-              <Route path="/champions">
-                <ChampionsSearch />
-              </Route>
-              <Route path="/users">
-                <UsersSearch />
-              </Route>
-              <Route path="/profile/:username">
-                <OtherUserProfile />
-              </Route>
-              <Route path="/battle/:userid/vs/:otheruserid">
-                <UserConsumer>
-                  {
-                    value => {
-                      return value.loggedIn ? <Battle /> : <Redirect to="/login" />
+                  </UserConsumer>
+                </Route>
+                <Route path="/signup">
+                  <Signup />
+                </Route>
+                <Route exact path="/profile">
+                  <UserConsumer>
+                    {
+                      value => {
+                        return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
+                      }
                     }
-                  }
-                </UserConsumer>
-              </Route>
-              <Route path="/ranking">
-                <Ranking />
-              </Route>
-              <Route path="/create_champion">
-                <UserConsumer>
-                  {
-                    value => {
-                      return value.loggedIn ? <CreateChampion /> : <Redirect to="/login" />
+                  </UserConsumer>
+                </Route>
+                <Route path="/champions">
+                  <ChampionsSearch />
+                </Route>
+                <Route path="/users">
+                  <UsersSearch />
+                </Route>
+                <Route path="/profile/:username">
+                  <OtherUserProfile />
+                </Route>
+                <Route path="/battle/:userid/vs/:otheruserid">
+                  <UserConsumer>
+                    {
+                      value => {
+                        return value.loggedIn ? <Battle /> : <Redirect to="/login" />
+                      }
                     }
+                  </UserConsumer>
+                </Route>
+                <Route path="/ranking">
+                  <Ranking />
+                </Route>
+                <Route path="/create_champion">
+                  <UserConsumer>
+                    {
+                      value => {
+                        return value.loggedIn ? <CreateChampion /> : <Redirect to="/login" />
+                      }
+                    }
+                  </UserConsumer>
+                </Route>
+                <Route path="/credits">
+                  <Credits />
+                </Route>
+              </Switch>
+              <UserConsumer>
+                {
+                  value => {
+                    return value.battleMode ? "" : <Footer />
                   }
-                </UserConsumer>
-              </Route>
-              <Route path="/credits">
-                <Credits />
-              </Route>
-            </Switch>
-            <UserConsumer>
-              {
-                value => {
-                  return value.battleMode ? "" : <Footer />
                 }
-              }
-            </UserConsumer>
-          </div>
-        </Router>
+              </UserConsumer>
+            </div>
+          </Router>
+        </ChampionsProvider>
       </UsersProvider>
     </UserProvider>
   );
