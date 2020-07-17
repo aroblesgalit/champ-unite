@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom";
 import API from "../utils/API";
 import HealthBar from "../components/HealthBar";
 import ChampionCard from "../components/ChampionCard";
-// import UserContext from "../utils/UserContext";
 import Sound from "react-sound";
 import slash from "../sounds/442903__qubodup__slash.wav";
 import battleSound from "../sounds/510953__theojt__cinematic-battle-song.mp3";
@@ -314,13 +313,9 @@ function Battle() {
         }
     }
 
-    // function handleLeave() {
-    //     window.location.replace("/users");
-    // }
-
     return (
         <section className="battle-container uk-flex uk-flex-column uk-flex-middle uk-position-relative">
-            <div className="uk-flex uk-flex-top uk-width-expand uk-flex-between">
+            <div className="battle-top uk-flex uk-flex-top uk-width-expand uk-flex-between">
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
                     {
                         userAtkTurn ?
@@ -367,11 +362,30 @@ function Battle() {
                 {
                     <div className="battle-vs uk-flex uk-flex-column uk-flex-middle uk-margin-large-top">
                         {
-                            battleStats.timerDone ? (
-                                ""
-                            ) : `${timeLeft}`
+                            !battleStats.started ?
+                                <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
+                                : (
+                                    battleStats.timerDone ? (
+                                        <React.Fragment>
+                                            <div className="battle-text">{battleStats.textDisplay}</div>
+                                            <Link to="/users" className="uk-link-reset">
+                                                <button
+                                                    className="uk-button secondary-btn"
+                                                    style={{ display: battleStats.gameEnded ? "block" : "none" }}
+                                                    onClick={() => {
+                                                        fetchUserData();
+                                                        getUsers();
+                                                    }}
+                                                >
+                                                    Leave
+                                            </button>
+                                            </Link>
+                                        </React.Fragment>
+                                    ) : `${timeLeft}`
+                                )
+
                         }
-                        <div className="battle-text uk-position-fixed">{battleStats.textDisplay}</div>
+
                     </div>
                 }
                 <div className="uk-flex uk-flex-column uk-flex-middle uk-position-relative">
@@ -418,19 +432,6 @@ function Battle() {
                     <span className="battle-user-name"><span uk-icon="icon: user; ratio: .8"></span> {otherData.username}</span>
                 </div>
             </div>
-            <button className="uk-button primary-btn" style={{ display: battleStats.started ? "none" : "block" }} onClick={handleStart}>Start</button>
-            <Link to="/users" className="uk-link-reset">
-                <button
-                    className="uk-button secondary-btn"
-                    style={{ display: battleStats.gameEnded ? "block" : "none" }}
-                    onClick={() => { 
-                        fetchUserData();
-                        getUsers(); 
-                    }}
-                >
-                    Leave
-                </button>
-            </Link>
             {
                 // <div className="battle-speed-toggle-container uk-position-absolute">
                 //     <div className={speedToggleClicked ? "battle-speed-toggle uk-flex uk-flex-left uk-flex-middle" : "battle-speed-toggle uk-flex uk-flex-right uk-flex-middle"} onClick={toggleSpeed}><div className="toggle-ball"></div></div>

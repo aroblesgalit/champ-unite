@@ -131,15 +131,19 @@
     background-image: url("https://images.unsplash.com/photo-1569701813229-33284b643e3c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1088&q=80");
 }
 
+
+
+/* Battle Screen */
+
 .battle-vs {
     font-size: 32px;
     font-weight: bold;
     color: #f2f2f2;
 }
 
-.battle-vs h2 {
+/* .battle-vs h2 {
     color: #f2f2f2;
-}
+} */
 
 .battle-user-name {
     font-size: 24px;
@@ -194,29 +198,24 @@
 }
 
 
+/* Champions search */
+.title-and-form {
+    width: 100%;
+    max-width: 500px;
+    margin-right: 1rem;
+}
+
+.champions-search-container .create-link {
+    margin-right: 1.25rem;
+}
+
+
 
 /* Users Search */
 .user-search-input {
     padding-left: 2.2rem!important;
 }
 
-
-
-
-/* Champion select modal */
-.user-champions-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.521);
-    z-index: 10;
-}
-
-.user-champions-modal-wrapper {
-    background-color: #fff;
-}
 
 
 
@@ -250,5 +249,55 @@
     .ranking-container svg {
         max-width: 220px;
     }
+
+    /* Champions search */
+    .title-and-form {
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 1rem;
+        max-width: 100%;
+        /* margin-top: 1rem; */
+    }
+
+    .title-and-form h2 {
+        margin-bottom: 1rem;
+        align-self: flex-start;
+    }
+
+    .champions-search-container div:first-child {
+        flex-direction: column;
+    }
+
+    .champions-search-container .create-link {
+        max-width: 120px;
+        align-self: flex-end;
+        margin-right: 0;
+    }
     
   }
+
+
+/* Medium devices (landscape tablets, 639px and below) */
+@media only screen and (max-width: 639px) {
+    .battle-top {
+        flex-direction: column;
+    }
+
+    .battle-top>div:nth-child(2) {
+        align-self: center;
+        background-color: rgba(255, 255, 255, 0.808);
+        padding: 1rem;
+        border-radius: 0.25rem;
+        color: rgb(23, 12, 59);
+        justify-content: center;
+        margin-top: 1rem !important;
+    }
+
+    .battle-text {
+        color: rgb(25, 22, 84);
+    }
+
+    .battle-top>div:nth-child(3) {
+        align-self: flex-end;
+    }
+}

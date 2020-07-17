@@ -1,5 +1,5 @@
 /* Champion select modal */
-.user-champions-modal {
+.user-champions-modal-wrapper {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,13 +7,30 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.521);
     z-index: 10;
+    padding: 1rem;
 }
 
-.user-champions-modal-wrapper {
+.user-champions-modal {
     background-color: #fff;
     max-height: 100vh;
 }
 
-.uk-modal-header {
-    background-color: chocolate;
+.user-champions-modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #c0c0c0;
+}
+
+.user-champions-modal-header p {
+    margin: 0;
+}
+
+.user-champions-modal-body {
+    padding: 1rem;
+    max-height: 50vh;
+    overflow-y: scroll;
+}
+
+.user-champions-modal-footer {
+    padding: 1rem;
+    border-top: 1px solid #c0c0c0;
 }
