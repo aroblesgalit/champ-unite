@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import API from "./API";
 
 const ChampionsContext = React.createContext();
@@ -9,6 +9,10 @@ function ChampionsProvider(props) {
     const [champions, setChampions] = useState({
         db: []
     });
+
+    useEffect(() => {
+        loadChampionsDB();
+    }, []);
 
     function loadChampionsDB() {
         API.getAllChampions()
