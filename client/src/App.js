@@ -15,6 +15,7 @@ import CreateChampion from "./pages/CreateChampion";
 import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
 import ImageModal from "./components/ImageModal";
+import ChampionCardAlerts from "../ChampionCardAlerts";
 import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 
@@ -26,6 +27,7 @@ function App() {
           <div>
             <ChampSelectModal />
             <ImageModal />
+            <ChampionCardAlerts />
             <UserConsumer>
               {
                 value => {
