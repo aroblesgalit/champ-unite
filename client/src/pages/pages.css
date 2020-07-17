@@ -194,6 +194,18 @@
 }
 
 
+/* Champions search */
+.title-and-form {
+    width: 100%;
+    max-width: 500px;
+    margin-right: 1rem;
+}
+
+.champions-search-container .create-link {
+    margin-right: 1.25rem;
+}
+
+
 
 /* Users Search */
 .user-search-input {
@@ -249,6 +261,30 @@
 
     .ranking-container svg {
         max-width: 220px;
+    }
+
+    /* Champions search */
+    .title-and-form {
+        flex-direction: column;
+        margin-right: 0;
+        margin-bottom: 1rem;
+        max-width: 100%;
+        /* margin-top: 1rem; */
+    }
+
+    .title-and-form h2 {
+        margin-bottom: 1rem;
+        align-self: flex-start;
+    }
+
+    .champions-search-container div:first-child {
+        flex-direction: column;
+    }
+
+    .champions-search-container .create-link {
+        max-width: 120px;
+        align-self: flex-end;
+        margin-right: 0;
     }
     
   }
