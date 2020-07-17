@@ -89,19 +89,6 @@ function ChampionCard(props) {
         }
     }
 
-    // function handleDelete() {
-    //     API.removeChampion(props.id)
-    //         .then(res => {
-    //             console.log(res);
-    //             window.location.reload(false);
-    //         })
-    //         .catch(err => console.log(err));
-    //     // Remove from champions list in User model
-    //     API.removeChampionFromUser(info.id, props.id)
-    //         .then(res => console.log(res))
-    //         .catch(err => console.log(err));
-    // }
-
     return (
         <div className="champion-card uk-card uk-position-relatve" style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
             {

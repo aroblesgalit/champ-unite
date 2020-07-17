@@ -8,7 +8,7 @@ function About() {
             <div className="hero-text uk-width-1-2@m uk-text-center uk-margin-auto uk-margin-auto-vertical">
                 <h1>ChampUnite</h1>
                 <p>
-                    Create your champion(s) now and battle against other users on a one-one-one match.
+                    Create your champion(s) now and test your luck on a one-on-one match against other champions.
                 </p>
                 <Link to="/signup" className="uk-button primary-btn">Sign up</Link>
             </div>

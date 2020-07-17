@@ -196,9 +196,7 @@ function UserProvider(props) {
                         attack: attack,
                         defense: defense
                     });
-                    console.log("handleAdd worked...printing newUserChampion...", newUserChampion);
                     const updatedList = await API.updateUserChampions(user.info._id, newUserChampion.data._id);
-                    console.log("handleAdd worked...printing updatedList...", updatedList);
                     setCreateChamp({
                         ...createChamp,
                         championAdded: true
@@ -226,7 +224,7 @@ function UserProvider(props) {
                 ...createChamp,
                 createFailed: true
             });
-            resetCreateStates()
+            resetCreateStates();
         }
     };
 
@@ -250,11 +248,103 @@ function UserProvider(props) {
     function handleDelete(id) {
         API.removeChampion(id)
             .then(() => {
-                console.log("Champion deleted!");
                 fetchUserData();
             })
             .catch(err => console.log("Something went wrong while trying to delete the champion from the database...", err));
     };
+
+    // Add the new champion to the datbase using the existing stats
+    // If stats are null, then generate values
+    // and update the authenticated user's champions by adding this new one
+    async function handleAdd(champion) {
+        clearTimeout(resetCreateTimeout);
+        try {
+            if (user.info.champions.length < 3) {
+                setCreateChamp({
+                    ...createChamp,
+                    championAdded: true
+                });
+                // console.log("Running conditional champions.length < 3...", champions.length);
+                if (champion.nullStats) {
+                    // // Function to calculate attack and defense based on powerstats
+                    // function calcBattleStat(a, b, c) {
+                    //     return ((a + b + c) / 30).toFixed();
+                    // }
+                    // // Function to generate a random value from 1 - 100
+                    // function generateStat() {
+                    //     return Math.floor((Math.random() * 100) + 1);
+                    // }
+                    generateStats();
+                    // // Store relevant data
+                    // const strength = generateStat();
+                    // const power = generateStat();
+                    // const combat = generateStat();
+                    // const intelligence = generateStat();
+                    // const speed = generateStat();
+                    // const durability = generateStat();
+                    // // Calculate attack and defense
+                    // const attack = calcBattleStat(strength, power, combat);
+                    // const defense = calcBattleStat(intelligence, speed, durability);
+
+                    const newUserChampion = await API.addChampion({
+                        user: user.info._id,
+                        name: champion.name,
+                        image: champion.image,
+                        strength: strength,
+                        power: power,
+                        combat: combat,
+                        intelligence: intelligence,
+                        speed: speed,
+                        durability: durability,
+                        attack: attack,
+                        defense: defense,
+                        nullStats: champion.nullStats
+                    })
+                    // Update user's champions array
+                    await API.updateUserChampions(user.info._id, newUserChampion.data._id);
+                    // window.location.reload(false);
+                    fetchUserData();
+                } else {
+                    const newUserChampion = await API.addChampion({
+                        user: user.info.id,
+                        name: champion.name,
+                        image: champion.image,
+                        strength: champion.strength,
+                        power: champion.power,
+                        combat: champion.combat,
+                        intelligence: champion.intelligence,
+                        speed: champion.speed,
+                        durability: champion.durability,
+                        attack: champion.attack,
+                        defense: champion.defense,
+                        nullStats: champion.nullStats
+                    })
+                    // Update user's champions array
+                    await API.updateUserChampions(user.info._id, newUserChampion.data._id);
+                    // window.location.reload(false);
+                    fetchUserData();
+                }
+            } else {
+                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
+                setCreateChamp({
+                    ...createChamp,
+                    maxReached: true
+                });
+                resetCreateStates();
+                // After 3 seconds, setMaxReached backto false to close the alert
+                // setTimeout(function () {
+                //     setMaxReached(false);
+                // }, 4000);
+            }
+        } catch (err) {
+            console.log("Add failed: ", err);
+            setCreateChamp({
+                ...createChamp,
+                createFailed: true
+            });
+            resetCreateStates();
+        }
+    }
 
     // ------------ Champion Card Ends ------------ //
 
@@ -273,7 +363,8 @@ function UserProvider(props) {
                 handleImageModal,
                 handleBattleMode,
                 handleCreate,
-                handleDelete
+                handleDelete,
+                handleAdd
             }}
         >
             {props.children}
