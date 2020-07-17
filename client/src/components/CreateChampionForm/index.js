@@ -91,8 +91,21 @@ function CreateChampionForm() {
                     value => {
                         const { handleCreate } = value;
                         return (
-                            <React.Fragment>
-                                <div className="uk-margin-small">
+                            <div>
+                                <div className="uk-margin-small uk-width-expand uk-flex uk-flex-column uk-flex-middle">
+                                    <div className="stats-val-wrapper uk-flex uk-flex-center">
+                                        <div className="stat-val uk-flex uk-flex-column uk-flex-middle">
+                                            <h2>8</h2>
+                                            <p className="uk-text-small uk-text-muted uk-margin-remove">ATK</p>
+                                        </div>
+                                        <div className="stat-val uk-flex uk-flex-column uk-flex-middle">
+                                            <h2>7</h2>
+                                            <p className="uk-text-small uk-text-muted uk-margin-remove">DEF</p>
+                                        </div>
+                                    </div>
+                                    <button className="uk-button secondary-btn uk-margin-top" onClick={e => e.preventDefault()}>Generate x3</button>
+                                </div>
+                                <div className="uk-margin-large uk-flex uk-flex-center">
                                     <Link to="/profile"><button className="uk-button outline-btn uk-modal-close uk-margin-small-right" type="button">Cancel</button></Link>
                                     <button
                                         className="uk-button primary-btn"
@@ -105,7 +118,7 @@ function CreateChampionForm() {
                                         Create
                                     </button>
                                 </div>
-                            </React.Fragment>
+                            </div>
                         )
                     }
                 }
