@@ -29,6 +29,9 @@ function ChampionsProvider(props) {
             })
     };
 
+
+    // ------------- Champion Search Begins -------------  //
+
     // Function to generate a random value from 1 - 100
     function generateStat() {
         return Math.floor((Math.random() * 100) + 1);
@@ -37,6 +40,7 @@ function ChampionsProvider(props) {
     // Handle search event
     async function handleSearch(e, query) {
         e.preventDefault();
+
         // If no query, then set the results to the db
         if (!query) {
             setChampions({
@@ -50,12 +54,13 @@ function ChampionsProvider(props) {
         const queryRes = await API.findAQuery(query);
         console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
         if (queryRes.data && queryRes.data.results) {
-            const champRes = await API.findChampionsByQuery(query);
-            console.log("Printing results from findChampionsByQuery (champRes.data)...", champRes.data);
-            // setSearchResults(champRes.data);
+            // const champRes = await API.findChampionsByQuery(query);
+            const queryFilter = champions.db.filter(champion => champion.name.toLowerCase().includes(query));
+            // console.log("Printing results from findChampionsByQuery (champRes.data)...", champRes.data);
+            console.log("Printing results from filtering the db array (queryFilter)...", queryFilter);
             setChampions({
                 ...champions,
-                searchResults: champRes.data
+                searchResults: queryFilter
             });
         } else {
             // Otherwise, run the third party api
@@ -65,7 +70,6 @@ function ChampionsProvider(props) {
 
             if (!heroesResults.data.results) {
                 console.log("No results for this search.")
-                // setNoResults(true);
                 setChampions({
                     ...champions,
                     noResults: true
@@ -91,7 +95,7 @@ function ChampionsProvider(props) {
                 for (let i = 0; i < heroesResults.data.results.length; i++) {
                     // Store each result
                     const champion = heroesResults.data.results[i];
-                    // console.log("Adding champions...", champion);
+                    console.log("Adding champions...", champion);
 
                     // Store relevant data
                     const name = champion.name;
@@ -163,7 +167,6 @@ function ChampionsProvider(props) {
                     }
                 }
                 // Set search results to the new results array
-                // setSearchResults(newResults);
                 setChampions({
                     ...champions,
                     searchResults: newResults
@@ -172,6 +175,8 @@ function ChampionsProvider(props) {
             }
         }
     };
+
+    // ------------- Champion Search Ends -------------  //
 
     return (
         <ChampionsContext.Provider
