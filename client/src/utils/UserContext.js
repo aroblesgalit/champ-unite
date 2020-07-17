@@ -31,6 +31,11 @@ function UserProvider(props) {
     }, []);
 
     function fetchUserData() {
+        // For testing. Delete when done
+        API.getDefaultImage()
+        .then(res => console.log("Getting default image...", res))
+        .catch(err => console.log("Something went wrong while fetching default image...", err));
+        // End of test. Delete when done
         API.getUserData()
             .then(res => {
                 setUser({

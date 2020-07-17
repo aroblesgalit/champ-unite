@@ -1,18 +1,5 @@
 import axios from "axios";
 require("dotenv").config();
-import HeroImg1 from "../images/hero-img-1.svg";
-import HeroImg2 from "../images/hero-img-2.svg";
-import HeroImg3 from "../images/hero-img-3.svg";
-import HeroImg4 from "../images/hero-img-4.svg";
-import HeroImg5 from "../images/hero-img-5.svg";
-import HeroImg6 from "../images/hero-img-6.svg";
-import HeroImg7 from "../images/hero-img-7.svg";
-import HeroImg8 from "../images/hero-img-8.svg";
-import HeroImg9 from "../images/hero-img-9.svg";
-import HeroImg10 from "../images/hero-img-10.svg";
-
-// <a href='https://www.freepik.com/free-photos-vectors/kids'>Kids vector created by macrovector - www.freepik.com</a>
-const defaultChampImages = [HeroImg1, HeroImg2, HeroImg3, HeroImg4, HeroImg5, HeroImg6, HeroImg7, HeroImg8, HeroImg9, HeroImg10];
 
 export default {
     signupUser: function (data) {
@@ -77,14 +64,6 @@ export default {
                     resolve(heroes);
                 })
                 .catch(err => reject(err));
-        })
-    },
-    // Get a default image from defaultChampImages array
-    getDefaultImage: function () {
-        return new Promise((resolve, reject) => {
-            const randomNum = Math.floor(Math.random() * defaultChampImages.length);
-            const randomImg = defaultChampImages[randomNum];
-            resolve(randomImg);
         })
     },
     // Get all users
