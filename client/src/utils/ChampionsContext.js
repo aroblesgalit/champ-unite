@@ -21,7 +21,8 @@ function ChampionsProvider(props) {
             .then(res => {
                 setChampions({
                     ...champions,
-                    db: res.data
+                    db: res.data,
+                    searchResults: res.data
                 });
             })
             .catch(err => {
@@ -175,8 +176,6 @@ function ChampionsProvider(props) {
                     searchResults: newResults
                 })
                 // console.log("New Results: ", newResults);
-                // Load champions again
-                loadChampionsDB();
             }
         }
     };

@@ -17,14 +17,14 @@ function Features() {
             img: searchFeature
         },
         {
+            title: "Create a Champion",
+            description: "Can't find your favorite champion? Create one! Just need a name and an image url. Then test your luck and roll the dice for the attack and defense!",
+            img: createFeature
+        },
+        {
             title: "Search Users",
             description: "Browse through the Users page and check out other users and their champions. Go to their profile or battle their champions.",
             img: usersFeature
-        },
-        {
-            title: "Create a Champion",
-            description: "You have the freedom to create your own champion. Just need a name and an image url. The powerstats will be randomly generated so test your luck! The attack and defense will be calculated based on the powerstats.",
-            img: createFeature
         },
         {
             title: "Select a Champion for Battle",
