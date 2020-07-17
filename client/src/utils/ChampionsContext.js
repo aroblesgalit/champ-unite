@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "./API";
+import { load } from "dotenv/types";
 
 const ChampionsContext = React.createContext();
 
@@ -50,26 +51,26 @@ function ChampionsProvider(props) {
             return;
         }
 
-        // Search querydb for query
+        // First, search querydb for query
         const queryRes = await API.findAQuery(query);
-        console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
+        // console.log("Printing result from findAQuery (queryRes.data)...", queryRes.data)
+        // If it exists, then filter the loaded db array by the query and set searchResults to this
         if (queryRes.data && queryRes.data.results) {
-            // const champRes = await API.findChampionsByQuery(query);
             const queryFilter = champions.db.filter(champion => champion.name.toLowerCase().includes(query));
-            // console.log("Printing results from findChampionsByQuery (champRes.data)...", champRes.data);
-            console.log("Printing results from filtering the db array (queryFilter)...", queryFilter);
+            // console.log("Printing results from filtering the db array (queryFilter)...", queryFilter);
             setChampions({
                 ...champions,
                 searchResults: queryFilter
             });
+            // If query doesn't exist in the db, run the third party (superhero) api
         } else {
-            // Otherwise, run the third party api
-            console.log("No results form database. Running api call now...");
+            // console.log("No results form database. Running api call now...");
             const heroesResults = await API.searchHeroes(query);
-            console.log("Printing results from api call...", heroesResults.data.results);
-
+            // console.log("Printing results from api call...", heroesResults.data.results);
+            // If there's no results from the third party api call
+            // Set noResults to true and add the query to the db with the results field set to false
             if (!heroesResults.data.results) {
-                console.log("No results for this search.")
+                // console.log("No results for this search.")
                 setChampions({
                     ...champions,
                     noResults: true
@@ -79,8 +80,9 @@ function ChampionsProvider(props) {
                     query: query,
                     results: false
                 });
+                // If there is results from the third party api call
+                // Add the query to the db and set the results field to true
             } else {
-                // Add query to database
                 await API.addAQuery({
                     query: query,
                     results: true
@@ -95,7 +97,7 @@ function ChampionsProvider(props) {
                 for (let i = 0; i < heroesResults.data.results.length; i++) {
                     // Store each result
                     const champion = heroesResults.data.results[i];
-                    console.log("Adding champions...", champion);
+                    // console.log("Adding champions...", champion);
 
                     // Store relevant data
                     const name = champion.name;
@@ -139,13 +141,15 @@ function ChampionsProvider(props) {
                         defense: defense,
                         nullStats: nullStats
                     })
-
+                    // Check the db if these superheroes are already added
+                    // If they are already added, then don't add them to the db
+                    // Othewise, add them to the db
                     const superheroIdRes = await API.findAChampionBySuperHeroId(champion.id);
-                    console.log("Find champion in db by superheroid. Printing result from findAChampionBySuperHeroId...", superheroIdRes);
+                    // console.log("Find champion in db by superheroid. Printing result from findAChampionBySuperHeroId...", superheroIdRes);
                     if (superheroIdRes.data) {
                         console.log("Champion found in database. Not adding...");
                     } else {
-                        console.log("Champion NOT in database. Adding now...")
+                        // console.log("Champion NOT in database. Adding now...")
                         // Add each result to the database
                         API.addChampion({
                             superHeroId: champion.id,
@@ -171,7 +175,9 @@ function ChampionsProvider(props) {
                     ...champions,
                     searchResults: newResults
                 })
-                console.log("New Results: ", newResults);
+                // console.log("New Results: ", newResults);
+                // Load champions again
+                loadChampionsDB();
             }
         }
     };
