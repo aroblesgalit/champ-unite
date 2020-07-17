@@ -17,7 +17,7 @@ function ChampionsSearch() {
                                 <h2>Champions</h2>
                                 <form className="uk-search uk-search-default uk-width-1-4@l uk-width-1-3@m uk-width-1-2@s uk-width-1-1">
                                     <button className="uk-search-icon-flip" uk-search-icon="true" onClick={(e) => handleSearch(e, searchRef.current.value.toLowerCase())}></button>
-                                    <input className="uk-search-input" type="search" placeholder="Search for a champion" ref={searchRef} />
+                                    <input className="uk-search-input" type="search" placeholder="Type a name then click -->" ref={searchRef} />
                                 </form>
                             </div>
 
