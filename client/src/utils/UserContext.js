@@ -264,27 +264,10 @@ function UserProvider(props) {
                     ...createChamp,
                     championAdded: true
                 });
-                // console.log("Running conditional champions.length < 3...", champions.length);
+                resetCreateStates();
+
                 if (champion.nullStats) {
-                    // // Function to calculate attack and defense based on powerstats
-                    // function calcBattleStat(a, b, c) {
-                    //     return ((a + b + c) / 30).toFixed();
-                    // }
-                    // // Function to generate a random value from 1 - 100
-                    // function generateStat() {
-                    //     return Math.floor((Math.random() * 100) + 1);
-                    // }
                     generateStats();
-                    // // Store relevant data
-                    // const strength = generateStat();
-                    // const power = generateStat();
-                    // const combat = generateStat();
-                    // const intelligence = generateStat();
-                    // const speed = generateStat();
-                    // const durability = generateStat();
-                    // // Calculate attack and defense
-                    // const attack = calcBattleStat(strength, power, combat);
-                    // const defense = calcBattleStat(intelligence, speed, durability);
 
                     const newUserChampion = await API.addChampion({
                         user: user.info._id,
@@ -302,7 +285,6 @@ function UserProvider(props) {
                     })
                     // Update user's champions array
                     await API.updateUserChampions(user.info._id, newUserChampion.data._id);
-                    // window.location.reload(false);
                     fetchUserData();
                 } else {
                     const newUserChampion = await API.addChampion({
@@ -321,20 +303,14 @@ function UserProvider(props) {
                     })
                     // Update user's champions array
                     await API.updateUserChampions(user.info._id, newUserChampion.data._id);
-                    // window.location.reload(false);
                     fetchUserData();
                 }
             } else {
-                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
                 setCreateChamp({
                     ...createChamp,
                     maxReached: true
                 });
                 resetCreateStates();
-                // After 3 seconds, setMaxReached backto false to close the alert
-                // setTimeout(function () {
-                //     setMaxReached(false);
-                // }, 4000);
             }
         } catch (err) {
             console.log("Add failed: ", err);

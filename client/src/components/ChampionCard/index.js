@@ -1,93 +1,14 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import "./style.css";
-import API from "../../utils/API";
 import UserContext from "../../utils/UserContext";
 
 function ChampionCard(props) {
 
-    const { loggedIn, info, handleDelete } = useContext(UserContext);
-
-    const [maxReached, setMaxReached] = useState(false);
-    const [championAdded, setChampionAdded] = useState(false);
+    const { loggedIn, handleDelete, handleAdd, maxReached, championAdded } = useContext(UserContext);
 
     function calcBarWidth(a) {
         return a * .8;
-    }
-
-    async function handleAdd() {
-        try {
-            if (info.champions.length < 3) {
-                setChampionAdded(true);
-                // console.log("Running conditional champions.length < 3...", champions.length);
-                if (props.nullStats) {
-                    // Function to calculate attack and defense based on powerstats
-                    function calcBattleStat(a, b, c) {
-                        return ((a + b + c) / 30).toFixed();
-                    }
-                    // Function to generate a random value from 1 - 100
-                    function generateStat() {
-                        return Math.floor((Math.random() * 100) + 1);
-                    }
-                    // Store relevant data
-                    const strength = generateStat();
-                    const power = generateStat();
-                    const combat = generateStat();
-                    const intelligence = generateStat();
-                    const speed = generateStat();
-                    const durability = generateStat();
-                    // Calculate attack and defense
-                    const attack = calcBattleStat(strength, power, combat);
-                    const defense = calcBattleStat(intelligence, speed, durability);
-
-                    const newUserChampion = await API.addChampion({
-                        user: info.id,
-                        name: props.name,
-                        image: props.image,
-                        strength: strength,
-                        power: power,
-                        combat: combat,
-                        intelligence: intelligence,
-                        speed: speed,
-                        durability: durability,
-                        attack: attack,
-                        defense: defense,
-                        nullStats: props.nullStats
-                    })
-                    // Update user's champions array
-                    await API.updateUserChampions(info.id, newUserChampion.data._id);
-                    window.location.reload(false);
-                } else {
-                    const newUserChampion = await API.addChampion({
-                        user: info.id,
-                        name: props.name,
-                        image: props.image,
-                        strength: props.strength,
-                        power: props.power,
-                        combat: props.combat,
-                        intelligence: props.intelligence,
-                        speed: props.speed,
-                        durability: props.durability,
-                        attack: props.attack,
-                        defense: props.defense,
-                        nullStats: props.nullStats
-                    })
-                    // Update user's champions array
-                    await API.updateUserChampions(info.id, newUserChampion.data._id);
-                    window.location.reload(false);
-                }
-
-            } else {
-                console.log("You've reached the max number of champions on your list! Please make room if you'd like to add another.");
-                setMaxReached(true);
-                // After 3 seconds, setMaxReached backto false to close the alert
-                setTimeout(function () {
-                    setMaxReached(false);
-                }, 4000);
-            }
-        } catch (err) {
-            console.log("Add failed: ", err)
-        }
-    }
+    };
 
     return (
         <div className="champion-card uk-card uk-position-relatve" style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
@@ -101,13 +22,30 @@ function ChampionCard(props) {
             {
                 championAdded ? (
                     <div className="champion-added-alert uk-alert-success uk-position-fixed uk-animation-fade uk-animation-slide-bottom uk-animation-fast" uk-alert="true">
-                        <p>{props.name} successfuly added to your list!</p>
+                        <p>Champion successfuly added to your list!</p>
                     </div>
                 ) : ""
             }
             {
                 props.type === "search" && loggedIn ? (
-                    <button className="add-btn uk-icon-button uk-position-absolute" uk-icon="plus" onClick={handleAdd}></button>
+                    <button
+                        className="add-btn uk-icon-button uk-position-absolute"
+                        uk-icon="plus"
+                        onClick={() => handleAdd({
+                            name: props.name,
+                            image: props.image,
+                            strength: props.strength,
+                            power: props.power,
+                            combat: props.combat,
+                            intelligence: props.intelligence,
+                            speed: props.speed,
+                            durability: props.durability,
+                            attack: props.attack,
+                            defense: props.defense,
+                            nullStats: props.nullStats
+                        })}
+                    >
+                    </button>
                 ) : ""
             }
             {
