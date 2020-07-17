@@ -153,7 +153,7 @@
 .battle-text {
     font-size: 60px;
     font-weight: normal;
-    color: rgb(25, 22, 84);
+    color: rgb(96, 250, 219);
 }
 
 .health-damage {
@@ -294,7 +294,7 @@
     }
 
     .battle-text {
-        position: relative;
+        color: rgb(25, 22, 84);
     }
 
     .battle-top>div:nth-child(3) {
