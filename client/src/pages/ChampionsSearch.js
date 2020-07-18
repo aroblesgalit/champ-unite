@@ -18,9 +18,14 @@ function ChampionsSearch() {
                     const { handleSearch, list } = value;
                     return (
                         <section className="uk-section champions-search-container">
-                            <div className="uk-flex uk-flex-between uk-width-expand">
-                                <div className="title-and-form uk-flex uk-flex-middle">
-                                    <h2>Champions</h2>
+                            <div className="champions-search-header uk-flex uk-flex-between uk-width-expand">
+                                <div className="title-and-form uk-flex">
+                                    <div className="uk-flex">
+                                        <h2>Champions</h2>
+                                        {
+                                            loggedIn ? <Link to="/create_champion" className="create-link uk-button secondary-btn">Create</Link> : ""
+                                        }
+                                    </div>
                                     <form className="uk-search uk-search-default uk-width-1-1">
                                         <button className="uk-search-icon-flip" uk-search-icon="true" onClick={(e) => handleSearch(e, searchRef.current.value.toLowerCase())}></button>
                                         <input className="uk-search-input" type="search" placeholder="Type a name then click -->" ref={searchRef} />
