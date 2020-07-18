@@ -6,6 +6,12 @@ const ChampionsContext = React.createContext();
 // Provider
 function ChampionsProvider(props) {
 
+    const [pagination, setPagination] = useState({
+        nums: [], 
+        currentViews: [],
+        currentPage: 1
+    });
+
     const [champions, setChampions] = useState({
         db: [],
         searchResults: [],
@@ -201,6 +207,7 @@ function ChampionsProvider(props) {
         <ChampionsContext.Provider
             value={{
                 ...champions,
+                ...pagination,
                 handleSearch
             }}
         >
