@@ -91,8 +91,15 @@ function ChampionsProvider(props) {
                     noResults: true,
                     searchResults: []
                 });
-                setNums([]);
-                updateCurrentViews(0, []);
+                // setNums([]);
+                setPagination({
+                    nums: [],
+                    currentPage: 1
+                });
+                setCurrentViews({
+                    list: []
+                });
+                // updateCurrentViews(1, []);
                 // Add query to database
                 await API.addAQuery({
                     query: query,
