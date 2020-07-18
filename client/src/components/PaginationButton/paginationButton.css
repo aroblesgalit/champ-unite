@@ -65,3 +65,28 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+
+
+
+
+/* Medium devices (landscape tablets, 768px and below) */
+@media only screen and (max-width: 768px) {
+    .page-num-wrapper input {
+        height: 70px;
+        width: 70px;
+        margin: 0 0.8rem;
+        font-size: 1.8rem;
+    }
+      
+    .page-num-wrapper p {
+        margin-top: 0.2rem;
+        font-size: 1.2rem;
+        color: #a8a8a8;
+    }
+    
+    .page-num-wrapper span {
+        padding: 1rem;
+    }
+}

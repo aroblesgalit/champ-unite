@@ -283,6 +283,11 @@
         align-self: flex-end;
         margin-right: 0;
     }
+
+    .champions-search-results,
+    .users-search-results {
+        margin-top: 1rem;
+    }
     
     .battle-top {
         flex-direction: column;
