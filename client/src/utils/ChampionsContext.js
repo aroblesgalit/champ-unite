@@ -7,7 +7,7 @@ const ChampionsContext = React.createContext();
 function ChampionsProvider(props) {
 
     const [pagination, setPagination] = useState({
-        nums: [1, 2, 3, 4],
+        nums: [],
         currentViews: [],
         currentPage: 1
     });
@@ -30,6 +30,7 @@ function ChampionsProvider(props) {
                     db: res.data,
                     searchResults: res.data
                 });
+                setNums(res.data);
             })
             .catch(err => {
                 console.log("Something went wrong while fetching champions from db...", err);
@@ -54,6 +55,7 @@ function ChampionsProvider(props) {
                 ...champions,
                 searchResults: champions.db
             })
+            setNums(champions.db);
             return;
         }
 
@@ -201,7 +203,20 @@ function ChampionsProvider(props) {
     //    if page num === 2, then view indexes 20 to 39
     // 7. Map out the currentViews in the ChampionSearch page  
 
-    // Method for updating currentPage
+    // Method for calculating amount of pages and setting nums
+    function setNums(champs) {
+        const tempPages = Math.ceil(champs.length / 20);
+        const tempNums = [];
+        for (let i = 1; i < tempPages + 1; i++) {
+            tempNums.push(i);
+        }
+        setPagination({
+            ...pagination,
+            nums: tempNums
+        })
+    };
+
+    // Methods for updating currentPage
     function nextPage() {
         if (pagination.currentPage < pagination.nums.length) {
             setPagination({
