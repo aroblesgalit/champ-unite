@@ -60,7 +60,7 @@ function ChampionsProvider(props) {
                 searchResults: champions.db
             })
             setNums(champions.db);
-            updateCurrentViews(1, champions.data);
+            updateCurrentViews(1, champions.db);
             return;
         }
 
@@ -201,19 +201,7 @@ function ChampionsProvider(props) {
     };
 
 
-    // For pagination
-    // 1. Create states for pagination with fields for nums, currentViews, currentPage
-    // 2. Get the search results array
-    // 3. Calculate the amount of pages by taking the length of the array 
-    //    and dividing it by 20 (num of cards for show at a time) 
-    //    then round up to get the number of pages -- use Math.ceil() to round up
-    // 4. Use number of pages to map each number into the nums field
-    // 5. Set currentViews to the first 20 champs from the results array
-    // 6. Create a method for updating the currentViews based on the page num
-    //    if page num === 1, then view indexes (page num - 1) * 20 up to ((page num - 1) * 20)) + (20 - 1)
-    //    so if page num === 1, then view (1 - 1) * 20 up to ((1 - 1) * 20) + (20 - 1) ==> indexes 0 - 19
-    //    if page num === 2, then view indexes 20 to 39
-    // 7. Map out the currentViews in the ChampionSearch page  
+    // For pagination //
 
     // Method for updating the currentViews of 20 champions
     function updateCurrentViews(page, array) {
@@ -271,7 +259,7 @@ function ChampionsProvider(props) {
         if (num) {
             setPagination({
                 ...pagination,
-                currentPage: num
+                currentPage: parseInt(num)
             });
             updateCurrentViews(num, champions.searchResults);
         }

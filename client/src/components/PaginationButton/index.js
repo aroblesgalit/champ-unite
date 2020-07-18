@@ -17,7 +17,7 @@ function PaginationButton() {
                         <div className="page-num-wrapper uk-flex uk-flex-column uk-flex-middle">
                             <div className="uk-flex uk-flex-center uk-flex-middle">
                                 <span uk-icon="chevron-left" className={`${currentPage === 1 ? "disabled" : ""}`} onClick={() => prevPage()} />
-                                <input type="number" value={currentPage} defaultValue="1" onChange={(e) => setCurrentPage(e.target.value)}/>
+                                <input type="number" value={currentPage} onChange={(e) => setCurrentPage(e.target.value)}/>
                                 <span uk-icon="chevron-right" className={`${currentPage === nums.length ? "disabled" : ""}`} onClick={() => nextPage()} />
                             </div>
                             <p>of {nums.length}</p>

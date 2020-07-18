@@ -33,7 +33,8 @@ function ChampionsSearch() {
                                 }
                             </div>
                             <div className="champions-search-results uk-flex uk-flex-wrap">
-                                { list && list.length > 0 ?
+                                { 
+                                    // list && list.length > 0 ?
                                     list.map(champion => {
                                         return <ChampionCard
                                             key={champion._id || champion.image}
@@ -50,24 +51,25 @@ function ChampionsSearch() {
                                             nullStats={champion.nullStats}
                                             type="search"
                                         />
-                                    }) : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
-                                        db.map(champion => {
-                                            return <ChampionCard
-                                                key={champion._id || champion.image}
-                                                name={champion.name}
-                                                image={champion.image}
-                                                strength={champion.strength}
-                                                power={champion.power}
-                                                combat={champion.combat}
-                                                intelligence={champion.intelligence}
-                                                speed={champion.speed}
-                                                durability={champion.durability}
-                                                attack={champion.attack}
-                                                defense={champion.defense}
-                                                nullStats={champion.nullStats}
-                                                type="search"
-                                            />
-                                        })
+                                    }) 
+                                    // : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
+                                    //     db.map(champion => {
+                                    //         return <ChampionCard
+                                    //             key={champion._id || champion.image}
+                                    //             name={champion.name}
+                                    //             image={champion.image}
+                                    //             strength={champion.strength}
+                                    //             power={champion.power}
+                                    //             combat={champion.combat}
+                                    //             intelligence={champion.intelligence}
+                                    //             speed={champion.speed}
+                                    //             durability={champion.durability}
+                                    //             attack={champion.attack}
+                                    //             defense={champion.defense}
+                                    //             nullStats={champion.nullStats}
+                                    //             type="search"
+                                    //         />
+                                    //     })
                                 }
                             </div>
                         </section>
