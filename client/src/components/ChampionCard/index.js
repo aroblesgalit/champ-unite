@@ -13,7 +13,7 @@ function ChampionCard(props) {
     };
 
     return (
-        <div className="champion-card uk-card uk-position-relatve" tabIndex={props.index} style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
+        <div className="champion-card uk-card uk-position-relatve" style={props.selected && props.selectedId === props.id ? { border: "2px solid #221D54" } : { border: "" }} >
             {
                 props.type === "search" && loggedIn ? (
                     <button
