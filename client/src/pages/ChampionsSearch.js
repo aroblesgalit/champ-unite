@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import ChampionCard from "../components/ChampionCard";
+import PaginationButton from "../components/PaginationButton";
 import { ChampionsConsumer } from "../utils/ChampionsContext";
 import UserContext from "../utils/UserContext";
 
@@ -14,7 +15,7 @@ function ChampionsSearch() {
         <ChampionsConsumer>
             {
                 value => {
-                    const { db, searchResults, noResults, handleSearch } = value;
+                    const { handleSearch, list } = value;
                     return (
                         <section className="uk-section champions-search-container">
                             <div className="uk-flex uk-flex-between uk-width-expand">
@@ -29,28 +30,13 @@ function ChampionsSearch() {
                                     loggedIn ? <Link to="/create_champion" className="create-link uk-button secondary-btn">Create</Link> : ""
                                 }
                             </div>
-                            <div className="champions-search-results uk-flex uk-flex-wrap">
-                                {searchResults.length > 0 ?
-                                    searchResults.map(champion => {
-                                        return <ChampionCard
-                                            key={champion._id || champion.image}
-                                            name={champion.name}
-                                            image={champion.image}
-                                            strength={champion.strength}
-                                            power={champion.power}
-                                            combat={champion.combat}
-                                            intelligence={champion.intelligence}
-                                            speed={champion.speed}
-                                            durability={champion.durability}
-                                            attack={champion.attack}
-                                            defense={champion.defense}
-                                            nullStats={champion.nullStats}
-                                            type="search"
-                                        />
-                                    }) : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
-                                        db.map(champion => {
+                            <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true; finite: true">
+                                <div className="uk-flex uk-flex-nowrap uk-slider-items">
+                                    {
+                                        list.map((champion, index) => {
                                             return <ChampionCard
                                                 key={champion._id || champion.image}
+                                                index={index}
                                                 name={champion.name}
                                                 image={champion.image}
                                                 strength={champion.strength}
@@ -65,8 +51,10 @@ function ChampionsSearch() {
                                                 type="search"
                                             />
                                         })
-                                }
+                                    }
+                                </div>
                             </div>
+                            <PaginationButton />
                         </section>
                     )
                 }

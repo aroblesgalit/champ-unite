@@ -7,15 +7,26 @@
 .champion-card {
     width: 260px;
     min-width: 260px;
-    height: 100%;
+    height: 380px;
     border: 2px solid rgb(67, 198, 172);
     border-radius: 8px;
     background-image: linear-gradient(to right, rgb(67, 198, 172), rgb(25, 22, 84));
-}
-
-.champion-card:not(:last-child) {
     margin-right: 14px;
     margin-bottom: 14px;
+}
+
+/* .champion-card:not(:last-child) {
+    margin-right: 14px;
+    margin-bottom: 14px;
+} */
+
+.champion-card span,
+.champion-card p {
+    user-select: none; /* supported by Chrome and Opera */
+   -webkit-user-select: none; /* Safari */
+   -khtml-user-select: none; /* Konqueror HTML */
+   -moz-user-select: none; /* Firefox */
+   -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 .champion-name-container {

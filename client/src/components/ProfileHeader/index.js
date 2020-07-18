@@ -14,7 +14,7 @@ function ProfileHeader(props) {
     const { displayName, username, rank, wins, losses, champions, image, type } = props;
 
     return (
-        <section className="profile-header uk-section uk-flex uk-flex-bottom uk-light">
+        <section className="profile-header uk-section uk-flex uk-flex-bottom uk-flex-between uk-light">
             <div className="img-and-stats uk-flex uk-flex-middle">
                 <div className="profile-img-container uk-flex uk-flex-center uk-flex-middle uk-margin-right uk-position-relative">
                     {

@@ -6,6 +6,15 @@ const ChampionsContext = React.createContext();
 // Provider
 function ChampionsProvider(props) {
 
+    const [pagination, setPagination] = useState({
+        nums: [],
+        currentPage: 1
+    });
+
+    const [currentViews, setCurrentViews] = useState({
+        list: []
+    });
+
     const [champions, setChampions] = useState({
         db: [],
         searchResults: [],
@@ -21,8 +30,11 @@ function ChampionsProvider(props) {
             .then(res => {
                 setChampions({
                     ...champions,
-                    db: res.data
+                    db: res.data,
+                    searchResults: res.data
                 });
+                setNums(res.data);
+                updateCurrentViews(1, res.data);
             })
             .catch(err => {
                 console.log("Something went wrong while fetching champions from db...", err);
@@ -47,6 +59,8 @@ function ChampionsProvider(props) {
                 ...champions,
                 searchResults: champions.db
             })
+            setNums(champions.db);
+            updateCurrentViews(1, champions.db);
             return;
         }
 
@@ -61,6 +75,8 @@ function ChampionsProvider(props) {
                 ...champions,
                 searchResults: queryFilter
             });
+            setNums(queryFilter);
+            updateCurrentViews(1, queryFilter);
             // If query doesn't exist in the db, run the third party (superhero) api
         } else {
             // console.log("No results form database. Running api call now...");
@@ -72,8 +88,11 @@ function ChampionsProvider(props) {
                 // console.log("No results for this search.")
                 setChampions({
                     ...champions,
-                    noResults: true
+                    noResults: true,
+                    searchResults: []
                 });
+                setNums([]);
+                updateCurrentViews(0, []);
                 // Add query to database
                 await API.addAQuery({
                     query: query,
@@ -173,11 +192,76 @@ function ChampionsProvider(props) {
                 setChampions({
                     ...champions,
                     searchResults: newResults
-                })
+                });
+                setNums(newResults);
+                updateCurrentViews(1, newResults);
                 // console.log("New Results: ", newResults);
-                // Load champions again
-                loadChampionsDB();
             }
+        }
+    };
+
+
+    // For pagination //
+
+    // Method for updating the currentViews of 20 champions
+    function updateCurrentViews(page, array) {
+        let min = (page - 1) * 20;
+        let max = ((page - 1) * 20) + 19;
+        // Check if the page will be the last
+        // Figure out the max since it wont be + 19 ==> should be the length of the array
+        let tempChamps = [];
+        for (let i = min; i <= max; i++) {
+            if (!array[i]) {
+                return;
+            }
+            tempChamps.push(array[i]);
+            setCurrentViews({
+                list: tempChamps
+            });
+            // console.log(tempChamps);
+        }
+    };
+
+    // Method for calculating amount of pages and setting nums
+    function setNums(champs) {
+        const tempPages = Math.ceil(champs.length / 20);
+        const tempNums = [];
+        for (let i = 1; i < tempPages + 1; i++) {
+            tempNums.push(i);
+        }
+        setPagination({
+            ...pagination,
+            currentPage: 1,
+            nums: tempNums
+        })
+    };
+
+    // Methods for updating currentPage
+    function nextPage() {
+        if (pagination.currentPage < pagination.nums.length) {
+            setPagination({
+                ...pagination,
+                currentPage: pagination.currentPage + 1
+            });
+            updateCurrentViews(pagination.currentPage + 1, champions.searchResults);
+        }
+    };
+    function prevPage() {
+        if (pagination.currentPage > 1) {
+            setPagination({
+                ...pagination,
+                currentPage: pagination.currentPage - 1
+            });
+            updateCurrentViews(pagination.currentPage - 1, champions.searchResults);
+        }
+    };
+    function setCurrentPage(num) {
+        if (num) {
+            setPagination({
+                ...pagination,
+                currentPage: parseInt(num)
+            });
+            updateCurrentViews(num, champions.searchResults);
         }
     };
 
@@ -187,7 +271,12 @@ function ChampionsProvider(props) {
         <ChampionsContext.Provider
             value={{
                 ...champions,
-                handleSearch
+                ...pagination,
+                ...currentViews,
+                handleSearch,
+                prevPage,
+                nextPage,
+                setCurrentPage
             }}
         >
             {props.children}
