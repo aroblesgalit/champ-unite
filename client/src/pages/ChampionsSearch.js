@@ -15,7 +15,7 @@ function ChampionsSearch() {
         <ChampionsConsumer>
             {
                 value => {
-                    const { handleSearch, list, currentPage, searchResults } = value;
+                    const { handleSearch, list, searchResults } = value;
                     const totalChamps = searchResults.length;
                     const rangeMin = searchResults.indexOf(list[0]) + 1;
                     const rangeMax = searchResults.indexOf(list[list.length - 1]) + 1;
@@ -38,32 +38,38 @@ function ChampionsSearch() {
                                     loggedIn ? <Link to="/create_champion" className="create-link uk-button secondary-btn">Create</Link> : ""
                                 }
                             </div>
-                            <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
-                                <div className="uk-flex uk-flex-nowrap uk-slider-items">
-                                    {
-                                        list.map((champion, index) => {
-                                            return <ChampionCard
-                                                key={champion._id || champion.image}
-                                                index={index}
-                                                name={champion.name}
-                                                image={champion.image}
-                                                strength={champion.strength}
-                                                power={champion.power}
-                                                combat={champion.combat}
-                                                intelligence={champion.intelligence}
-                                                speed={champion.speed}
-                                                durability={champion.durability}
-                                                attack={champion.attack}
-                                                defense={champion.defense}
-                                                nullStats={champion.nullStats}
-                                                type="search"
-                                            />
-                                        })
-                                    }
-                                </div>
-                            </div>
-                            <p className="uk-text-small uk-text-mute uk-margin-remove uk-text-right">Showing {rangeMin}-{rangeMax} of {totalChamps}</p>
-                            <PaginationButton />
+                            {
+                                list.length > 0 ? (
+                                    <React.Fragment>
+                                        <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
+                                            <div className="uk-flex uk-flex-nowrap uk-slider-items">
+                                                {
+                                                    list.map((champion, index) => {
+                                                        return <ChampionCard
+                                                            key={champion._id || champion.image}
+                                                            index={index}
+                                                            name={champion.name}
+                                                            image={champion.image}
+                                                            strength={champion.strength}
+                                                            power={champion.power}
+                                                            combat={champion.combat}
+                                                            intelligence={champion.intelligence}
+                                                            speed={champion.speed}
+                                                            durability={champion.durability}
+                                                            attack={champion.attack}
+                                                            defense={champion.defense}
+                                                            nullStats={champion.nullStats}
+                                                            type="search"
+                                                        />
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                        <p className="uk-text-small uk-text-mute uk-margin-remove uk-text-right">Showing {rangeMin}-{rangeMax} of {totalChamps}</p>
+                                        <PaginationButton />
+                                    </React.Fragment>
+                                ) : <p className="uk-text-small uk-text-warning">No results found for <strong>{searchRef.current.value}</strong>.</p>
+                            }
                         </section>
                     )
                 }
