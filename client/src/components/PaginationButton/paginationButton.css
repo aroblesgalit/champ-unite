@@ -37,6 +37,7 @@
     background-color: #dddddd;
     color: rgb(155, 155, 155);
     cursor: unset;
+    visibility: hidden;
 }
 
 

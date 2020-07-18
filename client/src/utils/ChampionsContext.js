@@ -70,6 +70,7 @@ function ChampionsProvider(props) {
                 ...champions,
                 searchResults: queryFilter
             });
+            setNums(queryFilter);
             // If query doesn't exist in the db, run the third party (superhero) api
         } else {
             // console.log("No results form database. Running api call now...");
@@ -182,7 +183,8 @@ function ChampionsProvider(props) {
                 setChampions({
                     ...champions,
                     searchResults: newResults
-                })
+                });
+                setNums(newResults);
                 // console.log("New Results: ", newResults);
             }
         }
