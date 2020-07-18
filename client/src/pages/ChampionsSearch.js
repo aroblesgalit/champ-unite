@@ -15,11 +15,9 @@ function ChampionsSearch() {
         <ChampionsConsumer>
             {
                 value => {
-                    const { db, searchResults, noResults, handleSearch, list } = value;
+                    const { handleSearch, list } = value;
                     return (
                         <section className="uk-section champions-search-container">
-                            <PaginationButton />
-
                             <div className="uk-flex uk-flex-between uk-width-expand">
                                 <div className="title-and-form uk-flex uk-flex-middle">
                                     <h2>Champions</h2>
@@ -32,46 +30,31 @@ function ChampionsSearch() {
                                     loggedIn ? <Link to="/create_champion" className="create-link uk-button secondary-btn">Create</Link> : ""
                                 }
                             </div>
-                            <div className="champions-search-results uk-flex uk-flex-wrap">
-                                { 
-                                    // list && list.length > 0 ?
-                                    list.map(champion => {
-                                        return <ChampionCard
-                                            key={champion._id || champion.image}
-                                            name={champion.name}
-                                            image={champion.image}
-                                            strength={champion.strength}
-                                            power={champion.power}
-                                            combat={champion.combat}
-                                            intelligence={champion.intelligence}
-                                            speed={champion.speed}
-                                            durability={champion.durability}
-                                            attack={champion.attack}
-                                            defense={champion.defense}
-                                            nullStats={champion.nullStats}
-                                            type="search"
-                                        />
-                                    }) 
-                                    // : noResults ? <p className="uk-text-warning">No results found. Please try a different search!</p> :
-                                    //     db.map(champion => {
-                                    //         return <ChampionCard
-                                    //             key={champion._id || champion.image}
-                                    //             name={champion.name}
-                                    //             image={champion.image}
-                                    //             strength={champion.strength}
-                                    //             power={champion.power}
-                                    //             combat={champion.combat}
-                                    //             intelligence={champion.intelligence}
-                                    //             speed={champion.speed}
-                                    //             durability={champion.durability}
-                                    //             attack={champion.attack}
-                                    //             defense={champion.defense}
-                                    //             nullStats={champion.nullStats}
-                                    //             type="search"
-                                    //         />
-                                    //     })
-                                }
+                            <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true; finite: true">
+                                <div className="uk-flex uk-flex-nowrap uk-slider-items">
+                                    {
+                                        list.map((champion, index) => {
+                                            return <ChampionCard
+                                                key={champion._id || champion.image}
+                                                index={index}
+                                                name={champion.name}
+                                                image={champion.image}
+                                                strength={champion.strength}
+                                                power={champion.power}
+                                                combat={champion.combat}
+                                                intelligence={champion.intelligence}
+                                                speed={champion.speed}
+                                                durability={champion.durability}
+                                                attack={champion.attack}
+                                                defense={champion.defense}
+                                                nullStats={champion.nullStats}
+                                                type="search"
+                                            />
+                                        })
+                                    }
+                                </div>
                             </div>
+                            <PaginationButton />
                         </section>
                     )
                 }

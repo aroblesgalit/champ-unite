@@ -14,7 +14,7 @@ function PaginationButton() {
                 value => {
                     const { nums, currentPage, prevPage, nextPage, setCurrentPage } = value;
                     return nums.length > 1 ? (
-                        <div className="page-num-wrapper uk-flex uk-flex-column uk-flex-middle">
+                        <div className="page-num-wrapper uk-flex uk-flex-column uk-flex-middle uk-margin-top">
                             <div className="uk-flex uk-flex-center uk-flex-middle">
                                 <span uk-icon="chevron-left" className={`${currentPage === 1 ? "disabled" : ""}`} onClick={() => prevPage()} />
                                 <input type="number" value={currentPage} onChange={(e) => setCurrentPage(e.target.value)}/>

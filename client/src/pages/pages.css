@@ -209,6 +209,18 @@
     margin-right: 1.25rem;
 }
 
+.champions-search-results {
+    background-color: #e7e7e7;
+    padding: 1rem 280px 0 1rem;
+    flex-wrap: nowrap;
+    /* overflow: auto; */
+    overflow-x: hidden;
+    cursor: grab;
+    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+}
+
 
 
 /* Users Search */
@@ -262,9 +274,9 @@
         align-self: flex-start;
     }
 
-    .champions-search-container div:first-child {
+    /* .champions-search-container div:first-child {
         flex-direction: column;
-    }
+    } */
 
     .champions-search-container .create-link {
         max-width: 120px;
