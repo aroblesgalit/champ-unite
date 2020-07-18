@@ -218,7 +218,14 @@ function ChampionsProvider(props) {
             });
         }
     };
-
+    function setCurrentPage(num) {
+        if (num) {
+            setPagination({
+                ...pagination,
+                currentPage: num
+            })
+        }
+    };
 
     // ------------- Champion Search Ends -------------  //
 
@@ -229,7 +236,8 @@ function ChampionsProvider(props) {
                 ...pagination,
                 handleSearch,
                 prevPage,
-                nextPage
+                nextPage,
+                setCurrentPage
             }}
         >
             {props.children}
