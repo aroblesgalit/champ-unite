@@ -49,8 +49,8 @@
 .add-btn,
 .select-btn {
     z-index: 4;
-    background-color: rgb(67, 198, 172);
-    color: #f2f2f2;
+    background-color: rgb(67, 198, 172) !important;
+    color: #f2f2f2 !important;
     top: 5px;
     right: 5px;
 }
@@ -59,8 +59,8 @@
 .select-btn:hover,
 .add-btn:focus,
 .select-btn:focus {
-    background-color: rgb(25, 22, 84);
-    color: #f2f2f2;
+    background-color: rgb(25, 22, 84) !important;
+    color: #f2f2f2 !important;
 }
 
 .delete-btn {

@@ -15,7 +15,10 @@ function ChampionsSearch() {
         <ChampionsConsumer>
             {
                 value => {
-                    const { handleSearch, list } = value;
+                    const { handleSearch, list, currentPage, searchResults } = value;
+                    const totalChamps = searchResults.length;
+                    const rangeMin = searchResults.indexOf(list[0]) + 1;
+                    const rangeMax = searchResults.indexOf(list[list.length - 1]) + 1;
                     return (
                         <section className="uk-section champions-search-container">
                             <div className="champions-search-header uk-flex uk-flex-between uk-width-expand">
@@ -35,7 +38,7 @@ function ChampionsSearch() {
                                     loggedIn ? <Link to="/create_champion" className="create-link uk-button secondary-btn">Create</Link> : ""
                                 }
                             </div>
-                            <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true; finite: true">
+                            <div className="champions-search-results uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
                                 <div className="uk-flex uk-flex-nowrap uk-slider-items">
                                     {
                                         list.map((champion, index) => {
@@ -59,6 +62,7 @@ function ChampionsSearch() {
                                     }
                                 </div>
                             </div>
+                            <p className="uk-text-small uk-text-mute uk-margin-remove uk-text-right">Showing {rangeMin}-{rangeMax} of {totalChamps}</p>
                             <PaginationButton />
                         </section>
                     )
