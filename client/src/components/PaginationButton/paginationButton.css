@@ -27,10 +27,16 @@
     cursor: pointer;
 }
 
-.page-num-wrapper span:hover {
+.page-num-wrapper span:hover:not(.disabled) {
     background-color: rgb(67, 198, 172);
     color: #fff;
     border: 1px solid rgb(67, 198, 172);
+}
+
+.page-num-wrapper .disabled {
+    background-color: #dddddd;
+    color: rgb(155, 155, 155);
+    cursor: unset;
 }
 
 

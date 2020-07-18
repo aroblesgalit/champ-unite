@@ -7,7 +7,7 @@ const ChampionsContext = React.createContext();
 function ChampionsProvider(props) {
 
     const [pagination, setPagination] = useState({
-        nums: [1, 2, 3],
+        nums: [1, 2, 3, 4],
         currentViews: [],
         currentPage: 1
     });
