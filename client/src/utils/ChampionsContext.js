@@ -7,7 +7,7 @@ const ChampionsContext = React.createContext();
 function ChampionsProvider(props) {
 
     const [pagination, setPagination] = useState({
-        nums: [], 
+        nums: [1, 2, 3],
         currentViews: [],
         currentPage: 1
     });
@@ -201,6 +201,25 @@ function ChampionsProvider(props) {
     //    if page num === 2, then view indexes 20 to 39
     // 7. Map out the currentViews in the ChampionSearch page  
 
+    // Method for updating currentPage
+    function nextPage() {
+        if (pagination.currentPage < pagination.nums.length) {
+            setPagination({
+                ...pagination,
+                currentPage: pagination.currentPage + 1
+            });
+        }
+    };
+    function prevPage() {
+        if (pagination.currentPage > 1) {
+            setPagination({
+                ...pagination,
+                currentPage: pagination.currentPage - 1
+            });
+        }
+    };
+
+
     // ------------- Champion Search Ends -------------  //
 
     return (
@@ -208,7 +227,9 @@ function ChampionsProvider(props) {
             value={{
                 ...champions,
                 ...pagination,
-                handleSearch
+                handleSearch,
+                prevPage,
+                nextPage
             }}
         >
             {props.children}
