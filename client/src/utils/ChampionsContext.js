@@ -8,9 +8,10 @@ function ChampionsProvider(props) {
 
     const [pagination, setPagination] = useState({
         nums: [],
-        currentViews: [],
         currentPage: 1
     });
+
+    const [currentViews, setCurrentViews] = useState([]);
 
     const [champions, setChampions] = useState({
         db: [],
@@ -31,6 +32,7 @@ function ChampionsProvider(props) {
                     searchResults: res.data
                 });
                 setNums(res.data);
+                updateCurrentViews(1, res.data);
             })
             .catch(err => {
                 console.log("Something went wrong while fetching champions from db...", err);
@@ -82,8 +84,10 @@ function ChampionsProvider(props) {
                 // console.log("No results for this search.")
                 setChampions({
                     ...champions,
-                    noResults: true
+                    noResults: true,
+                    searchResults: []
                 });
+                setNums([]);
                 // Add query to database
                 await API.addAQuery({
                     query: query,
@@ -205,6 +209,17 @@ function ChampionsProvider(props) {
     //    if page num === 2, then view indexes 20 to 39
     // 7. Map out the currentViews in the ChampionSearch page  
 
+    // Method for updating the currentViews of 20 champions
+    function updateCurrentViews(page, array) {
+        let min = (page - 1) * 20;
+        let max = ((page - 1) * 20) + 19;
+        let tempChamps = [];
+        for (let i = min; i <= max; i++) {
+            tempChamps.push(array[i]);
+        }
+        setCurrentViews(tempChamps);
+    };
+
     // Method for calculating amount of pages and setting nums
     function setNums(champs) {
         const tempPages = Math.ceil(champs.length / 20);
@@ -214,6 +229,7 @@ function ChampionsProvider(props) {
         }
         setPagination({
             ...pagination,
+            currentPage: 1,
             nums: tempNums
         })
     };
@@ -225,6 +241,7 @@ function ChampionsProvider(props) {
                 ...pagination,
                 currentPage: pagination.currentPage + 1
             });
+            updateCurrentViews(pagination.currentPage + 1, champions.searchResults);
         }
     };
     function prevPage() {
@@ -233,6 +250,7 @@ function ChampionsProvider(props) {
                 ...pagination,
                 currentPage: pagination.currentPage - 1
             });
+            updateCurrentViews(pagination.currentPage - 1, champions.searchResults);
         }
     };
     function setCurrentPage(num) {
@@ -240,7 +258,8 @@ function ChampionsProvider(props) {
             setPagination({
                 ...pagination,
                 currentPage: num
-            })
+            });
+            updateCurrentViews(num, champions.searchResults);
         }
     };
 
