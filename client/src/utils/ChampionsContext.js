@@ -11,7 +11,9 @@ function ChampionsProvider(props) {
         currentPage: 1
     });
 
-    const [currentViews, setCurrentViews] = useState([]);
+    const [currentViews, setCurrentViews] = useState({
+        list: []
+    });
 
     const [champions, setChampions] = useState({
         db: [],
@@ -58,6 +60,7 @@ function ChampionsProvider(props) {
                 searchResults: champions.db
             })
             setNums(champions.db);
+            updateCurrentViews(1, champions.data);
             return;
         }
 
@@ -73,6 +76,7 @@ function ChampionsProvider(props) {
                 searchResults: queryFilter
             });
             setNums(queryFilter);
+            updateCurrentViews(1, queryFilter);
             // If query doesn't exist in the db, run the third party (superhero) api
         } else {
             // console.log("No results form database. Running api call now...");
@@ -88,6 +92,7 @@ function ChampionsProvider(props) {
                     searchResults: []
                 });
                 setNums([]);
+                updateCurrentViews(0, []);
                 // Add query to database
                 await API.addAQuery({
                     query: query,
@@ -189,6 +194,7 @@ function ChampionsProvider(props) {
                     searchResults: newResults
                 });
                 setNums(newResults);
+                updateCurrentViews(1, newResults);
                 // console.log("New Results: ", newResults);
             }
         }
@@ -213,11 +219,19 @@ function ChampionsProvider(props) {
     function updateCurrentViews(page, array) {
         let min = (page - 1) * 20;
         let max = ((page - 1) * 20) + 19;
+        // Check if the page will be the last
+        // Figure out the max since it wont be + 19 ==> should be the length of the array
         let tempChamps = [];
         for (let i = min; i <= max; i++) {
+            if (!array[i]) {
+                return;
+            }
             tempChamps.push(array[i]);
+            setCurrentViews({
+                list: tempChamps
+            });
+            // console.log(tempChamps);
         }
-        setCurrentViews(tempChamps);
     };
 
     // Method for calculating amount of pages and setting nums
@@ -270,6 +284,7 @@ function ChampionsProvider(props) {
             value={{
                 ...champions,
                 ...pagination,
+                ...currentViews,
                 handleSearch,
                 prevPage,
                 nextPage,

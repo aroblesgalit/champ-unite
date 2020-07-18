@@ -15,7 +15,7 @@ function ChampionsSearch() {
         <ChampionsConsumer>
             {
                 value => {
-                    const { db, searchResults, noResults, handleSearch } = value;
+                    const { db, searchResults, noResults, handleSearch, list } = value;
                     return (
                         <section className="uk-section champions-search-container">
                             <PaginationButton />
@@ -33,8 +33,8 @@ function ChampionsSearch() {
                                 }
                             </div>
                             <div className="champions-search-results uk-flex uk-flex-wrap">
-                                {searchResults.length > 0 ?
-                                    searchResults.map(champion => {
+                                { list && list.length > 0 ?
+                                    list.map(champion => {
                                         return <ChampionCard
                                             key={champion._id || champion.image}
                                             name={champion.name}
