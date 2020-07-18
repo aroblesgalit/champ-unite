@@ -51,28 +51,30 @@ function OtherUserProfile() {
                 <div className="uk-flex uk-flex-middle uk-flex-between">
                     <h3>Champions</h3>
                 </div>
-                <div className="champions-list-container uk-flex uk-flex-wrap">
-                    {
-                        userDetail.champions && userDetail.champions.length > 0 ? (
-                            userDetail.champions.map(champion => {
-                                return <ChampionCard
-                                    key={champion._id || champion.image}
-                                    id={champion._id}
-                                    name={champion.name}
-                                    image={champion.image}
-                                    strength={champion.strength}
-                                    power={champion.power}
-                                    combat={champion.combat}
-                                    intelligence={champion.intelligence}
-                                    speed={champion.speed}
-                                    durability={champion.durability}
-                                    attack={champion.attack}
-                                    defense={champion.defense}
-                                    type="otherUser"
-                                />
-                            })
-                        ) : <p>This user has no champions yet.</p>
-                    }
+                <div className="champions-list-container uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
+                    <div className="uk-flex uk-flex-nowrap uk-slider-items">
+                        {
+                            userDetail.champions && userDetail.champions.length > 0 ? (
+                                userDetail.champions.map(champion => {
+                                    return <ChampionCard
+                                        key={champion._id || champion.image}
+                                        id={champion._id}
+                                        name={champion.name}
+                                        image={champion.image}
+                                        strength={champion.strength}
+                                        power={champion.power}
+                                        combat={champion.combat}
+                                        intelligence={champion.intelligence}
+                                        speed={champion.speed}
+                                        durability={champion.durability}
+                                        attack={champion.attack}
+                                        defense={champion.defense}
+                                        type="otherUser"
+                                    />
+                                })
+                            ) : <p>This user has no champions yet.</p>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

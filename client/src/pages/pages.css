@@ -90,9 +90,16 @@
 }
 
 .champions-list-container {
-    border: 1px solid #c0c0c0;
-    padding: 20px;
+    /* border: 1px solid #c0c0c0; */
+    background-color: #f2f2f2;
+    padding: 1.25rem;
     margin-top: 10px;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    cursor: grab;
+    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
 }
 
 /* .user-champions-container a:hover {
@@ -209,15 +216,10 @@
     display: none;
 }
 
-.champions-search-container .create-link {
-    /* margin-right: 1.25rem; */
-}
-
 .champions-search-results {
-    background-color: #e7e7e7;
+    background-color: #f2f2f2;
     padding: 1rem 280px 0 1rem;
     flex-wrap: nowrap;
-    /* overflow: auto; */
     overflow-x: hidden;
     cursor: grab;
     -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
@@ -245,10 +247,6 @@
     .create-container,
     .user-champions-container {
         padding: 20px;
-    }
-
-    .champions-list-container {
-        padding: 10px;
     }
 
     .battle-text {
