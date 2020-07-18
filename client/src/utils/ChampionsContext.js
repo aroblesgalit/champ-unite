@@ -182,11 +182,11 @@ function ChampionsProvider(props) {
 
 
     // For pagination
-    // 1. Create states for pagination with fields for nums, currentViews
+    // 1. Create states for pagination with fields for nums, currentViews, currentPage
     // 2. Get the search results array
     // 3. Calculate the amount of pages by taking the length of the array 
     //    and dividing it by 20 (num of cards for show at a time) 
-    //    then round up to get the number of pages
+    //    then round up to get the number of pages -- use Math.ceil() to round up
     // 4. Use number of pages to map each number into the nums field
     // 5. Set currentViews to the first 20 champs from the results array
     // 6. Create a method for updating the currentViews based on the page num

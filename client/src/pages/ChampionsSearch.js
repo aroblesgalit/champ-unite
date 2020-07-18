@@ -1,6 +1,7 @@
 import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import ChampionCard from "../components/ChampionCard";
+import PaginationButton from "../components/PaginationButton";
 import { ChampionsConsumer } from "../utils/ChampionsContext";
 import UserContext from "../utils/UserContext";
 
@@ -17,6 +18,8 @@ function ChampionsSearch() {
                     const { db, searchResults, noResults, handleSearch } = value;
                     return (
                         <section className="uk-section champions-search-container">
+                            <PaginationButton />
+
                             <div className="uk-flex uk-flex-between uk-width-expand">
                                 <div className="title-and-form uk-flex uk-flex-middle">
                                     <h2>Champions</h2>
