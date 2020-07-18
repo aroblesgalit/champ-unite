@@ -13,11 +13,12 @@
 .user-champions-modal {
     background-color: #fff;
     max-height: 100vh;
+    max-width: 100%;
 }
 
 .user-champions-modal-header {
     padding: 1rem;
-    border-bottom: 1px solid #c0c0c0;
+    /* border-bottom: 1px solid #c0c0c0; */
 }
 
 .user-champions-modal-header p {
@@ -26,11 +27,17 @@
 
 .user-champions-modal-body {
     padding: 1rem;
-    max-height: 50vh;
-    overflow-y: scroll;
+    margin: 0 0.8rem;
+    /* overflow-y: scroll; */
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    cursor: grab;
+    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
 }
 
 .user-champions-modal-footer {
     padding: 1rem;
-    border-top: 1px solid #c0c0c0;
+    /* border-top: 1px solid #c0c0c0; */
 }
