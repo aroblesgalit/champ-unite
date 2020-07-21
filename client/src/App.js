@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Homepage from "./pages/Homepage";
 import Footer from "./components/Footer";
@@ -16,7 +16,9 @@ import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
 import ImageModal from "./components/ImageModal";
 import ChampionCardAlerts from "./components/ChampionCardAlerts";
-import { UserProvider, UserConsumer } from "./utils/UserContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
+import { UserProvider } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 import { ChampionsProvider } from "./utils/ChampionsContext";
 
@@ -30,38 +32,19 @@ function App() {
               <ChampSelectModal />
               <ImageModal />
               <ChampionCardAlerts />
-              <UserConsumer>
-                {
-                  value => {
-                    return value.battleMode ? "" : <Header />
-                  }
-                }
-              </UserConsumer>
+              <Header />
               <Switch>
                 <Route exact path="/">
                   <Homepage />
                 </Route>
                 <Route path="/login">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <Redirect to="/profile" /> : <Login />
-                      }
-
-                    }
-                  </UserConsumer>
+                  <PublicRoute component={Login} />
                 </Route>
                 <Route path="/signup">
                   <Signup />
                 </Route>
                 <Route exact path="/profile">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={UserProfile} />
                 </Route>
                 <Route path="/champions">
                   <ChampionsSearch />
@@ -73,37 +56,19 @@ function App() {
                   <OtherUserProfile />
                 </Route>
                 <Route path="/battle/:userid/vs/:otheruserid">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <Battle /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={Battle} />
                 </Route>
                 <Route path="/ranking">
                   <Ranking />
                 </Route>
                 <Route path="/create_champion">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <CreateChampion /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={CreateChampion} />
                 </Route>
                 <Route path="/credits">
                   <Credits />
                 </Route>
               </Switch>
-              <UserConsumer>
-                {
-                  value => {
-                    return value.battleMode ? "" : <Footer />
-                  }
-                }
-              </UserConsumer>
+              <Footer />
             </div>
           </Router>
         </ChampionsProvider>
