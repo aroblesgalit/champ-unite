@@ -16,6 +16,7 @@ import Credits from "./pages/Credits";
 import ChampSelectModal from "./components/ChampSelectModal";
 import ImageModal from "./components/ImageModal";
 import ChampionCardAlerts from "./components/ChampionCardAlerts";
+import ProtectedRoute from "./components/ProtectedRoute";
 import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 import { ChampionsProvider } from "./utils/ChampionsContext";
@@ -55,13 +56,7 @@ function App() {
                   <Signup />
                 </Route>
                 <Route exact path="/profile">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <UserProfile /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={UserProfile} />
                 </Route>
                 <Route path="/champions">
                   <ChampionsSearch />
@@ -73,25 +68,13 @@ function App() {
                   <OtherUserProfile />
                 </Route>
                 <Route path="/battle/:userid/vs/:otheruserid">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <Battle /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={Battle} />
                 </Route>
                 <Route path="/ranking">
                   <Ranking />
                 </Route>
                 <Route path="/create_champion">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <CreateChampion /> : <Redirect to="/login" />
-                      }
-                    }
-                  </UserConsumer>
+                  <ProtectedRoute component={CreateChampion} />
                 </Route>
                 <Route path="/credits">
                   <Credits />
