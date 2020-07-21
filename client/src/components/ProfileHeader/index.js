@@ -1,17 +1,15 @@
 import React, { useContext } from "react";
 import "./style.css";
 import UserContext from "../../utils/UserContext";
-import UsersContext from "../../utils/UsersContext";
 
 function ProfileHeader(props) {
 
     // Get authenticated user's info and event handlers for champion select modal and image upload modal from UserContext
-    const { info, handleModal, handleImageModal } = useContext(UserContext);
-    // Get event handler for selecting other user's champion
-    const { handleChampionSelect } = useContext(UsersContext);
+    const { info, handleImageModal } = useContext(UserContext);
+    
 
     // Get user's data values from props for rendering
-    const { displayName, username, rank, wins, losses, champions, image, type } = props;
+    const { displayName, username, rank, wins, losses, image } = props;
 
     return (
         <section className="profile-header uk-section uk-flex uk-flex-bottom uk-flex-between uk-light">
@@ -48,19 +46,6 @@ function ProfileHeader(props) {
                     </div>
                 </div>
             </div>
-            {
-                type === "otherUser" && champions && info.champions && info.champions.length > 0 && champions.length > 0 ? (
-                    <button
-                        className="uk-button secondary-btn"
-                        onClick={() => {
-                            handleChampionSelect(champions);
-                            handleModal();
-                        }}
-                    >
-                        Battle
-                    </button>
-                ) : ""
-            }
         </section>
     );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "./pages.css";
 import { Link } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
@@ -22,7 +23,7 @@ function UserProfile() {
                             />
 
                             <div className="user-champions-container">
-                                <div className="uk-flex uk-flex-middle uk-flex-between">
+                                <div className="user-champions-header uk-flex uk-flex-middle uk-flex-between">
                                     <h3>My Champions</h3>
                                     <Link to="/create_champion" className="uk-button secondary-btn">Create</Link>
                                 </div>

@@ -8,14 +8,11 @@
 .login-container, 
 .signup-container, 
 .user-profile-container,
-.champions-search-container,
 .user-champions-container,
 .users-search-container,
+.champions-search-container,
 .ranking-container,
-.create-container {
-    min-height: calc(100vh - 230px);
-}
-
+.create-container,
 .battle-container {
     min-height: 100vh;
 }
@@ -50,11 +47,9 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-.champions-search-container,
 .users-search-container,
 .battle-container,
-.create-container,
-.user-champions-container {
+.create-container {
     padding: 40px 100px;
     padding-top: 40px;
 }
@@ -90,16 +85,17 @@
 }
 
 .champions-list-container {
-    /* border: 1px solid #c0c0c0; */
-    background-color: #f2f2f2;
-    padding: 1.25rem;
-    margin-top: 10px;
+    padding: 1.25rem 6.25rem;
     flex-wrap: nowrap;
     overflow-x: hidden;
     cursor: grab;
-    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
     -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
-    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75); */
+}
+
+.user-champions-header {
+     padding: 1.25rem 6.25rem 0 6.25rem;
 }
 
 /* .user-champions-container a:hover {
@@ -206,6 +202,18 @@
 
 
 /* Champions search */
+.champions-search-container {
+    padding: 2.5rem 0;
+}
+
+.champions-search-header {
+    padding: 0 6.25rem; 
+}
+
+.results-info {
+    padding: 0 1rem;
+}
+
 .title-and-form {
     width: 100%;
     max-width: 500px;
@@ -217,14 +225,14 @@
 }
 
 .champions-search-results {
-    background-color: #f2f2f2;
-    padding: 1rem 280px 0 1rem;
+    /* background-color: #f2f2f2; */
+    padding: 0 6.25rem;
     flex-wrap: nowrap;
     overflow-x: hidden;
     cursor: grab;
-    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
     -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
-    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75); */
 }
 
 
@@ -240,12 +248,10 @@
 
 /* Medium devices (landscape tablets, 768px and below) */
 @media only screen and (max-width: 768px) {
-    .champions-search-container,
     .users-search-container,
     .battle-container,
     .ranking-container,
-    .create-container,
-    .user-champions-container {
+    .create-container {
         padding: 20px;
     }
 
@@ -281,8 +287,25 @@
         /* align-self: flex-start; */
     }
 
+    .champions-list-container {
+        padding: 1rem 3rem 1rem 1rem;
+    }
+
+    .user-champions-header {
+        padding: 1rem 1rem 0 1rem;
+   }
+
+    .champions-search-container {
+        padding: 1rem 0;
+    }
+
+    .champions-search-results {
+        padding: 0 1rem;
+    }
+
     .champions-search-header {
         flex-direction: column;
+        padding: 0 1rem;
     }
 
     .champions-search-container .create-link {

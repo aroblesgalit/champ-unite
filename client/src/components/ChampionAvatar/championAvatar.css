@@ -4,6 +4,7 @@
     border-radius: 18px;
     overflow: hidden;
     border: 1px solid rgb(67, 198, 172);
+    background-color: rgb(248, 248, 248);
 }
 
 .champion-avatar img {

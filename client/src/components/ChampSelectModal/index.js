@@ -20,8 +20,9 @@ function ChampSelectModal() {
                         champModalOpen ? (
                             <div className="user-champions-modal-wrapper uk-flex uk-flex-middle uk-flex-center">
                                 <div className="user-champions-modal">
-                                    <div className="user-champions-modal-header">
-                                        <p>Select one of your champions to go into battle.</p>
+                                    <div className="user-champions-modal-header uk-flex uk-flex-middle uk-flex-between">
+                                        <p>Select a champion to go into battle.</p>
+                                        <span uk-icon="close" onClick={() => handleModal()}></span>
                                     </div>
                                     <div className="user-champions-modal-body uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
                                         <div className="uk-flex uk-flex-nowrap uk-slider-items">
