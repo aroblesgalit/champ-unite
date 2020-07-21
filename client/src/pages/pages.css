@@ -80,6 +80,10 @@
     margin-top: 40px;
 }
 
+.no-results-text {
+    padding: 0 6.25rem;
+}
+
 .user-champions-container h3 {
     margin: 0;
 }
@@ -322,6 +326,10 @@
     .champions-search-results,
     .users-search-results {
         margin-top: 1rem;
+    }
+
+    .no-results-text {
+        padding: 0 1rem;
     }
     
     .battle-top {

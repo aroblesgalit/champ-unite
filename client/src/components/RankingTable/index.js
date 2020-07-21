@@ -18,17 +18,19 @@ function RankingTable() {
                             const { rankings } = value;
                             return rankings.length > 0 ? (
                                 rankings.map(user => {
-                                    return <RankingTableRow
-                                        key={user._id}
-                                        id={user._id}
-                                        username={user.username}
-                                        rank={user.rank}
-                                        displayName={user.displayName}
-                                        wins={user.wins}
-                                        losses={user.losses}
-                                        totalBattle={user.totalBattle}
-                                        winsPercent={user.winsPercent}
-                                    />
+                                    if (user.rank < 11) {
+                                        return <RankingTableRow
+                                            key={user._id}
+                                            id={user._id}
+                                            username={user.username}
+                                            rank={user.rank}
+                                            displayName={user.displayName}
+                                            wins={user.wins}
+                                            losses={user.losses}
+                                            totalBattle={user.totalBattle}
+                                            winsPercent={user.winsPercent}
+                                        />
+                                    }
                                 })
                             ) : (
                                     <div className="uk-text-nowrap uk-text-muted">
