@@ -48,7 +48,7 @@ function OtherUserProfile() {
                 type="otherUser"
             />
             <div className="user-champions-container">
-                <div className="uk-flex uk-flex-middle uk-flex-between">
+                <div className="user-champions-header uk-flex uk-flex-middle uk-flex-between">
                     <h3>Champions</h3>
                 </div>
                 <div className="champions-list-container uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">

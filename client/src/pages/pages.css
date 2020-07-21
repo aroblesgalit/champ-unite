@@ -49,8 +49,7 @@
 
 .users-search-container,
 .battle-container,
-.create-container,
-.user-champions-container {
+.create-container {
     padding: 40px 100px;
     padding-top: 40px;
 }
@@ -86,16 +85,17 @@
 }
 
 .champions-list-container {
-    /* border: 1px solid #c0c0c0; */
-    background-color: #f2f2f2;
-    padding: 1.25rem;
-    margin-top: 10px;
+    padding: 1.25rem 6.25rem;
     flex-wrap: nowrap;
     overflow-x: hidden;
     cursor: grab;
-    -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    /* -webkit-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
     -moz-box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
-    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75);
+    box-shadow: inset 0 0 1rem 0 rgba(0,0,0,0.75); */
+}
+
+.user-champions-header {
+     padding: 1.25rem 6.25rem 0 6.25rem;
 }
 
 /* .user-champions-container a:hover {
@@ -226,7 +226,7 @@
 
 .champions-search-results {
     /* background-color: #f2f2f2; */
-    padding: 0 0 0 6.25rem;
+    padding: 0 6.25rem;
     flex-wrap: nowrap;
     overflow-x: hidden;
     cursor: grab;
@@ -251,8 +251,7 @@
     .users-search-container,
     .battle-container,
     .ranking-container,
-    .create-container,
-    .user-champions-container {
+    .create-container {
         padding: 20px;
     }
 
@@ -287,6 +286,14 @@
         /* margin-bottom: 1rem; */
         /* align-self: flex-start; */
     }
+
+    .champions-list-container {
+        padding: 1rem 3rem 1rem 1rem;
+    }
+
+    .user-champions-header {
+        padding: 1rem 1rem 0 1rem;
+   }
 
     .champions-search-container {
         padding: 1rem 0;
