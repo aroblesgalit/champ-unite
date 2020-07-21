@@ -65,7 +65,7 @@ function ChampionsSearch() {
                                                 }
                                             </div>
                                         </div>
-                                        <p className="uk-text-small uk-text-mute uk-margin-remove uk-text-right">Showing {rangeMin}-{rangeMax} of {totalChamps}</p>
+                                        <p className="results-info uk-text-small uk-text-mute uk-margin-remove uk-text-right">Showing {rangeMin}-{rangeMax} of {totalChamps}</p>
                                         <PaginationButton />
                                     </React.Fragment>
                                 ) : <p className="uk-text-small uk-text-warning">No results found for <strong>{searchRef.current.value}</strong>.</p>
