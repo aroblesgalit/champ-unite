@@ -18,7 +18,7 @@ import ImageModal from "./components/ImageModal";
 import ChampionCardAlerts from "./components/ChampionCardAlerts";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
-import { UserProvider, UserConsumer } from "./utils/UserContext";
+import { UserProvider } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 import { ChampionsProvider } from "./utils/ChampionsContext";
 
