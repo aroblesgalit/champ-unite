@@ -17,6 +17,7 @@ import ChampSelectModal from "./components/ChampSelectModal";
 import ImageModal from "./components/ImageModal";
 import ChampionCardAlerts from "./components/ChampionCardAlerts";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 import { UserProvider, UserConsumer } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 import { ChampionsProvider } from "./utils/ChampionsContext";
@@ -43,14 +44,7 @@ function App() {
                   <Homepage />
                 </Route>
                 <Route path="/login">
-                  <UserConsumer>
-                    {
-                      value => {
-                        return value.loggedIn ? <Redirect to="/profile" /> : <Login />
-                      }
-
-                    }
-                  </UserConsumer>
+                  <PublicRoute component={Login} />
                 </Route>
                 <Route path="/signup">
                   <Signup />
