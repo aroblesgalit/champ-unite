@@ -68,13 +68,7 @@ function App() {
                   <Credits />
                 </Route>
               </Switch>
-              <UserConsumer>
-                {
-                  value => {
-                    return value.battleMode ? "" : <Footer />
-                  }
-                }
-              </UserConsumer>
+              <Footer />
             </div>
           </Router>
         </ChampionsProvider>

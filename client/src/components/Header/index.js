@@ -7,11 +7,6 @@ function Header() {
 
     let location = useLocation();
 
-    useEffect(() => {
-        console.log("location.pathname...", location.pathname.toString());
-        console.log("location.pathname...", location.pathname.toString().includes("/battle"));
-    }, [])
-
     const { loggedIn, handleLogout } = useContext(UserContext);
 
     if (location.pathname.toString().includes("/battle")) {
