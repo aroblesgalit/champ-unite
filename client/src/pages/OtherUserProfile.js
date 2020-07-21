@@ -3,13 +3,17 @@ import { useParams } from "react-router-dom";
 import ProfileHeader from "../components/ProfileHeader";
 import ChampionCard from "../components/ChampionCard";
 import UsersContext from "../utils/UsersContext";
+import UserContext from "../utils/UserContext";
 
 function OtherUserProfile() {
 
     // Get :username from html route
     const { username } = useParams();
-    // Get list of users form UsersContext
-    const { list } = useContext(UsersContext);
+    // Get list of users and event handler for selecting other user's champion form UsersContext
+    const { list, handleChampionSelect } = useContext(UsersContext);
+
+    // Get authenticated user's info and event handlers for champion select modal and image upload modal from UserContext
+    const { info, handleModal } = useContext(UserContext);
 
     // Declare state for user's details
     const [userDetail, setUserDetail] = useState({});
@@ -50,6 +54,19 @@ function OtherUserProfile() {
             <div className="user-champions-container">
                 <div className="user-champions-header uk-flex uk-flex-middle uk-flex-between">
                     <h3>Champions</h3>
+                    {
+                        userDetail.champions && info.champions && info.champions.length > 0 && userDetail.champions.length > 0 ? (
+                            <button
+                                className="uk-button secondary-btn"
+                                onClick={() => {
+                                    handleChampionSelect(userDetail.champions);
+                                    handleModal();
+                                }}
+                            >
+                                Battle
+                            </button>
+                        ) : ""
+                    }
                 </div>
                 <div className="champions-list-container uk-position-relative uk-visible-toggle" tabIndex="-1" uk-slider="sets: true">
                     <div className="uk-flex uk-flex-nowrap uk-slider-items">
