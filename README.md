@@ -1,8 +1,22 @@
 # ChampUnite
 > A game application where users create a champion(s) to battle against other users on a one-on-one match.
 
-This was a revamp of my first group project where I turned it into a full-stack app using the MERN stack. ChampUnite is for everyone who enjoys superheroes and card games. I used the [Superhero API](https://superheroapi.com/index.html) to get the superheroes' powerstats and calculated their Attack and Defense based off of those to be used during a one-on-one battle against other users. Users can also easily create their own champions or superheroes if they are unable to find them in the search or they just wanted better powerstats.
+This was a revamp of [my first group project](https://github.com/cynthia-dm1216/ProjectGroup1#readme) where I turned it into a full-stack app using the MERN stack. ChampUnite is for everyone who enjoys superheroes and card games. I used the [Superhero API](https://superheroapi.com/index.html) to get the superheroes' powerstats and calculated their Attack and Defense based off of those to be used during a one-on-one battle against other users. Users can also easily create their own champions or superheroes if they are unable to find them in the search or they just wanted better powerstats.
 
+
+## Deployed Application / Live Demo
+[ChampUnite](https://champ-unite-v01.herokuapp.com/)
+
+
+## Demos / GIFs
+Visitors can see the ranking, users, and champions as well as use the search features
+![Public Pages](./client/src/images/public-pages.gif)
+
+Authenticated users can add champions from the search feature or create their own
+![Add and/or Create Champion](./client/src/images/add-create-champion.gif)
+
+Authenticated users can battle other users with their champions
+![Battle Other Users](./client/src/images/battle.gif)
 
 ## User Stories
 
@@ -56,9 +70,6 @@ THEN I am taken back to the users search page
 WHEN I click on the Ranking link in the navbar
 THEN I am taken to the ranking page with a table of users who have battle at least 20 times
 ```
-
-## Deployed Application
-[ChampUnite](https://champ-unite-v01.herokuapp.com/)
 
 ## Wireframes
 ![Home](./client/src/images/Home.png)   
