@@ -21,56 +21,59 @@ import PublicRoute from "./components/PublicRoute";
 import { UserProvider } from "./utils/UserContext";
 import { UsersProvider } from "./utils/UsersContext";
 import { ChampionsProvider } from "./utils/ChampionsContext";
+import { BattleProvider } from "./utils/BattleContext";
 
 function App() {
   return (
     <UserProvider>
       <UsersProvider>
         <ChampionsProvider>
-          <Router>
-            <div>
-              <ChampSelectModal />
-              <ImageModal />
-              <ChampionCardAlerts />
-              <Header />
-              <Switch>
-                <Route exact path="/">
-                  <Homepage />
-                </Route>
-                <Route path="/login">
-                  <PublicRoute component={Login} />
-                </Route>
-                <Route path="/signup">
-                  <Signup />
-                </Route>
-                <Route exact path="/profile">
-                  <ProtectedRoute component={UserProfile} />
-                </Route>
-                <Route path="/champions">
-                  <ChampionsSearch />
-                </Route>
-                <Route path="/users">
-                  <UsersSearch />
-                </Route>
-                <Route path="/profile/:username">
-                  <OtherUserProfile />
-                </Route>
-                <Route path="/battle/:userid/vs/:otheruserid">
-                  <ProtectedRoute component={Battle} />
-                </Route>
-                <Route path="/ranking">
-                  <Ranking />
-                </Route>
-                <Route path="/create_champion">
-                  <ProtectedRoute component={CreateChampion} />
-                </Route>
-                <Route path="/credits">
-                  <Credits />
-                </Route>
-              </Switch>
-              <Footer />
-            </div>
-          </Router>
+          <BattleProvider>
+            <Router>
+              <div>
+                <ChampSelectModal />
+                <ImageModal />
+                <ChampionCardAlerts />
+                <Header />
+                <Switch>
+                  <Route exact path="/">
+                    <Homepage />
+                  </Route>
+                  <Route path="/login">
+                    <PublicRoute component={Login} />
+                  </Route>
+                  <Route path="/signup">
+                    <Signup />
+                  </Route>
+                  <Route exact path="/profile">
+                    <ProtectedRoute component={UserProfile} />
+                  </Route>
+                  <Route path="/champions">
+                    <ChampionsSearch />
+                  </Route>
+                  <Route path="/users">
+                    <UsersSearch />
+                  </Route>
+                  <Route path="/profile/:username">
+                    <OtherUserProfile />
+                  </Route>
+                  <Route path="/battle/:userid/vs/:otheruserid">
+                    <ProtectedRoute component={Battle} />
+                  </Route>
+                  <Route path="/ranking">
+                    <Ranking />
+                  </Route>
+                  <Route path="/create_champion">
+                    <ProtectedRoute component={CreateChampion} />
+                  </Route>
+                  <Route path="/credits">
+                    <Credits />
+                  </Route>
+                </Switch>
+                <Footer />
+              </div>
+            </Router>
+          </BattleProvider>
         </ChampionsProvider>
       </UsersProvider>
     </UserProvider>
