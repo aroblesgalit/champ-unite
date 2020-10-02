@@ -10,12 +10,28 @@ function BattleProvider(props) {
         timerDone: false,
         textDisplay: "",
         gameEnded: false
-    })
+    });
+
+    const [userChampion, setUserChampion] = useState({
+        champion: {},
+        health: 0,
+        attack: 0,
+        damage: 0
+    });
+
+    const [otherChampion, setOtherChampion] = useState({
+        champion: {},
+        health: 0,
+        attack: 0,
+        damage: 0
+    });
 
     return (
         <BattleContext.Provider
             value={{
-                ...battleStats
+                ...battleStats,
+                userChampion,
+                otherChampion
             }}
         >
             {props.children}
