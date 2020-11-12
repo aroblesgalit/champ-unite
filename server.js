@@ -27,7 +27,7 @@ app.use(passport.session());
 app.use(routes);
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/champUnite", {
+mongoose.connect(process.env.DB_URI || "mongodb://localhost/champUnite", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true,
